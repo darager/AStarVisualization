@@ -21,11 +21,9 @@ function heuristic(node) =
 
 ## Examples :
 
-![Image of AStar Example]
-(/images/AStarExample1.png)
+![](/images/AStarExample1.png)
 
-![Image of AStar Example]
-(/images/AStarExample2.PNG)
+![](/images/AStarExample2.png)
 
 ---
 
