@@ -8,9 +8,7 @@ If you want to find the absolutely shortest path use Dijkstra instead of A*.
 
 ---
 ## Heuristic :
-
 This particular implementation of the A* Pathfinding Algorithm uses the popular **Manhattan distance** which is the standard heuristic for square grid layouts.
-
 ```
 function heuristic(node) =
    dx = abs(node.x - goal.x)
@@ -18,14 +16,13 @@ function heuristic(node) =
    return D * (dx + dy)
 ```
 ---
-
 ## Examples :
 
-![](/images/AStarExample1.png)
-
-![](/images/AStarExample2.png)
+<p align="center">
+   <kbd><img src="images/Example1.png" height="400"></kbd>
+   <kbd><img src="images/Example2.png" height="400"></kbd>
+</p>
 
 ---
-
 
 © Rager 2019
