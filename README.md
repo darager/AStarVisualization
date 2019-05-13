@@ -25,4 +25,6 @@ function heuristic(node) =
 
 ---
 
+[![HitCount](http://hits.dwyl.io/darager/AStarVisualization.svg)](http://hits.dwyl.io/darager/AStarVisualization)
+
 © Rager 2019
