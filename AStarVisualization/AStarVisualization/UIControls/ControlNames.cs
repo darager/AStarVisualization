@@ -1,6 +1,6 @@
 ﻿namespace AStarVisualization.UIElements
 {
-    static class ControlID
+    static class ControlNames
     {
         public static string DrawingCanvas = "DrawingCanvas";
 
@@ -13,6 +13,8 @@
 
         public static string DelaySlider = "NumDelay";
         public static string DelaySliderDisplay = "LblDelay";
+
+        public static string DiagonalPathCheckbox = "DiagonalPathCheckbox";
 
         public static string SetStartTileButton = "CmdSetStartTile";
         public static string SetWallTileButton = "CmdSetWallTile";

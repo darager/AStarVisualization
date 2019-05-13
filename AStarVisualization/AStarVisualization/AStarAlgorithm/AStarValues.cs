@@ -108,6 +108,17 @@ namespace AStarVisualization.AStarAlgorithm
         public static event EventHandler DelayChanged;
         #endregion
 
+        #region DiagonalPathsEnabled
+        private static object DiagonalPathsEnabledlockObject = new object();
+
+        private static bool _DiagonalPathsEnabled = false;
+        public static bool DiagonalPathsEnabled
+        {
+            get { lock (DiagonalPathsEnabledlockObject) return _DiagonalPathsEnabled; }
+            set { lock (DiagonalPathsEnabledlockObject) _DiagonalPathsEnabled = value; }
+        }
+        #endregion
+
         #region AStarTiles
         public static readonly object lockAstarTilesObject = new object();
 

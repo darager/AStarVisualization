@@ -14,9 +14,9 @@ namespace AStarVisualization.Controllers
 
         public StateController(UIElements.UIControl uiElements)
         {
-            StartButton = (Button)uiElements.AStarControls[ControlID.StartButton];
-            PauseButton = (Button)uiElements.AStarControls[ControlID.PauseButton];
-            ResetButton = (Button)uiElements.AStarControls[ControlID.ResetButton];
+            StartButton = (Button)uiElements.AStarControls[ControlNames.StartButton];
+            PauseButton = (Button)uiElements.AStarControls[ControlNames.PauseButton];
+            ResetButton = (Button)uiElements.AStarControls[ControlNames.ResetButton];
         }
 
         public void StartControlling()

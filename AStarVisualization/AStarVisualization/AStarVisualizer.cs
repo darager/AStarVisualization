@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Windows.Media;
+using AStarVisualization.Observers;
 
 namespace AStarVisualization.AStarVisualizer
 {
@@ -29,22 +30,22 @@ namespace AStarVisualization.AStarVisualizer
         private void InitUIStartupValues(UIElements.UIControl uiElements)
         {
             // Drawing Canvas:
-            Canvas drawingCanvas = (Canvas)uiElements.AStarControls[ControlID.DrawingCanvas];
+            Canvas drawingCanvas = (Canvas)uiElements.AStarControls[ControlNames.DrawingCanvas];
 
             drawingCanvas.Background = new SolidColorBrush(Colors.Transparent);
 
             // Griddimension Textboxes:
-            TextBox NumRowsTextBlock = (TextBox)uiElements.AStarControls[ControlID.NumRowsField];
-            TextBox NumColumnsTextBlock = (TextBox)uiElements.AStarControls[ControlID.NumColumnsField];
+            TextBox NumRowsTextBlock = (TextBox)uiElements.AStarControls[ControlNames.NumRowsField];
+            TextBox NumColumnsTextBlock = (TextBox)uiElements.AStarControls[ControlNames.NumColumnsField];
 
             NumRowsTextBlock.Text = StartupValues.NumGridRows.ToString();
             NumColumnsTextBlock.Text = StartupValues.NumGridColumns.ToString();
 
             // Algorithm Control Buttons:
-            Button StartButton = (Button)uiElements.AStarControls[ControlID.StartButton];
-            Button ResetButton = (Button)uiElements.AStarControls[ControlID.ResetButton];
-            Button PauseButton = (Button)uiElements.AStarControls[ControlID.PauseButton];
-            Slider DelaySlider = (Slider)uiElements.AStarControls[ControlID.DelaySlider];
+            Button StartButton = (Button)uiElements.AStarControls[ControlNames.StartButton];
+            Button ResetButton = (Button)uiElements.AStarControls[ControlNames.ResetButton];
+            Button PauseButton = (Button)uiElements.AStarControls[ControlNames.PauseButton];
+            Slider DelaySlider = (Slider)uiElements.AStarControls[ControlNames.DelaySlider];
 
             StartButton.IsEnabled = true;
             ResetButton.IsEnabled = false;
@@ -54,14 +55,14 @@ namespace AStarVisualization.AStarVisualizer
             DelaySlider.Value = StartupValues.CurrentDelay;
 
             // Delay Slider:
-            Label DelayLabel = (Label)uiElements.AStarControls[ControlID.DelaySliderDisplay];
+            Label DelayLabel = (Label)uiElements.AStarControls[ControlNames.DelaySliderDisplay];
             DelayLabel.Content = "Delay: " + DelaySlider.Value + "ms";
 
             // Tileplacement Buttons:
-            Button SetStartTileButton = (Button)uiElements.AStarControls[ControlID.SetStartTileButton];
-            Button SetWallTileButton = (Button)uiElements.AStarControls[ControlID.SetWallTileButton];
-            Button SetGoalTileButton = (Button)uiElements.AStarControls[ControlID.SetGoalTileButton];
-            Button ClearTilesButton = (Button)uiElements.AStarControls[ControlID.ClearTilesButton];
+            Button SetStartTileButton = (Button)uiElements.AStarControls[ControlNames.SetStartTileButton];
+            Button SetWallTileButton = (Button)uiElements.AStarControls[ControlNames.SetWallTileButton];
+            Button SetGoalTileButton = (Button)uiElements.AStarControls[ControlNames.SetGoalTileButton];
+            Button ClearTilesButton = (Button)uiElements.AStarControls[ControlNames.ClearTilesButton];
 
             SetStartTileButton.IsEnabled = true;
             SetWallTileButton.IsEnabled = true;
@@ -85,13 +86,14 @@ namespace AStarVisualization.AStarVisualizer
             var observers = new List<IObserver>();
 
             observers.Add(new StateObserver());
+            observers.Add(new DiagonalPathObserver(uiElements));
 
             foreach (IObserver observer in observers)
                 observer.StartObserving();
         }
         private void InitRenderers(UIElements.UIControl uiElements)
         {
-            Canvas canvas = (Canvas)uiElements.AStarControls[ControlID.DrawingCanvas];
+            Canvas canvas = (Canvas)uiElements.AStarControls[ControlNames.DrawingCanvas];
             var renderers = new List<IRenderer>();
 
             renderers.Add(new GridRenderer(canvas));

@@ -16,14 +16,16 @@ namespace AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread
         private Node currentNode;
         private bool IsPaused;
         private bool AlgorithmDone;
+        private bool DiagonalsEnabled = false;
         private int stepNumber = 0;
 
-        public AStarAlgorithm(Node[,] map, Node StartNode, Node GoalNode, double ManhattanDistanceConstant = 1000.0)
+        public AStarAlgorithm(Node[,] map, Node StartNode, Node GoalNode, bool DiagonalPathsEnabled, double ManhattanDistanceConstant = 1000.0)
         {
             this.openSet = new OpenSet(map.GetLength(0) * map.GetLength(1));
             this.map = map;
             this.StartNode = StartNode;
             this.GoalNode = GoalNode;
+            this.DiagonalsEnabled = DiagonalPathsEnabled;
 
             IsPaused = false;
             AlgorithmDone = false;
@@ -94,7 +96,7 @@ namespace AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread
                 return;
             }
 
-            List<Node> successors = GetSuccessors(currentNode);
+            List<Node> successors = GetSuccessors(currentNode, DiagonalsEnabled);
 
             foreach (Node successor in successors)
             {

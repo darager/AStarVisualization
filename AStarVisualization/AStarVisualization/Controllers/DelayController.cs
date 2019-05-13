@@ -12,8 +12,8 @@ namespace AStarVisualization.Controllers
 
         public DelayController(UIElements.UIControl uiElements)
         {
-            LblDelay = (Label)uiElements.AStarControls[ControlID.DelaySliderDisplay];
-            NumDelay = (Slider)uiElements.AStarControls[ControlID.DelaySlider];
+            LblDelay = (Label)uiElements.AStarControls[ControlNames.DelaySliderDisplay];
+            NumDelay = (Slider)uiElements.AStarControls[ControlNames.DelaySlider];
         }
 
         public void StartControlling()

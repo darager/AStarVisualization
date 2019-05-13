@@ -15,6 +15,6 @@ namespace AStarVisualization.AStarVisualizer
         public static readonly uint MaxDelay = 250;
 
         // DiagonalPaths:
-        public static readonly bool DiagonalPathsEnabled = false;
+        public static readonly bool DiagonalPathsEnabled = true;
     }
 }

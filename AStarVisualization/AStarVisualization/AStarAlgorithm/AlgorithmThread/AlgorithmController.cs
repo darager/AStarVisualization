@@ -1,4 +1,5 @@
 ﻿using AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread.Helpers;
+using AStarVisualization.AStarVisualizer;
 using System;
 using System.Windows.Threading;
 
@@ -23,7 +24,7 @@ namespace AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread
 
         private void InitAlgorithm()
         {
-            algorithm = new AStarAlgorithm(map, StartNode, GoalNode);
+            algorithm = new AStarAlgorithm(map, StartNode, GoalNode, AStarValues.DiagonalPathsEnabled);
         }
         private void SetupMap()
         {

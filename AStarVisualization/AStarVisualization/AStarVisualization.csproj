@@ -63,6 +63,7 @@
     <Compile Include="AStarAlgorithm\Helpers\EventArgs\NodeAddedToCollectionEventArgs.cs" />
     <Compile Include="AStarAlgorithm\Helpers\Objects\Node.cs" />
     <Compile Include="AStarAlgorithm\AStarValues.cs" />
+    <Compile Include="Observers\DiagonalPathObserver.cs" />
     <Compile Include="Observers\IObserver.cs" />
     <Compile Include="Observers\StateObserver.cs" />
     <Compile Include="AStarAlgorithm\Helpers\Enums\State.cs" />

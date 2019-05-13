@@ -14,8 +14,8 @@ namespace AStarVisualization.Controllers
 
         public DimensionController(UIElements.UIControl uiElements)
         {
-            this.TxtNumColumns = (TextBox)uiElements.AStarControls[ControlID.NumColumnsField];
-            this.TxtNumRows = (TextBox)uiElements.AStarControls[ControlID.NumRowsField];
+            this.TxtNumColumns = (TextBox)uiElements.AStarControls[ControlNames.NumColumnsField];
+            this.TxtNumRows = (TextBox)uiElements.AStarControls[ControlNames.NumRowsField];
         }
 
         public void StartControlling()
