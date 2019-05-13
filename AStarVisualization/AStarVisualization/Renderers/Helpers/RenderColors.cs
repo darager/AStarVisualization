@@ -8,6 +8,7 @@ namespace AStarVisualization.Renderer.RenderHelpers
         public static SolidColorBrush Grid = new SolidColorBrush(Colors.LightSlateGray);
 
         // Path Colors
+        public static int PathThickness = 2;
         public static SolidColorBrush Path = new SolidColorBrush(Colors.Black);
 
         // Tile Colors:

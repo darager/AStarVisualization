@@ -7,6 +7,7 @@ using AStarVisualization.AStarAlgorithm;
 using AStarVisualization.Renderer.RenderHelpers;
 using AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread;
 using System.Collections;
+using System.Windows.Media;
 
 namespace AStarVisualization.Renderer
 {
@@ -14,13 +15,14 @@ namespace AStarVisualization.Renderer
     {
         Canvas canvas;
 
-        List<Line> path = new List<Line>();
+        Polyline pathline;
 
         public PathRenderer(Canvas canvas)
         {
             this.canvas = canvas;
-        }
 
+            InitPathLine();
+        }
 
         public void StartRendering()
         {
@@ -37,45 +39,38 @@ namespace AStarVisualization.Renderer
 
         public void Render(object sender, EventArgs args)
         {
-            ArrayList path = AStarValues.Path;
-
-            var pathNodes = new List<Node>();
-            foreach (Node node in path)
-                pathNodes.Add(node);
+            Node[] pathNodes = AStarValues.Path.ToArray(typeof(Node)) as Node[];
 
             int numRows = AStarValues.NumGridRows;
             int numColumns = AStarValues.NumGridColumns;
-
             double width = canvas.ActualWidth;
             double height = canvas.ActualHeight;
-
             double rowSpacing = height / numRows;
             double columnSpacing = width / numColumns;
 
-            Point lastPoint = new Point(pathNodes[0].ColumnIndex * columnSpacing + columnSpacing / 2, pathNodes[0].RowIndex * rowSpacing + rowSpacing / 2);
-            foreach (Node node in pathNodes)
+            var points = new PointCollection();
+            foreach(Node node in pathNodes)
             {
-                Point currentPoint = new Point(node.ColumnIndex * columnSpacing + columnSpacing / 2, node.RowIndex * rowSpacing + rowSpacing / 2);
+                double nodeX = node.ColumnIndex * columnSpacing + columnSpacing/2;
+                double nodeY = node.RowIndex * rowSpacing + rowSpacing/2;
 
-                Line line = new Line();
-                line.X1 = lastPoint.X;
-                line.Y1 = lastPoint.Y;
-                line.X2 = currentPoint.X;
-                line.Y2 = currentPoint.Y;
-                line.StrokeThickness = 3;
-                line.SnapsToDevicePixels = true;
-                line.Stroke = RenderColors.Path;
-
-                this.path.Add(line);
-                canvas.Children.Add(line);
-
-                lastPoint = currentPoint;
+                points.Add(new Point(nodeX, nodeY));
             }
+
+            pathline.Points = points;
+
+            canvas.Children.Remove(pathline);
+            canvas.Children.Add(pathline);
         }
         private void RemovePath(object sender, EventArgs e)
         {
-            foreach (Line line in path)
-                canvas.Children.Remove(line);
+            canvas.Children.Remove(pathline);
+        }
+        private void InitPathLine()
+        {
+            pathline = new Polyline();
+            pathline.Stroke = RenderColors.Path;
+            pathline.StrokeThickness = RenderColors.PathThickness;
         }
     }
 }
