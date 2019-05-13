@@ -7,7 +7,7 @@ The main advantage that the A* algorithm has over other pathfinding algorithms i
 If you want to find the absolutely shortest path use Dijkstra instead of A*.
 
 ---
-## Heuristic :
+## Heuristic
 This particular implementation of the A* Pathfinding Algorithm uses the popular **Manhattan distance** which is the standard heuristic for square grid layouts.
 ```
 function heuristic(node) =
@@ -16,7 +16,7 @@ function heuristic(node) =
    return D * (dx + dy)
 ```
 ---
-## Examples :
+## Examples
 
 <p align="center">
    <kbd><img src="images/Example1.png" height="400"></kbd>
