@@ -23,15 +23,24 @@ namespace AStarVisualization.Observers
         public void StartObserving()
         {
             checkbox.Click += DiagonalPathCheckbox_Clicked;
+            AStarValues.AlgorithmStateChanged += AlgorithmStateChanged;
         }
         public void StopObserving()
         {
             checkbox.Click -= DiagonalPathCheckbox_Clicked;
+            AStarValues.AlgorithmStateChanged -= AlgorithmStateChanged;
         }
 
         private void DiagonalPathCheckbox_Clicked(object sender, RoutedEventArgs e)
         {
             AStarValues.DiagonalPathsEnabled = (bool)checkbox.IsChecked;
+        }
+        private void AlgorithmStateChanged(object sender, EventArgs e)
+        {
+            if (AStarValues.AStarState == State.HasNotStarted)
+                checkbox.IsEnabled = true;
+            else
+                checkbox.IsEnabled = false;
         }
     }
 }
