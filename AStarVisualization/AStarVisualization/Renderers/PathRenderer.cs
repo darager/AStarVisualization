@@ -34,6 +34,7 @@ namespace AStarVisualization.Renderer
             StateObserver.ResetAlgorithm -= RemovePath;
             AStarValues.PathChanged -= Render;
         }
+
         public void Render(object sender, EventArgs args)
         {
             ArrayList path = AStarValues.Path;
@@ -71,7 +72,6 @@ namespace AStarVisualization.Renderer
                 lastPoint = currentPoint;
             }
         }
-
         private void RemovePath(object sender, EventArgs e)
         {
             foreach (Line line in path)

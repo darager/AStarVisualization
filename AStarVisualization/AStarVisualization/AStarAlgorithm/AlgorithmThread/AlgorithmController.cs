@@ -18,7 +18,6 @@ namespace AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread
             this.mainDispatcher = threadDispatcher;
             BindAlgorithmToControllEvents();
             SetupMap();
-            GetStartAndGoal();
             InitAlgorithm();
         }
 
@@ -49,26 +48,23 @@ namespace AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread
                         tile = tiles[row, col];
                     }
 
-                    map[row, col] = new Node(tile);
-                }
-            }
-        }
-        private void GetStartAndGoal()
-        {
-            foreach (AStarTile tile in tiles)
-            {
-                try
-                {
-                    if (tile.TileType == Tile.Goal)
+                    Node node = new Node(tile);
+
+                    Tile type = tile.TileType;
+                    switch (type)
                     {
-                        GoalNode = map[tile.RowIndex, tile.ColumnIndex];
+                        case Tile.Start:
+                            StartNode = node;
+                            break;
+                        case Tile.Goal:
+                            GoalNode = node;
+                            break;
+                        default:
+                            break;
                     }
-                    else if (tile.TileType == Tile.Start)
-                    {
-                        StartNode = map[tile.RowIndex, tile.ColumnIndex];
-                    }
+
+                    map[row, col] = node;
                 }
-                catch { }
             }
         }
         private void BindAlgorithmToControllEvents()
