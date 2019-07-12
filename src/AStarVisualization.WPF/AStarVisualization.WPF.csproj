@@ -124,7 +124,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AStarDataStructures\AStarVisualization.Library.csproj">
+    <ProjectReference Include="..\AStarVisualization.Library\AStarVisualization.Library.csproj">
       <Project>{430addc1-a636-4dc3-aa31-ebcf39c92479}</Project>
       <Name>AStarVisualization.Library</Name>
     </ProjectReference>
