@@ -1,5 +1,4 @@
-﻿using AStarVisualization.WPF.WPF;
-using System.Windows;
+﻿using System.Windows;
 
 namespace AStarVisualization.WPF
 {
@@ -11,12 +10,7 @@ namespace AStarVisualization.WPF
         public MainWindow()
         {
             InitializeComponent();
-            InitializeAStarVisualization();
-        }
-
-        private void InitializeAStarVisualization()
-        {
-            var aStarVisualizer = new AStarVisualizer(this);
+            var astarVisualization = new AStarVisualizer(this);
         }
     }
 }

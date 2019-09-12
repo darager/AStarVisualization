@@ -13,7 +13,7 @@ using System.Windows.Media;
 using AStarVisualization.WPF.Observers;
 using System.Windows;
 
-namespace AStarVisualization.WPF.WPF
+namespace AStarVisualization.WPF
 {
     public class AStarVisualizer
     {
@@ -40,8 +40,8 @@ namespace AStarVisualization.WPF.WPF
             TextBox NumRowsTextBlock = (TextBox)window.FindName(ControlNames.NumRowsField);
             TextBox NumColumnsTextBlock = (TextBox)window.FindName(ControlNames.NumColumnsField);
 
-            NumRowsTextBlock.Text = StartupValues.StartupValues.NumGridRows.ToString();
-            NumColumnsTextBlock.Text = StartupValues.StartupValues.NumGridColumns.ToString();
+            NumRowsTextBlock.Text = StartupValues.NumGridRows.ToString();
+            NumColumnsTextBlock.Text = StartupValues.NumGridColumns.ToString();
 
             // Algorithm Control Buttons:
             Button StartButton = (Button)window.FindName(ControlNames.StartButton);
@@ -52,9 +52,9 @@ namespace AStarVisualization.WPF.WPF
             StartButton.IsEnabled = true;
             ResetButton.IsEnabled = false;
             PauseButton.IsEnabled = false;
-            DelaySlider.Minimum = StartupValues.StartupValues.MinDelay;
-            DelaySlider.Maximum = StartupValues.StartupValues.MaxDelay;
-            DelaySlider.Value = StartupValues.StartupValues.CurrentDelay;
+            DelaySlider.Minimum = StartupValues.MinDelay;
+            DelaySlider.Maximum = StartupValues.MaxDelay;
+            DelaySlider.Value = StartupValues.CurrentDelay;
 
             // Delay Slider:
             Label DelayLabel = (Label)window.FindName(ControlNames.DelaySliderDisplay);
