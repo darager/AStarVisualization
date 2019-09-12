@@ -25,13 +25,13 @@ namespace AStarVisualization.Controllers
         private bool SetWallActive = false;
         private bool SetTileActive => (SetStartActive || SetGoalActive || SetWallActive);
 
-        public TileController(UIElements.UIControl uiElements)
+        public TileController(Window window)
         {
-            canvas = (Canvas)uiElements.AStarControls[ControlNames.DrawingCanvas];
-            SetStartButton = (Button)uiElements.AStarControls[ControlNames.SetStartTileButton];
-            SetGoalButton = (Button)uiElements.AStarControls[ControlNames.SetGoalTileButton];
-            SetWallButton = (Button)uiElements.AStarControls[ControlNames.SetWallTileButton];
-            ClearTilesButton = (Button)uiElements.AStarControls[ControlNames.ClearTilesButton];
+            canvas = (Canvas)window.FindName(ControlNames.DrawingCanvas);
+            SetStartButton = (Button)window.FindName(ControlNames.SetStartTileButton);
+            SetGoalButton = (Button)window.FindName(ControlNames.SetGoalTileButton);
+            SetWallButton = (Button)window.FindName(ControlNames.SetWallTileButton);
+            ClearTilesButton = (Button)window.FindName(ControlNames.ClearTilesButton);
 
             EnabledButtonColor = (SolidColorBrush)SetStartButton.Background; // get the default backgroundcolor of the buttons
         }

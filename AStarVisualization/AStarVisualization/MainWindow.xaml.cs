@@ -15,8 +15,7 @@ namespace AStarVisualization
 
         private void InitializeAStarVisualization()
         {
-            var uiElements = new UIElements.UIControl(AStarcontrols, DrawingCanvas);
-            var AStarVisualizer = new AStarVisualizer.AStarVisualizer(uiElements);
+            var AStarVisualizer = new AStarVisualizer.AStarVisualizer(this);
         }
     }
 }

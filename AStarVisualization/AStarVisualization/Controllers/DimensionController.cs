@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using AStarVisualization.UIElements;
 using AStarVisualization.AStarAlgorithm;
 using AStarVisualization.AStarVisualizer;
+using System.Windows;
 
 namespace AStarVisualization.Controllers
 {
@@ -12,10 +13,10 @@ namespace AStarVisualization.Controllers
         private TextBox TxtNumColumns;
         private TextBox TxtNumRows;
 
-        public DimensionController(UIElements.UIControl uiElements)
+        public DimensionController(Window window)
         {
-            this.TxtNumColumns = (TextBox)uiElements.AStarControls[ControlNames.NumColumnsField];
-            this.TxtNumRows = (TextBox)uiElements.AStarControls[ControlNames.NumRowsField];
+            this.TxtNumColumns = (TextBox)window.FindName(ControlNames.NumColumnsField);
+            this.TxtNumRows = (TextBox)window.FindName(ControlNames.NumRowsField);
         }
 
         public void StartControlling()

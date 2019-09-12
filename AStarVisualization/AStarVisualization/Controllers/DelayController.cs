@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using AStarVisualization.UIElements;
 using AStarVisualization.AStarAlgorithm;
+using System.Windows;
 
 namespace AStarVisualization.Controllers
 {
@@ -10,10 +11,10 @@ namespace AStarVisualization.Controllers
         private Label LblDelay;
         private Slider NumDelay;
 
-        public DelayController(UIElements.UIControl uiElements)
+        public DelayController(Window window)
         {
-            LblDelay = (Label)uiElements.AStarControls[ControlNames.DelaySliderDisplay];
-            NumDelay = (Slider)uiElements.AStarControls[ControlNames.DelaySlider];
+            this.LblDelay = (Label)window.FindName(ControlNames.DelaySliderDisplay);
+            this.NumDelay = (Slider)window.FindName(ControlNames.DelaySlider);
         }
 
         public void StartControlling()

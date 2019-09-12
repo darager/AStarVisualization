@@ -15,9 +15,9 @@ namespace AStarVisualization.Observers
     {
         CheckBox checkbox;
 
-        public DiagonalPathObserver(UIElements.UIControl uiElements)
+        public DiagonalPathObserver(Window window)
         {
-            checkbox = (CheckBox)uiElements.AStarControls[ControlNames.DiagonalPathCheckbox];
+            checkbox = (CheckBox)window.FindName(ControlNames.DiagonalPathCheckbox);
         }
 
         public void StartObserving()

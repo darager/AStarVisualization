@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using AStarVisualization.AStarAlgorithm;
 using AStarVisualization.AStarAlgorithm.AStarImplementation;
@@ -12,11 +13,11 @@ namespace AStarVisualization.Controllers
         Button PauseButton;
         Button ResetButton;
 
-        public StateController(UIElements.UIControl uiElements)
+        public StateController(Window window)
         {
-            StartButton = (Button)uiElements.AStarControls[ControlNames.StartButton];
-            PauseButton = (Button)uiElements.AStarControls[ControlNames.PauseButton];
-            ResetButton = (Button)uiElements.AStarControls[ControlNames.ResetButton];
+            StartButton = (Button)window.FindName(ControlNames.StartButton);
+            PauseButton = (Button)window.FindName(ControlNames.PauseButton);
+            ResetButton = (Button)window.FindName(ControlNames.ResetButton);
         }
 
         public void StartControlling()
