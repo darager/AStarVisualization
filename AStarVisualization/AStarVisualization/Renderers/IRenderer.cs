@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AStarVisualization.Renderer.RenderHelpers
+namespace AStarVisualization.WPF.Renderer.RenderHelpers
 {
     interface IRenderer
     {

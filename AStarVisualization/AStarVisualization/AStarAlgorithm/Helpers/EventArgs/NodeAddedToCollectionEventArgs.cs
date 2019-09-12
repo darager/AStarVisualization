@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread.Helpers
+namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread.Helpers
 {
     public class NodeAddedToCollectionEventArgs : EventArgs
     {

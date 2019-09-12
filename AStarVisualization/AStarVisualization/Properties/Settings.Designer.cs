@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AStarVisualization.Properties
+namespace AStarVisualization.WPF.Properties
 {
 
 

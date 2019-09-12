@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using AStarDataStructures;
+using AStarVisualization.WPF.DataStructures;
 
-namespace AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread.Helpers
+namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread.Helpers
 {
     public class OpenSet
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace AStarDataStructures
+namespace AStarVisualization.WPF.DataStructures
 {
     public class MinPriorityQueue<T, K> where T : IComparable
     {

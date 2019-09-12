@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Collections.Generic;
 
-namespace AStarVisualization.UIElements
+namespace AStarVisualization.WPF.UIElements
 {
     public class UIControl
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Controls;
-using AStarVisualization.AStarAlgorithm;
-using AStarVisualization.Renderer.RenderHelpers;
-using AStarVisualization.Renderer.TileRenderHelpers;
+using AStarVisualization.WPF.AStarAlgorithm;
+using AStarVisualization.WPF.Renderer.RenderHelpers;
+using AStarVisualization.WPF.Renderer.TileRenderHelpers;
 
-namespace AStarVisualization.Renderer
+namespace AStarVisualization.WPF.Renderer
 {
     class TileRenderer : IRenderer
     {

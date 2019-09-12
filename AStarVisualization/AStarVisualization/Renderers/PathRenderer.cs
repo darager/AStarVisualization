@@ -3,13 +3,13 @@ using System.Windows;
 using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Collections.Generic;
-using AStarVisualization.AStarAlgorithm;
-using AStarVisualization.Renderer.RenderHelpers;
-using AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread;
+using AStarVisualization.WPF.AStarAlgorithm;
+using AStarVisualization.WPF.Renderer.RenderHelpers;
+using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread;
 using System.Collections;
 using System.Windows.Media;
 
-namespace AStarVisualization.Renderer
+namespace AStarVisualization.WPF.Renderer
 {
     class PathRenderer : IRenderer
     {

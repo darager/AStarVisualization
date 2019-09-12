@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread
+namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread
 {
     public class Node : IComparable
     {

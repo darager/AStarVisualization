@@ -1,9 +1,8 @@
-﻿using AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread.Helpers;
-using AStarVisualization.AStarVisualizer;
+﻿using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread.Helpers;
 using System;
 using System.Windows.Threading;
 
-namespace AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread
+namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread
 {
     public class AlgorithmController
     {

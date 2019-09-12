@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using AStarVisualization.UIElements;
-using AStarVisualization.AStarAlgorithm;
-using AStarVisualization.AStarVisualizer;
+using AStarVisualization.WPF.UIElements;
+using AStarVisualization.WPF.AStarAlgorithm;
 using System.Windows;
+using AStarVisualization.WPF.WPF.StartupValues;
 
-namespace AStarVisualization.Controllers
+namespace AStarVisualization.WPF.Controllers
 {
     public class DimensionController : IController
     {

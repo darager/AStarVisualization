@@ -3,10 +3,10 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Controls;
-using AStarVisualization.UIElements;
-using AStarVisualization.AStarAlgorithm;
+using AStarVisualization.WPF.UIElements;
+using AStarVisualization.WPF.AStarAlgorithm;
 
-namespace AStarVisualization.Controllers
+namespace AStarVisualization.WPF.Controllers
 {
     class TileController : IController
     {

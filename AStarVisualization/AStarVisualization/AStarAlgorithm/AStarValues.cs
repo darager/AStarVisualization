@@ -1,8 +1,8 @@
-﻿using System;
+﻿using AStarVisualization.WPF.WPF.StartupValues;
+using System;
 using System.Collections;
-using AStarVisualization.AStarVisualizer;
 
-namespace AStarVisualization.AStarAlgorithm
+namespace AStarVisualization.WPF.AStarAlgorithm
 {
     public static class AStarValues
     {

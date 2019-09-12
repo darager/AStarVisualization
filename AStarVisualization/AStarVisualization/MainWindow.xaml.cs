@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using AStarVisualization.WPF.WPF;
+using System.Windows;
 
-namespace AStarVisualization
+namespace AStarVisualization.WPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -15,7 +16,7 @@ namespace AStarVisualization
 
         private void InitializeAStarVisualization()
         {
-            var AStarVisualizer = new AStarVisualizer.AStarVisualizer(this);
+            var aStarVisualizer = new AStarVisualizer(this);
         }
     }
 }

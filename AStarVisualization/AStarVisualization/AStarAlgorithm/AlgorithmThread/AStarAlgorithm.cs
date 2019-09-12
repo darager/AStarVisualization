@@ -1,10 +1,10 @@
-﻿using AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread.Helpers;
+﻿using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread.Helpers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread
+namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread
 {
     public class AStarAlgorithm
     {

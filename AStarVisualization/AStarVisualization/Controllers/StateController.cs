@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using AStarVisualization.AStarAlgorithm;
-using AStarVisualization.AStarAlgorithm.AStarImplementation;
-using AStarVisualization.UIElements;
+using AStarVisualization.WPF.AStarAlgorithm;
+using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation;
+using AStarVisualization.WPF.UIElements;
 
-namespace AStarVisualization.Controllers
+namespace AStarVisualization.WPF.Controllers
 {
     class StateController : IController
     {

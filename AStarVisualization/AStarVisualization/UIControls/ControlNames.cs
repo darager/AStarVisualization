@@ -1,4 +1,4 @@
-﻿namespace AStarVisualization.UIElements
+﻿namespace AStarVisualization.WPF.UIElements
 {
     static class ControlNames
     {

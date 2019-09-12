@@ -1,18 +1,19 @@
-﻿using AStarVisualization.AStarAlgorithm;
-using AStarVisualization.AStarAlgorithm.AStarImplementation;
-using AStarVisualization.Controllers;
-using AStarVisualization.Observers.Helpers;
-using AStarVisualization.Renderer;
-using AStarVisualization.Renderer.RenderHelpers;
-using AStarVisualization.UIElements;
+﻿using AStarVisualization.WPF.AStarAlgorithm;
+using AStarVisualization.WPF.WPF.StartupValues;
+using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation;
+using AStarVisualization.WPF.Controllers;
+using AStarVisualization.WPF.Observers.Helpers;
+using AStarVisualization.WPF.Renderer;
+using AStarVisualization.WPF.Renderer.RenderHelpers;
+using AStarVisualization.WPF.UIElements;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Windows.Media;
-using AStarVisualization.Observers;
+using AStarVisualization.WPF.Observers;
 using System.Windows;
 
-namespace AStarVisualization.AStarVisualizer
+namespace AStarVisualization.WPF.WPF
 {
     public class AStarVisualizer
     {
@@ -39,8 +40,8 @@ namespace AStarVisualization.AStarVisualizer
             TextBox NumRowsTextBlock = (TextBox)window.FindName(ControlNames.NumRowsField);
             TextBox NumColumnsTextBlock = (TextBox)window.FindName(ControlNames.NumColumnsField);
 
-            NumRowsTextBlock.Text = StartupValues.NumGridRows.ToString();
-            NumColumnsTextBlock.Text = StartupValues.NumGridColumns.ToString();
+            NumRowsTextBlock.Text = StartupValues.StartupValues.NumGridRows.ToString();
+            NumColumnsTextBlock.Text = StartupValues.StartupValues.NumGridColumns.ToString();
 
             // Algorithm Control Buttons:
             Button StartButton = (Button)window.FindName(ControlNames.StartButton);
@@ -51,9 +52,9 @@ namespace AStarVisualization.AStarVisualizer
             StartButton.IsEnabled = true;
             ResetButton.IsEnabled = false;
             PauseButton.IsEnabled = false;
-            DelaySlider.Minimum = StartupValues.MinDelay;
-            DelaySlider.Maximum = StartupValues.MaxDelay;
-            DelaySlider.Value = StartupValues.CurrentDelay;
+            DelaySlider.Minimum = StartupValues.StartupValues.MinDelay;
+            DelaySlider.Maximum = StartupValues.StartupValues.MaxDelay;
+            DelaySlider.Value = StartupValues.StartupValues.CurrentDelay;
 
             // Delay Slider:
             Label DelayLabel = (Label)window.FindName(ControlNames.DelaySliderDisplay);

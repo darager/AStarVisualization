@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AStarVisualization.AStarVisualizer
+namespace AStarVisualization.WPF.WPF.StartupValues
 {
     static class StartupValues
     {

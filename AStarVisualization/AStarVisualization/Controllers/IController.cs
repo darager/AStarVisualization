@@ -1,4 +1,4 @@
-﻿namespace AStarVisualization.Controllers
+﻿namespace AStarVisualization.WPF.Controllers
 {
     public interface IController
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread.Helpers
+namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread.Helpers
 {
     public partial class ClosedSet
     {

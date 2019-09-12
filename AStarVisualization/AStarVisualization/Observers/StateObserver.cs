@@ -1,7 +1,7 @@
 ﻿using System;
-using AStarVisualization.Observers.Helpers;
+using AStarVisualization.WPF.Observers.Helpers;
 
-namespace AStarVisualization.AStarAlgorithm
+namespace AStarVisualization.WPF.AStarAlgorithm
 {
     public class StateObserver : IObserver
     {

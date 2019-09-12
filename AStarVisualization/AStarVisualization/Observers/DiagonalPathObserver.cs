@@ -1,6 +1,6 @@
-﻿using AStarVisualization.AStarAlgorithm;
-using AStarVisualization.Observers.Helpers;
-using AStarVisualization.UIElements;
+﻿using AStarVisualization.WPF.AStarAlgorithm;
+using AStarVisualization.WPF.Observers.Helpers;
+using AStarVisualization.WPF.UIElements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace AStarVisualization.Observers
+namespace AStarVisualization.WPF.Observers
 {
     public class DiagonalPathObserver : IObserver
     {

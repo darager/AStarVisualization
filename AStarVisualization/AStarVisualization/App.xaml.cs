@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace AStarVisualization
+namespace AStarVisualization.WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml

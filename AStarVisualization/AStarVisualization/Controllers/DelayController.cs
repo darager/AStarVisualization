@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Controls;
-using AStarVisualization.UIElements;
-using AStarVisualization.AStarAlgorithm;
+using AStarVisualization.WPF.UIElements;
+using AStarVisualization.WPF.AStarAlgorithm;
 using System.Windows;
 
-namespace AStarVisualization.Controllers
+namespace AStarVisualization.WPF.Controllers
 {
     class DelayController : IController
     {

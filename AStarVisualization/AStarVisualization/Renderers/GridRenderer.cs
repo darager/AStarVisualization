@@ -3,11 +3,11 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Controls;
-using AStarVisualization.AStarAlgorithm;
-using AStarVisualization.Renderer.RenderHelpers;
+using AStarVisualization.WPF.AStarAlgorithm;
+using AStarVisualization.WPF.Renderer.RenderHelpers;
 using System.Collections.Generic;
 
-namespace AStarVisualization.Renderer
+namespace AStarVisualization.WPF.Renderer
 {
     public class GridRenderer : IRenderer
     {

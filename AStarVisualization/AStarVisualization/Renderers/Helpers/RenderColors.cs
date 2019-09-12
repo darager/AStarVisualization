@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace AStarVisualization.Renderer.RenderHelpers
+namespace AStarVisualization.WPF.Renderer.RenderHelpers
 {
     public static class RenderColors
     {

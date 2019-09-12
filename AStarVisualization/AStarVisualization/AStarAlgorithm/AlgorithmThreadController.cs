@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Threading;
-using AStarVisualization.AStarAlgorithm.AStarImplementation.Algorithmthread;
-using AStarVisualization.Controllers;
+using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread;
+using AStarVisualization.WPF.Controllers;
 
-namespace AStarVisualization.AStarAlgorithm.AStarImplementation
+namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation
 {
     public class AlgorithmThreadController : IController
     {

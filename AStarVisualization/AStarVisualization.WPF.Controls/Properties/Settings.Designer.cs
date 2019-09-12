@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AStarVisualization.WPF.Controls.Properties
+namespace AStarVisualization.WPF.WPF.Controls.Properties
 {
     
     

@@ -1,4 +1,4 @@
-﻿namespace AStarVisualization.Observers.Helpers
+﻿namespace AStarVisualization.WPF.Observers.Helpers
 {
     public interface IObserver
     {
