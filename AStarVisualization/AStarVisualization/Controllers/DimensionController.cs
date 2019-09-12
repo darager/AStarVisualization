@@ -78,7 +78,8 @@ namespace AStarVisualization.WPF.Controllers
         }
         private int GetDimension(string GridDimension, int MaxDimension)
         {
-            var regex = GetRegex();
+            var regex = GetDimensionRegex();
+            int minDimension = 2;
             int dimension = MaxDimension;
 
             if (regex.IsMatch(GridDimension))
@@ -87,7 +88,7 @@ namespace AStarVisualization.WPF.Controllers
 
                 int newDimension = Convert.ToInt32(match.ToString());
 
-                if (newDimension <= MaxDimension && newDimension >= 2)
+                if (newDimension <= MaxDimension && newDimension >= minDimension)
                     dimension = newDimension;
             }
 
@@ -98,12 +99,9 @@ namespace AStarVisualization.WPF.Controllers
             if (GridDimension == String.Empty)
                 return true;
 
-            var regex = GetRegex();
+            var regex = GetDimensionRegex();
 
-            if (regex.IsMatch(GridDimension))
-                return true;
-            else
-                return false;
+            return regex.IsMatch(GridDimension);
         }
         private void ChangeText(TextBox textBox)
         {
@@ -114,7 +112,7 @@ namespace AStarVisualization.WPF.Controllers
             TxtNumColumns.Text = AStarValues.NumGridColumns.ToString();
             TxtNumRows.Text = AStarValues.NumGridRows.ToString();
         }
-        private Regex GetRegex()
+        private Regex GetDimensionRegex()
         {
             int maxDimension = StartupValues.MaxDimension;
             char maxDimensionNumber = maxDimension.ToString()[0];
