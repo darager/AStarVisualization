@@ -23,7 +23,6 @@ namespace AStarVisualization.WPF.Controllers
         private bool SetStartActive = false;
         private bool SetGoalActive = false;
         private bool SetWallActive = false;
-        private bool SetTileActive => (SetStartActive || SetGoalActive || SetWallActive);
 
         public TileController(Window window)
         {
@@ -123,15 +122,7 @@ namespace AStarVisualization.WPF.Controllers
 
         private void SetStartTileValueChanged(object sender, EventArgs args)
         {
-            if (!SetStartActive)
-            {
-                SetStartActive = true;
-
-                AddButtonHighlight(SetStartButton);
-                DisableButton(SetGoalButton);
-                DisableButton(SetWallButton);
-            }
-            else
+            if (SetStartActive)
             {
                 SetStartActive = false;
 
@@ -139,18 +130,18 @@ namespace AStarVisualization.WPF.Controllers
                 EnableButton(SetGoalButton);
                 EnableButton(SetWallButton);
             }
+            else
+            {
+                SetStartActive = true;
+
+                AddButtonHighlight(SetStartButton);
+                DisableButton(SetGoalButton);
+                DisableButton(SetWallButton);
+            }
         }
         private void SetGoalTileValueChanged(object sender, EventArgs args)
         {
-            if (!SetGoalActive)
-            {
-                SetGoalActive = true;
-
-                AddButtonHighlight(SetGoalButton);
-                DisableButton(SetStartButton);
-                DisableButton(SetWallButton);
-            }
-            else
+            if (SetGoalActive)
             {
                 SetGoalActive = false;
 
@@ -158,24 +149,32 @@ namespace AStarVisualization.WPF.Controllers
                 EnableButton(SetStartButton);
                 EnableButton(SetWallButton);
             }
+            else
+            {
+                SetGoalActive = true;
+
+                AddButtonHighlight(SetGoalButton);
+                DisableButton(SetStartButton);
+                DisableButton(SetWallButton);
+            }
         }
         private void SetWallTileValueChanged(object sender, EventArgs args)
         {
-            if (!SetWallActive)
-            {
-                SetWallActive = true;
-
-                AddButtonHighlight(SetWallButton);
-                DisableButton(SetStartButton);
-                DisableButton(SetGoalButton);
-            }
-            else
+            if (SetWallActive)
             {
                 SetWallActive = false;
 
                 RemoveButtonHighlight(SetWallButton);
                 EnableButton(SetStartButton);
                 EnableButton(SetGoalButton);
+            }
+            else
+            {
+                SetWallActive = true;
+
+                AddButtonHighlight(SetWallButton);
+                DisableButton(SetStartButton);
+                DisableButton(SetGoalButton);
             }
         }
 

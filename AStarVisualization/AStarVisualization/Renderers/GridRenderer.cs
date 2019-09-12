@@ -36,7 +36,8 @@ namespace AStarVisualization.WPF.Renderer
         public void Render(object sender, EventArgs args)
         {
             RemoveGridLines();
-            GridLines = GetGridLines(AStarValues.NumGridRows, AStarValues.NumGridColumns, canvas.ActualHeight, canvas.ActualWidth, Brush);
+            GridLines = GetGridLines(AStarValues.NumGridRows, AStarValues.NumGridColumns,
+                canvas.ActualHeight, canvas.ActualWidth, Brush);
             AddGridLines();
         }
 
@@ -51,7 +52,8 @@ namespace AStarVisualization.WPF.Renderer
                 canvas.Children.Remove(line);
         }
 
-        private List<UIElement> GetGridLines(int numRows, int numColumns, double CanvasHeight, double CanvasWidth, Brush brush)
+        private List<UIElement> GetGridLines(int numRows, int numColumns,
+            double CanvasHeight, double CanvasWidth, Brush brush)
         {
             var result = new List<UIElement>();
 
