@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.136
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization", "AStarVisualization\AStarVisualization.csproj", "{964BCA88-1FB4-403B-9ABA-31B2CDF562C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.WPF", "AStarVisualization\AStarVisualization.WPF.csproj", "{964BCA88-1FB4-403B-9ABA-31B2CDF562C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarDataStructures", "AStarDataStructures\AStarDataStructures.csproj", "{430ADDC1-A636-4DC3-AA31-EBCF39C92479}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.DataStructures", "AStarDataStructures\AStarVisualization.DataStructures.csproj", "{430ADDC1-A636-4DC3-AA31-EBCF39C92479}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.WPF.Controls", "AStarVisualization.WPF.Controls\AStarVisualization.WPF.Controls.csproj", "{D339AA80-A50F-4D42-9515-027AE3FF8612}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{430ADDC1-A636-4DC3-AA31-EBCF39C92479}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{430ADDC1-A636-4DC3-AA31-EBCF39C92479}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{430ADDC1-A636-4DC3-AA31-EBCF39C92479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
