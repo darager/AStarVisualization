@@ -15,6 +15,6 @@ namespace AStarVisualization.WPF.WPF.StartupValues
         public static readonly uint MaxDelay = 250;
 
         // DiagonalPaths:
-        public static readonly bool DiagonalPathsEnabled = true;
+        public static readonly bool DiagonalPathsAllowed = true;
     }
 }

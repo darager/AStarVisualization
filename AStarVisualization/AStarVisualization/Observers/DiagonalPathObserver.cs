@@ -37,10 +37,7 @@ namespace AStarVisualization.WPF.Observers
         }
         private void AlgorithmStateChanged(object sender, EventArgs e)
         {
-            if (AStarValues.AStarState == State.HasNotStarted)
-                checkbox.IsEnabled = true;
-            else
-                checkbox.IsEnabled = false;
+            checkbox.IsEnabled = (AStarValues.AStarState == State.HasNotStarted);
         }
     }
 }

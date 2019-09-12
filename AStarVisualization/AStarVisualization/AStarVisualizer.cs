@@ -73,37 +73,34 @@ namespace AStarVisualization.WPF
         }
         private void InitControllers(Window window)
         {
-            var controllers = new List<IController>();
-
-            controllers.Add(new DelayController(window));
-            controllers.Add(new DimensionController(window));
-            controllers.Add(new TileController(window));
-            controllers.Add(new StateController(window));
-
-            foreach (IController controller in controllers)
-                controller.StartControlling();
+            var controllers = new List<IController>()
+            {
+                new DelayController(window),
+                new DimensionController(window),
+                new TileController(window),
+                new StateController(window)
+            };
+            controllers.ForEach(c => c.StartControlling());
         }
         private void InitObservers(Window window)
         {
-            var observers = new List<IObserver>();
-
-            observers.Add(new StateObserver());
-            observers.Add(new DiagonalPathObserver(window));
-
-            foreach (IObserver observer in observers)
-                observer.StartObserving();
+            var observers = new List<IObserver>()
+            {
+                new StateObserver(),
+                new DiagonalPathObserver(window)
+            };
+            observers.ForEach(o => o.StartObserving());
         }
         private void InitRenderers(Window window)
         {
             Canvas canvas = (Canvas)window.FindName(ControlNames.DrawingCanvas);
-            var renderers = new List<IRenderer>();
-
-            renderers.Add(new GridRenderer(canvas));
-            renderers.Add(new TileRenderer(canvas));
-            renderers.Add(new PathRenderer(canvas));
-
-            foreach (IRenderer renderer in renderers)
-                renderer.StartRendering();
+            var renderers = new List<IRenderer>()
+            {
+                new GridRenderer(canvas),
+                new TileRenderer(canvas),
+                new PathRenderer(canvas)
+            };
+            renderers.ForEach(r => r.StartRendering());
         }
         private void InitAlgorithmThreadController()
         {
