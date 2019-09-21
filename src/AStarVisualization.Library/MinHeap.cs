@@ -1,10 +1,6 @@
 ﻿using System;
 
-<<<<<<< HEAD:AStarVisualization/AStarDataStructures/MinHeap.cs
-namespace AStarVisualization.WPF.DataStructures
-=======
-namespace AStarVisualization.Library.DataStructures
->>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.Library/MinHeap.cs
+namespace AStarVisualization.DataStructures
 {
     public class MinHeap<T> where T : IComparable
     {

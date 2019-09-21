@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{430ADDC1-A636-4DC3-AA31-EBCF39C92479}</ProjectGuid>
+    <ProjectGuid>{A9342786-D352-490C-BAE9-22236BB1BA88}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AStarDataStructures</RootNamespace>
