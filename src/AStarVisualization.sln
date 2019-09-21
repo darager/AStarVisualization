@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.DataStructures", "AStarVisualization.DataStructures\AStarVisualization.DataStructures.csproj", "{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.WPF", "AStarVisualization\AStarVisualization.WPF.csproj", "{964BCA88-1FB4-403B-9ABA-31B2CDF562C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.WPF", "AStarVisualization.WPF\AStarVisualization.WPF.csproj", "{964BCA88-1FB4-403B-9ABA-31B2CDF562C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.WPF.Controls", "AStarVisualization.WPF.Controls\AStarVisualization.WPF.Controls.csproj", "{D339AA80-A50F-4D42-9515-027AE3FF8612}"
 EndProject
