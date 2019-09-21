@@ -1,6 +1,10 @@
 ﻿using System;
 
+<<<<<<< HEAD:AStarVisualization/AStarDataStructures/MinHeap.cs
 namespace AStarVisualization.WPF.DataStructures
+=======
+namespace AStarVisualization.Library.DataStructures
+>>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.Library/MinHeap.cs
 {
     public class MinHeap<T> where T : IComparable
     {
@@ -108,7 +112,7 @@ namespace AStarVisualization.WPF.DataStructures
                 Swap(GetParentIndex(index), index);
                 index = GetParentIndex(index);
             }
-        }   
+        }
         private void HeapifyDown()
         {
             int index = 0;

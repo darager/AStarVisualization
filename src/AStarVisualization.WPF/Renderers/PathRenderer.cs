@@ -2,12 +2,18 @@
 using System.Windows;
 using System.Windows.Shapes;
 using System.Windows.Controls;
+<<<<<<< HEAD:AStarVisualization/AStarVisualization/Renderers/PathRenderer.cs
 using System.Collections.Generic;
 using AStarVisualization.WPF.AStarAlgorithm;
 using AStarVisualization.WPF.Renderer.RenderHelpers;
 using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread;
 using System.Collections;
+=======
+>>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/Renderers/PathRenderer.cs
 using System.Windows.Media;
+using AStarVisualization.WPF.Renderer.RenderHelpers;
+using AStarVisualization.WPF.AStarAlgorithm;
+using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread;
 
 namespace AStarVisualization.WPF.Renderer
 {

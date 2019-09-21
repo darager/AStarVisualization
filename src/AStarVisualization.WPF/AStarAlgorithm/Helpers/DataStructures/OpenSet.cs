@@ -1,6 +1,11 @@
+<<<<<<< HEAD:AStarVisualization/AStarVisualization/AStarAlgorithm/Helpers/DataStructures/OpenSet.cs
 ﻿using System;
 using System.Collections.Generic;
 using AStarVisualization.WPF.DataStructures;
+=======
+﻿using System.Collections.Generic;
+using AStarVisualization.Library.DataStructures;
+>>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/AStarAlgorithm/Helpers/DataStructures/OpenSet.cs
 
 namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread.Helpers
 {

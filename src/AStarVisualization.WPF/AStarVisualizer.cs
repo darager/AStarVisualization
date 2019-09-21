@@ -1,19 +1,34 @@
 ﻿using AStarVisualization.WPF.AStarAlgorithm;
+<<<<<<< HEAD:AStarVisualization/AStarVisualization/AStarVisualizer.cs
 using AStarVisualization.WPF.WPF.StartupValues;
 using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation;
 using AStarVisualization.WPF.Controllers;
+=======
+using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation;
+using AStarVisualization.WPF.Controllers;
+using AStarVisualization.WPF.Observers;
+>>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/AStarVisualizer.cs
 using AStarVisualization.WPF.Observers.Helpers;
 using AStarVisualization.WPF.Renderer;
 using AStarVisualization.WPF.Renderer.RenderHelpers;
 using AStarVisualization.WPF.UIElements;
+<<<<<<< HEAD:AStarVisualization/AStarVisualization/AStarVisualizer.cs
+=======
+using System;
+>>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/AStarVisualizer.cs
 using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Windows.Threading;
 using System.Windows.Media;
+<<<<<<< HEAD:AStarVisualization/AStarVisualization/AStarVisualizer.cs
 using AStarVisualization.WPF.Observers;
 using System.Windows;
 
 namespace AStarVisualization.WPF
+=======
+using System.Windows.Threading;
+
+namespace AStarVisualization.WPF.AStarVisualizer
+>>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/AStarVisualizer.cs
 {
     public class AStarVisualizer
     {

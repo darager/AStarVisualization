@@ -1,10 +1,16 @@
-﻿using System;
+﻿using AStarVisualization.WPF.AStarAlgorithm;
+using AStarVisualization.WPF.AStarVisualizer;
+using AStarVisualization.WPF.UIElements;
+using System;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
+<<<<<<< HEAD:AStarVisualization/AStarVisualization/Controllers/DimensionController.cs
 using AStarVisualization.WPF.UIElements;
 using AStarVisualization.WPF.AStarAlgorithm;
 using System.Windows;
 using AStarVisualization.WPF.WPF.StartupValues;
+=======
+>>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/Controllers/DimensionController.cs
 
 namespace AStarVisualization.WPF.Controllers
 {

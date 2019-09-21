@@ -1,4 +1,8 @@
+<<<<<<< HEAD:AStarVisualization/AStarVisualization/AStarAlgorithm/AStarValues.cs
 ﻿using AStarVisualization.WPF.WPF.StartupValues;
+=======
+﻿using AStarVisualization.WPF.AStarVisualizer;
+>>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/AStarAlgorithm/AStarValues.cs
 using System;
 using System.Collections;
 

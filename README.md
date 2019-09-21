@@ -19,8 +19,8 @@ function heuristic(node) =
 ## Examples
 
 <p align="center">
-   <kbd><img src="images/Example1.png" height="400"></kbd>
-   <kbd><img src="images/Example2.png" height="400"></kbd>
+   <kbd><img src="img/Example1.png" height="400"></kbd>
+   <kbd><img src="img/Example2.png" height="400"></kbd>
 </p>
 
 ---

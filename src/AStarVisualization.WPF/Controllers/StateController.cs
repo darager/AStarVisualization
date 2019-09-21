@@ -1,9 +1,16 @@
+<<<<<<< HEAD:AStarVisualization/AStarVisualization/Controllers/StateController.cs
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using AStarVisualization.WPF.AStarAlgorithm;
 using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation;
 using AStarVisualization.WPF.UIElements;
+=======
+﻿using AStarVisualization.WPF.AStarAlgorithm;
+using AStarVisualization.WPF.UIElements;
+using System;
+using System.Windows.Controls;
+>>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/Controllers/StateController.cs
 
 namespace AStarVisualization.WPF.Controllers
 {

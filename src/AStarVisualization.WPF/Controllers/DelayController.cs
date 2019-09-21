@@ -1,8 +1,13 @@
-﻿using System;
+﻿using AStarVisualization.WPF.AStarAlgorithm;
+using AStarVisualization.WPF.UIElements;
+using System;
 using System.Windows.Controls;
+<<<<<<< HEAD:AStarVisualization/AStarVisualization/Controllers/DelayController.cs
 using AStarVisualization.WPF.UIElements;
 using AStarVisualization.WPF.AStarAlgorithm;
 using System.Windows;
+=======
+>>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/Controllers/DelayController.cs
 
 namespace AStarVisualization.WPF.Controllers
 {
