@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
+using System.Reflection;
 using System.Collections.Generic;
 
 namespace AStarVisualization.WPF.UIElements
@@ -28,7 +27,7 @@ namespace AStarVisualization.WPF.UIElements
 
         public UIControl(Window window)
         {
-            foreach(var elementName in uiElements)
+            foreach (var elementName in uiElements)
             {
                 var element = (UIElement)window.FindName(elementName);
                 AStarControls.Add(elementName, element);

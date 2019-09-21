@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{964BCA88-1FB4-403B-9ABA-31B2CDF562C6}</ProjectGuid>
+    <ProjectGuid>{4D21BA11-1048-4206-819D-7B6B3785A451}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>AStarVisualization</RootNamespace>
-    <AssemblyName>AStarVisualization</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>AStarVisualization.WPF.Cleanup</RootNamespace>
+    <AssemblyName>AStarVisualization.WPF.Cleanup</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -42,6 +42,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -54,36 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AStarAlgorithm\AlgorithmThreadController.cs" />
-    <Compile Include="AStarAlgorithm\AlgorithmThread\AlgorithmController.cs" />
-    <Compile Include="AStarAlgorithm\AlgorithmThread\AStarAlgorithm.cs" />
-    <Compile Include="AStarAlgorithm\Helpers\DataStructures\ClosedSet.cs" />
-    <Compile Include="AStarAlgorithm\Helpers\DataStructures\OpenSet.cs" />
-    <Compile Include="AStarAlgorithm\Helpers\EventArgs\PathFoundEventArgs.cs" />
-    <Compile Include="AStarAlgorithm\Helpers\EventArgs\NodeAddedToCollectionEventArgs.cs" />
-    <Compile Include="AStarAlgorithm\Helpers\Objects\Node.cs" />
-    <Compile Include="AStarAlgorithm\AStarValues.cs" />
-    <Compile Include="Observers\DiagonalPathObserver.cs" />
-    <Compile Include="Observers\IObserver.cs" />
-    <Compile Include="Observers\StateObserver.cs" />
-    <Compile Include="AStarAlgorithm\Helpers\Enums\State.cs" />
-    <Compile Include="Renderers\Helpers\RenderColors.cs" />
-    <Compile Include="AStarAlgorithm\Helpers\Enums\Tile.cs" />
-    <Compile Include="AStarAlgorithm\Helpers\Objects\AStarTile.cs" />
-    <Compile Include="Renderers\Helpers\TileRenderObject.cs" />
-    <Compile Include="StartupValues\StartupValues.cs" />
-    <Compile Include="AStarVisualizer.cs" />
-    <Compile Include="Controllers\StateController.cs" />
-    <Compile Include="Controllers\DelayController.cs" />
-    <Compile Include="Controllers\DimensionController.cs" />
-    <Compile Include="Controllers\IController.cs" />
-    <Compile Include="Controllers\TileController.cs" />
-    <Compile Include="Renderers\GridRenderer.cs" />
-    <Compile Include="Renderers\IRenderer.cs" />
-    <Compile Include="Renderers\PathRenderer.cs" />
-    <Compile Include="Renderers\TileRenderer.cs" />
-    <Compile Include="UIControls\ControlNames.cs" />
-    <Compile Include="UIControls\UIControl.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -124,11 +95,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AStarVisualization.Core\AStarVisualization.Core.csproj">
+      <Project>{016c9fc7-77b3-4554-b47c-3fc8e4dab93f}</Project>
+      <Name>AStarVisualization.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AStarVisualization.DataStructures\AStarVisualization.DataStructures.csproj">
-      <Project>{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}</Project>
+      <Project>{7aab1625-d15e-44d1-aac4-847dc707bb0a}</Project>
       <Name>AStarVisualization.DataStructures</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AStarVisualization.WPF.Controls\AStarVisualization.WPF.Controls.csproj">
+      <Project>{d339aa80-a50f-4d42-9515-027ae3ff8612}</Project>
+      <Name>AStarVisualization.WPF.Controls</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
