@@ -17,6 +17,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.Library", "AStarVisualization.Library\AStarVisualization.Library.csproj", "{430ADDC1-A636-4DC3-AA31-EBCF39C92479}"
 >>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.sln
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.DataStructures", "AStarVisualization.DataStructures\AStarVisualization.DataStructures.csproj", "{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +33,17 @@ Global
 		{430ADDC1-A636-4DC3-AA31-EBCF39C92479}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{430ADDC1-A636-4DC3-AA31-EBCF39C92479}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{430ADDC1-A636-4DC3-AA31-EBCF39C92479}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+		{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> 676799d647ae6214b7a6ee12aaf016a6e2bb8fef
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
