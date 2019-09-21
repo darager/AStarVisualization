@@ -1,16 +1,10 @@
 ﻿using AStarVisualization.WPF.AStarAlgorithm;
-using AStarVisualization.WPF.AStarVisualizer;
 using AStarVisualization.WPF.UIElements;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
-<<<<<<< HEAD:AStarVisualization/AStarVisualization/Controllers/DimensionController.cs
-using AStarVisualization.WPF.UIElements;
-using AStarVisualization.WPF.AStarAlgorithm;
 using System.Windows;
-using AStarVisualization.WPF.WPF.StartupValues;
-=======
->>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/Controllers/DimensionController.cs
+using AStarVisualization.WPF.StartupValues;
 
 namespace AStarVisualization.WPF.Controllers
 {
@@ -74,7 +68,7 @@ namespace AStarVisualization.WPF.Controllers
             if (!IsValidDimension(numColumns))
                 ChangeText(TxtNumColumns);
 
-            int maxDimension = StartupValues.MaxDimension;
+            int maxDimension = StartupValues.StartupValues.MaxDimension;
 
             int RowDimension = GetDimension(numRows, maxDimension);
             int ColumnDimension = GetDimension(numColumns, maxDimension);
@@ -111,7 +105,7 @@ namespace AStarVisualization.WPF.Controllers
         }
         private void ChangeText(TextBox textBox)
         {
-            textBox.Text = StartupValues.MaxDimension.ToString();
+            textBox.Text = StartupValues.StartupValues.MaxDimension.ToString();
         }
         private void ChangeDimensionText(object sender, EventArgs args)
         {
@@ -120,7 +114,7 @@ namespace AStarVisualization.WPF.Controllers
         }
         private Regex GetDimensionRegex()
         {
-            int maxDimension = StartupValues.MaxDimension;
+            int maxDimension = StartupValues.StartupValues.MaxDimension;
             char maxDimensionNumber = maxDimension.ToString()[0];
 
             var regex = new Regex("(^[1-9]$|^[1-" + maxDimensionNumber + "][0-9]{0,1}$)");

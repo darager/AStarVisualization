@@ -1,9 +1,5 @@
-<<<<<<< HEAD:AStarVisualization/AStarVisualization/AStarAlgorithm/AStarValues.cs
-﻿using AStarVisualization.WPF.WPF.StartupValues;
-=======
-﻿using AStarVisualization.WPF.AStarVisualizer;
->>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/AStarAlgorithm/AStarValues.cs
 using System;
+using AStarVisualization.WPF.StartupValues;
 using System.Collections;
 
 namespace AStarVisualization.WPF.AStarAlgorithm
@@ -22,8 +18,8 @@ namespace AStarVisualization.WPF.AStarAlgorithm
         #region GridDimensions
         private static readonly object lockGridValuesObject = new object();
 
-        private static int _NumGridRows = StartupValues.NumGridColumns;
-        private static int _NumGridColumns = StartupValues.NumGridColumns;
+        private static int _NumGridRows = StartupValues.StartupValues.NumGridRows;
+        private static int _NumGridColumns = StartupValues.StartupValues.NumGridColumns;
 
         public static int NumGridRows
         {
@@ -89,7 +85,7 @@ namespace AStarVisualization.WPF.AStarAlgorithm
 
         #region DelayControl
         private static readonly object lockDelayControlObject = new object();
-        private static uint _Delay = StartupValues.CurrentDelay;
+        private static uint _Delay = StartupValues.StartupValues.CurrentDelay;
         public static uint Delay
         {
             get { lock (lockDelayControlObject) return _Delay; }

@@ -1,10 +1,6 @@
 ﻿using System;
 
-<<<<<<< HEAD:AStarVisualization/AStarVisualization/StartupValues/StartupValues.cs
-namespace AStarVisualization.WPF.WPF.StartupValues
-=======
-namespace AStarVisualization.WPF.AStarVisualizer
->>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/StartupValues/StartupValues.cs
+namespace AStarVisualization.WPF.StartupValues
 {
     static class StartupValues
     {

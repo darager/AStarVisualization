@@ -1,10 +1,6 @@
 ﻿using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Controls;
-<<<<<<< HEAD:AStarVisualization/AStarVisualization/Renderers/Helpers/TileRenderObject.cs
-using System.Collections.Generic;
-=======
->>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/Renderers/Helpers/TileRenderObject.cs
 using AStarVisualization.WPF.AStarAlgorithm;
 using AStarVisualization.WPF.Renderer.RenderHelpers;
 

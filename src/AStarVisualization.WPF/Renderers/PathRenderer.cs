@@ -1,19 +1,11 @@
-﻿using System;
+﻿using AStarVisualization.WPF.AStarAlgorithm;
+using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread;
+using AStarVisualization.WPF.Renderer.RenderHelpers;
+using System;
 using System.Windows;
-using System.Windows.Shapes;
 using System.Windows.Controls;
-<<<<<<< HEAD:AStarVisualization/AStarVisualization/Renderers/PathRenderer.cs
-using System.Collections.Generic;
-using AStarVisualization.WPF.AStarAlgorithm;
-using AStarVisualization.WPF.Renderer.RenderHelpers;
-using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread;
-using System.Collections;
-=======
->>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/Renderers/PathRenderer.cs
 using System.Windows.Media;
-using AStarVisualization.WPF.Renderer.RenderHelpers;
-using AStarVisualization.WPF.AStarAlgorithm;
-using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread;
+using System.Windows.Shapes;
 
 namespace AStarVisualization.WPF.Renderer
 {
@@ -55,10 +47,10 @@ namespace AStarVisualization.WPF.Renderer
             double columnSpacing = width / numColumns;
 
             var points = new PointCollection();
-            foreach(Node node in pathNodes)
+            foreach (Node node in pathNodes)
             {
-                double nodeX = node.ColumnIndex * columnSpacing + columnSpacing/2;
-                double nodeY = node.RowIndex * rowSpacing + rowSpacing/2;
+                double nodeX = node.ColumnIndex * columnSpacing + columnSpacing / 2;
+                double nodeY = node.RowIndex * rowSpacing + rowSpacing / 2;
 
                 points.Add(new Point(nodeX, nodeY));
             }

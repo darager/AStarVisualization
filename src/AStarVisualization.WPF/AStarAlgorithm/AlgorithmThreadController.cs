@@ -3,11 +3,6 @@ using AStarVisualization.WPF.Controllers;
 using System;
 using System.Threading;
 using System.Windows.Threading;
-<<<<<<< HEAD:AStarVisualization/AStarVisualization/AStarAlgorithm/AlgorithmThreadController.cs
-using AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthread;
-using AStarVisualization.WPF.Controllers;
-=======
->>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/AStarAlgorithm/AlgorithmThreadController.cs
 
 namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation
 {

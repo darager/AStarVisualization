@@ -1,16 +1,11 @@
-﻿using System;
+﻿using AStarVisualization.WPF.AStarAlgorithm;
+using AStarVisualization.WPF.Renderer.RenderHelpers;
+using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Windows.Controls;
-<<<<<<< HEAD:AStarVisualization/AStarVisualization/Renderers/GridRenderer.cs
-using AStarVisualization.WPF.AStarAlgorithm;
-using AStarVisualization.WPF.Renderer.RenderHelpers;
-=======
->>>>>>> e92bf3931e56c010cb6668335a283a2f1a7e25a2:src/AStarVisualization.WPF/Renderers/GridRenderer.cs
-using System.Collections.Generic;
-using AStarVisualization.WPF.Renderer.RenderHelpers;
-using AStarVisualization.WPF.AStarAlgorithm;
 
 namespace AStarVisualization.WPF.Renderer
 {
@@ -53,7 +48,7 @@ namespace AStarVisualization.WPF.Renderer
         }
         private void RemoveGridLines()
         {
-            foreach(UIElement line in GridLines)
+            foreach (UIElement line in GridLines)
                 canvas.Children.Remove(line);
         }
 
@@ -67,13 +62,13 @@ namespace AStarVisualization.WPF.Renderer
             double RowLineSpacing = CanvasHeight / numRows;
             double RowLineX1 = 0;
             double RowLineX2 = CanvasWidth;
-            for(int i = 0; i < numRowLines + 1; i++)
+            for (int i = 0; i < numRowLines + 1; i++)
             {
                 Line line = new Line();
 
                 line.X1 = RowLineX1;
                 line.X2 = RowLineX2;
-                line.Y1 = (i+1) * RowLineSpacing;
+                line.Y1 = (i + 1) * RowLineSpacing;
                 line.Y2 = line.Y1;
 
                 line.Stroke = brush;
@@ -91,7 +86,7 @@ namespace AStarVisualization.WPF.Renderer
             {
                 Line line = new Line();
 
-                line.X1 = (i+1) * ColumnLineSpacing;
+                line.X1 = (i + 1) * ColumnLineSpacing;
                 line.X2 = line.X1;
                 line.Y1 = ColumnLineY1;
                 line.Y2 = ColumnLineY2;
