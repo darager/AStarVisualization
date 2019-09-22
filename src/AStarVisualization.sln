@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.WPF.Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.WPF.Cleanup", "AStarVisualization.WPF.Cleanup\AStarVisualization.WPF.Cleanup.csproj", "{4D21BA11-1048-4206-819D-7B6B3785A451}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.Core", "AStarVisualization.Core\AStarVisualization.Core.csproj", "{016C9FC7-77B3-4554-B47C-3FC8E4DAB93F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AStarVisualization.Core", "AStarVisualization.Core\AStarVisualization.Core.csproj", "{016C9FC7-77B3-4554-B47C-3FC8E4DAB93F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.Core.UnitTests", "AStarVisualization.Core.UnitTests\AStarVisualization.Core.UnitTests.csproj", "{C17F0F5F-4A46-4E1A-A87B-84A6E42F32C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{016C9FC7-77B3-4554-B47C-3FC8E4DAB93F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{016C9FC7-77B3-4554-B47C-3FC8E4DAB93F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{016C9FC7-77B3-4554-B47C-3FC8E4DAB93F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C17F0F5F-4A46-4E1A-A87B-84A6E42F32C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C17F0F5F-4A46-4E1A-A87B-84A6E42F32C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C17F0F5F-4A46-4E1A-A87B-84A6E42F32C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C17F0F5F-4A46-4E1A-A87B-84A6E42F32C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

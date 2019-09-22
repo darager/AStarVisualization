@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AStarVisualization.Core
+﻿namespace AStarVisualization.Core
 {
     public class Node
     {
@@ -15,9 +11,9 @@ namespace AStarVisualization.Core
         public bool IsWalkable => State != NodeState.Wall;
         public double TotalCost => Heuristic + MovementCost * 500; // TODO remove the 500
 
-        public Node(Node parent = null)
+        public Node(Node parentNode = null)
         {
-            this._parent = parent;
+            this._parent = parentNode;
         }
     }
 }
