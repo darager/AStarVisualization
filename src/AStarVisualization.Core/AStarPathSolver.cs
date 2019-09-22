@@ -4,10 +4,10 @@ using System.Text;
 
 namespace AStarVisualization.Core
 {
-    public class PathSolver
+    public class AStarPathSolver
     {
         private Node[,] _nodes;
-        public PathSolver(ref Node[,] nodes)
+        public AStarPathSolver(ref Node[,] nodes)
         {
             this._nodes = nodes;
         }
