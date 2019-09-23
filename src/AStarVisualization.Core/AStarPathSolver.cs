@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AStarVisualization.Core
 {
-    public class AStarPathSolver
+    public class AStarPathSolver : IPathSolver
     {
-        private Node[,] _nodes;
-        public AStarPathSolver(ref Node[,] nodes)
+        private Node[,] map;
+
+        public AStarPathSolver(ref Node[,] map)
         {
-            this._nodes = nodes;
+            this.map = map;
         }
 
-        public async void StartSolving()
+        public Task<List<Node>> FindPath()
         {
-
+            throw new System.NotImplementedException();
         }
-        public async void StopSolving()
-        {
 
+        public void Stop()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

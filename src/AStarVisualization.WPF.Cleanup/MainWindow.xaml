@@ -24,7 +24,7 @@
         </Grid.ColumnDefinitions>
 
         <!--  Drawing Canvas  -->
-        <c:AStarCanvas Grid.Row="0" Grid.Column="0" />
+        <!--<c:AStarCanvas Grid.Row="0" Grid.Column="0" /> -->
 
         <!--  AStarcontrols Section  -->
         <Border

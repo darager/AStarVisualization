@@ -5,8 +5,8 @@ namespace AStarVisualization.WPF.StartupValues
     static class StartupValues
     {
         // Griddimensions:
-        public static readonly int NumGridRows = 40;
-        public static readonly int NumGridColumns = 40;
+        public static readonly int NumGridRows = 60;
+        public static readonly int NumGridColumns = 60;
         public static int MaxDimension => Math.Max(NumGridRows, NumGridColumns);
 
         // Delay Properties:

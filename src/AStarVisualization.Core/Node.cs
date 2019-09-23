@@ -11,9 +11,10 @@
         public bool IsWalkable => State != NodeState.Wall;
         public double TotalCost => Heuristic + MovementCost * 500; // TODO remove the 500
 
-        public Node(Node parentNode = null)
+        public Node(NodeState state, Node parentNode = null)
         {
             this._parent = parentNode;
+            this.State = state;
         }
     }
 }
