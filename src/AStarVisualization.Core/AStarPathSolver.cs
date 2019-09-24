@@ -17,7 +17,7 @@ namespace AStarVisualization.Core
         public Task<List<Node>> FindPath()
         {
             CheckMapForValidity(this.map);
-            throw new System.NotImplementedException();
+            return null; // TODO IMplement this
         }
         private void CheckMapForValidity(Node[,] map)
         {
@@ -35,7 +35,7 @@ namespace AStarVisualization.Core
             bool hasStart = false;
             bool hasGoal = false;
 
-            foreach(Node node in map)
+            foreach (Node node in map)
             {
                 if (node.State == NodeState.Start)
                     hasStart = true;

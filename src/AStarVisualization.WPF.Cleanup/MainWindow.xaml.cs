@@ -23,11 +23,6 @@ namespace AStarVisualization.WPF.Cleanup
     {
         public MainWindow()
         {
-            // TODO Ninject does not work for some reason
-            //var kernel = new StandardKernel();
-            //kernel.Load(Assembly.GetExecutingAssembly());
-
-            InitializeComponent();
         }
     }
 }
