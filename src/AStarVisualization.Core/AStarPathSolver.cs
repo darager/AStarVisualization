@@ -16,11 +16,11 @@ namespace AStarVisualization.Core
 
         public Task<List<Node>> FindPath()
         {
-            CheckMapForValidity(this.map);
+            EnsureMapValidity(this.map);
 
             return Task.Factory.StartNew(() => new List<Node>()); // TODO remove this and implement the algorithm
         }
-        private void CheckMapForValidity(Node[,] map)
+        private void EnsureMapValidity(Node[,] map)
         {
             if (map == null)
                 throw new ArgumentNullException();

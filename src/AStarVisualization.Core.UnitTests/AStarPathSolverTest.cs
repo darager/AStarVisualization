@@ -80,15 +80,15 @@ namespace AStarVisualization.Core.UnitTests
                 .TypeOf<MapTooSmallException>());
         }
 
-        [Test]
-        public void FindPath_NoWayPoints_ThrowsError()
+        [Test, TestCaseSource("FindPath_NoWayPoints_ThrowsError_Cases")]
+        public void FindPath_NoWayPoints_ThrowsError(object[,] mapCase)
         {
-            //var map = (Node[,])mapCase;
-            var map = new Node[,]
-            {
-                {new Node(NodeState.Wall), new Node(NodeState.Ground)},
-                {new Node(NodeState.Start), new Node(NodeState.Ground)},
-            };
+            var map = (Node[,])mapCase;
+            //var map = new Node[,]
+            //{
+            //    {new Node(NodeState.Wall), new Node(NodeState.Ground)},
+            //    {new Node(NodeState.Start), new Node(NodeState.Ground)},
+            //};
 
             IPathSolver pathfinder = new AStarPathSolver(ref map);
 
@@ -96,7 +96,7 @@ namespace AStarVisualization.Core.UnitTests
                 Throws.Exception
                 .TypeOf<NoWayPointsException>());
         }
-        public static object[] FindPath_NoWayPoints_ThrowsError_Cases =
+        private static object[] FindPath_NoWayPoints_ThrowsError_Cases =
         {
             new Node[,]
             {
