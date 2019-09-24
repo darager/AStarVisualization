@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using AStarVisualization.Core.Exceptions;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AStarVisualization.Core
@@ -14,6 +16,12 @@ namespace AStarVisualization.Core
 
         public Task<List<Node>> FindPath()
         {
+            if (map == null)
+                throw new ArgumentNullException();
+
+            if (map.GetLength(0) == 1 || map.GetLength(1) == 1)
+                throw new MapTooSmallException();
+
             throw new System.NotImplementedException();
         }
 

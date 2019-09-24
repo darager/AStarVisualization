@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace AStarVisualization.Core
+namespace AStarVisualization.Core.Exceptions
 {
     public class NoPathFoundException : Exception
     {
+        public NoPathFoundException() : base()
+        {
+
+        }
         public NoPathFoundException(string message) : base(message)
         {
 
