@@ -17,7 +17,8 @@ namespace AStarVisualization.Core
         public Task<List<Node>> FindPath()
         {
             CheckMapForValidity(this.map);
-            return null; // TODO IMplement this
+
+            return Task.Factory.StartNew(() => new List<Node>()); // TODO remove this and implement the algorithm
         }
         private void CheckMapForValidity(Node[,] map)
         {
@@ -27,7 +28,7 @@ namespace AStarVisualization.Core
             if (map.GetLength(0) == 1 || map.GetLength(1) == 1)
                 throw new MapTooSmallException();
 
-            if (MapHasGoalAndPath(map))
+            if (!MapHasGoalAndPath(map))
                 throw new NoWayPointsException();
         }
         private bool MapHasGoalAndPath(Node[,] map)
