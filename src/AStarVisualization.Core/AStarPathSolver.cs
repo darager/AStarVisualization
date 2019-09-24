@@ -16,13 +16,34 @@ namespace AStarVisualization.Core
 
         public Task<List<Node>> FindPath()
         {
+            CheckMapForValidity(this.map);
+            throw new System.NotImplementedException();
+        }
+        private void CheckMapForValidity(Node[,] map)
+        {
             if (map == null)
                 throw new ArgumentNullException();
 
             if (map.GetLength(0) == 1 || map.GetLength(1) == 1)
                 throw new MapTooSmallException();
 
-            throw new System.NotImplementedException();
+            if (MapHasGoalAndPath(map))
+                throw new NoWayPointsException();
+        }
+        private bool MapHasGoalAndPath(Node[,] map)
+        {
+            bool hasStart = false;
+            bool hasGoal = false;
+
+            foreach(Node node in map)
+            {
+                if (node.State == NodeState.Start)
+                    hasStart = true;
+                if (node.State == NodeState.Goal)
+                    hasGoal = true;
+            }
+
+            return (hasStart && hasGoal);
         }
 
         public void Stop()
