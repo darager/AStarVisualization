@@ -18,35 +18,35 @@ namespace AStarVisualization.Core.UnitTests
             {new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Goal)},
         };
 
-        // TODO fix this test and implement it
-        //[Test, TestCaseSource("FindPath_PathExists_ReturnsPath_Cases")]
+        // TODO implement the findpath method for this test to pass
+        [Test, TestCaseSource("FindPath_PathExists_ReturnsPath_Cases")]
         public async Task FindPath_PathExists_ReturnsPath(object[] parameters)
         {
-            int startRowIdx = (int)parameters[0];
-            int startColIdx = (int)parameters[1];
-            int goalRowIdx = (int)parameters[2];
-            int goalColIdx = (int)parameters[3];
-            List<Node> requiredPath = parameters.Skip(4).Cast<Node>().ToList();
-            //Node[,] map = GetMapWithStartAndGoal(startRowIdx, startColIdx, goalRowIdx, goalColIdx, Map);
+            (int startRowIdx, int startColIdx, int goalRowIdx, int goalColIdx, var expectedPath) = GetTestParameters(parameters);
+            Node[,] map = GetMapWithWaypoints(startRowIdx, startColIdx, goalRowIdx, goalColIdx, Map);
 
             IPathSolver pathfinder = new AStarPathSolver(ref Map);
-            List<Node> path = await pathfinder.FindPath();
-            path = parameters.Skip(4).Cast<Node>().ToList();
+            List<Node> actualPath = await pathfinder.FindPath();
 
-            Assert.AreEqual(path, requiredPath);
+            Assert.That(actualPath, Is.EquivalentTo(expectedPath));
         }
         #region TestUtils FindPath_PathExists_ReturnsPath
-        private static object[] FindPath_PathExists_ReturnsPath_Cases =
+        private (int, int, int, int, List<Node>) GetTestParameters(object[] parameters)
         {
-            new object[] {0, 0, 3, 3, Map[0,0], Map[1,0], Map[1,1], Map[1,2], Map[2,3], Map[3,3]},
-            // TODO add more cases
-        };
-        private Node[,] GetMapWithStartAndGoal(int startRowIdx, int startColIdx, int goalRowIdx, int goalColIdx, Node[,] map)
+            var path = parameters.Skip(4).Cast<Node>().ToList();
+            return ((int)parameters[0], (int)parameters[1], (int)parameters[2], (int)parameters[3], path);
+        }
+        private Node[,] GetMapWithWaypoints(int startRowIdx, int startColIdx, int goalRowIdx, int goalColIdx, Node[,] map)
         {
             //map[startRowIdx, startColIdx] = new Node(NodeState.Start);
             //map[goalRowIdx, goalColIdx] = new Node(NodeState.Goal);
             return map;
         }
+        private static object[] FindPath_PathExists_ReturnsPath_Cases =
+        {
+            // TODO add more cases
+            new object[] {0, 0, 3, 3, Map[0,0], Map[1,0], Map[1,1], Map[1,2], Map[2,3], Map[3,3]},
+        };
         #endregion
         //[Test]
         //public void FindPath_NoPathExists_ThrowsError()
@@ -80,7 +80,8 @@ namespace AStarVisualization.Core.UnitTests
                 .TypeOf<MapTooSmallException>());
         }
 
-        [Test, TestCaseSource("FindPath_NoWayPoints_ThrowsError_Cases")]
+        // TODO make this test work
+        [Test]
         public void FindPath_NoWayPoints_ThrowsError(object[,] mapCase)
         {
             var map = (Node[,])mapCase;

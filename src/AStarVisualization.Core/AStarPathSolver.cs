@@ -22,7 +22,7 @@ namespace AStarVisualization.Core
         }
         private void EnsureMapValidity(Node[,] map)
         {
-            if (map == null)
+            if (map is null)
                 throw new ArgumentNullException();
 
             if (map.GetLength(0) == 1 || map.GetLength(1) == 1)
@@ -40,7 +40,7 @@ namespace AStarVisualization.Core
             {
                 if (node.State == NodeState.Start)
                     hasStart = true;
-                if (node.State == NodeState.Goal)
+                else if (node.State == NodeState.Goal)
                     hasGoal = true;
             }
 
