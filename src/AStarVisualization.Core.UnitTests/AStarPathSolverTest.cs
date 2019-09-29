@@ -18,7 +18,6 @@ namespace AStarVisualization.Core.UnitTests
             {new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Goal)},
         };
 
-        // TODO implement the findpath method for this test to pass
         [Test, TestCaseSource("FindPath_PathExists_ReturnsPath_Cases")]
         public async Task FindPath_PathExists_ReturnsPath(object[] parameters)
         {
@@ -48,6 +47,7 @@ namespace AStarVisualization.Core.UnitTests
             new object[] {0, 0, 3, 3, Map[0,0], Map[1,0], Map[1,1], Map[1,2], Map[2,3], Map[3,3]},
         };
         #endregion
+        // TODO implement this test
         //[Test]
         //public void FindPath_NoPathExists_ThrowsError()
         //{
@@ -81,7 +81,7 @@ namespace AStarVisualization.Core.UnitTests
         }
 
         // TODO make this test work
-        [Test]
+        [Test, TestCaseSource("FindPath_NoWayPoints_ThrowsError_Cases")]
         public void FindPath_NoWayPoints_ThrowsError(object[,] mapCase)
         {
             var map = (Node[,])mapCase;
@@ -97,28 +97,10 @@ namespace AStarVisualization.Core.UnitTests
                 Throws.Exception
                 .TypeOf<NoWayPointsException>());
         }
-        private static object[] FindPath_NoWayPoints_ThrowsError_Cases =
+        private static object[,] FindPath_NoWayPoints_ThrowsError_Cases =
         {
-            new Node[,]
-            {
-                {new Node(NodeState.Wall), new Node(NodeState.Ground)},
-                {new Node(NodeState.Start), new Node(NodeState.Ground)},
-            },
-            new Node[,]
-            {
-                {new Node(NodeState.Goal), new Node(NodeState.Ground)},
-                {new Node(NodeState.Start), new Node(NodeState.Ground)},
-            },
-            new Node[,]
-            {
-                {new Node(NodeState.Start), new Node(NodeState.Ground)},
-                {new Node(NodeState.Wall), new Node(NodeState.Ground)},
-            },
-            new Node[,]
-            {
-                {new Node(NodeState.Wall), new Node(NodeState.Ground)},
-                {new Node(NodeState.Wall), new Node(NodeState.Ground)},
-            },
+            {new Node(NodeState.Wall), new Node(NodeState.Ground)},
+            {new Node(NodeState.Start), new Node(NodeState.Ground)},
         };
     }
 }

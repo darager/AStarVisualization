@@ -1,5 +1,4 @@
 using System;
-using AStarVisualization.WPF.StartupValues;
 using System.Collections;
 
 namespace AStarVisualization.WPF.AStarAlgorithm

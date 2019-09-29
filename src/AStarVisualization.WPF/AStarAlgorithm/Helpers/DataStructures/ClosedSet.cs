@@ -28,7 +28,7 @@ namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthr
         {
             var handler = NodeAddedToCollection;
 
-            if(handler != null)
+            if (handler != null)
             {
                 var args = new NodeAddedToCollectionEventArgs(node);
                 NodeAddedToCollection(this, args);

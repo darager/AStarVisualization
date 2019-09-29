@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AStarVisualization.Core.UnitTests": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

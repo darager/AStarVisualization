@@ -1,6 +1,5 @@
-﻿using System.Windows;
-using System.Reflection;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Windows;
 
 namespace AStarVisualization.WPF.UIElements
 {

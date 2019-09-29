@@ -17,8 +17,8 @@ namespace AStarVisualization.Core
         public Task<List<Node>> FindPath()
         {
             EnsureMapValidity(this.map);
-
-            return Task.Factory.StartNew(() => new List<Node>()); // TODO remove this and implement the algorithm
+            // TODO remove this and implement the algorithm
+            return Task.Factory.StartNew(() => new List<Node>());
         }
         private void EnsureMapValidity(Node[,] map)
         {

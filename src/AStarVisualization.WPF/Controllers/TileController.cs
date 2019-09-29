@@ -1,10 +1,10 @@
-﻿using System;
+﻿using AStarVisualization.WPF.AStarAlgorithm;
+using AStarVisualization.WPF.UIElements;
+using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Controls;
-using AStarVisualization.WPF.UIElements;
-using AStarVisualization.WPF.AStarAlgorithm;
 
 namespace AStarVisualization.WPF.Controllers
 {
@@ -235,7 +235,7 @@ namespace AStarVisualization.WPF.Controllers
             int ColumnIndex = GetColumnIndex(MousePosX);
 
             AStarTile previousTile;
-            if(AStarValues.AStarTiles[RowIndex, ColumnIndex] != null)
+            if (AStarValues.AStarTiles[RowIndex, ColumnIndex] != null)
             {
                 previousTile = AStarValues.AStarTiles[RowIndex, ColumnIndex];
 
@@ -344,7 +344,7 @@ namespace AStarVisualization.WPF.Controllers
         {
             AStarTile[,] tiles = AStarValues.AStarTiles;
 
-            foreach(AStarTile tile in tiles)
+            foreach (AStarTile tile in tiles)
             {
                 if (tile == null)
                     continue;

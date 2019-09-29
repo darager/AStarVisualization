@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AStarVisualization.DataStructures
 {
@@ -62,7 +62,7 @@ namespace AStarVisualization.DataStructures
             K result = list.First();
             list.Remove(result);
 
-            if(list.Count == 0)
+            if (list.Count == 0)
                 dictionary.Remove(key);
 
             _Count--;

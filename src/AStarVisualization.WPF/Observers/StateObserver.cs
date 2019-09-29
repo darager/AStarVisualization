@@ -1,5 +1,5 @@
-﻿using System;
-using AStarVisualization.WPF.Observers.Helpers;
+﻿using AStarVisualization.WPF.Observers.Helpers;
+using System;
 
 namespace AStarVisualization.WPF.AStarAlgorithm
 {

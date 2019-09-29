@@ -1,8 +1,8 @@
 ﻿using AStarVisualization.WPF.AStarAlgorithm;
 using AStarVisualization.WPF.UIElements;
 using System;
-using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace AStarVisualization.WPF.Controllers
 {

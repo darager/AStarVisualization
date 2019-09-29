@@ -2,9 +2,8 @@
 using AStarVisualization.WPF.UIElements;
 using System;
 using System.Text.RegularExpressions;
-using System.Windows.Controls;
 using System.Windows;
-using AStarVisualization.WPF.StartupValues;
+using System.Windows.Controls;
 
 namespace AStarVisualization.WPF.Controllers
 {

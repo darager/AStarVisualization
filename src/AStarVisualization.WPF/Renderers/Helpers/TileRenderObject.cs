@@ -1,8 +1,8 @@
-﻿using System.Windows.Media;
-using System.Windows.Shapes;
-using System.Windows.Controls;
-using AStarVisualization.WPF.AStarAlgorithm;
+﻿using AStarVisualization.WPF.AStarAlgorithm;
 using AStarVisualization.WPF.Renderer.RenderHelpers;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace AStarVisualization.WPF.Renderer.TileRenderHelpers
 {

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Controls;
-using AStarVisualization.WPF.AStarAlgorithm;
+﻿using AStarVisualization.WPF.AStarAlgorithm;
 using AStarVisualization.WPF.Renderer.RenderHelpers;
 using AStarVisualization.WPF.Renderer.TileRenderHelpers;
+using System;
+using System.Windows.Controls;
 
 namespace AStarVisualization.WPF.Renderer
 {
@@ -19,8 +19,8 @@ namespace AStarVisualization.WPF.Renderer
             int numColumns = AStarValues.NumGridColumns;
 
             this.Tiles = new TileRenderObject[numRows, numColumns];
-            for(int i = 0; i < numRows; i++)
-                for(int j = 0; j < numColumns; j++)
+            for (int i = 0; i < numRows; i++)
+                for (int j = 0; j < numColumns; j++)
                 {
                     var tile = new AStarTile(i, j);
                     Tiles[i, j] = new TileRenderObject(DrawingCanvas, tile);
