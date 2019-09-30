@@ -47,7 +47,7 @@ namespace AStarVisualization.Core.UnitTests
             // TODO add more testcases
         };
         #endregion
-        [Test] //TODO implement this test
+        //[Test] //TODO implement this test
         public void FindPath_NoPathExists_ThrowsError()
         {
             Node[,] map = null;
