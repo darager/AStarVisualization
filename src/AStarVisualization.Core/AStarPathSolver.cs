@@ -1,4 +1,5 @@
 ﻿using AStarVisualization.Core.Exceptions;
+using AStarVisualization.DataStructures;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,6 +14,9 @@ namespace AStarVisualization.Core
         private Node goalNode;
         private Node currentNode;
 
+        private OpenSet openSet;
+        private HashSet<Node> closedSet;
+
         public AStarPathSolver(ref Node[,] map)
         {
             this.map = map;
@@ -21,9 +25,22 @@ namespace AStarVisualization.Core
         public Task<List<Node>> FindPath()
         {
             EnsureMapValidity(this.map);
-            // TODO remove this and implement the algorithm
-            return Task.Factory.StartNew(() => new List<Node>());
+            InitDataStructures();
+
+
+
+
+
+
+            return Task.Factory.StartNew(() => new List<Node>()); // TODO remove this
         }
+
+        private void InitDataStructures()
+        {
+            this.openSet = new OpenSet();
+            this.closedSet = new HashSet<Node>();
+        }
+
         public void Stop()
         {
             throw new System.NotImplementedException();
@@ -59,7 +76,7 @@ namespace AStarVisualization.Core
             Node goal = null;
             Node start = null;
 
-            foreach(var node in map)
+            foreach (var node in map)
             {
                 if (node.State == NodeState.Start)
                     start = node;
