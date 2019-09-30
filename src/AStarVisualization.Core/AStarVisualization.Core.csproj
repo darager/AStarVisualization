@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AStarVisualization.DataStructures\AStarVisualization.DataStructures.csproj" />
+  </ItemGroup>
+
 </Project>

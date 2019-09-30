@@ -128,14 +128,7 @@ namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthr
         }
         private bool IsPathFound(Node node)
         {
-            if (node == GoalNode)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return (node == GoalNode);
         }
         private void HandleFoundPath(Node node)
         {

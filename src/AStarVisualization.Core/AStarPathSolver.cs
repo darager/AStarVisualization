@@ -8,6 +8,10 @@ namespace AStarVisualization.Core
     public class AStarPathSolver : IPathSolver
     {
         private Node[,] map;
+        private bool diagonalsAllowed;
+        private Node startNode;
+        private Node goalNode;
+        private Node currentNode;
 
         public AStarPathSolver(ref Node[,] map)
         {
@@ -19,6 +23,10 @@ namespace AStarVisualization.Core
             EnsureMapValidity(this.map);
             // TODO remove this and implement the algorithm
             return Task.Factory.StartNew(() => new List<Node>());
+        }
+        public void Stop()
+        {
+            throw new System.NotImplementedException();
         }
         private void EnsureMapValidity(Node[,] map)
         {
@@ -46,10 +54,20 @@ namespace AStarVisualization.Core
 
             return (hasStart && hasGoal);
         }
-
-        public void Stop()
+        private (Node, Node) GetStartAndGoal(Node[,] map)
         {
-            throw new System.NotImplementedException();
+            Node goal = null;
+            Node start = null;
+
+            foreach(var node in map)
+            {
+                if (node.State == NodeState.Start)
+                    start = node;
+                else if (node.State == NodeState.Goal)
+                    goal = node;
+            }
+
+            return (start, goal);
         }
     }
 }
