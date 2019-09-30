@@ -304,7 +304,7 @@ namespace AStarVisualization.WPF.Controllers
 
                 AStarTile oldTile = AStarValues.AStarTiles[RowIndex, ColumnIndex];
 
-                if (oldTile == null)
+                if (oldTile is null)
                     return;
 
                 if (oldTile.TileType == Tile.Start)
@@ -318,10 +318,10 @@ namespace AStarVisualization.WPF.Controllers
         }
         private void SetRandomStartGoal(object sender, EventArgs args)
         {
-            if (AStarValues.StartTile == null)
+            if (AStarValues.StartTile is null)
                 SetStartTile(0, 0);
 
-            if (AStarValues.GoalTile == null)
+            if (AStarValues.GoalTile is null)
             {
                 int numRows = AStarValues.NumGridRows;
                 int numColumns = AStarValues.NumGridColumns;
@@ -346,7 +346,7 @@ namespace AStarVisualization.WPF.Controllers
 
             foreach (AStarTile tile in tiles)
             {
-                if (tile == null)
+                if (tile is null)
                     continue;
 
                 if (tile.TileType == Tile.EmptyClosed || tile.TileType == Tile.EmptyOpen)

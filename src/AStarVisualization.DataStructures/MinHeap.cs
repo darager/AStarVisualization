@@ -17,7 +17,6 @@ namespace AStarVisualization.DataStructures
             if (Capacity == 0)
                 throw new Exception("The Capacity can not be 0");
 
-
             this._Capacity = Capacity;
 
             Items = new T[_Capacity];

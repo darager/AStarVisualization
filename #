@@ -1,4 +1,4 @@
-﻿using AStarVisualization.Core.Exceptions;
+using AStarVisualization.Core.Exceptions;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace AStarVisualization.Core.UnitTests
             (int startRowIdx, int startColIdx, int goalRowIdx, int goalColIdx, var expectedPath) = GetTestParameters(parameters);
             Node[,] map = GetMapWithWaypoints(startRowIdx, startColIdx, goalRowIdx, goalColIdx, Map);
 
-            IPathSolver pathfinder = new AStarPathSolver(ref map);
+            IPathSolver pathfinder = new AStarPathSolver(ref Map);
             List<Node> actualPath = await pathfinder.FindPath();
 
             Assert.That(actualPath, Is.EquivalentTo(expectedPath));
@@ -37,26 +37,27 @@ namespace AStarVisualization.Core.UnitTests
         }
         private Node[,] GetMapWithWaypoints(int startRowIdx, int startColIdx, int goalRowIdx, int goalColIdx, Node[,] map)
         {
-            map[startRowIdx, startColIdx] = new Node(NodeState.Start);
-            map[goalRowIdx, goalColIdx] = new Node(NodeState.Goal);
+            //map[startRowIdx, startColIdx] = new Node(NodeState.Start);
+            //map[goalRowIdx, goalColIdx] = new Node(NodeState.Goal);
             return map;
         }
         private static object[] FindPath_PathExists_ReturnsPath_Cases =
         {
+            // TODO add more cases
             new object[] {0, 0, 3, 3, Map[0,0], Map[1,0], Map[1,1], Map[1,2], Map[2,3], Map[3,3]},
-            // TODO add more testcases
         };
         #endregion
-        [Test] //TODO implement this test
-        public void FindPath_NoPathExists_ThrowsError()
-        {
-            Node[,] map = null;
-            IPathSolver pathfinder = new AStarPathSolver(ref map);
+        // TODO implement this test
+        //[Test]
+        //public void FindPath_NoPathExists_ThrowsError()
+        //{
+        //    Node[,] map = null;
+        //    IPathSolver pathfinder = new AStarPathSolver(ref map);
 
-            Assert.That(async () => await pathfinder.FindPath(),
-                Throws.Exception
-                .TypeOf<NoPathFoundException>());
-        }
+        //    Assert.That(async () => await pathfinder.FindPath(),
+        //        Throws.Exception
+        //        .TypeOf<NoPathFoundException>());
+        //}
         [Test]
         public void FindPath_MapIsNull_ThrowsError()
         {
@@ -78,7 +79,9 @@ namespace AStarVisualization.Core.UnitTests
                 Throws.Exception
                 .TypeOf<MapTooSmallException>());
         }
-        [Test] // TODO add more testcases
+
+        // TODO add more testcases
+        [Test]
         public void FindPath_NoWayPoints_ThrowsError()
         {
             var map = new Node[,]

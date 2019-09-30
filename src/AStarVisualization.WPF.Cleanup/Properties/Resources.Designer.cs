@@ -42,7 +42,7 @@ namespace AStarVisualization.WPF.Cleanup.Properties
         {
             get
             {
-                if ((resourceMan == null))
+                if ((resourceMan is null))
                 {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AStarVisualization.WPF.Cleanup.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;

@@ -39,7 +39,7 @@ namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthr
                 for (int col = 0; col < numColumns; col++)
                 {
                     AStarTile tile;
-                    if (tiles[row, col] == null)
+                    if (tiles[row, col] is null)
                     {
                         tile = new AStarTile(row, col);
                     }
@@ -102,7 +102,7 @@ namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthr
             {
                 Node node = args.node;
                 AStarTile tile = AStarValues.AStarTiles[node.RowIndex, node.ColumnIndex];
-                if (tile == null)
+                if (tile is null)
                 {
                     tile = new AStarTile(node.RowIndex, node.ColumnIndex);
                 }
