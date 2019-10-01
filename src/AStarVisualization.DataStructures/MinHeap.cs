@@ -4,22 +4,20 @@ namespace AStarVisualization.DataStructures
 {
     public class MinHeap<T> where T : IComparable
     {
-        private int _Capacity;
-        private int _Count = 0;
-
         public int Capacity { get { return _Capacity; } }
         public int Count { get { return _Count; } }
 
-        private T[] Items;
+        private int _Capacity;
+        private int _Count = 0;
+        private T[] _Items;
 
         public MinHeap(int Capacity)
         {
-            if (Capacity == 0)
-                throw new Exception("The Capacity can not be 0");
+            if (Capacity <= 0)
+                throw new Exception("The Capacity can not be 0 or smaller than 0!");
 
-            this._Capacity = Capacity;
-
-            Items = new T[_Capacity];
+            _Capacity = Capacity;
+            _Items = new T[_Capacity];
         }
 
         public T Peek()
@@ -27,15 +25,15 @@ namespace AStarVisualization.DataStructures
             if (_Count == 0)
                 throw new Exception("The Heap does not contain any values");
 
-            return Items[0];
+            return _Items[0];
         }
         public T GetMinimumElement()
         {
             if (_Count == 0)
                 throw new Exception("The Heap does not contain any values");
 
-            T item = Items[0];
-            Items[0] = Items[_Count - 1];
+            T item = _Items[0];
+            _Items[0] = _Items[_Count - 1];
             _Count--;
             HeapifyDown();
 
@@ -44,9 +42,9 @@ namespace AStarVisualization.DataStructures
         public void Add(T item)
         {
             if (_Count == _Capacity)
-                throw new Exception("The Capacity of the Heap is not large enough");
+                IncreaseCapacity();
 
-            Items[_Count] = item;
+            _Items[_Count] = item;
             _Count++;
             HeapifyUp();
         }
@@ -64,7 +62,6 @@ namespace AStarVisualization.DataStructures
             return (index - 1) / 2;
 
         }
-
         private bool HasLeftChild(int index)
         {
             return GetLeftChildIndex(index) < _Count;
@@ -77,32 +74,31 @@ namespace AStarVisualization.DataStructures
         {
             return GetParentIndex(index) >= 0;
         }
-
         private T GetLeftChild(int index)
         {
-            return Items[GetLeftChildIndex(index)];
+            return _Items[GetLeftChildIndex(index)];
         }
         private T GetRightChild(int index)
         {
-            return Items[GetRightChildIndex(index)];
+            return _Items[GetRightChildIndex(index)];
         }
         private T GetParent(int index)
         {
-            return Items[GetParentIndex(index)];
+            return _Items[GetParentIndex(index)];
         }
 
         private void Swap(int indexOne, int indexTwo)
         {
-            T temp = Items[indexOne];
-            Items[indexOne] = Items[indexTwo];
-            Items[indexTwo] = temp;
+            T temp = _Items[indexOne];
+            _Items[indexOne] = _Items[indexTwo];
+            _Items[indexTwo] = temp;
 
         }
         private void HeapifyUp()
         {
             int index = _Count - 1;
 
-            while (HasParent(index) && Items[index].CompareTo(GetParent(index)) == -1)
+            while (HasParent(index) && _Items[index].CompareTo(GetParent(index)) == -1)
             {
                 Swap(GetParentIndex(index), index);
                 index = GetParentIndex(index);
@@ -122,17 +118,23 @@ namespace AStarVisualization.DataStructures
                 {
                     int RightChildIndex = GetRightChildIndex(index);
 
-                    if (Items[RightChildIndex].CompareTo(Items[LeftChildIndex]) == -1)
+                    if (_Items[RightChildIndex].CompareTo(_Items[LeftChildIndex]) == -1)
                         SmallerChildIndex = RightChildIndex;
                 }
 
-                if (Items[index].CompareTo(Items[SmallerChildIndex]) == -1)
+                if (_Items[index].CompareTo(_Items[SmallerChildIndex]) == -1)
                     break;
                 else
                     Swap(index, SmallerChildIndex);
 
                 index = SmallerChildIndex;
             }
+        }
+
+        private void IncreaseCapacity()
+        {
+            _Capacity = _Capacity * 2;
+            Array.Resize(ref _Items, _Capacity);
         }
     }
 }
