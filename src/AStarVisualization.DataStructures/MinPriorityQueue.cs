@@ -6,38 +6,31 @@ namespace AStarVisualization.DataStructures
 {
     public class MinPriorityQueue<T, K> where T : IComparable
     {
-        MinHeap<T> minHeap;
-        Dictionary<T, List<K>> dictionary;
+        public int Capacity => _minHeap.Capacity;
+        public int Count => _Count;
 
-        private int _Capacity;
         private int _Count;
-
-        public int Capacity { get { return _Capacity; } }
-        public int Count { get { return _Count; } }
+        private MinHeap<T> _minHeap;
+        private Dictionary<T, List<K>> _dictionary;
 
         public MinPriorityQueue(int Capacity)
         {
-            _Capacity = Capacity;
-
-            minHeap = new MinHeap<T>(Capacity);
-            dictionary = new Dictionary<T, List<K>>();
+            _minHeap = new MinHeap<T>(Capacity);
+            _dictionary = new Dictionary<T, List<K>>();
         }
 
         public bool Contains(T key)
         {
-            return dictionary.ContainsKey(key);
+            return _dictionary.ContainsKey(key);
         }
         public void Add(T key, K value)
         {
-            if (_Count == Capacity)
-                throw new Exception("The Priority Queue is full");
+            _minHeap.Add(key);
 
-            minHeap.Add(key);
-
-            if (dictionary.ContainsKey(key))
-                dictionary[key].Add(value);
+            if (_dictionary.ContainsKey(key))
+                _dictionary[key].Add(value);
             else
-                dictionary.Add(key, new List<K> { value });
+                _dictionary.Add(key, new List<K> { value });
 
             _Count++;
         }
@@ -46,8 +39,8 @@ namespace AStarVisualization.DataStructures
             if (_Count == 0)
                 throw new Exception("The Priority Queue is Empty");
 
-            T key = minHeap.Peek();
-            List<K> list = dictionary[key];
+            T key = _minHeap.Peek();
+            List<K> list = _dictionary[key];
 
             return new KeyValuePair<T, K>(key, list.First());
         }
@@ -56,14 +49,14 @@ namespace AStarVisualization.DataStructures
             if (_Count == 0)
                 throw new Exception("The Priority Queue is empty");
 
-            T key = minHeap.GetMinimumElement();
-            List<K> list = dictionary[key];
+            T key = _minHeap.GetMinimumElement();
+            List<K> list = _dictionary[key];
 
             K result = list.First();
             list.Remove(result);
 
             if (list.Count == 0)
-                dictionary.Remove(key);
+                _dictionary.Remove(key);
 
             _Count--;
 

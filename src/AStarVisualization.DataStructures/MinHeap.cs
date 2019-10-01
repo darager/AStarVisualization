@@ -4,8 +4,8 @@ namespace AStarVisualization.DataStructures
 {
     public class MinHeap<T> where T : IComparable
     {
-        public int Capacity { get { return _Capacity; } }
-        public int Count { get { return _Count; } }
+        public int Capacity => _Capacity;
+        public int Count => _Count;
 
         private int _Capacity;
         private int _Count = 0;
