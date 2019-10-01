@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Linq;
 
-namespace AStarVisualization.DataStructures.UnitTests
+namespace AStarVisualization.DataStructures.UnitTests // TODO: implement the tests for this class
 {
     [TestFixture]
     public class MinPriorityQueueTest
@@ -57,42 +57,41 @@ namespace AStarVisualization.DataStructures.UnitTests
             int[] keys = { 10, 123, 352, 1024 };
             var minPriorityQueue = new MinPriorityQueue<int, string>(10);
 
-            foreach (var key in keys)
-                minPriorityQueue.Add(number);
+            foreach (int key in keys)
+                minPriorityQueue.Add(key, "test");
             int previousCount = minPriorityQueue.Count;
-            minPriorityQueue.Add(18324);
+            minPriorityQueue.Add(10323, "test");
             int actualCount = minPriorityQueue.Count;
 
             Assert.That(previousCount < actualCount);
         }
-        //[Test]
-        //public void GetMinimumElement_RemovesElement_DecreasesCount()
-        //{
-        //    int[] numbers = { 10, 123, 352, 1024 };
-        //    var minPriorityQueue = new MinPriorityQueue<int>(10);
+        [Test]
+        public void GetMinimumElement_RemovesElement_DecreasesCount()
+        {
+            int[] keys = { 10, 123, 352, 1024 };
+            var minPriorityQueue = new MinPriorityQueue<int, string>(10);
 
-        //    foreach (var number in numbers)
-        //        minPriorityQueue.Add(number);
-        //    int previousCount = minPriorityQueue.Count;
-        //    var num = minPriorityQueue.GetMinimumElement();
-        //    int actualCount = minPriorityQueue.Count;
+            foreach (int key in keys)
+                minPriorityQueue.Add(key, "test");
+            int previousCount = minPriorityQueue.Count;
+            var _ = minPriorityQueue.GetMinPriorityPair();
+            int actualCount = minPriorityQueue.Count;
 
-        //    Assert.That(previousCount > actualCount);
-        //}
-        //[Test]
-        //public void Add_ExceedsCapacity_IncreasesCapacity()
-        //{
-        //    int[] numbers = { 10, 1234, 583, 28, 28 };
-        //    var minPriorityQueue = new MinPriorityQueue<int>(5);
+            Assert.That(previousCount > actualCount);
+        }
+        [Test]
+        public void Add_ExceedsCapacity_IncreasesCapacity()
+        {
+            int[] keys = { 10, 1234, 583, 28, 28 };
+            var minPriorityQueue = new MinPriorityQueue<int, string>(5);
 
-        //    foreach (var num in numbers)
-        //        minPriorityQueue.Add(num);
-        //    int previousCapacity = minPriorityQueue.Capacity;
+            foreach (var key in keys)
+                minPriorityQueue.Add(key, "test");
+            int previousCapacity = minPriorityQueue.Capacity;
+            minPriorityQueue.Add(103, "test");
+            int actualCapacity = minPriorityQueue.Capacity;
 
-        //    minPriorityQueue.Add(103);
-        //    int actualCapacity = minPriorityQueue.Capacity;
-
-        //    Assert.That(actualCapacity == previousCapacity * 2);
-        //}
+            Assert.That(actualCapacity == previousCapacity * 2);
+        }
     }
 }

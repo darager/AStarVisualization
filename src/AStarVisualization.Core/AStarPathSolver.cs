@@ -14,7 +14,7 @@ namespace AStarVisualization.Core
         private Node goalNode;
         private Node currentNode;
 
-        private OpenSet openSet;
+        private MinPriorityQueue<double, Node> openSet;
         private HashSet<Node> closedSet;
 
         public AStarPathSolver(ref Node[,] map)
@@ -37,7 +37,7 @@ namespace AStarVisualization.Core
 
         private void InitDataStructures()
         {
-            this.openSet = new OpenSet();
+            this.openSet = new MinPriorityQueue<double, Node>(102341234); // TODO: implement this
             this.closedSet = new HashSet<Node>();
         }
 

@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using System.Linq;
-using System;
 
 namespace AStarVisualization.DataStructures.UnitTests
 {
@@ -75,7 +74,7 @@ namespace AStarVisualization.DataStructures.UnitTests
             foreach (var number in numbers)
                 minHeap.Add(number);
             int previousCount = minHeap.Count;
-            var num = minHeap.GetMinimumElement();
+            var _ = minHeap.GetMinimumElement();
             int actualCount = minHeap.Count;
 
             Assert.That(previousCount > actualCount);
@@ -89,7 +88,6 @@ namespace AStarVisualization.DataStructures.UnitTests
             foreach (var num in numbers)
                 minHeap.Add(num);
             int previousCapacity = minHeap.Capacity;
-
             minHeap.Add(103);
             int actualCapacity = minHeap.Capacity;
 
