@@ -44,12 +44,12 @@ namespace AStarVisualization.DataStructures
 
             return new KeyValuePair<T, K>(key, list.First());
         }
-        public KeyValuePair<T, K> GetMinPriorityPair()
+        public KeyValuePair<T, K> Pop()
         {
             if (_Count == 0)
                 throw new Exception("The Priority Queue is empty");
 
-            T key = _minHeap.GetMinimumElement();
+            T key = _minHeap.Pop();
             List<K> list = _dictionary[key];
 
             K result = list.First();

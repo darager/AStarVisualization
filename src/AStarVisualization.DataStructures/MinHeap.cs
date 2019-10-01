@@ -27,7 +27,7 @@ namespace AStarVisualization.DataStructures
 
             return _Items[0];
         }
-        public T GetMinimumElement()
+        public T Pop()
         {
             if (_Count == 0)
                 throw new Exception("The Heap does not contain any values");

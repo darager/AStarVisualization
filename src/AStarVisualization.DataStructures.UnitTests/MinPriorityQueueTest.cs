@@ -26,7 +26,7 @@ namespace AStarVisualization.DataStructures.UnitTests // TODO: implement the tes
             new object[] { 1023, 10381234, 823984137, 1992, 1902, 1023, 2839 },
         };
         [Test, TestCaseSource("Pop_GetsPushedMultipleValues_ReturnsSmallestValue_Cases")]
-        public void GetMinPriorityPair_GetsPushedMultipleValues_ReturnsSmallestValue(object[] values)
+        public void Pop_GetsPushedMultipleValues_ReturnsSmallestValue(object[] values)
         {
             int smallestKey = (int)values[0];
             int[] numbers = values.Skip(1).Cast<int>().ToArray<int>();
@@ -34,7 +34,7 @@ namespace AStarVisualization.DataStructures.UnitTests // TODO: implement the tes
 
             foreach (int num in numbers)
                 minPriorityQueue.Add(num, "test");
-            var lowestPriorityPair = minPriorityQueue.GetMinPriorityPair();
+            var lowestPriorityPair = minPriorityQueue.Pop();
 
             Assert.AreEqual(lowestPriorityPair.Key, smallestKey);
         }
@@ -66,7 +66,7 @@ namespace AStarVisualization.DataStructures.UnitTests // TODO: implement the tes
             Assert.That(previousCount < actualCount);
         }
         [Test]
-        public void GetMinimumElement_RemovesElement_DecreasesCount()
+        public void Pop_RemovesElement_DecreasesCount()
         {
             int[] keys = { 10, 123, 352, 1024 };
             var minPriorityQueue = new MinPriorityQueue<int, string>(10);
@@ -74,7 +74,7 @@ namespace AStarVisualization.DataStructures.UnitTests // TODO: implement the tes
             foreach (int key in keys)
                 minPriorityQueue.Add(key, "test");
             int previousCount = minPriorityQueue.Count;
-            var _ = minPriorityQueue.GetMinPriorityPair();
+            var _ = minPriorityQueue.Pop();
             int actualCount = minPriorityQueue.Count;
 
             Assert.That(previousCount > actualCount);

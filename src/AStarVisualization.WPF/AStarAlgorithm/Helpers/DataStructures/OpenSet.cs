@@ -41,10 +41,10 @@ namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthr
         }
         public Node Pop()
         {
-            Node result = openSet.GetMinPriorityPair().Value;
+            Node result = openSet.Pop().Value;
 
             while (!hashSet.Contains(result))
-                result = openSet.GetMinPriorityPair().Value;
+                result = openSet.Pop().Value;
 
             return result;
         }

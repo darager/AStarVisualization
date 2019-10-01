@@ -26,7 +26,7 @@ namespace AStarVisualization.DataStructures.UnitTests
             new object[] { 1023, 10381234, 823984137, 1992, 1902, 1023, 2839 },
         };
         [Test, TestCaseSource("Pop_HasMultipleValues_ReturnsSmallestValue_Cases")]
-        public void GetMinimumElement_HasMultipleValues_ReturnsSmallestValue(object[] values)
+        public void Pop_HasMultipleValues_ReturnsSmallestValue(object[] values)
         {
             int expectedSmallestValue = (int)values[0];
             int[] numbers = values.Skip(1).Cast<int>().ToArray<int>();
@@ -34,7 +34,7 @@ namespace AStarVisualization.DataStructures.UnitTests
             var minHeap = new MinHeap<int>(values.Length);
             foreach (int num in numbers)
                 minHeap.Add(num);
-            int actualSmallestValue = minHeap.GetMinimumElement();
+            int actualSmallestValue = minHeap.Pop();
 
             Assert.AreEqual(actualSmallestValue, expectedSmallestValue);
         }
@@ -66,7 +66,7 @@ namespace AStarVisualization.DataStructures.UnitTests
             Assert.That(previousCount < actualCount);
         }
         [Test]
-        public void GetMinimumElement_RemovesElement_DecreasesCount()
+        public void Pop_RemovesElement_DecreasesCount()
         {
             int[] numbers = { 10, 123, 352, 1024 };
             var minHeap = new MinHeap<int>(10);
@@ -74,7 +74,7 @@ namespace AStarVisualization.DataStructures.UnitTests
             foreach (var number in numbers)
                 minHeap.Add(number);
             int previousCount = minHeap.Count;
-            var _ = minHeap.GetMinimumElement();
+            var _ = minHeap.Pop();
             int actualCount = minHeap.Count;
 
             Assert.That(previousCount > actualCount);

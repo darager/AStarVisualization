@@ -51,7 +51,7 @@ namespace AStarVisualization.Core
                 if (openSet.Count == 0)
                     throw new NoPathFoundException();
 
-                currentNode = openSet.GetMinPriorityPair().Value;
+                currentNode = openSet.Pop().Value;
 
                 if (currentNode == goalNode)
                     return Task.Factory.StartNew(() => ReconstructPath(currentNode));
