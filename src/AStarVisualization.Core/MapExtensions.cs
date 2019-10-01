@@ -21,7 +21,7 @@ namespace AStarVisualization.Core
                         continue;
                     if (j >= colCount || j < 0)
                         continue;
-                    if (!diagonalsEnabled && AreDiagonalIndices(rowIdx, colIdx, i, j))
+                    if (!diagonalsEnabled && IsDiagonalNeighbor(rowIdx, colIdx, i, j))
                         continue;
                     if (i == rowIdx && j == colIdx)
                         continue;
@@ -35,7 +35,8 @@ namespace AStarVisualization.Core
         {
             return map.GetNeighbors(rowIdx, colIdx, diagonalsEnabled).Count;
         }
-        private static bool AreDiagonalIndices(int rowIdx, int colIdx, int nRowidx, int nColIdx)
+
+        private static bool IsDiagonalNeighbor(int rowIdx, int colIdx, int nRowidx, int nColIdx)
         {
             return ((Math.Abs(rowIdx - nRowidx)) == 1) && ((Math.Abs(colIdx - nColIdx) == 1));
         }

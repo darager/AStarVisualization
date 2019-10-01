@@ -6,7 +6,7 @@
         Start,
         Goal,
         Ground,
-        GroundVisited,
-        GroundToBeVisited
+        GroundToBeVisited,
+        GroundVisited
     }
 }

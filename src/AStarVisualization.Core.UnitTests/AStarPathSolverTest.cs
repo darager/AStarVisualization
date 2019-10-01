@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+// TODO: clean up this testFixture
+
 namespace AStarVisualization.Core.UnitTests
 {
     [TestFixture]
@@ -44,6 +46,7 @@ namespace AStarVisualization.Core.UnitTests
         private static object[] FindPath_PathExists_ReturnsPath_Cases =
         {
             new object[] {0, 0, 3, 3, Map[0,0], Map[1,0], Map[1,1], Map[1,2], Map[2,3], Map[3,3]},
+            new object[] {1, 3, 3, 1, Map[1,3], Map[1,2], Map[1,1], Map[1,0], Map[2,0], Map[3,0], Map[3,1]}
             // TODO add more testcases
         };
         #endregion
