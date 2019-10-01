@@ -28,5 +28,10 @@ namespace AStarVisualization.Core.UnitTests
 
             Assert.AreEqual(actualNeighborCount, expectedNeighborCount);
         }
+        [Test]
+        public void GetStartAndGoal_HasBoth_ReturnsRightNodes()
+        {
+            Assert.Fail();
+        }
     }
 }
