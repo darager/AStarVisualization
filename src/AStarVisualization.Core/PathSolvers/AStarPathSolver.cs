@@ -36,48 +36,22 @@ namespace AStarVisualization.Core.PathSolvers
 
             (startNode, goalNode) = GetStartAndGoal(map);
 
-            // 1. step
-            currentNode = startNode;
-            currentNode.MovementCost = 0;
-
-            if (currentNode == goalNode)
-                return Task.Factory.StartNew(() => new List<Node>());
-
-            openSet.Add(currentNode.TotalCost, currentNode);
-
-            // x. Step
-            while (true)
-            {
-                if (openSet.Count == 0)
-                    throw new NoPathFoundException();
-
-                currentNode = openSet.Pop().Value;
-
-                //if (currentNode == goalNode)
-                    //return Task.Factory.StartNew(() => ReconstructPath(currentNode));
-
-               // List<Node> neighbors = map.GetNeighbors();
-               // List<Node> successors = // neighbors without the visited nodes and without the walls
-
-               //foreach (Node successor in successors)
-               // {
-               //     successor.MovementCost = currentNode.MovementCost + MovementCost(successor, currentNode);
-               //     successor.Parent = currentNode;
-
-               //     openSet.Add(successor);
-               // }
-
-               // openSet.Remove(currentNode);
-               // closedSet.Add(currentNode);
-            }
-
-            return Task.Factory.StartNew(() => new List<Node>()); // TODO remove this
+            // 1. ste(() => new List<Node>()); // TODO remove this
         }
 
-        //private List<Node> ReconstructPath(Node currentNode)
-        //{
-        //    // TODO: implement this method
-        //}
+        private List<Node> ReconstructPath(Node node)
+        {
+            var path = new List<Node>();
+
+            while (node.Parent != null)
+            {
+                path.Add(node);
+                node = node.Parent;
+            }
+            path.Add(node.Parent);
+
+            return path;
+        }
         private void ComputeHeuristicCosts(Node[,] map, double D = 1000.0) // TODO remove this
         {
             (int goalRowIdx, int goalColIdx) = GetGoalIndices();
