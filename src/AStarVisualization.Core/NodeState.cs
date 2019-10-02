@@ -1,12 +1,12 @@
 ﻿namespace AStarVisualization.Core
 {
-    public enum NodeState
+    public enum NodeState // TODO: implement statechange when added to the openset and removed from the openSet
     {
         Wall,
         Start,
         Goal,
         Ground,
-        GroundToBeVisited,
-        GroundVisited
+        GroundToBeVisited, // when in openSet
+        GroundVisited // when moved out of openSet
     }
 }
