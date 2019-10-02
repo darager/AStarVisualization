@@ -1,4 +1,5 @@
 ﻿using AStarVisualization.Core.Exceptions;
+using AStarVisualization.Core.PathSolvers;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

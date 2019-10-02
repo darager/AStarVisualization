@@ -1,5 +1,6 @@
 ﻿using System;
 using AStarVisualization.Core;
+using AStarVisualization.Core.PathSolvers;
 
 namespace AStarVisualization.Playground
 {
