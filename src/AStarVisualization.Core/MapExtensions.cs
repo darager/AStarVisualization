@@ -35,21 +35,6 @@ namespace AStarVisualization.Core
         {
             return map.GetNeighbors(rowIdx, colIdx, diagonalsEnabled).Count;
         }
-        public static (Node, Node) GetStartAndGoal(this Node[,] map)
-        {
-            Node start = null;
-            Node goal = null;
-
-            foreach (var node in map)
-            {
-                if (node.State == NodeState.Start)
-                    start = node;
-                if (node.State == NodeState.Goal)
-                    goal = node;
-            }
-
-            return (start, goal);
-        }
 
         private static bool IsDiagonalNeighbor(int rowIdx, int colIdx, int nRowidx, int nColIdx)
         {

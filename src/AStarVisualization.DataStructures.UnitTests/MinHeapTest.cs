@@ -52,15 +52,17 @@ namespace AStarVisualization.DataStructures.UnitTests
             Assert.AreEqual(actualSmallestValue, expectedSmallestValue);
         }
         [Test]
-        public void Add_AddsElementToHeap_CountIncreases()
+        [TestCase(4)]
+        [TestCase(10)]
+        public void Add_AddsElementToHeap_CountIncreases(int originalCapacity)
         {
             int[] numbers = { 10, 123, 352, 1024 };
-            var minHeap = new MinHeap<int>(10);
+            var minHeap = new MinHeap<int>(originalCapacity);
 
             foreach (var number in numbers)
                 minHeap.Add(number);
             int previousCount = minHeap.Count;
-            minHeap.Add(18324);
+            minHeap.Add(1035);
             int actualCount = minHeap.Count;
 
             Assert.That(previousCount < actualCount);

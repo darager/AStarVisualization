@@ -53,31 +53,31 @@ namespace AStarVisualization.Core
 
                 currentNode = openSet.Pop().Value;
 
-                if (currentNode == goalNode)
-                    return Task.Factory.StartNew(() => ReconstructPath(currentNode));
+                //if (currentNode == goalNode)
+                    //return Task.Factory.StartNew(() => ReconstructPath(currentNode));
 
-                List<Node> neighbors = map.GetNeighbors();
-                List<Node> successors = // neighbors without the visited nodes and without the walls
+               // List<Node> neighbors = map.GetNeighbors();
+               // List<Node> successors = // neighbors without the visited nodes and without the walls
 
-               foreach (Node successor in successors)
-                {
-                    successor.MovementCost = currentNode.MovementCost + MovementCost(successor, currentNode);
-                    successor.Parent = currentNode;
+               //foreach (Node successor in successors)
+               // {
+               //     successor.MovementCost = currentNode.MovementCost + MovementCost(successor, currentNode);
+               //     successor.Parent = currentNode;
 
-                    openSet.Add(successor);
-                }
+               //     openSet.Add(successor);
+               // }
 
-                openSet.Remove(currentNode);
-                closedSet.Add(currentNode);
+               // openSet.Remove(currentNode);
+               // closedSet.Add(currentNode);
             }
 
             return Task.Factory.StartNew(() => new List<Node>()); // TODO remove this
         }
 
-        private List<Node> ReconstructPath(Node currentNode)
-        {
-            // TODO: implement this method
-        }
+        //private List<Node> ReconstructPath(Node currentNode)
+        //{
+        //    // TODO: implement this method
+        //}
         private void ComputeHeuristicCosts(Node[,] map, double D = 1000.0) // TODO remove this
         {
             (int goalRowIdx, int goalColIdx) = GetGoalIndices();

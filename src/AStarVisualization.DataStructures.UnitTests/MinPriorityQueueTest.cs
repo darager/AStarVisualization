@@ -52,10 +52,12 @@ namespace AStarVisualization.DataStructures.UnitTests
             Assert.AreEqual(lowestPriorityPair.Key, smallestKey);
         }
         [Test]
-        public void Add_AddsElementToHeap_CountIncreases()
+        [TestCase(4)]
+        [TestCase(10)]
+        public void Add_AddsElementToHeap_CountIncreases(int originalCapacity)
         {
             int[] keys = { 10, 123, 352, 1024 };
-            var minPriorityQueue = new MinPriorityQueue<int, string>(10);
+            var minPriorityQueue = new MinPriorityQueue<int, string>(originalCapacity);
 
             foreach (int key in keys)
                 minPriorityQueue.Add(key, "test");
