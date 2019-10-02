@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Linq;
 
-namespace AStarVisualization.DataStructures.UnitTests // TODO: implement the tests for this class
+namespace AStarVisualization.DataStructures.UnitTests
 {
     [TestFixture]
     public class MinPriorityQueueTest
