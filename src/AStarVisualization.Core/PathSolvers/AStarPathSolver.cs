@@ -28,16 +28,21 @@ namespace AStarVisualization.Core.PathSolvers
         {
             throw new System.NotImplementedException();
         }
-        public Task<List<Node>> FindPath()
+        public Task<List<Node>> FindPath() // TODO handle movementcost values
         {
             EnsureMapValidity(this.map);
-            ComputeHeuristicCosts(this.map);
             InitDataStructures(this.map);
+            ComputeHeuristicCosts(this.map);
+            SetNodeIndices(this.map);
 
             (startNode, goalNode) = GetStartAndGoal(map);
+            Node currentNode = startNode;
 
-            // 1. ste(() => new List<Node>()); // TODO remove this
+            // 1.st step
+            currentNode.MovementCost = 0;
+            openSet.Add(currentNode.TotalCost, currentNode);
         }
+
 
         private List<Node> ReconstructPath(Node node)
         {
@@ -82,14 +87,18 @@ namespace AStarVisualization.Core.PathSolvers
                 return (rowIdx, colIdx);
             }
         }
-
         private void InitDataStructures(Node[,] map)
         {
             int numNodes = map.Length;
             this.openSet = new MinPriorityQueue<double, Node>(numNodes);
             this.closedSet = new HashSet<Node>();
         }
-
+        private void SetNodeIndices(Node[,] map)
+        {
+            for (int i = 0; i < map.GetLength(0); i++)
+                for (int j = 0; j < map.GetLength(1); j++)
+                    map[i, j].SetIndices(i, j);
+        }
         private void EnsureMapValidity(Node[,] map)
         {
             if (map is null)
