@@ -1,4 +1,5 @@
 ﻿using AStarVisualization.Core.Exceptions;
+using System.Linq;
 using AStarVisualization.DataStructures;
 using System;
 using System.Collections.Generic;
@@ -19,32 +20,60 @@ namespace AStarVisualization.Core.PathSolvers
         private MinPriorityQueue<double, Node> openSet;
         private HashSet<Node> closedSet;
 
-        public AStarPathSolver(ref Node[,] map)
+        public AStarPathSolver(ref Node[,] map, bool diagonalsAllowed = false)
         {
             this.map = map;
+            this.diagonalsAllowed = diagonalsAllowed;
         }
 
         public void Stop()
         {
             throw new System.NotImplementedException();
         }
-        public Task<List<Node>> FindPath() // TODO handle movementcost values
+        public async Task<List<Node>> FindPath() // TODO handle movementcost values
         {
             EnsureMapValidity(this.map);
             InitDataStructures(this.map);
             ComputeHeuristicCosts(this.map);
             SetNodeIndices(this.map);
-
-            (startNode, goalNode) = GetStartAndGoal(map);
-            Node currentNode = startNode;
+            (this.startNode, this.goalNode) = GetStartAndGoal(map);
 
             // 1.st step
+            currentNode = startNode;
             currentNode.MovementCost = 0;
             openSet.Add(currentNode.TotalCost, currentNode);
+
+            while (openSet.Count > 0 && currentNode != goalNode)
+            {
+                currentNode = openSet.Pop().Value;
+
+                // get the neighbors
+                List<Node> neighbors = map.GetNeighbors(currentNode.RowIndex, currentNode.ColIndex, this.diagonalsAllowed);
+                // get the successors out of the neighbors (already visited, wall, similar,...)
+                List<Node> successors = neighbors.Where(n => (n.State == NodeState.Ground) || (n.State == NodeState.Goal)).ToList<Node>();
+                // set the movementcost of all the successors
+                successors.ForEach(n => SetSuccessorMovementCost(currentNode, n));
+                // add all of the successors to the openSet
+                foreach (var successor in successors)
+                {
+                    successor.Parent = currentNode;
+                    if (successor.State != NodeState.Goal)
+                        successor.State = NodeState.GroundToBeVisited;
+
+                    openSet.Add(successor.TotalCost, successor);
+                }
+                // add the currentnode to the closedSet
+                currentNode.State = NodeState.GroundVisited;
+                closedSet.Add(currentNode);
+            }
+
+            List<Node> path = await ReconstructPath(currentNode);
+
+            return path;
         }
 
 
-        private List<Node> ReconstructPath(Node node)
+        private async Task<List<Node>> ReconstructPath(Node node)
         {
             var path = new List<Node>();
 
@@ -54,6 +83,7 @@ namespace AStarVisualization.Core.PathSolvers
                 node = node.Parent;
             }
             path.Add(node.Parent);
+            path.Reverse();
 
             return path;
         }
@@ -98,6 +128,13 @@ namespace AStarVisualization.Core.PathSolvers
             for (int i = 0; i < map.GetLength(0); i++)
                 for (int j = 0; j < map.GetLength(1); j++)
                     map[i, j].SetIndices(i, j);
+        }
+        private void SetSuccessorMovementCost(Node current, Node successor)
+        {
+            int dx = currentNode.ColIndex - successor.ColIndex;
+            int dy = currentNode.RowIndex - successor.RowIndex;
+
+            successor.MovementCost = Math.Sqrt(dx * dx + dy * dy);
         }
         private void EnsureMapValidity(Node[,] map)
         {
