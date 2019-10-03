@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 // TODO: clean up this class
+// TODO: do not use Linq since it is quite slow (measure difference first if it is necessary!)
 
 namespace AStarVisualization.Core.PathSolvers
 {
@@ -95,6 +96,7 @@ namespace AStarVisualization.Core.PathSolvers
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
                     var node = map[i, j];
+                    // this particular heuristic is the Manhattan distance which is used for grid layouts
                     node.Heuristic = D * (Math.Abs(i - goalRowIdx) + Math.Abs(j - goalColIdx));
                 }
 
