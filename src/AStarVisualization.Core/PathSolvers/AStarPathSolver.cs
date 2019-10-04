@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 // TODO: clean up this class
-// TODO: do not use Linq since it is quite slow (measure difference first if it is necessary!)
+// TODO: measure performance, if necessary replace linq for more efficient methods
 
 namespace AStarVisualization.Core.PathSolvers
 {
@@ -31,12 +31,12 @@ namespace AStarVisualization.Core.PathSolvers
         {
             throw new System.NotImplementedException();
         }
-        public async Task<List<Node>> FindPath() // TODO handle movementcost values
+        public List<Node> FindPath() // TODO handle movementcost values
         {
             EnsureMapValidity(this.map);
             InitDataStructures(this.map);
-            ComputeHeuristicCosts(this.map);
             SetNodeIndices(this.map);
+            ComputeHeuristicCosts(this.map);
             (this.startNode, this.goalNode) = GetStartAndGoal(map);
 
             // 1.st step
@@ -68,13 +68,13 @@ namespace AStarVisualization.Core.PathSolvers
                 closedSet.Add(currentNode);
             }
 
-            List<Node> path = await ReconstructPath(currentNode);
+            List<Node> path = ReconstructPath(currentNode);
 
             return path;
         }
 
 
-        private async Task<List<Node>> ReconstructPath(Node node)
+        private List<Node> ReconstructPath(Node node)
         {
             var path = new List<Node>();
 
@@ -92,13 +92,18 @@ namespace AStarVisualization.Core.PathSolvers
         {
             (int goalRowIdx, int goalColIdx) = GetGoalIndices();
 
-            for (int i = 0; i < map.GetLength(0); i++)
-                for (int j = 0; j < map.GetLength(1); j++)
-                {
-                    var node = map[i, j];
-                    // this particular heuristic is the Manhattan distance which is used for grid layouts
-                    node.Heuristic = D * (Math.Abs(i - goalRowIdx) + Math.Abs(j - goalColIdx));
-                }
+            Parallel.ForEach(map, n =>
+            {
+                var node = (Node)n;
+                int rowIdx = node.RowIndex;
+                int colIdx = node.ColIndex;
+                // this particular heuristic is the Manhattan distance which is used for grid layouts
+                node.Heuristic = D * (Math.Abs(rowIdx - goalRowIdx) + Math.Abs(colIdx - goalColIdx));
+            });
+            //for (int i = 0; i < map.GetLength(0); i++)
+            //    for (int j = 0; j < map.GetLength(1); j++)
+            //    {
+            //    }
 
             (int, int) GetGoalIndices()
             {

@@ -5,7 +5,7 @@ namespace AStarVisualization.Core.PathSolvers
 {
     public interface IPathSolver
     {
-        Task<List<Node>> FindPath();
+        List<Node> FindPath();
         void Stop();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AStarVisualization.Core;
 using AStarVisualization.Core.PathSolvers;
 
@@ -8,12 +9,17 @@ namespace AStarVisualization.Playground
     {
         static void Main(string[] args)
         {
-            TestNoWayPointsThrown();
+            var array = new int[] { 10, 2134, 6, 45, 4, 5, 6, 435, 2345, 3246, 324 };
+            Parallel.ForEach(array, num =>
+            {
+                int number = (int)num * 10;
+                Console.WriteLine(number);
+            });
 
             Console.ReadKey();
         }
 
-        public static async void TestNoWayPointsThrown()
+        public static void TestNoWayPointsThrown()
         {
             var map = new Node[,]
             {
@@ -25,7 +31,7 @@ namespace AStarVisualization.Playground
             IPathSolver pathSolver = new AStarPathSolver(ref map);
             try
             {
-                await pathSolver.FindPath();
+                pathSolver.FindPath();
             }
             catch(Exception ex)
             {
