@@ -64,7 +64,8 @@ namespace AStarVisualization.Core.PathSolvers
                     openSet.Add(successor.TotalCost, successor);
                 }
                 // add the currentnode to the closedSet
-                currentNode.State = NodeState.GroundVisited;
+                if (currentNode.State != NodeState.Goal && currentNode.State != NodeState.Start)
+                    currentNode.State = NodeState.GroundVisited;
                 closedSet.Add(currentNode);
             }
 
@@ -83,7 +84,7 @@ namespace AStarVisualization.Core.PathSolvers
                 path.Add(node);
                 node = node.Parent;
             }
-            path.Add(node.Parent);
+            path.Add(node);
             path.Reverse();
 
             return path;
@@ -92,18 +93,13 @@ namespace AStarVisualization.Core.PathSolvers
         {
             (int goalRowIdx, int goalColIdx) = GetGoalIndices();
 
-            Parallel.ForEach(map, n =>
+            foreach (Node node in map)
             {
-                var node = (Node)n;
                 int rowIdx = node.RowIndex;
                 int colIdx = node.ColIndex;
                 // this particular heuristic is the Manhattan distance which is used for grid layouts
                 node.Heuristic = D * (Math.Abs(rowIdx - goalRowIdx) + Math.Abs(colIdx - goalColIdx));
-            });
-            //for (int i = 0; i < map.GetLength(0); i++)
-            //    for (int j = 0; j < map.GetLength(1); j++)
-            //    {
-            //    }
+            }
 
             (int, int) GetGoalIndices()
             {

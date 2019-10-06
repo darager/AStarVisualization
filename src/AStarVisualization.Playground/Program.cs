@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using AStarVisualization.Core;
 using AStarVisualization.Core.PathSolvers;
 
@@ -9,12 +9,26 @@ namespace AStarVisualization.Playground
     {
         static void Main(string[] args)
         {
-            var array = new int[] { 10, 2134, 6, 45, 4, 5, 6, 435, 2345, 3246, 324 };
-            Parallel.ForEach(array, num =>
+            var map = new Node[,]
             {
-                int number = (int)num * 10;
-                Console.WriteLine(number);
-            });
+                { new Node(NodeState.Start), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall) },
+                { new Node(NodeState.Goal), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) },
+                { new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall) },
+                { new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) }
+            };
+            List<Node> expectedPath = new List<Node>
+            {
+                map[0,0], map[1,0]
+            };
+
+            IPathSolver pathSolver = new AStarPathSolver(ref map, false);
+            var path = pathSolver.FindPath();
+
+            foreach (Node node in path)
+                Console.WriteLine($"[{node.RowIndex}, {node.ColIndex}]");
+
+            if (path == expectedPath)
+                Console.WriteLine("this is working");
 
             Console.ReadKey();
         }
@@ -33,7 +47,7 @@ namespace AStarVisualization.Playground
             {
                 pathSolver.FindPath();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }

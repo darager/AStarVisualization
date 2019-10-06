@@ -1,6 +1,8 @@
-﻿namespace AStarVisualization.Core
+﻿using System;
+
+namespace AStarVisualization.Core
 {
-    public class Node
+    public class Node : IEquatable<Node>
     {
         public double Heuristic { get; set; }
         public double MovementCost { get; set; }
@@ -25,5 +27,28 @@
             this._rowIndex = rowIndex;
             this._colIndex = colIndex;
         }
+
+        // TODO follow the tutorial at https://medium.com/@pjbgf/asserting-equality-in-your-c-unit-tests-837b423024bf
+        public override bool Equals(object other)
+        {
+            if (other.GetType() != this.GetType()) return false;
+            var node = (Node)other;
+            if (ReferenceEquals(null, node)) return false;
+            if (ReferenceEquals(this, node)) return true;
+
+            return (this.RowIndex == node.RowIndex) && (this.ColIndex == node.ColIndex);
+        }
+        public bool Equals(Node other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+
+            return (this.RowIndex == other.RowIndex) && (this.ColIndex == other.ColIndex);
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
     }
 }
