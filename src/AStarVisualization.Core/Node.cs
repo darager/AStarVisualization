@@ -47,7 +47,10 @@ namespace AStarVisualization.Core
         }
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            unchecked
+            {
+                return (RowIndex.ToString() + ColIndex.ToString()).GetHashCode();
+            }
         }
 
     }

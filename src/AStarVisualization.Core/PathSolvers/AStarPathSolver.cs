@@ -31,7 +31,7 @@ namespace AStarVisualization.Core.PathSolvers
         {
             throw new System.NotImplementedException();
         }
-        public List<Node> FindPath() // TODO handle movementcost values
+        public List<Node> FindPath()
         {
             EnsureMapValidity(this.map);
             InitDataStructures(this.map);
@@ -63,17 +63,20 @@ namespace AStarVisualization.Core.PathSolvers
 
                     openSet.Add(successor.TotalCost, successor);
                 }
+
                 // add the currentnode to the closedSet
                 if (currentNode.State != NodeState.Goal && currentNode.State != NodeState.Start)
                     currentNode.State = NodeState.GroundVisited;
                 closedSet.Add(currentNode);
             }
 
+            if(currentNode.State != NodeState.Goal)
+                throw new NoPathFoundException();
+
             List<Node> path = ReconstructPath(currentNode);
 
             return path;
         }
-
 
         private List<Node> ReconstructPath(Node node)
         {
@@ -89,7 +92,7 @@ namespace AStarVisualization.Core.PathSolvers
 
             return path;
         }
-        private void ComputeHeuristicCosts(Node[,] map, double D = 1000.0) // TODO remove this
+        private void ComputeHeuristicCosts(Node[,] map, double D = 1000.0) // TODO do something with D
         {
             (int goalRowIdx, int goalColIdx) = GetGoalIndices();
 
