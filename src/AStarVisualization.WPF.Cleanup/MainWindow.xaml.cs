@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using Ninject;
+using System.Reflection;
+using System.Windows;
 
 namespace AStarVisualization.WPF.Cleanup
 {
@@ -9,6 +11,8 @@ namespace AStarVisualization.WPF.Cleanup
     {
         public MainWindow()
         {
+            var kernel = new StandardKernel();
+            kernel.Load(Assembly.GetExecutingAssembly());
         }
     }
 }

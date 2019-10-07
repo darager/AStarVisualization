@@ -35,7 +35,6 @@ namespace AStarVisualization.WPF.Cleanup.ViewModels
         }
         private Node[,] _map;
 
-
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
