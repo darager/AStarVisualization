@@ -18,8 +18,15 @@
             <RowDefinition Height="15.0" />
         </Grid.RowDefinitions>
 
+        <!--  this is a testcontrol to test custom binding properties  -->
+        <!--<c:TestControl
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            CustomText="{Binding Text, Mode=OneWay}" />-->
+
         <c:AStarCanvas
             Grid.Row="0"
+            Background="darkBlue"
             Map="{Binding Map, Mode=OneWay}"
             Path="{Binding Path, Mode=OneWay}" />
 
