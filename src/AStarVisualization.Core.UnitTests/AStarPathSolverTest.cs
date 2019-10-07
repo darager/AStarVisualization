@@ -12,7 +12,7 @@ namespace AStarVisualization.Core.UnitTests
     [TestFixture]
     public class AStarPathSolverTest
     {
-        private static Node[,] Map = new Node[,]
+        private static readonly Node[,] Map = new Node[,]
         {
             {new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Ground)},
             {new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground)},
@@ -48,7 +48,7 @@ namespace AStarVisualization.Core.UnitTests
             map[goalRowIdx, goalColIdx] = new Node(NodeState.Goal);
             return map;
         }
-        private static object[] FindPath_PathExists_ReturnsPath_Cases = // TODO add more testcases
+        private static readonly object[] FindPath_PathExists_ReturnsPath_Cases = // TODO add more testcases
         {
             new object[] {0, 0, 1, 0, (0,0), (1,0) },
             new object[] {0, 0, 1, 1, (0,0), (1,0), (1,1) },

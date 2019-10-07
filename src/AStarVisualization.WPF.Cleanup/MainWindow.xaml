@@ -17,7 +17,12 @@
             <RowDefinition Height="85.0" />
             <RowDefinition Height="15.0" />
         </Grid.RowDefinitions>
-        <c:AStarCanvas Grid.Row="0" />
+
+        <c:AStarCanvas
+            Grid.Row="0"
+            Map="{Binding Map, Mode=OneWay}"
+            Path="{Binding Path, Mode=OneWay}" />
+
         <StackPanel
             Grid.Row="1"
             Background="CornflowerBlue"

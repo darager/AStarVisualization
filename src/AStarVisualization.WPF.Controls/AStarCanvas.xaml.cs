@@ -10,17 +10,25 @@ namespace AStarVisualization.WPF.Controls
     /// </summary>
     public partial class AStarCanvas : UserControl
     {
-        public static readonly DependencyProperty Map =
+        public static readonly DependencyProperty MapProperty =
             DependencyProperty.Register(
                 "Map", typeof(Node[,]), typeof(AStarCanvas),
-            new FrameworkPropertyMetadata(
-                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-
-        public static readonly DependencyProperty Path =
+            new PropertyMetadata(null));
+        public static readonly DependencyProperty PathProperty =
             DependencyProperty.Register(
                 "Path", typeof(List<Node>), typeof(AStarCanvas),
-            new FrameworkPropertyMetadata(
-                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            new PropertyMetadata(new List<Node>()));
+        public Node[,] Map
+        {
+            get => (Node[,])GetValue(MapProperty);
+            set => SetValue(MapProperty, value);
+        }
+        public List<Node> Path
+        {
+            get => (List<Node>)GetValue(PathProperty);
+            set => SetValue(PathProperty, value);
+        }
+
 
         public AStarCanvas()
         {

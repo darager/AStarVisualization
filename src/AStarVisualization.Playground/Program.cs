@@ -7,7 +7,7 @@ namespace AStarVisualization.Playground
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var map = new Node[,]
             {

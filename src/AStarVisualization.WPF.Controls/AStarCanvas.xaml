@@ -7,13 +7,4 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="450"
-    mc:Ignorable="d">
-
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Canvas
-            Grid.Row="0"
-            Grid.Column="0"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch" />
-    </Grid>
-</UserControl>
+    mc:Ignorable="d" />
