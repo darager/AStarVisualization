@@ -105,6 +105,10 @@
       <Project>{7aab1625-d15e-44d1-aac4-847dc707bb0a}</Project>
       <Name>AStarVisualization.DataStructures</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AStarVisualization.WPF.Controls\AStarVisualization.WPF.Controls.csproj">
+      <Project>{d339aa80-a50f-4d42-9515-027ae3ff8612}</Project>
+      <Name>AStarVisualization.WPF.Controls</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />

@@ -1,4 +1,6 @@
 ﻿using AStarVisualization.Core;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace AStarVisualization.WPF.Controls
@@ -8,14 +10,21 @@ namespace AStarVisualization.WPF.Controls
     /// </summary>
     public partial class AStarCanvas : UserControl
     {
-        public int Rows { get; set; }
-        public int Columns { get; set; }
-        public Node[,] Nodes { get; set; }
+        public static readonly DependencyProperty Map =
+            DependencyProperty.Register(
+                "Map", typeof(Node[,]), typeof(AStarCanvas),
+            new FrameworkPropertyMetadata(
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public static readonly DependencyProperty Path =
+            DependencyProperty.Register(
+                "Path", typeof(List<Node>), typeof(AStarCanvas),
+            new FrameworkPropertyMetadata(
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public AStarCanvas()
         {
             InitializeComponent();
-            this.DataContext = this;
         }
     }
 }
