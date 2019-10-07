@@ -21,8 +21,9 @@ namespace AStarVisualization.Core.UnitTests
         };
 
         [Test, TestCaseSource("FindPath_PathExists_ReturnsPath_Cases")]
-        public void FindPath_PathExists_ReturnsPath(object[] parameters) // TODO: clean up this test
+        public void FindPath_PathExists_ReturnsPath(object[] parameters)
         {
+            // TODO clean up this test
             // TODO the problem is the expected path since it is derived from the static map without the waypoints
             (int startRowIdx, int startColIdx, int goalRowIdx, int goalColIdx, var expectedPathIndices) = GetTestParameters(parameters);
             Node[,] map = GetMapWithWaypoints(startRowIdx, startColIdx, goalRowIdx, goalColIdx, Map);
@@ -33,7 +34,7 @@ namespace AStarVisualization.Core.UnitTests
             IPathSolver pathfinder = new AStarPathSolver(ref map);
             List<Node> actualPath = pathfinder.FindPath();
 
-            Assert.AreEqual(actualPath, expectedPath);
+            Assert.That(actualPath, Is.EquivalentTo(expectedPath));
         }
         #region TestUtils FindPath_PathExists_ReturnsPath
         private (int, int, int, int, List<(int, int)>) GetTestParameters(object[] parameters)
@@ -47,16 +48,15 @@ namespace AStarVisualization.Core.UnitTests
             map[goalRowIdx, goalColIdx] = new Node(NodeState.Goal);
             return map;
         }
-        private static object[] FindPath_PathExists_ReturnsPath_Cases =
+        private static object[] FindPath_PathExists_ReturnsPath_Cases = // TODO add more testcases
         {
             new object[] {0, 0, 1, 0, (0,0), (1,0) },
             new object[] {0, 0, 1, 1, (0,0), (1,0), (1,1) },
             new object[] {0, 0, 3, 3, (0,0), (1,0), (1,1), (1,2), (2,3), (3,3) },
             new object[] {1, 3, 3, 1, (1,3), (1,2), (1,1), (1,0), (2,0), (3,0), (3,1) }
-            // TODO add more testcases
         };
         #endregion
-        [Test] //TODO implement this test
+        [Test]
         public void FindPath_NoPathExists_ThrowsError()
         {
             Node[,] map = new Node[,]
@@ -91,7 +91,7 @@ namespace AStarVisualization.Core.UnitTests
                 Throws.Exception
                 .TypeOf<MapTooSmallException>());
         }
-        [Test] // TODO add more testcases
+        [Test] // TODO add multiple testcases to this test
         public void FindPath_NoWayPoints_ThrowsError()
         {
             var map = new Node[,]
