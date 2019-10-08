@@ -16,11 +16,9 @@ namespace AStarVisualization.WPF.Cleanup.ViewModels
                 {
                     _path = value;
                     OnPropertyChanged("Path");
-
                 }
             }
         }
-        private List<Node> _path;
         public Node[,] Map
         {
             get => _map;
@@ -33,7 +31,9 @@ namespace AStarVisualization.WPF.Cleanup.ViewModels
                 }
             }
         }
+
         private Node[,] _map;
+        private List<Node> _path;
 
         private void OnPropertyChanged(string propertyName)
         {

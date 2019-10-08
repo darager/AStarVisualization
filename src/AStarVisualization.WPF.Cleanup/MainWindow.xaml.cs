@@ -13,6 +13,8 @@ namespace AStarVisualization.WPF.Cleanup
         {
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
+
+            textControl.CustomText = "thsi si s a teast";
         }
     }
 }
