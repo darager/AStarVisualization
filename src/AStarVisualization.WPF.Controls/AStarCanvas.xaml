@@ -9,6 +9,6 @@
     d:DesignWidth="450"
     mc:Ignorable="d">
     <Grid>
-        <Canvas x:Name="astarCanvas" MouseMove="" />
+        <Canvas x:Name="astarCanvas" />
     </Grid>
 </UserControl>

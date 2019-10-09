@@ -10,7 +10,7 @@ namespace AStarVisualization.WPF.Controls
     {
         public static readonly DependencyProperty CustomTextProperty =
             DependencyProperty.Register(
-                "CustomText", typeof(string), typeof(AStarCanvas),
+                "CustomText", typeof(string), typeof(TestControl),
             new PropertyMetadata(string.Empty));
         public string CustomText
         {
