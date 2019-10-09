@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Ninject.Modules;
 using AStarVisualization.Core.PathSolvers;
+using AStarVisualization.WPF.Cleanup.ViewModels;
 
 namespace AStarVisualization.WPF.Cleanup
 {
@@ -13,7 +14,7 @@ namespace AStarVisualization.WPF.Cleanup
     {
         public override void Load()
         {
-            Bind<IPathSolverFactory>().To<PathSolverFactory>().InSingletonScope();
+            // TODO: implement all the bindings
         }
     }
 }

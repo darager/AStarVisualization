@@ -12,10 +12,10 @@ namespace AStarVisualization.WPF.Cleanup
     {
         public MainWindow()
         {
+            InitializeComponent();
+
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
-
-            InitializeComponent();
 
             var testvm = new TestViewModel();
             customTestControl.DataContext = testvm;

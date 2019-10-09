@@ -34,10 +34,10 @@
             VerticalAlignment="Stretch"
             CustomText="{Binding CustomText}" />
 
-        <!--<c:AStarCanvas
-            Grid.Row="0"
-            Background="darkBlue"
-            Map="{Binding Map, Mode=OneWay}"
-            Path="{Binding Path, Mode=OneWay}" />-->
+        <c:AStarCanvas
+            x:Name="astarCanvas"
+            Grid.Row="1"
+            Map="{Binding vmMap}"
+            Path="{Binding vmPath}" />
     </Grid>
 </Window>

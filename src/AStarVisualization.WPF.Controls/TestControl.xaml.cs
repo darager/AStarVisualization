@@ -1,11 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
+// TODO: remove this
 namespace AStarVisualization.WPF.Controls
 {
-    /// <summary>
-    /// Interaction logic for TestControl.xaml
-    /// </summary>
     public partial class TestControl : UserControl
     {
         public static readonly DependencyProperty CustomTextProperty =
