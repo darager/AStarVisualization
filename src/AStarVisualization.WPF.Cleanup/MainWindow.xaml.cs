@@ -6,9 +6,6 @@ using System.Windows;
 
 namespace AStarVisualization.WPF.Cleanup
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -20,14 +17,13 @@ namespace AStarVisualization.WPF.Cleanup
 
             //customTestControl.DataContext = new TestViewModel();
 
-            var astarVM = new AStarGridViewModel();
-
             // TODO remove this (only for testing purposes
-            astarVM.AStarMap.Map = new Core.Node[,]
-            {
-                { new Core.Node(NodeState.Wall), new Node(NodeState.Goal) },
-                { new Core.Node(NodeState.Start), new Node(NodeState.Ground) }
-            };
+            var astarVM = new AStarGridViewModel();
+            //astarVM.AStarMap.Map = new Core.Node[,]
+            //{
+            //    { new Core.Node(NodeState.Wall), new Node(NodeState.Goal) },
+            //    { new Core.Node(NodeState.Start), new Node(NodeState.Ground) }
+            //};
 
             astarCanvas.DataContext = astarVM;
         }
