@@ -12,32 +12,20 @@
     Height="800"
     ResizeMode="NoResize"
     mc:Ignorable="d">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="200" />
-            <RowDefinition Height="200" />
-        </Grid.RowDefinitions>
-
-        <!--<Label
-            x:Name="customTestControl"
-            Grid.Row="0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Content="{Binding CustomText}"
-            Foreground="Chocolate" />-->
-
-        <!--  this is a testcontrol to test custom binding properties  -->
-        <c:TestControl
-            x:Name="customTestControl"
-            Grid.Row="0"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            CustomText="{Binding CustomText}" />
-
+    <DockPanel>
         <c:AStarCanvas
             x:Name="astarCanvas"
-            Grid.Row="1"
-            Map="{Binding vmMap}"
-            Path="{Binding vmPath}" />
-    </Grid>
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Background="Orange"
+            DockPanel.Dock="Top"
+            Map="{Binding Path=AStarMap}"
+            Path="{Binding Path=AStarPath}" />
+
+        <!--  this is a testcontrol to test custom binding properties  -->
+        <!--<c:TestControl
+            x:Name="customTestControl"
+            CustomText="{Binding CustomText}"
+            DockPanel.Dock="Bottom" />-->
+    </DockPanel>
 </Window>

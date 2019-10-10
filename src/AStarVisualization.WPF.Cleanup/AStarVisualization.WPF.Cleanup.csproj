@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bindings.cs" />
+    <Compile Include="Models\AStarMap.cs" />
     <Compile Include="ViewModels\AStarGridViewModel.cs" />
     <Compile Include="ViewModels\TestViewModel.cs" />
     <Page Include="MainWindow.xaml">

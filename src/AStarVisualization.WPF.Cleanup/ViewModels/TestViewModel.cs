@@ -20,7 +20,7 @@ namespace AStarVisualization.WPF.Cleanup.ViewModels
 
         public TestViewModel()
         {
-            _customText = "this is so sad that I have to do this kind of stuff all the time in order to be more productive in oder";
+            _customText = "this is so sad";
         }
 
         private void OnPropertyChanged(string propertyName)

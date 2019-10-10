@@ -10,6 +10,9 @@
     d:DesignWidth="450"
     mc:Ignorable="d">
     <Grid>
-        <Canvas x:Name="astarCanvas" />
+        <Canvas
+            x:Name="drawingCanvas"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch" />
     </Grid>
 </UserControl>
