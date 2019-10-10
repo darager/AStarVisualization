@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 // TODO: implement the rendering through the callbacks
@@ -50,6 +51,19 @@ namespace AStarVisualization.WPF.Controls
         {
             List<Node> path = (List<Node>)e.NewValue;
             // TODO: Render the path
+            int numRows =   this.Map.GetLength(0);
+            int numCols = this.Map.GetLength(1);
+            double height = drawingCanvas.ActualHeight;
+            double width = drawingCanvas.ActualWidth;
+            double rowSpacing = height / numRows;
+            double colSpacing = width / numCols;
+
+            var points = new PointCollection();
+            foreach(Node node in path)
+            {
+                int y = rowSpacing * node.RowIndex;
+                int x = colSpacing * node.ColIndex;
+            }
         }
     }
 }
