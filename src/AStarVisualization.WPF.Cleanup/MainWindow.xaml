@@ -13,14 +13,21 @@
     ResizeMode="NoResize"
     mc:Ignorable="d">
     <DockPanel>
-        <c:AStarCanvas
+        <c:CustomCanvas
+            x:Name="astarCanvas"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            DockPanel.Dock="Top"
+            Map="{Binding Path=AStarMap}"
+            Path="{Binding Path=AStarPath}" />
+        <!--<c:AStarCanvas
             x:Name="astarCanvas"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Background="Orange"
             DockPanel.Dock="Top"
             Map="{Binding Path=AStarMap}"
-            Path="{Binding Path=AStarPath}" />
+            Path="{Binding Path=AStarPath}" />-->
 
         <!--  this is a testcontrol to test custom binding properties  -->
         <!--<c:TestControl

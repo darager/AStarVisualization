@@ -8,13 +8,25 @@ namespace AStarVisualization.WPF.Cleanup.ViewModels
     // TODO ICommands that are responsible for placing the tiles
     public class AStarGridViewModel : INotifyPropertyChanged
     {
-        public AStarMap AStarMap;
+        public AStarMap AStarMap
+        {
+            get => _aStarMap;
+            set
+            {
+                if (_aStarMap != value)
+                {
+                    _aStarMap = value;
+                    OnPropertyChanged("AStarMap");
+                }
+            }
+        }
+        private AStarMap _aStarMap;
         public List<Node> AStarPath
         {
             get => _path;
             set
             {
-                if(_path != value)
+                if (_path != value)
                 {
                     _path = value;
                     OnPropertyChanged("Path");
@@ -22,6 +34,13 @@ namespace AStarVisualization.WPF.Cleanup.ViewModels
             }
         }
         private List<Node> _path;
+
+        public AStarGridViewModel()
+        {
+            _path = new List<Node>();
+            _aStarMap = new AStarMap();
+            _aStarMap.Map = new Node[0, 0];
+        }
 
         private void OnPropertyChanged(string propertyName)
         {

@@ -61,6 +61,7 @@
     <Compile Include="AStarCanvas.xaml.cs">
       <DependentUpon>AStarCanvas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomCanvas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

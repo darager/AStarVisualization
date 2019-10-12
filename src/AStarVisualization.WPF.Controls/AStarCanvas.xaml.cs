@@ -32,38 +32,44 @@ namespace AStarVisualization.WPF.Controls
             get => (List<Node>)GetValue(PathProperty);
             set => SetValue(PathProperty, value);
         }
+        public int NumRows => ((Node[,])GetValue(MapProperty)).GetLength(0);
+        public int NumColumns => ((Node[,])GetValue(MapProperty)).GetLength(1);
+
+        public Polyline PathLine;
 
         public AStarCanvas() => InitializeComponent();
 
         private static void OnMapChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             // TODO: render the grid including the lines and the tiles
-            if(e.NewValue.GetType() == typeof(List<Node>))
+            if (e.NewValue.GetType() == typeof(List<Node>))
             {
 
             }
-            else if(e.NewValue.GetType() == typeof(Node))
+            else if (e.NewValue.GetType() == typeof(Node))
             {
 
             }
         }
-        private static void OnPathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnPathChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            List<Node> path = (List<Node>)e.NewValue;
             // TODO: Render the path
-            int numRows =   this.Map.GetLength(0);
-            int numCols = this.Map.GetLength(1);
-            double height = drawingCanvas.ActualHeight;
-            double width = drawingCanvas.ActualWidth;
-            double rowSpacing = height / numRows;
-            double colSpacing = width / numCols;
+            //AStarCanvas wrapperCanvas = source as AStarCanvas;
+            //Canvas canvas = (Canvas)wrapperCanvas.
+            //var path = (List<Node>)e.NewValue;
 
-            var points = new PointCollection();
-            foreach(Node node in path)
-            {
-                int y = rowSpacing * node.RowIndex;
-                int x = colSpacing * node.ColIndex;
-            }
+            //Polyline oldPathLine = canvas.PathLine;
+
+            //double rowSpacing = canvas.ActualHeight / canvas.NumRows;
+            //double colSpacing = canvas.ActualWidth / canvas.NumColumns;
+
+            //var points = new PointCollection();
+            //foreach (Node node in path)
+            //{
+            //    int y = (int)rowSpacing * node.RowIndex;
+            //    int x = (int)colSpacing * node.ColIndex;
+            //}
+
         }
     }
 }
