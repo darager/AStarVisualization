@@ -41,13 +41,12 @@ namespace AStarVisualization.WPF.Cleanup.ViewModels
             var map = new Node[,] {
                 { new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.Wall) },
                 { new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
-                { new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
                 { new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Goal) },
             };
             map.UpdateNodeIndices();
             _aStarMap = new AStarMap();
             _aStarMap.Map = map;
-            _path = new List<Node> { map[0, 0], map[1, 0], map[2, 0], map[3, 0], map[3, 1], map[3, 2] };
+            _path = new List<Node> { map[0, 0], map[1, 0], map[2, 0], map[2, 1], map[2, 2] };
         }
 
         private void OnPropertyChanged(string propertyName)

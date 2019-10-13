@@ -50,10 +50,12 @@ namespace AStarVisualization.WPF.Controls
             if (e.NewValue.GetType() == typeof(AStarMap))
                 RedrawGrid();
             else if (e.NewValue.GetType() == typeof(Node))
+                DrawNode((Node)e.NewValue);
+
+            void DrawNode(Node node)
             {
 
             }
-
             void RedrawGrid()
             {
                 MapCanvas canvas = source as MapCanvas;
