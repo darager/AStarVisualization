@@ -41,14 +41,17 @@ namespace AStarVisualization.WPF.Controls
             DependencyProperty.Register(
                 "Path", typeof(List<Node>), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnPathChanged)));
-        public Polyline PathLine;
 
         public int NumRows => ((AStarMap)GetValue(MapProperty)).GetLength(0);
         public int NumColumns => ((AStarMap)GetValue(MapProperty)).GetLength(1);
 
+        // canvas elements
+        public Polyline PathLine;
+
         public MapCanvas()
         {
             PathLine = new Polyline();
+            this.Children.Add(PathLine);
         }
 
         private static void OnPathChanged(DependencyObject source, DependencyPropertyChangedEventArgs e) // TODO: Render the path
@@ -73,7 +76,7 @@ namespace AStarVisualization.WPF.Controls
             pathLine.Stroke = new SolidColorBrush(Colors.Black); // TODO: make this bindable
             pathLine.StrokeThickness = 2;
 
-            canvas.Children.Add(pathLine);
+            canvas.PathLine = pathLine;
         }
     }
 }
