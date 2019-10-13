@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace AStarVisualization.WPF.Cleanup.ViewModels
 {
-    // TODO ICommands that are responsible for placing the tiles
+    // TODO: ICommands that are responsible for placing the tiles
     public class AStarGridViewModel : INotifyPropertyChanged
     {
         public AStarMap AStarMap

@@ -18,7 +18,7 @@ namespace AStarVisualization.WPF.Cleanup
 
             //customTestControl.DataContext = new TestViewModel();
 
-            // TODO remove this (only for testing purposes
+            // TODO: remove this (only for testing purposes
             var astarVM = new AStarGridViewModel();
 
             astarVM.AStarMap.Map = new Core.Node[,]

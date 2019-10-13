@@ -23,8 +23,7 @@ namespace AStarVisualization.Core.UnitTests
         [Test, TestCaseSource("FindPath_PathExists_ReturnsPath_Cases")]
         public void FindPath_PathExists_ReturnsPath(object[] parameters)
         {
-            // TODO clean up this test
-            // TODO the problem is the expected path since it is derived from the static map without the waypoints
+            // TODO: clean up this test, the problem with the test is the way that the paths are compared
             (int startRowIdx, int startColIdx, int goalRowIdx, int goalColIdx, var expectedPathIndices) = GetTestParameters(parameters);
             Node[,] map = GetMapWithWaypoints(startRowIdx, startColIdx, goalRowIdx, goalColIdx, Map);
             List<Node> expectedPath = new List<Node>();
@@ -48,7 +47,7 @@ namespace AStarVisualization.Core.UnitTests
             map[goalRowIdx, goalColIdx] = new Node(NodeState.Goal);
             return map;
         }
-        private static readonly object[] FindPath_PathExists_ReturnsPath_Cases = // TODO add more testcases
+        private static readonly object[] FindPath_PathExists_ReturnsPath_Cases = // TODO: add more testcases
         {
             new object[] {0, 0, 1, 0, (0,0), (1,0) },
             new object[] {0, 0, 1, 1, (0,0), (1,0), (1,1) },

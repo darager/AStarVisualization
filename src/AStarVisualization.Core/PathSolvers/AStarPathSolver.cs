@@ -70,7 +70,7 @@ namespace AStarVisualization.Core.PathSolvers
                 closedSet.Add(currentNode);
             }
 
-            if(currentNode.State != NodeState.Goal)
+            if (currentNode.State != NodeState.Goal)
                 throw new NoPathFoundException();
 
             List<Node> path = ReconstructPath(currentNode);
@@ -92,7 +92,7 @@ namespace AStarVisualization.Core.PathSolvers
 
             return path;
         }
-        private void ComputeHeuristicCosts(Node[,] map, double D = 1000.0) // TODO do something with D
+        private void ComputeHeuristicCosts(Node[,] map, double D = 1000.0) // TODO: do something with D
         {
             (int goalRowIdx, int goalColIdx) = GetGoalIndices();
 

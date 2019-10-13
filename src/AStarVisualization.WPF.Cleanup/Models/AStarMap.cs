@@ -2,7 +2,7 @@
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-// TODO create a wrapper for the astargrid array in ordser to be able to use mvvm properly
+// TODO: create a wrapper for the astargrid array in ordser to be able to use mvvm properly
 namespace AStarVisualization.WPF.Cleanup.Models
 {
     public class AStarMap : INotifyCollectionChanged, INotifyPropertyChanged
@@ -12,7 +12,7 @@ namespace AStarVisualization.WPF.Cleanup.Models
             get => _map;
             set
             {
-                if(value != _map)
+                if (value != _map)
                 {
                     _map = value;
                     OnPropertyChanged("Map");
@@ -25,7 +25,7 @@ namespace AStarVisualization.WPF.Cleanup.Models
             get => _map[i, j];
             set
             {
-                if(_map[i,j] != value)
+                if (_map[i, j] != value)
                 {
                     _map[i, j] = value;
                     CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));

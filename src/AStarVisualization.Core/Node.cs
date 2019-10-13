@@ -28,7 +28,7 @@ namespace AStarVisualization.Core
             this._colIndex = colIndex;
         }
 
-        // TODO follow the tutorial at https://medium.com/@pjbgf/asserting-equality-in-your-c-unit-tests-837b423024bf
+        // TODO: follow the tutorial at https://medium.com/@pjbgf/asserting-equality-in-your-c-unit-tests-837b423024bf
         public override bool Equals(object other)
         {
             if (other.GetType() != this.GetType()) return false;
