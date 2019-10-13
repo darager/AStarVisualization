@@ -32,7 +32,7 @@ namespace AStarVisualization.WPF.Cleanup
                 map[1,0], map[1,1], map[0,1]
             };
 
-            astarCanvas.DataContext = astarVM;
+            mapCanvas.DataContext = astarVM;
         }
     }
 }

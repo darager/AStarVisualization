@@ -91,7 +91,7 @@ namespace AStarVisualization.Core.UnitTests
                 Throws.Exception
                 .TypeOf<MapTooSmallException>());
         }
-        [Test] // TODO add multiple testcases to this test
+        [Test]
         public void FindPath_NoWayPoints_ThrowsError()
         {
             var map = new Node[,]

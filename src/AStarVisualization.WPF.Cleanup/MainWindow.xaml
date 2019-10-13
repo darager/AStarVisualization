@@ -13,8 +13,8 @@
     ResizeMode="NoResize"
     mc:Ignorable="d">
     <DockPanel>
-        <c:CustomCanvas
-            x:Name="astarCanvas"
+        <c:MapCanvas
+            x:Name="mapCanvas"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             DockPanel.Dock="Top"

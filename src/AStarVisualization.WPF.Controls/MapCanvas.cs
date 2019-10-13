@@ -5,15 +5,14 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-// TODO: use a custom control instead of a usercontrol
 namespace AStarVisualization.WPF.Controls
 {
-    public class CustomCanvas : Canvas
+    public class MapCanvas : Canvas
     {
         #region map property
         public static readonly DependencyProperty MapProperty =
             DependencyProperty.Register(
-                "Map", typeof(Node[,]), typeof(CustomCanvas),
+                "Map", typeof(Node[,]), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnMapChanged)));
         public Node[,] Map
         {
@@ -44,20 +43,19 @@ namespace AStarVisualization.WPF.Controls
         }
         public static readonly DependencyProperty PathProperty =
             DependencyProperty.Register(
-                "Path", typeof(List<Node>), typeof(CustomCanvas),
+                "Path", typeof(List<Node>), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnPathChanged)));
 
         public Polyline PathLine;
 
-        public CustomCanvas()
+        public MapCanvas()
         {
             PathLine = new Polyline();
         }
 
-        private static void OnPathChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        private static void OnPathChanged(DependencyObject source, DependencyPropertyChangedEventArgs e) // TODO: Render the path
         {
-            // TODO: Render the path
-            CustomCanvas canvas = source as CustomCanvas;
+            MapCanvas canvas = source as MapCanvas;
             List<Node> path = (List<Node>)e.NewValue;
 
             double rowSpacing = canvas.ActualHeight / canvas.NumRows;
