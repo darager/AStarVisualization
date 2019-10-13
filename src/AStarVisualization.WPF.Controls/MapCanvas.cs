@@ -52,6 +52,8 @@ namespace AStarVisualization.WPF.Controls
             else if (e.NewValue.GetType() == typeof(Node))
                 DrawNode((Node)e.NewValue);
 
+            // this does not work as is
+            // the problem is this method is not called when an element of the array is updated
             void DrawNode(Node node)
             {
 

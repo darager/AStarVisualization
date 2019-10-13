@@ -60,7 +60,6 @@
     </ApplicationDefinition>
     <Compile Include="Bindings.cs" />
     <Compile Include="ViewModels\AStarGridViewModel.cs" />
-    <Compile Include="ViewModels\TestViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
