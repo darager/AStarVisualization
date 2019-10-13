@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 
 // TODO: create a wrapper for the astargrid array in ordser to be able to use mvvm properly
-namespace AStarVisualization.WPF.Cleanup.Models
+namespace AStarVisualization.WPF.Controls.Models
 {
     public class AStarMap : INotifyCollectionChanged, INotifyPropertyChanged
     {
@@ -33,6 +33,8 @@ namespace AStarVisualization.WPF.Cleanup.Models
             }
         }
 
+        public int GetLength(int i) => _map.GetLength(i);
+
         private void OnItemChanged(int rowIdx, int colIdx)
         {
             CollectionChanged?.Invoke(
@@ -44,6 +46,7 @@ namespace AStarVisualization.WPF.Cleanup.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         public event NotifyCollectionChangedEventHandler CollectionChanged;
         public event PropertyChangedEventHandler PropertyChanged;
     }

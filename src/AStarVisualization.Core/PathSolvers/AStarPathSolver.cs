@@ -35,7 +35,7 @@ namespace AStarVisualization.Core.PathSolvers
         {
             EnsureMapValidity(this.map);
             InitDataStructures(this.map);
-            SetNodeIndices(this.map);
+            this.map.UpdateNodeIndices();
             ComputeHeuristicCosts(this.map);
             (this.startNode, this.goalNode) = GetStartAndGoal(map);
 
@@ -128,12 +128,6 @@ namespace AStarVisualization.Core.PathSolvers
             int numNodes = map.Length;
             this.openSet = new MinPriorityQueue<double, Node>(numNodes);
             this.closedSet = new HashSet<Node>();
-        }
-        private void SetNodeIndices(Node[,] map)
-        {
-            for (int i = 0; i < map.GetLength(0); i++)
-                for (int j = 0; j < map.GetLength(1); j++)
-                    map[i, j].SetIndices(i, j);
         }
         private void SetSuccessorMovementCost(Node current, Node successor)
         {

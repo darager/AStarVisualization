@@ -16,22 +16,8 @@ namespace AStarVisualization.WPF.Cleanup
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
 
-            //customTestControl.DataContext = new TestViewModel();
-
-            // TODO: remove this (only for testing purposes
+            // TODO: use xaml to inject the viewmodels instead
             var astarVM = new AStarGridViewModel();
-
-            astarVM.AStarMap.Map = new Core.Node[,]
-            {
-                { new Core.Node(NodeState.Wall), new Node(NodeState.Goal) },
-                { new Core.Node(NodeState.Start), new Node(NodeState.Ground) }
-            };
-            var map = astarVM.AStarMap;
-            astarVM.AStarPath = new List<Node>
-            {
-                map[1,0], map[1,1], map[0,1]
-            };
-
             mapCanvas.DataContext = astarVM;
         }
     }

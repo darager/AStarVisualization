@@ -31,11 +31,16 @@ namespace AStarVisualization.Core
 
             return neighbors;
         }
+        public static void UpdateNodeIndices(this Node[,] map) // write tests for this extension method
+        {
+            for (int i = 0; i < map.GetLength(0); i++)
+                for (int j = 0; j < map.GetLength(1); j++)
+                    map[i, j].SetIndices(i, j);
+        }
         public static int GetNeighborCount(this Node[,] map, int rowIdx, int colIdx, bool diagonalsEnabled)
         {
             return map.GetNeighbors(rowIdx, colIdx, diagonalsEnabled).Count;
         }
-
         private static bool IsDiagonalNeighbor(int rowIdx, int colIdx, int nRowidx, int nColIdx)
         {
             return ((Math.Abs(rowIdx - nRowidx)) == 1) && ((Math.Abs(colIdx - nColIdx) == 1));

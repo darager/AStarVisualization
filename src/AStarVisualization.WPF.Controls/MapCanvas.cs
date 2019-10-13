@@ -1,4 +1,5 @@
 ﻿using AStarVisualization.Core;
+using AStarVisualization.WPF.Controls.Models;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,14 +10,13 @@ namespace AStarVisualization.WPF.Controls
 {
     public class MapCanvas : Canvas
     {
-        #region map property
         public static readonly DependencyProperty MapProperty =
             DependencyProperty.Register(
-                "Map", typeof(Node[,]), typeof(MapCanvas),
+                "Map", typeof(AStarMap), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnMapChanged)));
-        public Node[,] Map
+        public AStarMap Map
         {
-            get => (Node[,])GetValue(MapProperty);
+            get => (AStarMap)GetValue(MapProperty);
             set => SetValue(MapProperty, value);
         }
         private static void OnMapChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -31,10 +31,6 @@ namespace AStarVisualization.WPF.Controls
 
             }
         }
-        #endregion
-
-        public int NumRows => ((Node[,])GetValue(MapProperty)).GetLength(0);
-        public int NumColumns => ((Node[,])GetValue(MapProperty)).GetLength(1);
 
         public List<Node> Path
         {
@@ -45,8 +41,10 @@ namespace AStarVisualization.WPF.Controls
             DependencyProperty.Register(
                 "Path", typeof(List<Node>), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnPathChanged)));
-
         public Polyline PathLine;
+
+        public int NumRows => ((AStarMap)GetValue(MapProperty)).GetLength(0);
+        public int NumColumns => ((AStarMap)GetValue(MapProperty)).GetLength(1);
 
         public MapCanvas()
         {
@@ -74,6 +72,8 @@ namespace AStarVisualization.WPF.Controls
             pathLine.Points = points;
             pathLine.Stroke = new SolidColorBrush(Colors.Black); // TODO: make this bindable
             pathLine.StrokeThickness = 2;
+
+            canvas.Children.Add(pathLine);
         }
     }
 }
