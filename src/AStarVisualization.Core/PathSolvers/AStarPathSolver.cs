@@ -3,7 +3,6 @@ using System.Linq;
 using AStarVisualization.DataStructures;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 // TODO: clean up this class
 // TODO: measure performance, if necessary replace linq for more efficient methods
@@ -12,7 +11,7 @@ namespace AStarVisualization.Core.PathSolvers
 {
     public class AStarPathSolver : IPathSolver
     {
-        private Node[,] map;
+        private Node[][] map;
         private bool diagonalsAllowed;
         private Node startNode;
         private Node goalNode;
@@ -21,7 +20,7 @@ namespace AStarVisualization.Core.PathSolvers
         private MinPriorityQueue<double, Node> openSet;
         private HashSet<Node> closedSet;
 
-        public AStarPathSolver(ref Node[,] map, bool diagonalsAllowed = false)
+        public AStarPathSolver(ref Node[][] map, bool diagonalsAllowed = false)
         {
             this.map = map;
             this.diagonalsAllowed = diagonalsAllowed;
@@ -92,17 +91,18 @@ namespace AStarVisualization.Core.PathSolvers
 
             return path;
         }
-        private void ComputeHeuristicCosts(Node[,] map, double D = 1000.0) // TODO: do something with D
+        private void ComputeHeuristicCosts(Node[][] map, double D = 1000.0) // TODO: do something with D
         {
             (int goalRowIdx, int goalColIdx) = GetGoalIndices();
 
-            foreach (Node node in map)
-            {
-                int rowIdx = node.RowIndex;
-                int colIdx = node.ColIndex;
-                // this particular heuristic is the Manhattan distance which is used for grid layouts
-                node.Heuristic = D * (Math.Abs(rowIdx - goalRowIdx) + Math.Abs(colIdx - goalColIdx));
-            }
+            foreach (Node[] nodes in map)
+                foreach (Node node in nodes)
+                {
+                    int rowIdx = node.RowIndex;
+                    int colIdx = node.ColIndex;
+                    // this particular heuristic is the Manhattan distance which is used for grid layouts
+                    node.Heuristic = D * (Math.Abs(rowIdx - goalRowIdx) + Math.Abs(colIdx - goalColIdx));
+                }
 
             (int, int) GetGoalIndices()
             {
@@ -112,7 +112,7 @@ namespace AStarVisualization.Core.PathSolvers
                 for (int i = 0; i < map.GetLength(0); i++)
                     for (int j = 0; j < map.GetLength(1); j++)
                     {
-                        var node = map[i, j];
+                        var node = map[i][j];
                         if (node.State == NodeState.Goal)
                         {
                             rowIdx = i;
@@ -123,7 +123,7 @@ namespace AStarVisualization.Core.PathSolvers
                 return (rowIdx, colIdx);
             }
         }
-        private void InitDataStructures(Node[,] map)
+        private void InitDataStructures(Node[][] map)
         {
             int numNodes = map.Length;
             this.openSet = new MinPriorityQueue<double, Node>(numNodes);
@@ -136,7 +136,7 @@ namespace AStarVisualization.Core.PathSolvers
 
             successor.MovementCost = Math.Sqrt(dx * dx + dy * dy);
         }
-        private void EnsureMapValidity(Node[,] map)
+        private void EnsureMapValidity(Node[][] map)
         {
             if (map is null)
                 throw new ArgumentNullException();
@@ -147,33 +147,35 @@ namespace AStarVisualization.Core.PathSolvers
             if (!MapHasGoalAndPath(map))
                 throw new NoWayPointsException();
         }
-        private bool MapHasGoalAndPath(Node[,] map)
+        private bool MapHasGoalAndPath(Node[][] map)
         {
             bool hasStart = false;
             bool hasGoal = false;
 
-            foreach (Node node in map)
-            {
-                if (node.State == NodeState.Start)
-                    hasStart = true;
-                else if (node.State == NodeState.Goal)
-                    hasGoal = true;
-            }
+            foreach (Node[] nodes in map)
+                foreach (Node node in nodes)
+                {
+                    if (node.State == NodeState.Start)
+                        hasStart = true;
+                    else if (node.State == NodeState.Goal)
+                        hasGoal = true;
+                }
 
             return (hasStart && hasGoal);
         }
-        private (Node, Node) GetStartAndGoal(Node[,] map)
+        private (Node, Node) GetStartAndGoal(Node[][] map)
         {
             Node goal = null;
             Node start = null;
 
-            foreach (var node in map)
-            {
-                if (node.State == NodeState.Start)
-                    start = node;
-                else if (node.State == NodeState.Goal)
-                    goal = node;
-            }
+            foreach (var nodes in map)
+                foreach (var node in nodes)
+                {
+                    if (node.State == NodeState.Start)
+                        start = node;
+                    else if (node.State == NodeState.Goal)
+                        goal = node;
+                }
 
             return (start, goal);
         }

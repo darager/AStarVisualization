@@ -7,7 +7,7 @@ namespace AStarVisualization.WPF.Controls.Models
 {
     public class AStarMap : INotifyCollectionChanged, INotifyPropertyChanged
     {
-        public Node[,] Map
+        public Node[][] Map
         {
             get => _map;
             set
@@ -19,15 +19,15 @@ namespace AStarVisualization.WPF.Controls.Models
                 }
             }
         }
-        private Node[,] _map;
+        private Node[][] _map;
         public Node this[int i, int j]
         {
-            get => _map[i, j];
+            get => _map[i][j];
             set
             {
-                if (_map[i, j] != value)
+                if (_map[i][j] != value)
                 {
-                    _map[i, j] = value;
+                    _map[i][j] = value;
                     CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));
                 }
             }
@@ -39,7 +39,7 @@ namespace AStarVisualization.WPF.Controls.Models
         {
             CollectionChanged?.Invoke(
                 this,
-                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, _map[rowIdx, colIdx]
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, _map[rowIdx][colIdx]
                 ));
         }
         private void OnPropertyChanged(string propertyName)

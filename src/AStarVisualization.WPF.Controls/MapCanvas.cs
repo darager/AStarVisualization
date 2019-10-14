@@ -47,74 +47,60 @@ namespace AStarVisualization.WPF.Controls
         private static void OnMapChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             // TODO: render the grid including the lines and the tiles
-            if (e.NewValue.GetType() == typeof(AStarMap))
-                RedrawGrid();
-            else if (e.NewValue.GetType() == typeof(Node))
-                DrawNode((Node)e.NewValue);
+            MapCanvas canvas = source as MapCanvas;
+            AStarMap map = (AStarMap)e.NewValue;
 
-            // this does not work as is
-            // the problem is this method is not called when an element of the array is updated
-            void DrawNode(Node node)
+            double height = canvas.ActualHeight;
+            double width = canvas.ActualWidth;
+            double rowSpacing = height / canvas.NumRows;
+            double colSpacing = width / canvas.NumColumns;
+            int numRows = canvas.NumRows;
+            int numCols = canvas.NumColumns;
+
+            var stroke = new SolidColorBrush(Colors.DarkGray);
+            int thickness = 1;
+
+            var newLines = new List<Line>();
+            for (int i = 0; i < numRows; i++)
             {
+                double Y = i * rowSpacing + rowSpacing;
+                var rowLine = new Line()
+                {
+                    X1 = 0,
+                    X2 = width,
+                    Y1 = Y,
+                    Y2 = Y,
+                    Stroke = stroke,
+                    StrokeThickness = thickness
+                };
 
+                newLines.Add(rowLine);
             }
-            void RedrawGrid()
+            for (int i = 0; i < numCols; i++)
             {
-                MapCanvas canvas = source as MapCanvas;
-                AStarMap map = (AStarMap)e.NewValue;
-
-                double height = canvas.ActualHeight;
-                double width = canvas.ActualWidth;
-                double rowSpacing = height / canvas.NumRows;
-                double colSpacing = width / canvas.NumColumns;
-                int numRows = canvas.NumRows;
-                int numCols = canvas.NumColumns;
-
-                var stroke = new SolidColorBrush(Colors.DarkGray);
-                int thickness = 1;
-
-                var newLines = new List<Line>();
-                for (int i = 0; i < numRows; i++)
+                double X = i * colSpacing + colSpacing;
+                var rowLine = new Line()
                 {
-                    double Y = i * rowSpacing + rowSpacing;
-                    var rowLine = new Line()
-                    {
-                        X1 = 0,
-                        X2 = width,
-                        Y1 = Y,
-                        Y2 = Y,
-                        Stroke = stroke,
-                        StrokeThickness = thickness
-                    };
+                    X1 = X,
+                    X2 = X,
+                    Y1 = 0,
+                    Y2 = height,
+                    Stroke = stroke,
+                    StrokeThickness = thickness
+                };
 
-                    newLines.Add(rowLine);
-                }
-                for (int i = 0; i < numCols; i++)
-                {
-                    double X = i * colSpacing + colSpacing;
-                    var rowLine = new Line()
-                    {
-                        X1 = X,
-                        X2 = X,
-                        Y1 = 0,
-                        Y2 = height,
-                        Stroke = stroke,
-                        StrokeThickness = thickness
-                    };
-
-                    newLines.Add(rowLine);
-                }
-
-                var oldLines = canvas.GridLines;
-                foreach (Line line in newLines)
-                    canvas.Children.Add(line);
-                foreach (Line line in oldLines)
-                    canvas.Children.Remove(line);
-
-                canvas.GridLines = newLines;
+                newLines.Add(rowLine);
             }
+
+            var oldLines = canvas.GridLines;
+            foreach (Line line in newLines)
+                canvas.Children.Add(line);
+            foreach (Line line in oldLines)
+                canvas.Children.Remove(line);
+
+            canvas.GridLines = newLines;
         }
-        private static void OnPathChanged(DependencyObject source, DependencyPropertyChangedEventArgs e) // TODO: Render the path
+        private static void OnPathChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             MapCanvas canvas = source as MapCanvas;
             List<Node> path = (List<Node>)e.NewValue;

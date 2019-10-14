@@ -12,12 +12,12 @@ namespace AStarVisualization.Core.UnitTests
     [TestFixture]
     public class AStarPathSolverTest
     {
-        private static readonly Node[,] Map = new Node[,]
+        private static readonly Node[][] Map = new Node[][]
         {
-            {new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Ground)},
-            {new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground)},
-            {new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Ground)},
-            {new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Ground)},
+            new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Ground) },
+            new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) },
+            new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Ground) },
+            new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Ground) },
         };
 
         [Test, TestCaseSource("FindPath_PathExists_ReturnsPath_Cases")]
@@ -25,10 +25,10 @@ namespace AStarVisualization.Core.UnitTests
         {
             // TODO: clean up this test, the problem with the test is the way that the paths are compared
             (int startRowIdx, int startColIdx, int goalRowIdx, int goalColIdx, var expectedPathIndices) = GetTestParameters(parameters);
-            Node[,] map = GetMapWithWaypoints(startRowIdx, startColIdx, goalRowIdx, goalColIdx, Map);
+            Node[][] map = GetMapWithWaypoints(startRowIdx, startColIdx, goalRowIdx, goalColIdx, Map);
             List<Node> expectedPath = new List<Node>();
             foreach ((int, int) indices in expectedPathIndices)
-                expectedPath.Add(map[indices.Item1, indices.Item2]);
+                expectedPath.Add(map[indices.Item1][indices.Item2]);
 
             IPathSolver pathfinder = new AStarPathSolver(ref map);
             List<Node> actualPath = pathfinder.FindPath();
@@ -41,10 +41,10 @@ namespace AStarVisualization.Core.UnitTests
             var path = parameters.Skip(4).Cast<(int, int)>().ToList();
             return ((int)parameters[0], (int)parameters[1], (int)parameters[2], (int)parameters[3], path);
         }
-        private Node[,] GetMapWithWaypoints(int startRowIdx, int startColIdx, int goalRowIdx, int goalColIdx, Node[,] map)
+        private Node[][] GetMapWithWaypoints(int startRowIdx, int startColIdx, int goalRowIdx, int goalColIdx, Node[][] map)
         {
-            map[startRowIdx, startColIdx] = new Node(NodeState.Start);
-            map[goalRowIdx, goalColIdx] = new Node(NodeState.Goal);
+            map[startRowIdx][startColIdx] = new Node(NodeState.Start);
+            map[goalRowIdx][goalColIdx] = new Node(NodeState.Goal);
             return map;
         }
         private static readonly object[] FindPath_PathExists_ReturnsPath_Cases = // TODO: add more testcases
@@ -58,10 +58,10 @@ namespace AStarVisualization.Core.UnitTests
         [Test]
         public void FindPath_NoPathExists_ThrowsError()
         {
-            Node[,] map = new Node[,]
+            Node[][] map = new Node[][]
             {
-                { new Node(NodeState.Start), new Node(NodeState.Wall), new Node(NodeState.Goal) },
-                { new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Ground) }
+                new Node[]{ new Node(NodeState.Start), new Node(NodeState.Wall), new Node(NodeState.Goal) },
+                new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Ground) }
             };
             IPathSolver pathfinder = new AStarPathSolver(ref map);
 
@@ -72,7 +72,7 @@ namespace AStarVisualization.Core.UnitTests
         [Test]
         public void FindPath_MapIsNull_ThrowsError()
         {
-            Node[,] map = null;
+            Node[][] map = null;
             IPathSolver pathfinder = new AStarPathSolver(ref map);
 
             Assert.That(() => pathfinder.FindPath(),
@@ -82,7 +82,7 @@ namespace AStarVisualization.Core.UnitTests
         [Test]
         public void FindPath_MapIsTooSmall_ThrowsError()
         {
-            var map = new Node[,] { { new Node(NodeState.Wall), new Node(NodeState.Goal) } };
+            var map = new Node[][] { new Node[]{ new Node(NodeState.Wall), new Node(NodeState.Goal) } };
 
             IPathSolver pathfinder = new AStarPathSolver(ref map);
 
@@ -93,10 +93,10 @@ namespace AStarVisualization.Core.UnitTests
         [Test]
         public void FindPath_NoWayPoints_ThrowsError()
         {
-            var map = new Node[,]
+            var map = new Node[][]
             {
-                {new Node(NodeState.Wall), new Node(NodeState.Ground)},
-                {new Node(NodeState.Start), new Node(NodeState.Ground)},
+                new Node[]{ new Node(NodeState.Wall), new Node(NodeState.Ground)},
+                new Node[]{ new Node(NodeState.Start), new Node(NodeState.Ground)},
             };
 
             IPathSolver pathfinder = new AStarPathSolver(ref map);

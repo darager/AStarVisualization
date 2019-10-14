@@ -2,6 +2,6 @@
 {
     public interface IPathSolverFactory
     {
-        IPathSolver GetPathSolver(ref Node[,] map, PathSolver pathSolverType, bool diagonalsEnabled);
+        IPathSolver GetPathSolver(ref Node[][] map, PathSolver pathSolverType, bool diagonalsEnabled);
     }
 }

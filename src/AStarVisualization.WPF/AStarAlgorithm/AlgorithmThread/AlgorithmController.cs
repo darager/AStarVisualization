@@ -8,7 +8,7 @@ namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthr
     {
         private Dispatcher mainDispatcher;
         private AStarTile[,] tiles;
-        private Node[,] map;
+        private Node[][] map;
         private Node StartNode;
         private Node GoalNode;
         private AStarAlgorithm algorithm;
@@ -31,7 +31,7 @@ namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthr
             int numRows = tiles.GetLength(0);
             int numColumns = tiles.GetLength(1);
 
-            this.map = new Node[numRows, numColumns];
+            this.map = new Node[numRows][];
             var nodes = new Node[numRows, numColumns];
 
             for (int row = 0; row < numRows; row++)
@@ -63,7 +63,7 @@ namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthr
                             break;
                     }
 
-                    map[row, col] = node;
+                    map[row][col] = node;
                 }
             }
         }

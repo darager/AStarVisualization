@@ -10,7 +10,7 @@ namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthr
     {
         private OpenSet openSet;
         private ClosedSet closedSet = new ClosedSet();
-        private Node[,] map;
+        private Node[][] map;
         private Node StartNode;
         private Node GoalNode;
         private Node currentNode;
@@ -19,7 +19,7 @@ namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthr
         private bool DiagonalsEnabled = false;
         private int stepNumber = 0;
 
-        public AStarAlgorithm(Node[,] map, Node StartNode, Node GoalNode, bool DiagonalPathsEnabled, double ManhattanDistanceConstant = 1000.0)
+        public AStarAlgorithm(Node[][] map, Node StartNode, Node GoalNode, bool DiagonalPathsEnabled, double ManhattanDistanceConstant = 1000.0)
         {
             this.openSet = new OpenSet(map.GetLength(0) * map.GetLength(1));
             this.map = map;
@@ -114,10 +114,11 @@ namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthr
         #region AlgorithmHelperMethods
         private void ComputeHeuristicCosts(double D)
         {
-            foreach (Node node in map)
-            {
-                node.Heuristic = ManhattanDistance(node, GoalNode);
-            }
+            foreach (var nodes in map)
+                foreach (Node node in nodes)
+                {
+                    node.Heuristic = ManhattanDistance(node, GoalNode);
+                }
 
             double ManhattanDistance(Node node, Node goal)
             {
@@ -160,7 +161,7 @@ namespace AStarVisualization.WPF.AStarAlgorithm.AStarImplementation.Algorithmthr
                 {
                     try
                     {
-                        Node successor = map[row, col];
+                        Node successor = map[row][col];
 
                         if (openSet.Contains(successor) || closedSet.Contains(successor))
                         {

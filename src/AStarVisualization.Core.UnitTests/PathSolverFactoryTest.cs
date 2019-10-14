@@ -9,7 +9,7 @@ namespace AStarVisualization.Core.UnitTests
         [Test]
         public void GetPathSolver_ReturnsAStarPathSolver()
         {
-            Node[,] map = null;
+            Node[][] map = null;
             IPathSolverFactory pathSolverFactory = new PathSolverFactory();
 
             var pathsolver = pathSolverFactory.GetPathSolver(ref map, PathSolver.AStar, false);

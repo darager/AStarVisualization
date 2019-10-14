@@ -9,16 +9,16 @@ namespace AStarVisualization.Playground
     {
         static void Main()
         {
-            var map = new Node[,]
+            var map = new Node[][]
             {
-                { new Node(NodeState.Start), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall) },
-                { new Node(NodeState.Goal), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) },
-                { new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall) },
-                { new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) }
+                new Node[]{ new Node(NodeState.Start), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall) },
+                new Node[]{ new Node(NodeState.Goal), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) },
+                new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall) },
+                new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) }
             };
             List<Node> expectedPath = new List<Node>
             {
-                map[0,0], map[1,0]
+                map[0][0], map[1][0]
             };
 
             IPathSolver pathSolver = new AStarPathSolver(ref map, false);
@@ -35,11 +35,11 @@ namespace AStarVisualization.Playground
 
         public static void TestNoWayPointsThrown()
         {
-            var map = new Node[,]
+            var map = new Node[][]
             {
-                { new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
-                { new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall) },
-                { new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Ground) }
+                new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
+                new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall) },
+                new Node[]{ new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Ground) }
             };
 
             IPathSolver pathSolver = new AStarPathSolver(ref map);

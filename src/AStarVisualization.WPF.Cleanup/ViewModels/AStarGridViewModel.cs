@@ -1,12 +1,13 @@
 ﻿using AStarVisualization.Core;
 using AStarVisualization.WPF.Controls.Models;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 
 namespace AStarVisualization.WPF.Cleanup.ViewModels
 {
     // TODO: ICommands that are responsible for placing the tiles
-    public class AStarGridViewModel : INotifyPropertyChanged
+    public class AStarGridViewModel : INotifyPropertyChanged, INotifyCollectionChanged
     {
         public AStarMap AStarMap
         {
@@ -20,6 +21,7 @@ namespace AStarVisualization.WPF.Cleanup.ViewModels
                 }
             }
         }
+
         private AStarMap _aStarMap;
         public List<Node> AStarPath
         {
@@ -37,16 +39,18 @@ namespace AStarVisualization.WPF.Cleanup.ViewModels
 
         public AStarGridViewModel()
         {
-            // TODO: remove mock data
-            var map = new Node[,] {
-                { new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.Wall) },
-                { new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
-                { new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Goal) },
+            //TODO: remove mock data
+            var map = new Node[][] {
+                new Node[]{ new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.Wall) },
+                new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
+                new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Goal) },
             };
             map.UpdateNodeIndices();
             _aStarMap = new AStarMap();
             _aStarMap.Map = map;
-            _path = new List<Node> { map[0, 0], map[1, 0], map[2, 0], map[2, 1], map[2, 2] };
+            _path = new List<Node> { map[0][0], map[1][1], map[2][0], map[2][1], map[2][2] };
+
+            AStarMap.CollectionChanged += (s, e) => CollectionChanged?.Invoke(s, e);
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -54,5 +58,6 @@ namespace AStarVisualization.WPF.Cleanup.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public event PropertyChangedEventHandler PropertyChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }

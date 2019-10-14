@@ -5,12 +5,12 @@ namespace AStarVisualization.Core.UnitTests
     [TestFixture]
     public class MapExtensionsTest
     {
-        public static Node[,] Map = new Node[,]
+        public static Node[][] Map = new Node[][]
         {
-            { new Node(NodeState.Goal), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall) },
-            { new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
-            { new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall) },
-            { new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Start) },
+            new Node[]{ new Node(NodeState.Goal), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall) },
+            new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
+            new Node[]{ new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall) },
+            new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Start) },
         };
 
         [Test]
