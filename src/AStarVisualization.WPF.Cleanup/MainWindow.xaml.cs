@@ -1,11 +1,11 @@
 ﻿using AStarVisualization.Core;
-using AStarVisualization.WPF.Cleanup.ViewModels;
+using AStarVisualization.WPF.ViewModels;
 using Ninject;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 
-namespace AStarVisualization.WPF.Cleanup
+namespace AStarVisualization.WPF
 {
     public partial class MainWindow : Window
     {

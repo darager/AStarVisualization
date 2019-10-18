@@ -1,10 +1,10 @@
 ﻿<Window
-    x:Class="AStarVisualization.WPF.Cleanup.MainWindow"
+    x:Class="AStarVisualization.WPF.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:AStarVisualization.WPF.Controls;assembly=AStarVisualization.WPF.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:AStarVisualization.WPF.Cleanup"
+    xmlns:local="clr-namespace:AStarVisualization.WPF"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Title="Pathfinding Visualization"

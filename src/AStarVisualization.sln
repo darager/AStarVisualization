@@ -5,11 +5,9 @@ VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AStarVisualization.DataStructures", "AStarVisualization.DataStructures\AStarVisualization.DataStructures.csproj", "{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.WPF", "AStarVisualization.WPF\AStarVisualization.WPF.csproj", "{964BCA88-1FB4-403B-9ABA-31B2CDF562C6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.WPF.Controls", "AStarVisualization.WPF.Controls\AStarVisualization.WPF.Controls.csproj", "{D339AA80-A50F-4D42-9515-027AE3FF8612}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.WPF.Cleanup", "AStarVisualization.WPF.Cleanup\AStarVisualization.WPF.Cleanup.csproj", "{4D21BA11-1048-4206-819D-7B6B3785A451}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.WPF", "AStarVisualization.WPF.Cleanup\AStarVisualization.WPF.csproj", "{4D21BA11-1048-4206-819D-7B6B3785A451}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AStarVisualization.Core", "AStarVisualization.Core\AStarVisualization.Core.csproj", "{016C9FC7-77B3-4554-B47C-3FC8E4DAB93F}"
 EndProject
@@ -17,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AStarVisualization.Core.Uni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AStarVisualization.DataStructures.UnitTests", "AStarVisualization.DataStructures.UnitTests\AStarVisualization.DataStructures.UnitTests.csproj", "{89EE35A2-A12F-4581-AB5E-39F644D532AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStarVisualization.Playground", "AStarVisualization.Playground\AStarVisualization.Playground.csproj", "{85354356-CB4B-4D2B-B656-C6EDB2A0DD51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AStarVisualization.Playground", "AStarVisualization.Playground\AStarVisualization.Playground.csproj", "{85354356-CB4B-4D2B-B656-C6EDB2A0DD51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{964BCA88-1FB4-403B-9ABA-31B2CDF562C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{964BCA88-1FB4-403B-9ABA-31B2CDF562C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{964BCA88-1FB4-403B-9ABA-31B2CDF562C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{964BCA88-1FB4-403B-9ABA-31B2CDF562C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Release|Any CPU.ActiveCfg = Release|Any CPU

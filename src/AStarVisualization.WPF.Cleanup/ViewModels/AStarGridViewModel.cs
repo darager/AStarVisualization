@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace AStarVisualization.WPF.Cleanup.ViewModels
+namespace AStarVisualization.WPF.ViewModels
 {
     // TODO: ICommands that are responsible for placing the tiles
     public class AStarGridViewModel : INotifyPropertyChanged, INotifyCollectionChanged

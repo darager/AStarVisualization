@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Ninject.Modules;
 using AStarVisualization.Core.PathSolvers;
-using AStarVisualization.WPF.Cleanup.ViewModels;
+using AStarVisualization.WPF.ViewModels;
 
-namespace AStarVisualization.WPF.Cleanup
+namespace AStarVisualization.WPF
 {
     public class Bindings : NinjectModule
     {
