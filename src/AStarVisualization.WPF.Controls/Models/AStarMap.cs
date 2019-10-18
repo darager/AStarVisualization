@@ -1,4 +1,5 @@
 ﻿using AStarVisualization.Core;
+using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
@@ -33,7 +34,15 @@ namespace AStarVisualization.WPF.Controls.Models
             }
         }
 
-        public int GetLength(int i) => _map.GetLength(i);
+        public int GetLength(int i)
+        {
+            if (i > 1) throw new IndexOutOfRangeException();
+
+            int length = 0;
+            if (i == 0) length = _map.GetLength(0);
+            if (i == 1) length = _map[0].GetLength(0);
+            return length;
+        }
 
         private void OnItemChanged(int rowIdx, int colIdx)
         {

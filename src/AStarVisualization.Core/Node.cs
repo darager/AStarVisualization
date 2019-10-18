@@ -33,14 +33,14 @@ namespace AStarVisualization.Core
         {
             if (other.GetType() != this.GetType()) return false;
             var node = (Node)other;
-            if (ReferenceEquals(null, node)) return false;
+            if (node is null) return false;
             if (ReferenceEquals(this, node)) return true;
 
             return (this.RowIndex == node.RowIndex) && (this.ColIndex == node.ColIndex);
         }
         public bool Equals(Node other)
         {
-            if (ReferenceEquals(null, other)) return false;
+            if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return (this.RowIndex == other.RowIndex) && (this.ColIndex == other.ColIndex);

@@ -18,8 +18,8 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             DockPanel.Dock="Top"
-            Map="{Binding Path=AStarMap}"
-            Path="{Binding Path=AStarPath}" />
+            Map="{Binding Path=AStarMap, Mode=TwoWay}"
+            Path="{Binding Path=AStarPath, Mode=TwoWay}" />
         <!--<c:AStarCanvas
             x:Name="astarCanvas"
             HorizontalAlignment="Stretch"

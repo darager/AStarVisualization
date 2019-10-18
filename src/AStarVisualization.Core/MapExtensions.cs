@@ -31,10 +31,10 @@ namespace AStarVisualization.Core
 
             return neighbors;
         }
-        public static void UpdateNodeIndices(this Node[][] map) // write tests for this extension method
+        public static void UpdateNodeIndices(this Node[][] map) // TODO: write tests for this extension method
         {
             for (int i = 0; i < map.GetLength(0); i++)
-                for (int j = 0; j < map.GetLength(1); j++)
+                for (int j = 0; j < map[i].GetLength(0); j++)
                     map[i][j].SetIndices(i, j);
         }
         public static int GetNeighborCount(this Node[][] map, int rowIdx, int colIdx, bool diagonalsEnabled)
