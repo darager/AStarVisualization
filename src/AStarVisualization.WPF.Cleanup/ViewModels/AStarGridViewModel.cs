@@ -31,7 +31,7 @@ namespace AStarVisualization.WPF.ViewModels
                 if (_path != value)
                 {
                     _path = value;
-                    OnPropertyChanged("Path");
+                    OnPropertyChanged("AStarPath");
                 }
             }
         }
