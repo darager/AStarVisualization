@@ -1,4 +1,5 @@
 ﻿using AStarVisualization.Core;
+using AStarVisualization.Core.Map;
 using AStarVisualization.WPF.ViewModels;
 using Ninject;
 using System.Collections.Generic;
@@ -29,13 +30,16 @@ namespace AStarVisualization.WPF
             timer.Elapsed += (s, e) =>
             {
                 // TODO: make sure that the mapview is updated by the change in the viewmodel
-                var map = new Node[][]
+                var map = new Map(2, 3)
                 {
-                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall)},
-                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall)},
+                    Data = new Node[][]
+                    {
+                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall)},
+                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall)},
+                    }
                 };
-                astarVM.AStarMap.Map = map;
-                astarVM.AStarPath = new List<Node>() { map[0][0], map[0][1], map[1][1] };
+                astarVM.AStarMap = map;
+                astarVM.AStarPath = new List<Node>() { map[0, 0], map[0, 1], map[1, 1] };
             };
             timer.Start();
         }
