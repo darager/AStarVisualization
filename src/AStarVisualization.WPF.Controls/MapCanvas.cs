@@ -10,14 +10,14 @@ namespace AStarVisualization.WPF.Controls
 {
     public class MapCanvas : Canvas
     {
-        public AStarMap Map
+        public Node[][] Map
         {
-            get => (AStarMap)GetValue(MapProperty);
+            get => (Node[][])GetValue(MapProperty);
             set => SetValue(MapProperty, value);
         }
         public static readonly DependencyProperty MapProperty =
             DependencyProperty.Register(
-                "Map", typeof(AStarMap), typeof(MapCanvas),
+                "Map", typeof(Node[][]), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnMapChanged)));
 
         public List<Node> Path
@@ -30,8 +30,8 @@ namespace AStarVisualization.WPF.Controls
                 "Path", typeof(List<Node>), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnPathChanged)));
 
-        public int NumRows => ((AStarMap)GetValue(MapProperty)).GetLength(0);
-        public int NumColumns => ((AStarMap)GetValue(MapProperty)).GetLength(1);
+        public int NumRows => ((Node[][])GetValue(MapProperty)).GetLength(0);
+        public int NumColumns => ((Node[][])GetValue(MapProperty)).GetLength(1);
 
         // canvas elements
         public Polyline PathLine = new Polyline();
@@ -48,7 +48,7 @@ namespace AStarVisualization.WPF.Controls
         {
             // TODO: render the grid including the lines and the tiles
             MapCanvas canvas = source as MapCanvas;
-            AStarMap map = (AStarMap)e.NewValue;
+            Node[][] map = (Node[][])e.NewValue;
 
             double height = canvas.ActualHeight;
             double width = canvas.ActualWidth;

@@ -9,7 +9,7 @@ namespace AStarVisualization.WPF.ViewModels
     // TODO: ICommands that are responsible for placing the tiles
     public class AStarGridViewModel : INotifyPropertyChanged, INotifyCollectionChanged
     {
-        public AStarMap AStarMap
+        public Node[][] AStarMap
         {
             get => _aStarMap;
             set
@@ -21,8 +21,8 @@ namespace AStarVisualization.WPF.ViewModels
                 }
             }
         }
+        private Node[][] _aStarMap;
 
-        private AStarMap _aStarMap;
         public List<Node> AStarPath
         {
             get => _path;
@@ -46,11 +46,8 @@ namespace AStarVisualization.WPF.ViewModels
                 new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Goal) },
             };
             map.UpdateNodeIndices();
-            _aStarMap = new AStarMap();
-            _aStarMap.Map = map;
+            _aStarMap = map;
             _path = new List<Node> { map[0][0], map[1][1], map[2][0], map[2][1], map[2][2] };
-
-            AStarMap.CollectionChanged += (s, e) => CollectionChanged?.Invoke(s, e);
         }
 
         private void OnPropertyChanged(string propertyName)

@@ -7,14 +7,14 @@ namespace AStarVisualization.Core.UnitTests
     public class PathSolverFactoryTest
     {
         [Test]
-        public void GetPathSolver_ReturnsAStarPathSolver()
+        public void GetPathSolver_RequestsAStarPathSolver_ReturnsAStarPathSolver()
         {
-            Node[][] map = null;
+            Map.Map map = null;
             IPathSolverFactory pathSolverFactory = new PathSolverFactory();
 
-            var pathsolver = pathSolverFactory.GetPathSolver(ref map, PathSolver.AStar, false);
+            IPathSolver pathsolver = pathSolverFactory.GetPathSolver(ref map, PathSolver.AStar, false);
 
-            Assert.IsInstanceOf(typeof(AStarPathSolver), pathsolver.GetType());
+            Assert.That(pathsolver.GetType() == typeof(AStarPathSolver));
         }
     }
 }

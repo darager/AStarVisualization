@@ -23,13 +23,18 @@ namespace AStarVisualization.WPF
             // timer for testing
             var timer = new System.Timers.Timer()
             {
-                Interval = 4000,
+                Interval = 1000,
                 AutoReset = false,
             };
             timer.Elapsed += (s, e) =>
             {
                 // TODO: make sure that the mapview is updated by the change in the viewmodel
-                var map = astarVM.AStarMap.Map;
+                var map = new Node[][]
+                {
+                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall)},
+                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall)},
+                };
+                astarVM.AStarMap.Map = map;
                 astarVM.AStarPath = new List<Node>() { map[0][0], map[0][1], map[1][1] };
             };
             timer.Start();

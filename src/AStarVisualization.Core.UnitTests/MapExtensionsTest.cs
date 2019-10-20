@@ -1,16 +1,20 @@
 ﻿using NUnit.Framework;
+using AStarVisualization.Core.Map;
 
 namespace AStarVisualization.Core.UnitTests
 {
     [TestFixture]
     public class MapExtensionsTest
     {
-        public static Node[][] Map = new Node[][]
+        public static Map.Map Map = new Map.Map(4, 4)
         {
-            new Node[]{ new Node(NodeState.Goal), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall) },
-            new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
-            new Node[]{ new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall) },
-            new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Start) },
+            Data = new Node[][]
+            {
+                new Node[]{ new Node(NodeState.Goal), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall) },
+                new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
+                new Node[]{ new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall) },
+                new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Start) },
+            }
         };
 
         [Test]

@@ -20,19 +20,5 @@
             DockPanel.Dock="Top"
             Map="{Binding Path=AStarMap, Mode=TwoWay}"
             Path="{Binding Path=AStarPath, Mode=TwoWay}" />
-        <!--<c:AStarCanvas
-            x:Name="astarCanvas"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Background="Orange"
-            DockPanel.Dock="Top"
-            Map="{Binding Path=AStarMap}"
-            Path="{Binding Path=AStarPath}" />-->
-
-        <!--  this is a testcontrol to test custom binding properties  -->
-        <!--<c:TestControl
-            x:Name="customTestControl"
-            CustomText="{Binding CustomText}"
-            DockPanel.Dock="Bottom" />-->
     </DockPanel>
 </Window>

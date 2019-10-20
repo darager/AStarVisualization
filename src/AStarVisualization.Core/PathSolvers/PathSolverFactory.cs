@@ -2,7 +2,7 @@
 {
     public class PathSolverFactory : IPathSolverFactory
     {
-        public IPathSolver GetPathSolver(ref Node[][] map, PathSolver pathSolverType, bool diagonalsEnabled)
+        public IPathSolver GetPathSolver(ref Map.Map map, PathSolver pathSolverType, bool diagonalsEnabled)
         {
             switch (pathSolverType)
             {

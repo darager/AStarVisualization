@@ -7,6 +7,6 @@
         Goal,
         Ground,
         GroundToBeVisited,
-        GroundVisited
+        GroundVisited,
     }
 }

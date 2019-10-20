@@ -11,13 +11,13 @@ namespace AStarVisualization.Core
         public bool IsWalkable => State != NodeState.Wall;
         public bool AlreadyVisited => (State != NodeState.Ground) || (State != NodeState.Goal);
         public double TotalCost => Heuristic + MovementCost; // TODO: 500 used to be here
+
         public int RowIndex => _rowIndex;
         public int ColIndex => _colIndex;
-
         private int _rowIndex;
         private int _colIndex;
 
-        public Node(NodeState state, Node parentNode = null)
+        public Node(NodeState state)
         {
             this.State = state;
         }
@@ -28,7 +28,6 @@ namespace AStarVisualization.Core
             this._colIndex = colIndex;
         }
 
-        // TODO: follow the tutorial at https://medium.com/@pjbgf/asserting-equality-in-your-c-unit-tests-837b423024bf
         public override bool Equals(object other)
         {
             if (other.GetType() != this.GetType()) return false;
