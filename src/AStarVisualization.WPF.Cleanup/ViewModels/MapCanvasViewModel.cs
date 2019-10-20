@@ -1,7 +1,6 @@
 ﻿using AStarVisualization.Core;
 using AStarVisualization.Core.Map;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 
 namespace AStarVisualization.WPF.ViewModels

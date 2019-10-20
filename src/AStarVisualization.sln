@@ -15,8 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AStarVisualization.Core.Uni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AStarVisualization.DataStructures.UnitTests", "AStarVisualization.DataStructures.UnitTests\AStarVisualization.DataStructures.UnitTests.csproj", "{89EE35A2-A12F-4581-AB5E-39F644D532AB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AStarVisualization.Playground", "AStarVisualization.Playground\AStarVisualization.Playground.csproj", "{85354356-CB4B-4D2B-B656-C6EDB2A0DD51}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +45,6 @@ Global
 		{89EE35A2-A12F-4581-AB5E-39F644D532AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89EE35A2-A12F-4581-AB5E-39F644D532AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89EE35A2-A12F-4581-AB5E-39F644D532AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{85354356-CB4B-4D2B-B656-C6EDB2A0DD51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85354356-CB4B-4D2B-B656-C6EDB2A0DD51}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85354356-CB4B-4D2B-B656-C6EDB2A0DD51}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85354356-CB4B-4D2B-B656-C6EDB2A0DD51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
