@@ -1,5 +1,6 @@
 ﻿using AStarVisualization.Core;
 using AStarVisualization.Core.Map;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,7 +34,6 @@ namespace AStarVisualization.WPF.Controls
         public int NumRows => ((Map)GetValue(MapProperty)).GetLength(0);
         public int NumColumns => ((Map)GetValue(MapProperty)).GetLength(1);
 
-        // canvas elements
         public Polyline PathLine = new Polyline();
         public List<Line> GridLines = new List<Line>();
 
@@ -46,7 +46,11 @@ namespace AStarVisualization.WPF.Controls
 
         private static void OnMapChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            // TODO: render the grid including the lines and the tiles
+            RenderGridLines(source, e);
+            RenderGridTiles(source, e);
+        }
+        private static void RenderGridLines(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        {
             var canvas = source as MapCanvas;
 
             double height = canvas.ActualHeight;
@@ -91,15 +95,26 @@ namespace AStarVisualization.WPF.Controls
                 newLines.Add(rowLine);
             }
 
-            var oldLines = canvas.GridLines;
+            List<Line> oldLines = canvas.GridLines;
             foreach (Line line in newLines)
                 canvas.Children.Add(line);
             foreach (Line line in oldLines)
                 canvas.Children.Remove(line);
 
             canvas.GridLines = newLines;
+
         }
+        private static void RenderGridTiles(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        {
+            // TODO: implement this method
+            //throw new NotImplementedException();
+        }
+
         private static void OnPathChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        {
+            RenderPathLine(source, e);
+        }
+        private static void RenderPathLine(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             var canvas = source as MapCanvas;
             var path = (List<Node>)e.NewValue;
@@ -118,7 +133,7 @@ namespace AStarVisualization.WPF.Controls
 
             var pathLine = canvas.PathLine;
             pathLine.Points = points;
-            pathLine.Stroke = new SolidColorBrush(Colors.Black); // TODO: make this bindable
+            pathLine.Stroke = new SolidColorBrush(Colors.Black);
             pathLine.StrokeThickness = 2;
 
             canvas.PathLine = pathLine;

@@ -7,7 +7,7 @@ using System.ComponentModel;
 namespace AStarVisualization.WPF.ViewModels
 {
     // TODO: ICommands that are responsible for placing the tiles
-    public class AStarGridViewModel : INotifyPropertyChanged
+    public class MapCanvasViewModel : INotifyPropertyChanged
     {
         public Map AStarMap
         {
@@ -39,7 +39,7 @@ namespace AStarVisualization.WPF.ViewModels
         private List<Node> _path;
 
         //TODO: remove mock data
-        public AStarGridViewModel()
+        public MapCanvasViewModel()
         {
             #region mockdata
             var map = new Map(3, 3)

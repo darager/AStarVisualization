@@ -3,6 +3,6 @@
     public enum PathSolver
     {
         AStar,
-        // TODO: implement more pathsolvers (djikstra, ...)
+        // TODO: implement more pathsolvers (djikstra, etc, ...)
     }
 }

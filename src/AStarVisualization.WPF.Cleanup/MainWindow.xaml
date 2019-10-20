@@ -18,7 +18,7 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             DockPanel.Dock="Top"
-            Map="{Binding Path=AStarMap, Mode=TwoWay}"
-            Path="{Binding Path=AStarPath, Mode=TwoWay}" />
+            Map="{Binding Path=AStarMap}"
+            Path="{Binding Path=AStarPath}" />
     </DockPanel>
 </Window>

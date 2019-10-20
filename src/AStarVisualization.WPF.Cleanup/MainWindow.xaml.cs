@@ -18,30 +18,33 @@ namespace AStarVisualization.WPF
             kernel.Load(Assembly.GetExecutingAssembly());
 
             // TODO: use xaml to inject the viewmodels instead
-            var astarVM = new AStarGridViewModel();
-            mapCanvas.DataContext = astarVM;
+            var mapViewModel = new MapCanvasViewModel();
+            mapCanvas.DataContext = mapViewModel;
 
-            // timer for testing
+            // TODO: remove the testing Timer
             #region testing autoupdating of the MapCanvas
             var timer = new System.Timers.Timer()
             {
-                Interval = 1000,
+                Interval = 2000,
                 AutoReset = false,
             };
             timer.Elapsed += (s, e) =>
             {
                 // TODO: make sure that the mapview is updated by the change in the viewmodel
-                astarVM.AStarMap = new Map(2, 3)
+                mapViewModel.AStarMap = new Map(2, 3)
                 {
                     Data = new Node[][]
                     {
-                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall)},
-                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall)},
+                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Wall)},
+                        new Node[] { new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.Ground)},
+                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Wall)},
+                        new Node[] { new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground)},
+                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Goal)},
                     }
                 };
 
-                var map = astarVM.AStarMap;
-                astarVM.AStarPath = new List<Node>() { map[0, 0], map[0, 1], map[1, 1] };
+                Map map = mapViewModel.AStarMap;
+                mapViewModel.AStarPath = new List<Node>() { map[0, 0], map[0, 1], map[1, 1] };
             };
             timer.Start();
             #endregion
