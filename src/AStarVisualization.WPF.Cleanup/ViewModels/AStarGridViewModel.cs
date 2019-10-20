@@ -1,5 +1,5 @@
 ﻿using AStarVisualization.Core;
-using AStarVisualization.WPF.Controls.Models;
+using AStarVisualization.Core.Map;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ namespace AStarVisualization.WPF.ViewModels
     // TODO: ICommands that are responsible for placing the tiles
     public class AStarGridViewModel : INotifyPropertyChanged, INotifyCollectionChanged
     {
-        public Node[][] AStarMap
+        public Map AStarMap
         {
             get => _aStarMap;
             set
@@ -21,7 +21,7 @@ namespace AStarVisualization.WPF.ViewModels
                 }
             }
         }
-        private Node[][] _aStarMap;
+        private Map _aStarMap;
 
         public List<Node> AStarPath
         {
@@ -40,14 +40,19 @@ namespace AStarVisualization.WPF.ViewModels
         public AStarGridViewModel()
         {
             //TODO: remove mock data
-            var map = new Node[][] {
-                new Node[]{ new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.Wall) },
-                new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
-                new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Goal) },
+            var map = new Map(3, 3)
+            {
+                Data = new Node[][]
+                {
+                    new Node[]{ new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.Wall) },
+                    new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
+                    new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Goal) },
+                }
             };
             map.UpdateNodeIndices();
             _aStarMap = map;
-            _path = new List<Node> { map[0][0], map[1][1], map[2][0], map[2][1], map[2][2] };
+
+            _path = new List<Node> { map[0, 0], map[1, 1], map[2, 0], map[2, 1], map[2, 2] };
         }
 
         private void OnPropertyChanged(string propertyName)

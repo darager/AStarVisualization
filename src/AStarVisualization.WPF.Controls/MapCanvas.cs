@@ -1,5 +1,5 @@
 ﻿using AStarVisualization.Core;
-using AStarVisualization.WPF.Controls.Models;
+using AStarVisualization.Core.Map;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,14 +10,14 @@ namespace AStarVisualization.WPF.Controls
 {
     public class MapCanvas : Canvas
     {
-        public Node[][] Map
+        public Map Map
         {
-            get => (Node[][])GetValue(MapProperty);
+            get => (Map)GetValue(MapProperty);
             set => SetValue(MapProperty, value);
         }
         public static readonly DependencyProperty MapProperty =
             DependencyProperty.Register(
-                "Map", typeof(Node[][]), typeof(MapCanvas),
+                "Map", typeof(Map), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnMapChanged)));
 
         public List<Node> Path
@@ -30,8 +30,8 @@ namespace AStarVisualization.WPF.Controls
                 "Path", typeof(List<Node>), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnPathChanged)));
 
-        public int NumRows => ((Node[][])GetValue(MapProperty)).GetLength(0);
-        public int NumColumns => ((Node[][])GetValue(MapProperty)).GetLength(1);
+        public int NumRows => ((Map)GetValue(MapProperty)).GetLength(0);
+        public int NumColumns => ((Map)GetValue(MapProperty)).GetLength(1);
 
         // canvas elements
         public Polyline PathLine = new Polyline();
@@ -47,8 +47,7 @@ namespace AStarVisualization.WPF.Controls
         private static void OnMapChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             // TODO: render the grid including the lines and the tiles
-            MapCanvas canvas = source as MapCanvas;
-            Node[][] map = (Node[][])e.NewValue;
+            var canvas = source as MapCanvas;
 
             double height = canvas.ActualHeight;
             double width = canvas.ActualWidth;
@@ -102,8 +101,8 @@ namespace AStarVisualization.WPF.Controls
         }
         private static void OnPathChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            MapCanvas canvas = source as MapCanvas;
-            List<Node> path = (List<Node>)e.NewValue;
+            var canvas = source as MapCanvas;
+            var path = (List<Node>)e.NewValue;
 
             double rowSpacing = canvas.ActualHeight / canvas.NumRows;
             double colSpacing = canvas.ActualWidth / canvas.NumColumns;
