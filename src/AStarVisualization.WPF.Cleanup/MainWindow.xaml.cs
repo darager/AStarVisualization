@@ -22,6 +22,7 @@ namespace AStarVisualization.WPF
             mapCanvas.DataContext = astarVM;
 
             // timer for testing
+            #region testing autoupdating of the MapCanvas
             var timer = new System.Timers.Timer()
             {
                 Interval = 1000,
@@ -30,7 +31,7 @@ namespace AStarVisualization.WPF
             timer.Elapsed += (s, e) =>
             {
                 // TODO: make sure that the mapview is updated by the change in the viewmodel
-                var map = new Map(2, 3)
+                astarVM.AStarMap = new Map(2, 3)
                 {
                     Data = new Node[][]
                     {
@@ -38,10 +39,12 @@ namespace AStarVisualization.WPF
                         new Node[] { new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Wall)},
                     }
                 };
-                astarVM.AStarMap = map;
+
+                var map = astarVM.AStarMap;
                 astarVM.AStarPath = new List<Node>() { map[0, 0], map[0, 1], map[1, 1] };
             };
             timer.Start();
+            #endregion
         }
     }
 }

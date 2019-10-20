@@ -7,7 +7,7 @@ using System.ComponentModel;
 namespace AStarVisualization.WPF.ViewModels
 {
     // TODO: ICommands that are responsible for placing the tiles
-    public class AStarGridViewModel : INotifyPropertyChanged, INotifyCollectionChanged
+    public class AStarGridViewModel : INotifyPropertyChanged
     {
         public Map AStarMap
         {
@@ -17,6 +17,7 @@ namespace AStarVisualization.WPF.ViewModels
                 if (_aStarMap != value)
                 {
                     _aStarMap = value;
+                    _aStarMap.UpdateNodeIndices();
                     OnPropertyChanged("AStarMap");
                 }
             }
@@ -37,9 +38,10 @@ namespace AStarVisualization.WPF.ViewModels
         }
         private List<Node> _path;
 
+        //TODO: remove mock data
         public AStarGridViewModel()
         {
-            //TODO: remove mock data
+            #region mockdata
             var map = new Map(3, 3)
             {
                 Data = new Node[][]
@@ -49,10 +51,9 @@ namespace AStarVisualization.WPF.ViewModels
                     new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Goal) },
                 }
             };
-            map.UpdateNodeIndices();
-            _aStarMap = map;
-
-            _path = new List<Node> { map[0, 0], map[1, 1], map[2, 0], map[2, 1], map[2, 2] };
+            AStarMap = map;
+            AStarPath = new List<Node> { map[0, 0], map[1, 1], map[2, 0], map[2, 1], map[2, 2] };
+            #endregion
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -60,6 +61,5 @@ namespace AStarVisualization.WPF.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public event PropertyChangedEventHandler PropertyChanged;
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }
