@@ -30,7 +30,7 @@ namespace AStarVisualization.WPF
             };
             timer.Elapsed += (s, e) =>
             {
-                // TODO: make sure that the mapview is updated by the change in the viewmodel
+                //TODO: make sure that the mapview is updated by the change in the viewmodel
                 mapViewModel.AStarMap = new Map(2, 3)
                 {
                     Data = new Node[][]
@@ -45,6 +45,8 @@ namespace AStarVisualization.WPF
 
                 Map map = mapViewModel.AStarMap;
                 mapViewModel.AStarPath = new List<Node>() { map[0, 0], map[0, 1], map[1, 1] };
+
+                map[1, 1].State = NodeState.GroundToBeVisited;
             };
             timer.Start();
             #endregion

@@ -1,12 +1,24 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace AStarVisualization.Core
 {
-    public class Node : IEquatable<Node>
+    public class Node : IEquatable<Node>, INotifyPropertyChanged
     {
         public double Heuristic { get; set; }
         public double MovementCost { get; set; }
-        public NodeState State { get; set; }
+        public NodeState State
+        {
+            get => _state;
+            set
+            {
+                if(value != _state)
+                {
+                    _state = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("State"));
+                }
+            }
+        }
         public Node Parent { get; set; }
         public bool IsWalkable => State != NodeState.Wall;
         public bool AlreadyVisited => (State != NodeState.Ground) || (State != NodeState.Goal);
@@ -14,6 +26,8 @@ namespace AStarVisualization.Core
 
         public int RowIndex => _rowIndex;
         public int ColIndex => _colIndex;
+
+        private NodeState _state;
         private int _rowIndex;
         private int _colIndex;
 
@@ -52,5 +66,6 @@ namespace AStarVisualization.Core
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
