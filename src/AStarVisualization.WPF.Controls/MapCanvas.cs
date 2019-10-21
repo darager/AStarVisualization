@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace AStarVisualization.WPF.Controls
+namespace AStarVisualization.WPF.Controls // TODO: clean up this class
 {
     public class MapCanvas : Canvas
     {
@@ -36,25 +36,23 @@ namespace AStarVisualization.WPF.Controls
 
         public Polyline PathLine = new Polyline();
         public List<Line> GridLines = new List<Line>();
-        public TileRenderer TileRenderer;
+        public TileRenderer tileRenderer;
 
         public MapCanvas()
         {
             this.Children.Add(PathLine);
+            Panel.SetZIndex(PathLine, 1); // TODO: make sure this works properly
             foreach (Line line in GridLines)
                 this.Children.Add(line);
 
-            TileRenderer = new TileRenderer(this);
-            //Rectangle[,] tiles = TileRenderer.Tiles;
-            //foreach (Rectangle tile in tiles)
-            //    this.Children.Add(tile);
+            tileRenderer = new TileRenderer(this);
         }
 
         private static void OnMapChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             RenderGridLines(source, e);
             var canvas = source as MapCanvas;
-            canvas.TileRenderer.HandleMapChange(source, e);
+            canvas.tileRenderer.HandleMapChange(source, e);
         }
         private static void RenderGridLines(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
