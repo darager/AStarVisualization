@@ -1,9 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
 
 namespace AStarVisualization.Core
 {
-    public class Node : IEquatable<Node>, INotifyPropertyChanged
+    public class Node : IEquatable<Node>
     {
         public double Heuristic { get; set; }
         public double MovementCost { get; set; }
@@ -12,10 +11,11 @@ namespace AStarVisualization.Core
             get => _state;
             set
             {
-                if(value != _state)
+                if (value != _state)
                 {
+                    NodeState oldState = _state;
                     _state = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("State"));
+                    NodeStateChanged?.Invoke(this, new NodeStateChangedEventArgs(this, _state, oldState));
                 }
             }
         }
@@ -66,6 +66,7 @@ namespace AStarVisualization.Core
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public delegate void NodeStateChangedEventHandler(object sender, NodeStateChangedEventArgs e);
+        public event NodeStateChangedEventHandler NodeStateChanged;
     }
 }

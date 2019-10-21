@@ -46,9 +46,11 @@ namespace AStarVisualization.WPF
                 Map map = mapViewModel.AStarMap;
                 mapViewModel.AStarPath = new List<Node>() { map[0, 0], map[0, 1], map[1, 1] };
 
-                map[1, 1].State = NodeState.GroundToBeVisited;
+                map[1, 1].State = NodeState.GroundToBeVisited; // this should call the propertychanged of one of the nodes
             };
             timer.Start();
+
+            mapViewModel.AStarMap[1, 1].State = NodeState.GroundVisited;
             #endregion
         }
     }

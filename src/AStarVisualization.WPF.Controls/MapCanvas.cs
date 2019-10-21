@@ -1,7 +1,7 @@
 ﻿using AStarVisualization.Core;
 using AStarVisualization.Core.Map;
+using AStarVisualization.WPF.Controls.MapCanvasHelper;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -36,30 +36,25 @@ namespace AStarVisualization.WPF.Controls
 
         public Polyline PathLine = new Polyline();
         public List<Line> GridLines = new List<Line>();
-        public Rectangle[,] GridTiles = new Rectangle[0,0];
+        public TileRenderer TileRenderer;
 
         public MapCanvas()
         {
             this.Children.Add(PathLine);
             foreach (Line line in GridLines)
                 this.Children.Add(line);
-            foreach (Rectangle tile in GridTiles)
-                this.Children.Add(tile);
+
+            TileRenderer = new TileRenderer(this);
+            //Rectangle[,] tiles = TileRenderer.Tiles;
+            //foreach (Rectangle tile in tiles)
+            //    this.Children.Add(tile);
         }
 
         private static void OnMapChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            var newMap = e.NewValue as Map;
-            var oldMap = e.OldValue as Map;
-            if (oldMap != null)
-                foreach (Node[] nodes in oldMap)
-                    foreach (Node node in nodes)
-                        node.PropertyChanged -= RenderGridTile;
-            foreach (Node[] nodes in newMap)
-                foreach (Node node in nodes)
-                    node.PropertyChanged += RenderGridTile;
-
             RenderGridLines(source, e);
+            var canvas = source as MapCanvas;
+            canvas.TileRenderer.HandleMapChange(source, e);
         }
         private static void RenderGridLines(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
@@ -114,32 +109,6 @@ namespace AStarVisualization.WPF.Controls
                 canvas.Children.Remove(line);
 
             canvas.GridLines = newLines;
-        }
-        private static void RenderGridTiles()
-        {
-        }
-        private static void RenderGridTile(object sender, PropertyChangedEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-        private static void RenderTile(MapCanvas mapCanvas, Canvas canvas, Node node)
-        {
-            double height = canvas.ActualHeight;
-            double width = canvas.ActualWidth;
-            double rowSpacing = height / mapCanvas.NumRows;
-            double colSpacing = width / mapCanvas.NumColumns;
-
-            int gridLineThickness = 1;
-            double x = colSpacing * node.ColIndex;
-            double y = rowSpacing * node.RowIndex;
-
-            var rectangle = new Rectangle()
-            {
-                Height = rowSpacing - gridLineThickness * 2,
-                Width = colSpacing - gridLineThickness * 2,
-            };
-            Canvas.SetTop(rectangle, y + gridLineThickness);
-            Canvas.SetLeft(rectangle, x + gridLineThickness);
         }
 
         private static void OnPathChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
