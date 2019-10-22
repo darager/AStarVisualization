@@ -5,48 +5,43 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace AStarVisualization.WPF.Controls.MapCanvasHelper // TODO: clean up this class
+namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
 {
     public class TileRenderer
     {
-        public static MapCanvas MapCanvas;
         public Rectangle[,] Tiles { get; private set; }
-
-        public TileRenderer(MapCanvas canvas)
-        {
-            MapCanvas = canvas;
-        }
 
         public void HandleMapChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
+            var canvas = source as MapCanvas;
             var oldMap = (Map)e.OldValue;
             var newMap = (Map)e.NewValue;
 
 
             Rectangle[,] oldTiles = Tiles;
-            Tiles = new Rectangle[MapCanvas.NumRows, MapCanvas.NumColumns];
+            Tiles = new Rectangle[canvas.NumRows, canvas.NumColumns];
 
             // create the new tiles
-            for (int i = 0; i < MapCanvas.NumRows; i++)
-                for (int j = 0; j < MapCanvas.NumColumns; j++)
-                    Tiles[i, j] = GetRectangle(MapCanvas, newMap[i, j]);
+            for (int i = 0; i < canvas.NumRows; i++)
+                for (int j = 0; j < canvas.NumColumns; j++)
+                    Tiles[i, j] = GetRectangle(canvas, newMap[i, j]);
 
             // add the new Tiles
             foreach (Rectangle tile in Tiles)
-                MapCanvas.Children.Add(tile);
+                canvas.Children.Add(tile);
 
             // remove the old Tiles
             if (oldTiles != null)
                 foreach (Rectangle tile in oldTiles)
-                    MapCanvas.Children.Remove(tile);
+                    canvas.Children.Remove(tile);
         }
 
-        private Rectangle GetRectangle(Canvas canvas, Node node)
+        private Rectangle GetRectangle(MapCanvas canvas, Node node)
         {
             var rect = new Rectangle();
 
-            int numrows = MapCanvas.NumRows;
-            int numcolumns = MapCanvas.NumColumns;
+            int numrows = canvas.NumRows;
+            int numcolumns = canvas.NumColumns;
 
             double canvasheight = canvas.ActualHeight;
             double canvaswidth = canvas.ActualWidth;

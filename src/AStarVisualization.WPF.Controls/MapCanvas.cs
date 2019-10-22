@@ -1,11 +1,9 @@
 ﻿using AStarVisualization.Core;
 using AStarVisualization.Core.Map;
-using AStarVisualization.WPF.Controls.MapCanvasHelper;
+using AStarVisualization.WPF.Controls.MapCanvasRenderers;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace AStarVisualization.WPF.Controls // TODO: clean up this class
 {
@@ -34,104 +32,27 @@ namespace AStarVisualization.WPF.Controls // TODO: clean up this class
         public int NumRows => ((Map)GetValue(MapProperty)).GetLength(0);
         public int NumColumns => ((Map)GetValue(MapProperty)).GetLength(1);
 
-        public Polyline PathLine = new Polyline();
-        public List<Line> GridLines = new List<Line>();
-        public TileRenderer tileRenderer;
+        public PathRenderer PathRenderer;
+        public TileRenderer TileRenderer;
+        public GridLineRenderer GridLineRenderer;
 
         public MapCanvas()
         {
-            this.Children.Add(PathLine);
-            Panel.SetZIndex(PathLine, 1); // TODO: make sure this works properly
-            foreach (Line line in GridLines)
-                this.Children.Add(line);
-
-            tileRenderer = new TileRenderer(this);
+            TileRenderer = new TileRenderer();
+            PathRenderer = new PathRenderer(this);
+            GridLineRenderer = new GridLineRenderer(this);
         }
 
         private static void OnMapChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            RenderGridLines(source, e);
             var canvas = source as MapCanvas;
-            canvas.tileRenderer.HandleMapChange(source, e);
+            canvas.TileRenderer.HandleMapChange(source, e);
+            canvas.GridLineRenderer.HandleMapChange(source, e);
         }
-        private static void RenderGridLines(DependencyObject source, DependencyPropertyChangedEventArgs e)
-        {
-            var canvas = source as MapCanvas;
-
-            double height = canvas.ActualHeight;
-            double width = canvas.ActualWidth;
-            double rowSpacing = height / canvas.NumRows;
-            double colSpacing = width / canvas.NumColumns;
-            int numRows = canvas.NumRows;
-            int numCols = canvas.NumColumns;
-
-            var stroke = new SolidColorBrush(Colors.DarkGray);
-            int thickness = 1;
-
-            var newLines = new List<Line>();
-            for (int i = 0; i < numRows; i++)
-            {
-                double Y = i * rowSpacing + rowSpacing;
-                var rowLine = new Line()
-                {
-                    X1 = 0,
-                    X2 = width,
-                    Y1 = Y,
-                    Y2 = Y,
-                    Stroke = stroke,
-                    StrokeThickness = thickness
-                };
-
-                newLines.Add(rowLine);
-            }
-            for (int i = 0; i < numCols; i++)
-            {
-                double X = i * colSpacing + colSpacing;
-                var rowLine = new Line()
-                {
-                    X1 = X,
-                    X2 = X,
-                    Y1 = 0,
-                    Y2 = height,
-                    Stroke = stroke,
-                    StrokeThickness = thickness
-                };
-
-                newLines.Add(rowLine);
-            }
-
-            List<Line> oldLines = canvas.GridLines;
-            foreach (Line line in newLines)
-                canvas.Children.Add(line);
-            foreach (Line line in oldLines)
-                canvas.Children.Remove(line);
-
-            canvas.GridLines = newLines;
-        }
-
         private static void OnPathChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             var canvas = source as MapCanvas;
-            var path = (List<Node>)e.NewValue;
-
-            double rowSpacing = canvas.ActualHeight / canvas.NumRows;
-            double colSpacing = canvas.ActualWidth / canvas.NumColumns;
-
-            var points = new PointCollection();
-            foreach (Node node in path)
-            {
-                double x = node.ColIndex * colSpacing + colSpacing / 2;
-                double y = node.RowIndex * rowSpacing + rowSpacing / 2;
-
-                points.Add(new Point(x, y));
-            }
-
-            var pathLine = canvas.PathLine;
-            pathLine.Points = points;
-            pathLine.Stroke = new SolidColorBrush(Colors.Black);
-            pathLine.StrokeThickness = 2;
-
-            canvas.PathLine = pathLine;
+            canvas.PathRenderer.HandlePathChange(source, e);
         }
     }
 }
