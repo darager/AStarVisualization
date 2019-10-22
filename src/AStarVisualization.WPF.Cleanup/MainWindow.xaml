@@ -17,9 +17,9 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             DockPanel.Dock="Top"
-            Map="{Binding Path=AStarMap}"
+            Map="{Binding Path=Map}"
             MouseDown="mapCanvas_MouseDown"
             MouseMove="mapCanvas_MouseMove"
-            Path="{Binding Path=AStarPath}" />
+            Path="{Binding Path=Path}" />
     </DockPanel>
 </Window>

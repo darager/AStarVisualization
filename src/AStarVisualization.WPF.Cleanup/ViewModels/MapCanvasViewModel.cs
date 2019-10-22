@@ -2,57 +2,46 @@
 using AStarVisualization.Core.Map;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace AStarVisualization.WPF.ViewModels
 {
     // TODO: ICommands that are responsible for placing the tiles
     public class MapCanvasViewModel : INotifyPropertyChanged
     {
-        public Map AStarMap
+        public Map Map
         {
-            get => _aStarMap;
+            get => _pathfindingMap;
             set
             {
-                if (_aStarMap != value)
+                if (_pathfindingMap != value)
                 {
-                    _aStarMap = value;
-                    _aStarMap.UpdateNodeIndices();
-                    OnPropertyChanged("AStarMap");
+                    _pathfindingMap = value;
+                    _pathfindingMap.UpdateNodeIndices();
+                    OnPropertyChanged("Map");
                 }
             }
         }
-        private Map _aStarMap;
-
-        public List<Node> AStarPath
+        public List<Node> Path
         {
-            get => _path;
+            get => _discoveredPath;
             set
             {
-                if (_path != value)
+                if (_discoveredPath != value)
                 {
-                    _path = value;
-                    OnPropertyChanged("AStarPath");
+                    _discoveredPath = value;
+                    OnPropertyChanged("Path");
                 }
             }
         }
-        private List<Node> _path;
+        public ICommand PlaceTileCommand => _placeTileCommand;
 
-        //TODO: remove mock data
+        private Map _pathfindingMap;
+        private List<Node> _discoveredPath;
+        private ICommand _placeTileCommand;
+
         public MapCanvasViewModel()
         {
-            #region mockdata
-            var map = new Map(3, 3)
-            {
-                Data = new Node[][]
-                {
-                    new Node[]{ new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.Wall) },
-                    new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
-                    new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Goal) },
-                }
-            };
-            AStarMap = map;
-            AStarPath = new List<Node> { map[0, 0], map[1, 1], map[2, 0], map[2, 1], map[2, 2] };
-            #endregion
         }
 
         private void OnPropertyChanged(string propertyName)

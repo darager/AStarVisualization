@@ -23,34 +23,21 @@ namespace AStarVisualization.WPF
 
             // TODO: remove the testing Timer
             #region testing autoupdating of the MapCanvas
-            var timer = new System.Timers.Timer()
+            //TODO: make sure that the mapview is updated by the change in the viewmodel
+            var map = new Map(2, 3)
             {
-                Interval = 1000,
-                AutoReset = false,
-            };
-            timer.Elapsed += (s, e) =>
-            {
-                //TODO: make sure that the mapview is updated by the change in the viewmodel
-                mapViewModel.AStarMap = new Map(2, 3)
+                Data = new Node[][]
                 {
-                    Data = new Node[][]
-                    {
-                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundToBeVisited), new Node(NodeState.Wall)},
-                        new Node[] { new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.GroundToBeVisited)},
-                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundVisited), new Node(NodeState.GroundToBeVisited)},
-                        new Node[] { new Node(NodeState.Ground), new Node(NodeState.GroundVisited), new Node(NodeState.GroundToBeVisited)},
-                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundVisited), new Node(NodeState.Goal)},
-                    }
-                };
-
-                Map map = mapViewModel.AStarMap;
-                mapViewModel.AStarPath = new List<Node>() { map[1, 0], map[1, 1], map[2, 1], map[3, 1], map[4, 1], map[4, 2] };
-
-                map[1, 1].State = NodeState.GroundVisited; // this should call the propertychanged of one of the nodes
+                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundToBeVisited), new Node(NodeState.Wall)},
+                    new Node[] { new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.GroundToBeVisited)},
+                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundVisited), new Node(NodeState.GroundToBeVisited)},
+                    new Node[] { new Node(NodeState.Ground), new Node(NodeState.GroundVisited), new Node(NodeState.GroundToBeVisited)},
+                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundVisited), new Node(NodeState.Goal)},
+                }
             };
-            timer.Start();
 
-            mapViewModel.AStarMap[1, 1].State = NodeState.GroundVisited;
+            mapViewModel.Map = map;
+            mapViewModel.Path = new List<Node>() { map[1, 0], map[1, 1], map[2, 1], map[3, 1], map[4, 1], map[4, 2] };
 
             //IPathSolver pathsolver = new AStarPathSolver(ref map, false);
             //pathsolver.FindPath();
