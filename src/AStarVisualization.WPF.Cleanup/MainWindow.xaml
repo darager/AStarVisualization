@@ -4,9 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:AStarVisualization.WPF.Controls;assembly=AStarVisualization.WPF.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:AStarVisualization.WPF"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Title="Pathfinding Visualization"
     Width="750"
     Height="800"
@@ -20,6 +18,8 @@
             VerticalAlignment="Stretch"
             DockPanel.Dock="Top"
             Map="{Binding Path=AStarMap}"
+            MouseDown="mapCanvas_MouseDown"
+            MouseMove="mapCanvas_MouseMove"
             Path="{Binding Path=AStarPath}" />
     </DockPanel>
 </Window>

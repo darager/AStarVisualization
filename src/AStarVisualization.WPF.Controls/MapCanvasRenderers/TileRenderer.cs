@@ -64,7 +64,7 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
 
             return rect;
         }
-        private SolidColorBrush GetStateColor(NodeState state)
+        private SolidColorBrush GetStateColor(NodeState state) // TODO: choose proper colors
         {
             switch (state)
             {

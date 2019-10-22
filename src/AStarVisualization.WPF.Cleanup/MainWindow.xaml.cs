@@ -44,7 +44,7 @@ namespace AStarVisualization.WPF
                 };
 
                 Map map = mapViewModel.AStarMap;
-                mapViewModel.AStarPath = new List<Node>() { map[1, 0], map[1, 1], map[2, 1], map[3,1], map[4,1], map[4,2] };
+                mapViewModel.AStarPath = new List<Node>() { map[1, 0], map[1, 1], map[2, 1], map[3, 1], map[4, 1], map[4, 2] };
 
                 map[1, 1].State = NodeState.GroundVisited; // this should call the propertychanged of one of the nodes
             };
@@ -56,6 +56,16 @@ namespace AStarVisualization.WPF
             //pathsolver.FindPath();
 
             #endregion
+        }
+
+        private void mapCanvas_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void mapCanvas_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+
         }
     }
 }

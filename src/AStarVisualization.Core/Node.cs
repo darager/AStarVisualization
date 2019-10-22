@@ -1,5 +1,6 @@
 ﻿using System;
 
+// TODO: write tests for this class
 namespace AStarVisualization.Core
 {
     public class Node : IEquatable<Node>
