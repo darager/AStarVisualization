@@ -1,4 +1,5 @@
 ﻿using AStarVisualization.Core;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,7 +40,7 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
             var pathLine = PathLine;
             pathLine.Points = points;
             pathLine.Stroke = new SolidColorBrush(Colors.Black);
-            pathLine.StrokeThickness = 2;
+            pathLine.StrokeThickness = Math.Min(rowSpacing, colSpacing) * 0.2;
 
             PathLine = pathLine;
         }

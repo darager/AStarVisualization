@@ -25,7 +25,7 @@ namespace AStarVisualization.WPF
             #region testing autoupdating of the MapCanvas
             var timer = new System.Timers.Timer()
             {
-                Interval = 2000,
+                Interval = 1000,
                 AutoReset = false,
             };
             timer.Elapsed += (s, e) =>
@@ -35,18 +35,18 @@ namespace AStarVisualization.WPF
                 {
                     Data = new Node[][]
                     {
-                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Wall)},
-                        new Node[] { new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.Ground)},
-                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Wall)},
-                        new Node[] { new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground)},
-                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Goal)},
+                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundToBeVisited), new Node(NodeState.Wall)},
+                        new Node[] { new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.GroundToBeVisited)},
+                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundVisited), new Node(NodeState.GroundToBeVisited)},
+                        new Node[] { new Node(NodeState.Ground), new Node(NodeState.GroundVisited), new Node(NodeState.GroundToBeVisited)},
+                        new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundVisited), new Node(NodeState.Goal)},
                     }
                 };
 
                 Map map = mapViewModel.AStarMap;
-                mapViewModel.AStarPath = new List<Node>() { map[0, 0], map[0, 1], map[1, 1] };
+                mapViewModel.AStarPath = new List<Node>() { map[1, 0], map[1, 1], map[2, 1], map[3,1], map[4,1], map[4,2] };
 
-                map[1, 1].State = NodeState.GroundToBeVisited; // this should call the propertychanged of one of the nodes
+                map[1, 1].State = NodeState.GroundVisited; // this should call the propertychanged of one of the nodes
             };
             timer.Start();
 
