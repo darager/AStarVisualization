@@ -16,9 +16,9 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
         public PathRenderer(MapCanvas canvas)
         {
             canvas.Children.Add(PathLine);
-
             // make sure that the pathline is in the foreground
-            Panel.SetZIndex(PathLine, 100);         }
+            Panel.SetZIndex(PathLine, 100);
+        }
 
         public void HandlePathChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
@@ -37,12 +37,9 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
                 points.Add(new Point(x, y));
             }
 
-            var pathLine = PathLine;
-            pathLine.Points = points;
-            pathLine.Stroke = new SolidColorBrush(Colors.Black);
-            pathLine.StrokeThickness = Math.Min(rowSpacing, colSpacing) * 0.2;
-
-            PathLine = pathLine;
+            PathLine.Points = points;
+            PathLine.Stroke = new SolidColorBrush(Colors.Black);
+            PathLine.StrokeThickness = Math.Min(rowSpacing, colSpacing) * 0.2;
         }
     }
 }

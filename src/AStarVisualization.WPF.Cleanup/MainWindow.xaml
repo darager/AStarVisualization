@@ -12,6 +12,7 @@
     Height="800"
     ResizeMode="NoResize"
     mc:Ignorable="d">
+
     <DockPanel>
         <c:MapCanvas
             x:Name="mapCanvas"

@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace AStarVisualization.WPF.Controls // TODO: clean up this class
+// TODO: clean up this class
+// TODO: add the tile placing functionality
+namespace AStarVisualization.WPF.Controls
 {
     public class MapCanvas : Canvas
     {
@@ -17,7 +19,7 @@ namespace AStarVisualization.WPF.Controls // TODO: clean up this class
         public static readonly DependencyProperty MapProperty =
             DependencyProperty.Register(
                 "Map", typeof(Map), typeof(MapCanvas),
-                new FrameworkPropertyMetadata(new PropertyChangedCallback(OnMapChanged)));
+                new FrameworkPropertyMetadata(new PropertyChangedCallback(OnMapChange)));
 
         public List<Node> Path
         {
@@ -27,10 +29,10 @@ namespace AStarVisualization.WPF.Controls // TODO: clean up this class
         public static readonly DependencyProperty PathProperty =
             DependencyProperty.Register(
                 "Path", typeof(List<Node>), typeof(MapCanvas),
-                new FrameworkPropertyMetadata(new PropertyChangedCallback(OnPathChanged)));
+                new FrameworkPropertyMetadata(new PropertyChangedCallback(OnPathChange)));
 
-        public int NumRows => ((Map)GetValue(MapProperty)).GetLength(0);
-        public int NumColumns => ((Map)GetValue(MapProperty)).GetLength(1);
+        public int NumRows => Map.GetLength(0);
+        public int NumColumns => Map.GetLength(1);
 
         public PathRenderer PathRenderer;
         public TileRenderer TileRenderer;
@@ -43,13 +45,13 @@ namespace AStarVisualization.WPF.Controls // TODO: clean up this class
             GridLineRenderer = new GridLineRenderer(this);
         }
 
-        private static void OnMapChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        private static void OnMapChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             var canvas = source as MapCanvas;
             canvas.TileRenderer.HandleMapChange(source, e);
             canvas.GridLineRenderer.HandleMapChange(source, e);
         }
-        private static void OnPathChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        private static void OnPathChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             var canvas = source as MapCanvas;
             canvas.PathRenderer.HandlePathChange(source, e);

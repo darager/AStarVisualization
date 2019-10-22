@@ -51,6 +51,10 @@ namespace AStarVisualization.WPF
             timer.Start();
 
             mapViewModel.AStarMap[1, 1].State = NodeState.GroundVisited;
+
+            //IPathSolver pathsolver = new AStarPathSolver(ref map, false);
+            //pathsolver.FindPath();
+
             #endregion
         }
     }
