@@ -21,9 +21,7 @@ namespace AStarVisualization.WPF
             var mapViewModel = new MapCanvasViewModel();
             mapCanvas.DataContext = mapViewModel;
 
-            // TODO: remove the testing Timer
-            #region testing autoupdating of the MapCanvas
-            //TODO: make sure that the mapview is updated by the change in the viewmodel
+            // TODO: remove mock data
             var map = new Map(2, 3)
             {
                 Data = new Node[][]
@@ -41,18 +39,6 @@ namespace AStarVisualization.WPF
 
             //IPathSolver pathsolver = new AStarPathSolver(ref map, false);
             //pathsolver.FindPath();
-
-            #endregion
-        }
-
-        private void mapCanvas_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void mapCanvas_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-
         }
     }
 }

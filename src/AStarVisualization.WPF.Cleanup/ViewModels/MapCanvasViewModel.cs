@@ -1,47 +1,67 @@
 ﻿using AStarVisualization.Core;
 using AStarVisualization.Core.Map;
+using AStarVisualization.WPF.Commands;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 
 namespace AStarVisualization.WPF.ViewModels
 {
-    // TODO: ICommands that are responsible for placing the tiles
     public class MapCanvasViewModel : INotifyPropertyChanged
     {
         public Map Map
         {
-            get => _pathfindingMap;
+            get => _map;
             set
             {
-                if (_pathfindingMap != value)
+                if (_map != value)
                 {
-                    _pathfindingMap = value;
-                    _pathfindingMap.UpdateNodeIndices();
+                    _map = value;
+                    _map.UpdateNodeIndices();
                     OnPropertyChanged("Map");
                 }
             }
         }
         public List<Node> Path
         {
-            get => _discoveredPath;
+            get => _path;
             set
             {
-                if (_discoveredPath != value)
+                if (_path != value)
                 {
-                    _discoveredPath = value;
+                    _path = value;
                     OnPropertyChanged("Path");
                 }
             }
         }
         public ICommand PlaceTileCommand => _placeTileCommand;
+        public ICommand HandleLeftClickCommand => _handleLeftClickCommand;
+        public ICommand HandleRightClickCommand => _handleRightClickCommand;
 
-        private Map _pathfindingMap;
-        private List<Node> _discoveredPath;
-        private ICommand _placeTileCommand;
+        // TODO: make sure that these properties are used correctly
+        public Place Place { get; set; } = Place.None;
+        public bool MapDesignPhaseActive { get; set; } = true;
+
+        private Map _map;
+        private List<Node> _path;
+
+        private readonly ICommand _placeTileCommand;
+        private readonly ICommand _handleLeftClickCommand;
+        private readonly ICommand _handleRightClickCommand;
 
         public MapCanvasViewModel()
         {
+            _map = new Map(0, 0);
+            _path = new List<Node>();
+
+            _placeTileCommand = new PlaceTileCommand(this);
+            _handleLeftClickCommand = new HandleLeftClickCommand(this);
+            _handleRightClickCommand = new HandleRightClickCommand(this);
+        }
+
+        private void OnMouseDown(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+
         }
 
         private void OnPropertyChanged(string propertyName)

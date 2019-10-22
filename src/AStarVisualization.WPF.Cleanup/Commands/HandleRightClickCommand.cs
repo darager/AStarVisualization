@@ -4,18 +4,18 @@ using AStarVisualization.WPF.ViewModels;
 
 namespace AStarVisualization.WPF.Commands
 {
-    public class PlaceTileCommand : ICommand
+    public class HandleRightClickCommand : ICommand
     {
         private MapCanvasViewModel mapCanvasViewModel;
 
-        public PlaceTileCommand(MapCanvasViewModel mapCanvasViewModel)
+        public HandleRightClickCommand(MapCanvasViewModel mapCanvasViewModel)
         {
             this.mapCanvasViewModel = mapCanvasViewModel;
         }
 
         public bool CanExecute(object parameter)
         {
-            return mapCanvasViewModel.MapDesignPhaseActive && (mapCanvasViewModel.Place != Place.None);
+            return mapCanvasViewModel.MapDesignPhaseActive;
         }
         public void Execute(object parameter)
         {

@@ -4,6 +4,7 @@ using AStarVisualization.WPF.Controls.MapCanvasRenderers;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 // TODO: clean up this class
 // TODO: add the tile placing functionality

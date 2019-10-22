@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:AStarVisualization.WPF.Controls;assembly=AStarVisualization.WPF.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Pathfinding Visualization"
     Width="750"
@@ -18,8 +19,19 @@
             VerticalAlignment="Stretch"
             DockPanel.Dock="Top"
             Map="{Binding Path=Map}"
-            MouseDown="mapCanvas_MouseDown"
-            MouseMove="mapCanvas_MouseMove"
-            Path="{Binding Path=Path}" />
+            Path="{Binding Path=Path}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseMove">
+                    <i:InvokeCommandAction Command="{Binding Path=PlaceTileCommand}" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding Path=HandleLeftClickCommand}" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseRightButtonDown">
+                    <i:InvokeCommandAction Command="{Binding Path=HandleRightClickCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </c:MapCanvas>
+
     </DockPanel>
 </Window>
