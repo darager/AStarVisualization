@@ -53,40 +53,37 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
             rect.Height = rowspacing - 2 * gridLineThickness;
             rect.Width = columnspacing - 2 * gridLineThickness;
 
-            rect.Stroke = new SolidColorBrush(Colors.Transparent);
             rect.SnapsToDevicePixels = true;
+            rect.Fill = GetStateColor(node.State);
 
-            switch (node.State)
-            {
-                case NodeState.Ground:
-                    rect.Fill = new SolidColorBrush(Colors.Transparent);
-                    break;
-                case NodeState.GroundVisited:
-                    rect.Fill = new SolidColorBrush(Colors.LightGreen);
-                    break;
-                case NodeState.GroundToBeVisited:
-                    rect.Fill = new SolidColorBrush(Colors.LightBlue);
-                    break;
-                case NodeState.Start:
-                    rect.Fill = new SolidColorBrush(Colors.DarkGoldenrod);
-                    break;
-                case NodeState.Wall:
-                    rect.Fill = new SolidColorBrush(Colors.Black);
-                    break;
-                case NodeState.Goal:
-                    rect.Fill = new SolidColorBrush(Colors.Red);
-                    break;
-                default:
-                    break;
-            }
+            double x = node.ColIndex * columnspacing + gridLineThickness;
+            double y = node.RowIndex * rowspacing + gridLineThickness;
 
-            double topdistance = node.RowIndex * rowspacing + gridLineThickness;
-            double leftdistance = node.ColIndex * columnspacing + gridLineThickness;
-
-            Canvas.SetLeft(rect, leftdistance);
-            Canvas.SetTop(rect, topdistance);
+            Canvas.SetLeft(rect, x);
+            Canvas.SetTop(rect, y);
 
             return rect;
+        }
+        private SolidColorBrush GetStateColor(NodeState state)
+        {
+            switch (state)
+            {
+                case NodeState.Ground:
+                    return new SolidColorBrush(Colors.Transparent);
+                case NodeState.GroundVisited:
+                    return new SolidColorBrush(Colors.LightGreen);
+                case NodeState.GroundToBeVisited:
+                    return new SolidColorBrush(Colors.LightBlue);
+                case NodeState.Start:
+                    return new SolidColorBrush(Colors.DarkGoldenrod);
+                case NodeState.Wall:
+                    return new SolidColorBrush(Colors.Black);
+                case NodeState.Goal:
+                    return new SolidColorBrush(Colors.Red);
+                default:
+                    return null;
+            }
+
         }
     }
 }

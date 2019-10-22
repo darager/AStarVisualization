@@ -24,49 +24,45 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
             double width = canvas.ActualWidth;
             double rowSpacing = height / canvas.NumRows;
             double colSpacing = width / canvas.NumColumns;
-            int numRows = canvas.NumRows;
-            int numCols = canvas.NumColumns;
 
             var stroke = new SolidColorBrush(Colors.DarkGray);
-            int thickness = 1;
+            int lineThickness = 1;
 
             var newLines = new List<Line>();
-            for (int i = 0; i < numRows; i++)
+            for (int i = 0; i < canvas.NumRows; i++)
             {
-                double Y = i * rowSpacing + rowSpacing;
+                double y = i * rowSpacing + rowSpacing;
                 var rowLine = new Line()
                 {
                     X1 = 0,
                     X2 = width,
-                    Y1 = Y,
-                    Y2 = Y,
+                    Y1 = y,
+                    Y2 = y,
                     Stroke = stroke,
-                    StrokeThickness = thickness
+                    StrokeThickness = lineThickness
                 };
 
                 newLines.Add(rowLine);
             }
-            for (int i = 0; i < numCols; i++)
+            for (int i = 0; i < canvas.NumColumns; i++)
             {
-                double X = i * colSpacing + colSpacing;
+                double x = i * colSpacing + colSpacing;
                 var rowLine = new Line()
                 {
-                    X1 = X,
-                    X2 = X,
+                    X1 = x,
+                    X2 = x,
                     Y1 = 0,
                     Y2 = height,
                     Stroke = stroke,
-                    StrokeThickness = thickness
+                    StrokeThickness = lineThickness
                 };
 
                 newLines.Add(rowLine);
             }
 
             List<Line> oldLines = GridLines;
-            foreach (Line line in newLines)
-                canvas.Children.Add(line);
-            foreach (Line line in oldLines)
-                canvas.Children.Remove(line);
+            newLines.ForEach(line => canvas.Children.Add(line));
+            oldLines.ForEach(line => canvas.Children.Remove(line));
 
             GridLines = newLines;
         }

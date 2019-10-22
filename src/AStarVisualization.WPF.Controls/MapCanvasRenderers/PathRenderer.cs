@@ -31,13 +31,13 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
             var points = new PointCollection();
             foreach (Node node in path)
             {
-                double x = node.ColIndex * colSpacing + colSpacing / 2;
-                double y = node.RowIndex * rowSpacing + rowSpacing / 2;
+                double x = (node.ColIndex * colSpacing) + (colSpacing / 2);
+                double y = (node.RowIndex * rowSpacing) + (rowSpacing / 2);
 
                 points.Add(new Point(x, y));
             }
-
             PathLine.Points = points;
+
             PathLine.Stroke = new SolidColorBrush(Colors.Black);
             PathLine.StrokeThickness = Math.Min(rowSpacing, colSpacing) * 0.2;
         }
