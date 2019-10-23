@@ -34,29 +34,29 @@ namespace AStarVisualization.WPF.ViewModels
                 }
             }
         }
+        public ICommand ProcessMouseMovementCommand => _processMouseMovementCommand;
         public ICommand PlaceTileCommand => _placeTileCommand;
-        public ICommand HandleLeftClickCommand => _handleLeftClickCommand;
         public ICommand RemoveTileCommand => _removeTileCommand;
 
-        // TODO: make sure that these properties are used correctly
-        public Place Place { get; set; } = Place.None;
+        // TODO: make sure that these properties are used correctly by the commands
+        public Place Place { get; set; } = Place.Wall;
         public bool MapDesignPhaseActive { get; set; } = true;
 
         private Map _map;
         private List<Node> _path;
 
+        private readonly ICommand _processMouseMovementCommand;
         private readonly ICommand _placeTileCommand;
-        private readonly ICommand _handleLeftClickCommand;
         private readonly ICommand _removeTileCommand;
 
         public MapCanvasViewModel()
         {
-            _map = new Map(0, 0);
+            _map = new Map(2, 2);
             _path = new List<Node>();
 
             // TODO: maybe inject these with Ninject
+            _processMouseMovementCommand = new ProcessMouseMovementCommand(this);
             _placeTileCommand = new PlaceTileCommand(this);
-            _handleLeftClickCommand = new HandleLeftClickCommand(this);
             _removeTileCommand = new RemoveTileCommand(this);
         }
 

@@ -19,7 +19,7 @@ namespace AStarVisualization.WPF.Commands
         public bool CanExecute(object parameter) => mapCanvasViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
-            var args = parameter as MouseEventArgs;
+            var args = (MouseEventArgs)parameter;
             var rectangle = (Shape)args.OriginalSource;
             var mapCanvas = (MapCanvas)rectangle.Parent;
 
@@ -30,7 +30,6 @@ namespace AStarVisualization.WPF.Commands
             int rowIdx = (int)Math.Truncate(mousePosition.Y / rowSpacing);
             int colIdx = (int)Math.Truncate(mousePosition.X / colSpacing);
 
-            // TODO: nothing is bound to the StateChangedEvent this results in the View not updating
             Node node = mapCanvas.Map[rowIdx, colIdx];
             node.State = NodeState.Ground;
         }

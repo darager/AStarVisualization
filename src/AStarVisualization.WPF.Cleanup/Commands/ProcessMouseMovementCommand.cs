@@ -4,18 +4,19 @@ using AStarVisualization.WPF.ViewModels;
 
 namespace AStarVisualization.WPF.Commands
 {
-    public class HandleLeftClickCommand : ICommand
+    public class ProcessMouseMovementCommand : ICommand
     {
         private MapCanvasViewModel mapCanvasViewModel;
 
-        public HandleLeftClickCommand(MapCanvasViewModel mapCanvasViewModel)
+        public ProcessMouseMovementCommand(MapCanvasViewModel mapCanvasViewModel)
         {
             this.mapCanvasViewModel = mapCanvasViewModel;
         }
 
         public bool CanExecute(object parameter)
         {
-            return mapCanvasViewModel.MapDesignPhaseActive && (mapCanvasViewModel.Place != Place.None);
+            return false;
+            //return mapCanvasViewModel.MapDesignPhaseActive && (mapCanvasViewModel.Place != Place.None);
         }
         public void Execute(object parameter)
         {
