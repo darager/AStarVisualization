@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Windows.Input;
+using System.Windows.Shapes;
+using AStarVisualization.Core;
+using AStarVisualization.Core.Map;
 using AStarVisualization.WPF.Controls;
 using AStarVisualization.WPF.ViewModels;
 
 namespace AStarVisualization.WPF.Commands
 {
-    public class HandleRightClickCommand : ICommand
+    public class RemoveTileCommand : ICommand
     {
         private MapCanvasViewModel mapCanvasViewModel;
 
-        public HandleRightClickCommand(MapCanvasViewModel mapCanvasViewModel)
+        public RemoveTileCommand(MapCanvasViewModel mapCanvasViewModel)
         {
             this.mapCanvasViewModel = mapCanvasViewModel;
         }
@@ -18,9 +21,18 @@ namespace AStarVisualization.WPF.Commands
         public void Execute(object parameter)
         {
             var args = parameter as MouseEventArgs;
-            var canvas = (MapCanvas)args.Source;
+            var rectangle = (Rectangle)args.OriginalSource;
+            var canvas = (MapCanvas)rectangle.Parent;
 
-            throw new NotImplementedException();
+            double rowSpacing = canvas.ActualHeight / canvas.NumRows;
+            double colSpacing = canvas.ActualWidth / canvas.NumColumns;
+
+            var mousePosition = args.GetPosition(canvas);
+            int rowIdx = (int)Math.Truncate(mousePosition.Y / rowSpacing);
+            int colIdx = (int)Math.Truncate(mousePosition.X / colSpacing);
+
+            Map map = canvas.Map;
+            map[rowIdx, colIdx].State = NodeState.Ground;
         }
 
         public event EventHandler CanExecuteChanged;

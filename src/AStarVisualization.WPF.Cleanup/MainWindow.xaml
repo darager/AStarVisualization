@@ -22,13 +22,13 @@
             Path="{Binding Path=Path}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseMove">
-                    <i:InvokeCommandAction Command="{Binding Path=PlaceTileCommand}" />
+                    <i:InvokeCommandAction Command="{Binding Path=PlaceTileCommand}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="MouseLeftButtonDown">
-                    <i:InvokeCommandAction Command="{Binding Path=HandleLeftClickCommand}" />
+                    <i:InvokeCommandAction Command="{Binding Path=HandleLeftClickCommand}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="MouseRightButtonDown">
-                    <i:InvokeCommandAction Command="{Binding Path=HandleRightClickCommand}" PassEventArgsToCommand="True" />
+                    <i:InvokeCommandAction Command="{Binding Path=RemoveTileCommand}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </c:MapCanvas>

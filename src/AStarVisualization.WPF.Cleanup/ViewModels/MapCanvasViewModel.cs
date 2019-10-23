@@ -36,7 +36,7 @@ namespace AStarVisualization.WPF.ViewModels
         }
         public ICommand PlaceTileCommand => _placeTileCommand;
         public ICommand HandleLeftClickCommand => _handleLeftClickCommand;
-        public ICommand HandleRightClickCommand => _handleRightClickCommand;
+        public ICommand RemoveTileCommand => _removeTileCommand;
 
         // TODO: make sure that these properties are used correctly
         public Place Place { get; set; } = Place.None;
@@ -47,7 +47,7 @@ namespace AStarVisualization.WPF.ViewModels
 
         private readonly ICommand _placeTileCommand;
         private readonly ICommand _handleLeftClickCommand;
-        private readonly ICommand _handleRightClickCommand;
+        private readonly ICommand _removeTileCommand;
 
         public MapCanvasViewModel()
         {
@@ -57,7 +57,7 @@ namespace AStarVisualization.WPF.ViewModels
             // TODO: maybe inject these with Ninject
             _placeTileCommand = new PlaceTileCommand(this);
             _handleLeftClickCommand = new HandleLeftClickCommand(this);
-            _handleRightClickCommand = new HandleRightClickCommand(this);
+            _removeTileCommand = new RemoveTileCommand(this);
         }
 
         private void OnMouseDown(object sender, System.Windows.Input.MouseEventArgs e)
