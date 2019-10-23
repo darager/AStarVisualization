@@ -2,11 +2,9 @@
 using AStarVisualization.Core.Map;
 using AStarVisualization.WPF.ViewModels;
 using Ninject;
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Input;
 
 namespace AStarVisualization.WPF
 {
@@ -28,7 +26,7 @@ namespace AStarVisualization.WPF
             {
                 Data = new Node[][]
                 {
-                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundToBeVisited), new Node(NodeState.Wall)},
+                    new Node[] { new Node(NodeState.Ground), new Node(NodeState.GroundToBeVisited), new Node(NodeState.Wall)},
                     new Node[] { new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.GroundToBeVisited)},
                     new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundVisited), new Node(NodeState.GroundToBeVisited)},
                     new Node[] { new Node(NodeState.Ground), new Node(NodeState.GroundVisited), new Node(NodeState.GroundToBeVisited)},

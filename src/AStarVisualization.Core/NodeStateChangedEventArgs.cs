@@ -2,13 +2,13 @@
 
 namespace AStarVisualization.Core
 {
-    public class NodeStateChangedEventArgs : EventArgs
+    public class StateChangedEventArgs : EventArgs
     {
         public Node Node { get; }
         public NodeState NewState { get; }
         public NodeState OldState { get; }
 
-        public NodeStateChangedEventArgs(Node node, NodeState newState, NodeState oldState)
+        public StateChangedEventArgs(Node node, NodeState newState, NodeState oldState)
         {
             Node = node;
             NewState = newState;

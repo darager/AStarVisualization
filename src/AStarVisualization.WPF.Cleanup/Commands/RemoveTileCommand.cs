@@ -2,7 +2,6 @@
 using System.Windows.Input;
 using System.Windows.Shapes;
 using AStarVisualization.Core;
-using AStarVisualization.Core.Map;
 using AStarVisualization.WPF.Controls;
 using AStarVisualization.WPF.ViewModels;
 
@@ -21,18 +20,19 @@ namespace AStarVisualization.WPF.Commands
         public void Execute(object parameter)
         {
             var args = parameter as MouseEventArgs;
-            var rectangle = (Rectangle)args.OriginalSource;
-            var canvas = (MapCanvas)rectangle.Parent;
+            var rectangle = (Shape)args.OriginalSource;
+            var mapCanvas = (MapCanvas)rectangle.Parent;
 
-            double rowSpacing = canvas.ActualHeight / canvas.NumRows;
-            double colSpacing = canvas.ActualWidth / canvas.NumColumns;
+            double rowSpacing = mapCanvas.ActualHeight / mapCanvas.NumRows;
+            double colSpacing = mapCanvas.ActualWidth / mapCanvas.NumColumns;
 
-            var mousePosition = args.GetPosition(canvas);
+            var mousePosition = args.GetPosition(mapCanvas);
             int rowIdx = (int)Math.Truncate(mousePosition.Y / rowSpacing);
             int colIdx = (int)Math.Truncate(mousePosition.X / colSpacing);
 
-            Map map = canvas.Map;
-            map[rowIdx, colIdx].State = NodeState.Ground;
+            // TODO: nothing is bound to the StateChangedEvent this results in the View not updating
+            Node node = mapCanvas.Map[rowIdx, colIdx];
+            node.State = NodeState.Ground;
         }
 
         public event EventHandler CanExecuteChanged;

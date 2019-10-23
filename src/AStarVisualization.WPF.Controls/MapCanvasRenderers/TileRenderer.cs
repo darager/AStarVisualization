@@ -1,5 +1,6 @@
 ﻿using AStarVisualization.Core;
 using AStarVisualization.Core.Map;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,13 +14,23 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
 
         public void HandleMapChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
+            // subscribe to the StatechangedEvent of each node and when it occurs color the rectangle differently
             var canvas = source as MapCanvas;
             var oldMap = (Map)e.OldValue;
             var newMap = (Map)e.NewValue;
 
-
             Rectangle[,] oldTiles = Tiles;
             Tiles = new Rectangle[canvas.NumRows, canvas.NumColumns];
+
+            if (newMap != null)
+                foreach (Node[] nodes in newMap)
+                    foreach (Node node in nodes)
+                        node.StateChanged += ChangeColor;
+
+            if (oldMap != null)
+                foreach (Node[] nodes in oldMap)
+                    foreach (Node node in nodes)
+                        node.StateChanged -= ChangeColor;
 
             // create the new tiles
             for (int i = 0; i < canvas.NumRows; i++)
@@ -36,6 +47,14 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
                     canvas.Children.Remove(tile);
         }
 
+        private void ChangeColor(object sender, StateChangedEventArgs e)
+        {
+            Node node = e.Node;
+            int rowIdx = node.RowIndex;
+            int colIdx = node.ColIndex;
+
+            Tiles[rowIdx, colIdx].Fill = GetStateColor(node.State);
+        }
         private Rectangle GetRectangle(MapCanvas canvas, Node node)
         {
             var rect = new Rectangle();
@@ -83,7 +102,6 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
                 default:
                     return null;
             }
-
         }
     }
 }

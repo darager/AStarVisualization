@@ -60,11 +60,6 @@ namespace AStarVisualization.WPF.ViewModels
             _removeTileCommand = new RemoveTileCommand(this);
         }
 
-        private void OnMouseDown(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-
-        }
-
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

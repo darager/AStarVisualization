@@ -18,8 +18,8 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             DockPanel.Dock="Top"
-            Map="{Binding Path=Map}"
-            Path="{Binding Path=Path}">
+            Map="{Binding Path=Map, Mode=TwoWay}"
+            Path="{Binding Path=Path, Mode=TwoWay}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseMove">
                     <i:InvokeCommandAction Command="{Binding Path=PlaceTileCommand}" PassEventArgsToCommand="True" />

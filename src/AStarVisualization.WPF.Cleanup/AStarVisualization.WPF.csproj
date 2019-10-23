@@ -64,7 +64,7 @@
     </ApplicationDefinition>
     <Compile Include="Bindings.cs" />
     <Compile Include="Commands\HandleLeftClickCommand.cs" />
-    <Compile Include="Commands\HandleRightClickCommand.cs" />
+    <Compile Include="Commands\RemoveTileCommand.cs" />
     <Compile Include="Commands\PlaceTileCommand.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="ViewModels\MapCanvasViewModel.cs" />

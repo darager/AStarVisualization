@@ -16,7 +16,7 @@ namespace AStarVisualization.Core
                 {
                     NodeState oldState = _state;
                     _state = value;
-                    NodeStateChanged?.Invoke(this, new NodeStateChangedEventArgs(this, _state, oldState));
+                    StateChanged?.Invoke(this, new StateChangedEventArgs(this, _state, oldState));
                 }
             }
         }
@@ -67,7 +67,7 @@ namespace AStarVisualization.Core
             }
         }
 
-        public delegate void NodeStateChangedEventHandler(object sender, NodeStateChangedEventArgs e);
-        public event NodeStateChangedEventHandler NodeStateChanged;
+        public delegate void StateChangedEventHandler(object sender, StateChangedEventArgs e);
+        public event StateChangedEventHandler StateChanged;
     }
 }
