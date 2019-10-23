@@ -23,8 +23,8 @@ namespace AStarVisualization.WPF.Commands
         public void Execute(object parameter)
         {
             var args = (MouseEventArgs)parameter;
-            var rectangle = (Shape)args.OriginalSource;
-            var mapCanvas = (MapCanvas)rectangle.Parent;
+            var shape = (Shape)args.OriginalSource;
+            var mapCanvas = (MapCanvas)shape.Parent;
 
             double rowSpacing = mapCanvas.ActualHeight / mapCanvas.NumRows;
             double colSpacing = mapCanvas.ActualWidth / mapCanvas.NumColumns;

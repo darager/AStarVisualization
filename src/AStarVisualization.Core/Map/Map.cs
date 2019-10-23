@@ -40,8 +40,8 @@ namespace AStarVisualization.Core.Map
             for (int i = 0; i < numRows; i++)
                 _map[i] = new Node[numColumns];
 
-            for (int i = 0; i < GetLength(0); i++)
-                for (int j = 0; j < GetLength(1); j++)
+            for (int i = 0; i < numRows; i++)
+                for (int j = 0; j < numColumns; j++)
                     _map[i][j] = new Node(NodeState.Ground);
         }
 
