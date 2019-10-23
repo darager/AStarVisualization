@@ -28,7 +28,7 @@
                     <i:InvokeCommandAction Command="{Binding Path=HandleLeftClickCommand}" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="MouseRightButtonDown">
-                    <i:InvokeCommandAction Command="{Binding Path=HandleRightClickCommand}" />
+                    <i:InvokeCommandAction Command="{Binding Path=HandleRightClickCommand}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </c:MapCanvas>

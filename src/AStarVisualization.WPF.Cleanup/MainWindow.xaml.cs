@@ -2,9 +2,11 @@
 using AStarVisualization.Core.Map;
 using AStarVisualization.WPF.ViewModels;
 using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Input;
 
 namespace AStarVisualization.WPF
 {

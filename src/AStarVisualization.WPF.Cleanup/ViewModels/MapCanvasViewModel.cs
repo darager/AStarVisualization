@@ -54,6 +54,7 @@ namespace AStarVisualization.WPF.ViewModels
             _map = new Map(0, 0);
             _path = new List<Node>();
 
+            // TODO: maybe inject these with Ninject
             _placeTileCommand = new PlaceTileCommand(this);
             _handleLeftClickCommand = new HandleLeftClickCommand(this);
             _handleRightClickCommand = new HandleRightClickCommand(this);

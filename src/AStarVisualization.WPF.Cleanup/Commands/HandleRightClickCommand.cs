@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using AStarVisualization.WPF.Controls;
 using AStarVisualization.WPF.ViewModels;
 
 namespace AStarVisualization.WPF.Commands
@@ -13,12 +14,12 @@ namespace AStarVisualization.WPF.Commands
             this.mapCanvasViewModel = mapCanvasViewModel;
         }
 
-        public bool CanExecute(object parameter)
-        {
-            return mapCanvasViewModel.MapDesignPhaseActive;
-        }
+        public bool CanExecute(object parameter) => mapCanvasViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
+            var args = parameter as MouseEventArgs;
+            var canvas = (MapCanvas)args.Source;
+
             throw new NotImplementedException();
         }
 
