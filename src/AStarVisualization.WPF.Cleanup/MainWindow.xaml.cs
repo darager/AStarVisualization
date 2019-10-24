@@ -21,17 +21,17 @@ namespace AStarVisualization.WPF
             mapCanvas.DataContext = mapViewModel;
 
             // TODO: remove mock data
-            var map = new Map(2, 3)
-            {
-                Data = new Node[][]
-                {
-                    new Node[] { new Node(NodeState.Ground), new Node(NodeState.GroundToBeVisited), new Node(NodeState.Wall)},
-                    new Node[] { new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.GroundToBeVisited)},
-                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundVisited), new Node(NodeState.GroundToBeVisited)},
-                    new Node[] { new Node(NodeState.Ground), new Node(NodeState.GroundVisited), new Node(NodeState.GroundToBeVisited)},
-                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundVisited), new Node(NodeState.Goal)},
-                }
-            };
+            //var map = new Map(2, 3)
+            //{
+            //    Data = new Node[][]
+            //    {
+            //        new Node[] { new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Ground) },
+            //        new Node[] { new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) },
+            //        new Node[] { new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) },
+            //        new Node[] { new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) },
+            //        new Node[] { new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Goal) },
+            //    }
+            //};
 
             //mapViewModel.Map = map;
             //mapViewModel.Path = new List<Node>() { map[1, 0], map[1, 1], map[2, 1], map[3, 1], map[4, 1], map[4, 2] };

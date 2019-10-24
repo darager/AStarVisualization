@@ -9,14 +9,14 @@ namespace AStarVisualization.WPF.Commands
 {
     public class RemoveTileCommand : ICommand
     {
-        private MapCanvasViewModel mapCanvasViewModel;
+        private MapCanvasViewModel _mapCanvasViewModel;
 
         public RemoveTileCommand(MapCanvasViewModel mapCanvasViewModel)
         {
-            this.mapCanvasViewModel = mapCanvasViewModel;
+            _mapCanvasViewModel = mapCanvasViewModel;
         }
 
-        public bool CanExecute(object parameter) => mapCanvasViewModel.MapDesignPhaseActive;
+        public bool CanExecute(object parameter) => _mapCanvasViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
             var args = (MouseEventArgs)parameter;

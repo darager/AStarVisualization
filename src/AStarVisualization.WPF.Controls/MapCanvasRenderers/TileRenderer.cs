@@ -10,12 +10,11 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
 {
     public class TileRenderer
     {
-        public Rectangle[,] Tiles { get; private set; }
+        private Rectangle[,] Tiles;
 
         public void HandleMapChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            // subscribe to the StatechangedEvent of each node and when it occurs color the rectangle differently
-            var canvas = source as MapCanvas;
+            var canvas = (MapCanvas)source;
             var oldMap = (Map)e.OldValue;
             var newMap = (Map)e.NewValue;
 
@@ -37,14 +36,22 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
                 for (int j = 0; j < canvas.NumColumns; j++)
                     Tiles[i, j] = GetRectangle(canvas, newMap[i, j]);
 
-            // add the new Tiles
+            foreach (Node[] nodes in newMap)
+                foreach (Node node in nodes)
+                    node.NodeStateChanged += UpdateColor;
+
             foreach (Rectangle tile in Tiles)
                 canvas.Children.Add(tile);
 
-            // remove the old Tiles
-            if (oldTiles != null)
+            if(oldMap != null)
+            {
+                foreach (Node[] nodes in oldMap)
+                    foreach (Node node in nodes)
+                        node.NodeStateChanged -= UpdateColor;
+
                 foreach (Rectangle tile in oldTiles)
                     canvas.Children.Remove(tile);
+            }
         }
 
         private void ChangeColor(object sender, StateChangedEventArgs e)
@@ -82,6 +89,13 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
             Canvas.SetTop(rect, y);
 
             return rect;
+        }
+        private void UpdateColor(object sender, NodeStateChangedEventArgs e)
+        {
+            var node = (Node)sender;
+            Rectangle rectangle = Tiles[node.RowIndex, node.ColIndex];
+
+            rectangle.Fill = GetStateColor(e.NewState);
         }
         private SolidColorBrush GetStateColor(NodeState state) // TODO: choose proper colors
         {

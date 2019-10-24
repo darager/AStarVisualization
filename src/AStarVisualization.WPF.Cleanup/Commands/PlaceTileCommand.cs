@@ -4,21 +4,24 @@ using AStarVisualization.WPF.ViewModels;
 using System;
 using System.Windows.Input;
 using System.Windows.Shapes;
+using AStarVisualization.Core;
+using AStarVisualization.WPF.Controls;
+using AStarVisualization.WPF.ViewModels;
 
 namespace AStarVisualization.WPF.Commands
 {
     public class PlaceTileCommand : ICommand
     {
-        private MapCanvasViewModel mapCanvasViewModel;
+        private readonly MapCanvasViewModel _mapCanvasViewModel;
 
         public PlaceTileCommand(MapCanvasViewModel mapCanvasViewModel)
         {
-            this.mapCanvasViewModel = mapCanvasViewModel;
+            _mapCanvasViewModel = mapCanvasViewModel;
         }
 
         public bool CanExecute(object parameter)
         {
-            return mapCanvasViewModel.MapDesignPhaseActive && (mapCanvasViewModel.Place != Place.None);
+            return _mapCanvasViewModel.MapDesignPhaseActive && (_mapCanvasViewModel.Place != Place.None);
         }
         public void Execute(object parameter)
         {
@@ -34,10 +37,9 @@ namespace AStarVisualization.WPF.Commands
             int colIdx = (int)Math.Truncate(mousePosition.X / colSpacing);
 
             Node node = mapCanvas.Map[rowIdx, colIdx];
-            Place placementMode = mapCanvasViewModel.Place;
-            NodeState newState = GetState(placementMode);
+            Place placementMode = _mapCanvasViewModel.Place;
 
-            node.State = newState;
+            node.State = GetState(placementMode);
         }
 
         private NodeState GetState(Place placementMode)

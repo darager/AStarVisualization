@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-//Panel.SetZIndex(PathLine, 1); // TODO: make sure this works properly
 namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
 {
     public class GridLineRenderer
@@ -18,7 +17,7 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
 
         public void HandleMapChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            var canvas = source as MapCanvas;
+            var canvas = (MapCanvas)source;
 
             double height = canvas.ActualHeight;
             double width = canvas.ActualWidth;

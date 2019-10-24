@@ -43,6 +43,8 @@ namespace AStarVisualization.Core.Map
             for (int i = 0; i < numRows; i++)
                 for (int j = 0; j < numColumns; j++)
                     _map[i][j] = new Node(NodeState.Ground);
+
+            this.UpdateNodeIndices();
         }
 
         public int GetLength(int dimension)
