@@ -16,7 +16,7 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
         public PathRenderer(MapCanvas canvas)
         {
             canvas.Children.Add(PathLine);
-            // make sure that the pathline is in the foreground
+            // ensures that the PathLine is in the foreground
             Panel.SetZIndex(PathLine, 100);
         }
 

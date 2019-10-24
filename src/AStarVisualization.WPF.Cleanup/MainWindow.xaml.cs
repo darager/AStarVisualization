@@ -28,11 +28,11 @@ namespace AStarVisualization.WPF
             {
                 Data = new Node[][]
                 {
-                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundToBeVisited), new Node(NodeState.Wall)},
-                    new Node[] { new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.GroundToBeVisited)},
-                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundVisited), new Node(NodeState.GroundToBeVisited)},
-                    new Node[] { new Node(NodeState.Ground), new Node(NodeState.GroundVisited), new Node(NodeState.GroundToBeVisited)},
-                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.GroundVisited), new Node(NodeState.Goal)},
+                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Ground) },
+                    new Node[] { new Node(NodeState.Start), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) },
+                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) },
+                    new Node[] { new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) },
+                    new Node[] { new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Goal) },
                 }
             };
 

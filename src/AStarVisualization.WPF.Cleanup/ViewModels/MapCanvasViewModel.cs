@@ -34,20 +34,17 @@ namespace AStarVisualization.WPF.ViewModels
                 }
             }
         }
-        public ICommand PlaceTileCommand => _placeTileCommand;
-        public ICommand HandleLeftClickCommand => _handleLeftClickCommand;
-        public ICommand HandleRightClickCommand => _handleRightClickCommand;
+        //public ICommand PlaceTileCommand => _placeTileCommand;
+        //public ICommand HandleLeftClickCommand => _handleLeftClickCommand;
+        public ICommand RemoveTileCommand { get; private set; }
+        public ICommand PlaceTileCommand { get; private set; }
 
         // TODO: make sure that these properties are used correctly
-        public Place Place { get; set; } = Place.None;
+        public Place Place { get; set; } = Place.Wall;
         public bool MapDesignPhaseActive { get; set; } = true;
 
         private Map _map;
         private List<Node> _path;
-
-        private readonly ICommand _placeTileCommand;
-        private readonly ICommand _handleLeftClickCommand;
-        private readonly ICommand _handleRightClickCommand;
 
         public MapCanvasViewModel()
         {
@@ -55,14 +52,8 @@ namespace AStarVisualization.WPF.ViewModels
             _path = new List<Node>();
 
             // TODO: maybe inject these with Ninject
-            _placeTileCommand = new PlaceTileCommand(this);
-            _handleLeftClickCommand = new HandleLeftClickCommand(this);
-            _handleRightClickCommand = new HandleRightClickCommand(this);
-        }
-
-        private void OnMouseDown(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-
+            RemoveTileCommand = new RemoveTileCommand(this);
+            PlaceTileCommand = new PlaceTileCommand(this);
         }
 
         private void OnPropertyChanged(string propertyName)
