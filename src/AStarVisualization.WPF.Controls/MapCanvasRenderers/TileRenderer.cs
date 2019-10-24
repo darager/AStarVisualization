@@ -13,7 +13,7 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
 
         public void HandleMapChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            var canvas = source as MapCanvas;
+            var canvas = (MapCanvas)source;
             var oldMap = (Map)e.OldValue;
             var newMap = (Map)e.NewValue;
 

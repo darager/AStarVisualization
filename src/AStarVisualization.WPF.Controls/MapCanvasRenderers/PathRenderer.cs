@@ -6,7 +6,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-// TODO: make sure that the path is in front of all the other canvas-elements
 namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
 {
     public class PathRenderer
@@ -22,7 +21,7 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
 
         public void HandlePathChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            var canvas = source as MapCanvas;
+            var canvas = (MapCanvas)source;
             var path = (List<Node>)e.NewValue;
 
             double rowSpacing = canvas.ActualHeight / canvas.NumRows;
