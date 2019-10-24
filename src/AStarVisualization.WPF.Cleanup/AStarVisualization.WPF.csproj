@@ -63,6 +63,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bindings.cs" />
+    <Compile Include="Commands\ProcessMouseMoveCommand.cs" />
     <Compile Include="Commands\RemoveTileCommand.cs" />
     <Compile Include="Commands\PlaceTileCommand.cs" />
     <Compile Include="Place.cs" />

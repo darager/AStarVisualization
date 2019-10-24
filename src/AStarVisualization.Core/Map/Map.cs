@@ -15,7 +15,7 @@ namespace AStarVisualization.Core.Map
                 if (_map[i][j] != value)
                 {
                     _map[i][j] = value;
-                    CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, _map[i][j]);
+                    CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, _map[i][j]));
                 }
             }
         }
@@ -27,7 +27,7 @@ namespace AStarVisualization.Core.Map
                 if (_map != value)
                 {
                     _map = value;
-                    OnCollection(NotifyCollectionChangedAction.Reset);
+                    CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                 }
             }
         }
@@ -39,6 +39,12 @@ namespace AStarVisualization.Core.Map
 
             for (int i = 0; i < numRows; i++)
                 _map[i] = new Node[numColumns];
+
+            for (int i = 0; i < numRows; i++)
+                for (int j = 0; j < numColumns; j++)
+                    _map[i][j] = new Node(NodeState.Ground);
+
+            this.UpdateNodeIndices();
         }
 
         public int GetLength(int dimension)
@@ -53,10 +59,6 @@ namespace AStarVisualization.Core.Map
         }
         public IEnumerator GetEnumerator() => _map.GetEnumerator();
 
-        private void OnCollection(NotifyCollectionChangedAction action)
-        {
-            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action));
-        }
         public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }

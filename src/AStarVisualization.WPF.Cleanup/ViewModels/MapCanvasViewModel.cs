@@ -34,10 +34,10 @@ namespace AStarVisualization.WPF.ViewModels
                 }
             }
         }
-        //public ICommand PlaceTileCommand => _placeTileCommand;
-        //public ICommand HandleLeftClickCommand => _handleLeftClickCommand;
+
         public ICommand RemoveTileCommand { get; private set; }
         public ICommand PlaceTileCommand { get; private set; }
+        public ICommand ProcessMouseMoveCommand { get; private set; }
 
         // TODO: make sure that these properties are used correctly
         public Place Place { get; set; } = Place.Wall;
@@ -48,12 +48,13 @@ namespace AStarVisualization.WPF.ViewModels
 
         public MapCanvasViewModel()
         {
-            _map = new Map(0, 0);
+            _map = new Map(9, 9);
             _path = new List<Node>();
 
-            // TODO: maybe inject these with Ninject
-            RemoveTileCommand = new RemoveTileCommand(this);
+            // TODO: inject these if necessary
             PlaceTileCommand = new PlaceTileCommand(this);
+            RemoveTileCommand = new RemoveTileCommand(this);
+            ProcessMouseMoveCommand = new ProcessMouseMoveCommand(this);
         }
 
         private void OnPropertyChanged(string propertyName)
