@@ -1,5 +1,5 @@
-﻿using PathFindingVisualization.Core;
-using PathFindingVisualization.Core.Map;
+﻿using PathFindingVisualization.Core.Map;
+using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Commands;
 using System.Collections.Generic;
 using System.ComponentModel;

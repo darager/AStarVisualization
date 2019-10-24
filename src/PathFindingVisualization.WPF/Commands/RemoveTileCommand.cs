@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using System.Windows.Shapes;
-using PathFindingVisualization.Core;
+using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Controls;
 using PathFindingVisualization.WPF.ViewModels;
 

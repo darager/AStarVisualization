@@ -1,5 +1,6 @@
 ﻿using PathFindingVisualization.Core;
 using PathFindingVisualization.Core.Map;
+using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Controls.MapCanvasRenderers;
 using System.Collections.Generic;
 using System.Windows;

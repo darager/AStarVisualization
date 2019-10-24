@@ -5,9 +5,9 @@ namespace PathFindingVisualization.Core.Map
 {
     public static class MapExtensions
     {
-        public static List<Node> GetNeighbors(this Map map, int rowIdx, int colIdx, bool diagonalsEnabled)
+        public static List<Node.Node> GetNeighbors(this Map map, int rowIdx, int colIdx, bool diagonalsEnabled)
         {
-            var neighbors = new List<Node>();
+            var neighbors = new List<Node.Node>();
 
             int rowCount = map.GetLength(0);
             int colCount = map.GetLength(1);

@@ -1,7 +1,7 @@
 ﻿using System;
 
 // TODO: write tests for this class
-namespace PathFindingVisualization.Core
+namespace PathFindingVisualization.Core.Node
 {
     public class Node : IEquatable<Node>
     {

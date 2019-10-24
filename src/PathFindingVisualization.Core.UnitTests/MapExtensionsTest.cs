@@ -8,12 +8,12 @@ namespace PathFindingVisualization.Core.UnitTests
     {
         public static Map.Map Map = new Map.Map(4, 4)
         {
-            Data = new Node[][]
+            Data = new Node.Node[][]
             {
-                new Node[]{ new Node(NodeState.Goal), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall) },
-                new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall) },
-                new Node[]{ new Node(NodeState.Wall), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall) },
-                new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Start) },
+                new Node.Node[]{ new Node.Node(Node.NodeState.Goal), new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Wall) },
+                new Node.Node[]{ new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Wall), new Node.Node(Node.NodeState.Wall) },
+                new Node.Node[]{ new Node.Node(Node.NodeState.Wall), new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Wall) },
+                new Node.Node[]{ new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Wall), new Node.Node(Node.NodeState.Wall), new Node.Node(Node.NodeState.Start) },
             }
         };
 

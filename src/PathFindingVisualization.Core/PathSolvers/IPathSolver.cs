@@ -4,7 +4,7 @@ namespace PathFindingVisualization.Core.PathSolvers
 {
     public interface IPathSolver
     {
-        List<Node> FindPath();
+        List<Node.Node> FindPath();
         void Stop();
     }
 }

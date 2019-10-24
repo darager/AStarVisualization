@@ -1,4 +1,4 @@
-﻿namespace PathFindingVisualization.Core
+﻿namespace PathFindingVisualization.Core.Node
 {
     public enum NodeState
     {

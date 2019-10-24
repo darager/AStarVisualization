@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PathFindingVisualization.Core
+namespace PathFindingVisualization.Core.Node
 {
     public class StateChangedEventArgs : EventArgs
     {

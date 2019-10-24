@@ -1,4 +1,4 @@
-﻿using PathFindingVisualization.Core;
+﻿using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Controls;
 using PathFindingVisualization.WPF.ViewModels;
 using System;

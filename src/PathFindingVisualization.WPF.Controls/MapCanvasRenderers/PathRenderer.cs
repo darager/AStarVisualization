@@ -1,4 +1,4 @@
-﻿using PathFindingVisualization.Core;
+﻿using PathFindingVisualization.Core.Node;
 using System;
 using System.Collections.Generic;
 using System.Windows;

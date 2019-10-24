@@ -13,12 +13,12 @@ namespace PathFindingVisualization.Core.UnitTests
     public class AStarPathSolverTest
     {
         private static readonly Map.Map Map = new Map.Map(4, 4) { Data = map };
-        private static readonly Node[][] map = new Node[][]
+        private static readonly Node.Node[][] map = new Node.Node[][]
         {
-            new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Ground) },
-            new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Ground) },
-            new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Wall), new Node(NodeState.Ground) },
-            new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Ground) },
+            new Node.Node[]{ new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Wall), new Node.Node(Node.NodeState.Wall), new Node.Node(Node.NodeState.Ground) },
+            new Node.Node[]{ new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Ground) },
+            new Node.Node[]{ new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Wall), new Node.Node(Node.NodeState.Wall), new Node.Node(Node.NodeState.Ground) },
+            new Node.Node[]{ new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Wall), new Node.Node(Node.NodeState.Ground) },
         };
 
         [Test, TestCaseSource("FindPath_PathExists_ReturnsPath_Cases")]
@@ -27,12 +27,12 @@ namespace PathFindingVisualization.Core.UnitTests
             // TODO: clean up this test, the problem with the test is the way that the paths are compared
             (int startRowIdx, int startColIdx, int goalRowIdx, int goalColIdx, var expectedPathIndices) = GetTestParameters(parameters);
             Map.Map map = GetMapWithWaypoints(startRowIdx, startColIdx, goalRowIdx, goalColIdx, Map);
-            var expectedPath = new List<Node>();
+            var expectedPath = new List<Node.Node>();
             foreach ((int, int) indices in expectedPathIndices)
                 expectedPath.Add(map[indices.Item1, indices.Item2]);
 
             IPathSolver pathfinder = new AStarPathSolver(ref map);
-            List<Node> actualPath = pathfinder.FindPath();
+            List<Node.Node> actualPath = pathfinder.FindPath();
 
             Assert.That(actualPath, Is.EquivalentTo(expectedPath));
         }
@@ -44,8 +44,8 @@ namespace PathFindingVisualization.Core.UnitTests
         }
         private Map.Map GetMapWithWaypoints(int startRowIdx, int startColIdx, int goalRowIdx, int goalColIdx, Map.Map map)
         {
-            map[startRowIdx, startColIdx] = new Node(NodeState.Start);
-            map[goalRowIdx, goalColIdx] = new Node(NodeState.Goal);
+            map[startRowIdx, startColIdx] = new Node.Node(Node.NodeState.Start);
+            map[goalRowIdx, goalColIdx] = new Node.Node(Node.NodeState.Goal);
             return map;
         }
         private static readonly object[] FindPath_PathExists_ReturnsPath_Cases = // TODO: add more testcases
@@ -61,10 +61,10 @@ namespace PathFindingVisualization.Core.UnitTests
         {
             var map = new Map.Map(2, 3)
             {
-                Data = new Node[][]
+                Data = new Node.Node[][]
                 {
-                    new Node[]{ new Node(NodeState.Start), new Node(NodeState.Wall), new Node(NodeState.Goal) },
-                    new Node[]{ new Node(NodeState.Ground), new Node(NodeState.Wall), new Node(NodeState.Ground) }
+                    new Node.Node[]{ new Node.Node(Node.NodeState.Start), new Node.Node(Node.NodeState.Wall), new Node.Node(Node.NodeState.Goal) },
+                    new Node.Node[]{ new Node.Node(Node.NodeState.Ground), new Node.Node(Node.NodeState.Wall), new Node.Node(Node.NodeState.Ground) }
                 }
             };
             IPathSolver pathfinder = new AStarPathSolver(ref map);
@@ -88,9 +88,9 @@ namespace PathFindingVisualization.Core.UnitTests
         {
             var map = new Map.Map(1, 2)
             {
-                Data = new Node[][]
+                Data = new Node.Node[][]
                 {
-                    new Node[] { new Node(NodeState.Start), new Node(NodeState.Goal) }
+                    new Node.Node[] { new Node.Node(Node.NodeState.Start), new Node.Node(Node.NodeState.Goal) }
                 }
             };
 
@@ -105,10 +105,10 @@ namespace PathFindingVisualization.Core.UnitTests
         {
             var map = new Map.Map(1, 2)
             {
-                Data = new Node[][]
+                Data = new Node.Node[][]
                 {
-                    new Node[]{ new Node(NodeState.Wall), new Node(NodeState.Ground)},
-                    new Node[]{ new Node(NodeState.Start), new Node(NodeState.Ground)},
+                    new Node.Node[]{ new Node.Node(Node.NodeState.Wall), new Node.Node(Node.NodeState.Ground)},
+                    new Node.Node[]{ new Node.Node(Node.NodeState.Start), new Node.Node(Node.NodeState.Ground)},
                 }
             };
 

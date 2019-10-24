@@ -7,7 +7,7 @@ namespace PathFindingVisualization.Core.Map
 {
     public class Map : INotifyCollectionChanged, IEnumerable
     {
-        public Node this[int i, int j]
+        public Node.Node this[int i, int j]
         {
             get => _map[i][j];
             set
@@ -19,7 +19,7 @@ namespace PathFindingVisualization.Core.Map
                 }
             }
         }
-        public Node[][] Data
+        public Node.Node[][] Data
         {
             get => _map;
             set
@@ -31,18 +31,18 @@ namespace PathFindingVisualization.Core.Map
                 }
             }
         }
-        private Node[][] _map;
+        private Node.Node[][] _map;
 
         public Map(int numRows, int numColumns)
         {
-            _map = new Node[numRows][];
+            _map = new Node.Node[numRows][];
 
             for (int i = 0; i < numRows; i++)
-                _map[i] = new Node[numColumns];
+                _map[i] = new Node.Node[numColumns];
 
             for (int i = 0; i < numRows; i++)
                 for (int j = 0; j < numColumns; j++)
-                    _map[i][j] = new Node(NodeState.Ground);
+                    _map[i][j] = new Node.Node(Node.NodeState.Ground);
 
             this.UpdateNodeIndices();
         }

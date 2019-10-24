@@ -14,12 +14,12 @@ namespace PathFindingVisualization.Core.PathSolvers
     {
         private Map.Map map;
         private readonly bool diagonalsAllowed;
-        private Node startNode;
-        private Node goalNode;
-        private Node currentNode;
+        private Node.Node startNode;
+        private Node.Node goalNode;
+        private Node.Node currentNode;
 
-        private MinPriorityQueue<double, Node> openSet;
-        private HashSet<Node> closedSet;
+        private MinPriorityQueue<double, Node.Node> openSet;
+        private HashSet<Node.Node> closedSet;
 
         public AStarPathSolver(ref Map.Map map, bool diagonalsAllowed = false)
         {
@@ -31,7 +31,7 @@ namespace PathFindingVisualization.Core.PathSolvers
         {
             throw new System.NotImplementedException();
         }
-        public List<Node> FindPath()
+        public List<Node.Node> FindPath()
         {
             EnsureMapValidity(this.map);
             InitDataStructures(this.map);
@@ -49,38 +49,38 @@ namespace PathFindingVisualization.Core.PathSolvers
                 currentNode = openSet.Pop().Value;
 
                 // get the neighbors
-                List<Node> neighbors = map.GetNeighbors(currentNode.RowIndex, currentNode.ColIndex, this.diagonalsAllowed);
+                List<Node.Node> neighbors = map.GetNeighbors(currentNode.RowIndex, currentNode.ColIndex, this.diagonalsAllowed);
                 // get the successors out of the neighbors (already visited, wall, similar,...)
-                List<Node> successors = neighbors.Where(n => (n.State == NodeState.Ground) || (n.State == NodeState.Goal)).ToList<Node>();
+                List<Node.Node> successors = neighbors.Where(n => (n.State == Node.NodeState.Ground) || (n.State == Node.NodeState.Goal)).ToList<Node.Node>();
                 // set the movementcost of all the successors
                 successors.ForEach(n => SetSuccessorMovementCost(currentNode, n));
                 // add all of the successors to the openSet
                 foreach (var successor in successors)
                 {
                     successor.Parent = currentNode;
-                    if (successor.State != NodeState.Goal)
-                        successor.State = NodeState.GroundToBeVisited;
+                    if (successor.State != Node.NodeState.Goal)
+                        successor.State = Node.NodeState.GroundToBeVisited;
 
                     openSet.Add(successor.TotalCost, successor);
                 }
 
                 // add the currentnode to the closedSet
-                if (currentNode.State != NodeState.Goal && currentNode.State != NodeState.Start)
-                    currentNode.State = NodeState.GroundVisited;
+                if (currentNode.State != Node.NodeState.Goal && currentNode.State != Node.NodeState.Start)
+                    currentNode.State = Node.NodeState.GroundVisited;
                 closedSet.Add(currentNode);
             }
 
-            if (currentNode.State != NodeState.Goal)
+            if (currentNode.State != Node.NodeState.Goal)
                 throw new NoPathFoundException();
 
-            List<Node> path = ReconstructPath(currentNode);
+            List<Node.Node> path = ReconstructPath(currentNode);
 
             return path;
         }
 
-        private List<Node> ReconstructPath(Node node)
+        private List<Node.Node> ReconstructPath(Node.Node node)
         {
-            var path = new List<Node>();
+            var path = new List<Node.Node>();
 
             while (node.Parent != null)
             {
@@ -96,8 +96,8 @@ namespace PathFindingVisualization.Core.PathSolvers
         {
             (int goalRowIdx, int goalColIdx) = GetGoalIndices();
 
-            foreach (Node[] nodes in map)
-                foreach (Node node in nodes)
+            foreach (Node.Node[] nodes in map)
+                foreach (Node.Node node in nodes)
                 {
                     int rowIdx = node.RowIndex;
                     int colIdx = node.ColIndex;
@@ -114,7 +114,7 @@ namespace PathFindingVisualization.Core.PathSolvers
                     for (int j = 0; j < map.GetLength(1); j++)
                     {
                         var node = map[i, j];
-                        if (node.State == NodeState.Goal)
+                        if (node.State == Node.NodeState.Goal)
                         {
                             rowIdx = i;
                             colIdx = j;
@@ -127,10 +127,10 @@ namespace PathFindingVisualization.Core.PathSolvers
         private void InitDataStructures(Map.Map map)
         {
             int numNodes = map.GetLength(0) * map.GetLength(1);
-            this.openSet = new MinPriorityQueue<double, Node>(numNodes);
-            this.closedSet = new HashSet<Node>();
+            this.openSet = new MinPriorityQueue<double, Node.Node>(numNodes);
+            this.closedSet = new HashSet<Node.Node>();
         }
-        private void SetSuccessorMovementCost(Node current, Node successor)
+        private void SetSuccessorMovementCost(Node.Node current, Node.Node successor)
         {
             int dx = currentNode.ColIndex - successor.ColIndex;
             int dy = currentNode.RowIndex - successor.RowIndex;
@@ -153,28 +153,28 @@ namespace PathFindingVisualization.Core.PathSolvers
             bool hasStart = false;
             bool hasGoal = false;
 
-            foreach (Node[] nodes in map)
-                foreach (Node node in nodes)
+            foreach (Node.Node[] nodes in map)
+                foreach (Node.Node node in nodes)
                 {
-                    if (node.State == NodeState.Start)
+                    if (node.State == Node.NodeState.Start)
                         hasStart = true;
-                    else if (node.State == NodeState.Goal)
+                    else if (node.State == Node.NodeState.Goal)
                         hasGoal = true;
                 }
 
             return (hasStart && hasGoal);
         }
-        private (Node, Node) GetStartAndGoal(Map.Map map)
+        private (Node.Node, Node.Node) GetStartAndGoal(Map.Map map)
         {
-            Node goal = null;
-            Node start = null;
+            Node.Node goal = null;
+            Node.Node start = null;
 
-            foreach (Node[] nodes in map)
-                foreach (Node node in nodes)
+            foreach (Node.Node[] nodes in map)
+                foreach (Node.Node node in nodes)
                 {
-                    if (node.State == NodeState.Start)
+                    if (node.State == Node.NodeState.Start)
                         start = node;
-                    else if (node.State == NodeState.Goal)
+                    else if (node.State == Node.NodeState.Goal)
                         goal = node;
                 }
 
