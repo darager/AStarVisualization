@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29001.49
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PathFindingVisualization.DataStructures", "PathFindingVisualization.DataStructures\PathFindingVisualization.DataStructures.csproj", "{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathFindingVisualization.WPF.Controls", "PathFindingVisualization.WPF.Controls\PathFindingVisualization.WPF.Controls.csproj", "{D339AA80-A50F-4D42-9515-027AE3FF8612}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathFindingVisualization.WPF", "PathFindingVisualization.WPF\PathFindingVisualization.WPF.csproj", "{4D21BA11-1048-4206-819D-7B6B3785A451}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PathFindingVisualization.Core", "PathFindingVisualization.Core\PathFindingVisualization.Core.csproj", "{016C9FC7-77B3-4554-B47C-3FC8E4DAB93F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PathFindingVisualization.Core.UnitTests", "PathFindingVisualization.Core.UnitTests\PathFindingVisualization.Core.UnitTests.csproj", "{C17F0F5F-4A46-4E1A-A87B-84A6E42F32C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PathFindingVisualization.DataStructures.UnitTests", "PathFindingVisualization.DataStructures.UnitTests\PathFindingVisualization.DataStructures.UnitTests.csproj", "{89EE35A2-A12F-4581-AB5E-39F644D532AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AAB1625-D15E-44D1-AAC4-847DC707BB0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D339AA80-A50F-4D42-9515-027AE3FF8612}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D21BA11-1048-4206-819D-7B6B3785A451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D21BA11-1048-4206-819D-7B6B3785A451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D21BA11-1048-4206-819D-7B6B3785A451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D21BA11-1048-4206-819D-7B6B3785A451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{016C9FC7-77B3-4554-B47C-3FC8E4DAB93F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{016C9FC7-77B3-4554-B47C-3FC8E4DAB93F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{016C9FC7-77B3-4554-B47C-3FC8E4DAB93F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{016C9FC7-77B3-4554-B47C-3FC8E4DAB93F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C17F0F5F-4A46-4E1A-A87B-84A6E42F32C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C17F0F5F-4A46-4E1A-A87B-84A6E42F32C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C17F0F5F-4A46-4E1A-A87B-84A6E42F32C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C17F0F5F-4A46-4E1A-A87B-84A6E42F32C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89EE35A2-A12F-4581-AB5E-39F644D532AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89EE35A2-A12F-4581-AB5E-39F644D532AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89EE35A2-A12F-4581-AB5E-39F644D532AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89EE35A2-A12F-4581-AB5E-39F644D532AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0020425E-8983-4AFC-A0CB-51415B26FA50}
+	EndGlobalSection
+EndGlobal

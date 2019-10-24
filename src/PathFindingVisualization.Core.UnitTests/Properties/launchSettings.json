@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PathFindingVisualization.Core.UnitTests": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
