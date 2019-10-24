@@ -21,9 +21,9 @@
             Map="{Binding Path=Map, Mode=TwoWay}"
             Path="{Binding Path=Path, Mode=TwoWay}">
             <i:Interaction.Triggers>
-                <!--<i:EventTrigger EventName="MouseMove">
-                    <i:InvokeCommandAction Command="{Binding Path=PlaceTileCommand}" />
-                </i:EventTrigger>-->
+                <i:EventTrigger EventName="MouseMove">
+                    <i:InvokeCommandAction Command="{Binding Path=ProcessMouseMovementCommand}" PassEventArgsToCommand="True" />
+                </i:EventTrigger>
                 <i:EventTrigger EventName="MouseLeftButtonDown">
                     <i:InvokeCommandAction Command="{Binding Path=PlaceTileCommand}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>

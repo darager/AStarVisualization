@@ -1,6 +1,5 @@
-﻿namespace AStarVisualization.WPF
+﻿namespace AStarVisualization.WPF.ViewModels
 {
-    // TODO: move this file to somewhere it belongs
     public enum Place
     {
         None,

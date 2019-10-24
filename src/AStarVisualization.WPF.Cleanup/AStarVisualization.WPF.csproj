@@ -63,12 +63,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bindings.cs" />
-    <Compile Include="Commands\ProcessMouseMoveCommand.cs" />
-    <Compile Include="Commands\RemoveTileCommand.cs" />
     <Compile Include="Commands\PlaceTileCommand.cs" />
     <Compile Include="Commands\RemoveTileCommand.cs" />
     <Compile Include="Commands\ProcessMouseMovementCommand.cs" />
-    <Compile Include="Place.cs" />
+    <Compile Include="ViewModels\Place.cs" />
     <Compile Include="ViewModels\MapCanvasViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

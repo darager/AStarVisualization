@@ -4,9 +4,6 @@ using AStarVisualization.WPF.ViewModels;
 using System;
 using System.Windows.Input;
 using System.Windows.Shapes;
-using AStarVisualization.Core;
-using AStarVisualization.WPF.Controls;
-using AStarVisualization.WPF.ViewModels;
 
 namespace AStarVisualization.WPF.Commands
 {

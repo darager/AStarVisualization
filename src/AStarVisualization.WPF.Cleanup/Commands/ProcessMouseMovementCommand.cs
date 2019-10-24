@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Windows.Input;
-using System.Windows.Shapes;
-using AStarVisualization.WPF.Controls;
 using AStarVisualization.WPF.ViewModels;
 
 namespace AStarVisualization.WPF.Commands
 {
     public class ProcessMouseMovementCommand : ICommand
     {
-        private MapCanvasViewModel mapCanvasViewModel;
+        private MapCanvasViewModel _mapCanvasViewModel;
 
         public ProcessMouseMovementCommand(MapCanvasViewModel mapCanvasViewModel)
         {
-            this.mapCanvasViewModel = mapCanvasViewModel;
+            _mapCanvasViewModel = mapCanvasViewModel;
         }
 
-        public bool CanExecute(object parameter)
-        {
-            return false;
-            //return mapCanvasViewModel.MapDesignPhaseActive && (mapCanvasViewModel.Place != Place.None);
-        }
+        public bool CanExecute(object parameter) => _mapCanvasViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
             //var args = (MouseEventArgs)parameter;

@@ -1,6 +1,5 @@
 ﻿using AStarVisualization.Core;
 using AStarVisualization.Core.Map;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -21,16 +20,6 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
             Rectangle[,] oldTiles = Tiles;
             Tiles = new Rectangle[canvas.NumRows, canvas.NumColumns];
 
-            if (newMap != null)
-                foreach (Node[] nodes in newMap)
-                    foreach (Node node in nodes)
-                        node.StateChanged += ChangeColor;
-
-            if (oldMap != null)
-                foreach (Node[] nodes in oldMap)
-                    foreach (Node node in nodes)
-                        node.StateChanged -= ChangeColor;
-
             // create the new tiles
             for (int i = 0; i < canvas.NumRows; i++)
                 for (int j = 0; j < canvas.NumColumns; j++)
@@ -38,29 +27,28 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
 
             foreach (Node[] nodes in newMap)
                 foreach (Node node in nodes)
-                    node.NodeStateChanged += UpdateColor;
+                    node.StateChanged += UpdateColor;
 
             foreach (Rectangle tile in Tiles)
                 canvas.Children.Add(tile);
 
-            if(oldMap != null)
+            if (oldMap != null)
             {
                 foreach (Node[] nodes in oldMap)
                     foreach (Node node in nodes)
-                        node.NodeStateChanged -= UpdateColor;
+                        node.StateChanged -= UpdateColor;
 
                 foreach (Rectangle tile in oldTiles)
                     canvas.Children.Remove(tile);
             }
         }
 
-        private void ChangeColor(object sender, StateChangedEventArgs e)
+        private void UpdateColor(object sender, StateChangedEventArgs e)
         {
-            Node node = e.Node;
-            int rowIdx = node.RowIndex;
-            int colIdx = node.ColIndex;
+            var node = (Node)sender;
+            Rectangle rectangle = Tiles[node.RowIndex, node.ColIndex];
 
-            Tiles[rowIdx, colIdx].Fill = GetStateColor(node.State);
+            rectangle.Fill = GetStateColor(e.NewState);
         }
         private Rectangle GetRectangle(MapCanvas canvas, Node node)
         {
@@ -89,13 +77,6 @@ namespace AStarVisualization.WPF.Controls.MapCanvasRenderers
             Canvas.SetTop(rect, y);
 
             return rect;
-        }
-        private void UpdateColor(object sender, NodeStateChangedEventArgs e)
-        {
-            var node = (Node)sender;
-            Rectangle rectangle = Tiles[node.RowIndex, node.ColIndex];
-
-            rectangle.Fill = GetStateColor(e.NewState);
         }
         private SolidColorBrush GetStateColor(NodeState state) // TODO: choose proper colors
         {
