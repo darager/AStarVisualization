@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using PathFindingVisualization.WPF.ViewModels;
 
+// TODO: improve this if possible
 namespace PathFindingVisualization.WPF.Commands
 {
     public class ProcessMouseMovementCommand : ICommand
@@ -16,23 +17,20 @@ namespace PathFindingVisualization.WPF.Commands
         public bool CanExecute(object parameter) => _mapCanvasViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
-            //var args = (MouseEventArgs)parameter;
-            //var shape = (Shape)args.OriginalSource;
-            //var mapCanvas = (MapCanvas)shape.Parent;
+            var args = (MouseEventArgs)parameter;
 
-            ////Point position = args.GetPosition(mapCanvas);
-            //if (args.LeftButton == MouseButtonState.Pressed)
-            //{
-            //    ICommand placeTileCommand = mapCanvasViewModel.PlaceTileCommand;
-            //    if (placeTileCommand.CanExecute(parameter))
-            //        placeTileCommand.Execute(parameter);
-            //}
-            //else if (args.RightButton == MouseButtonState.Pressed)
-            //{
-            //    ICommand removeTileCommand = mapCanvasViewModel.RemoveTileCommand;
-            //    if (removeTileCommand.CanExecute(parameter))
-            //        removeTileCommand.Execute(parameter);
-            //}
+            if (args.LeftButton == MouseButtonState.Pressed)
+            {
+                ICommand placeTileCommand = _mapCanvasViewModel.PlaceTileCommand;
+                if (placeTileCommand.CanExecute(parameter))
+                    placeTileCommand.Execute(parameter);
+            }
+            else if (args.RightButton == MouseButtonState.Pressed)
+            {
+                ICommand removeTileCommand = _mapCanvasViewModel.RemoveTileCommand;
+                if (removeTileCommand.CanExecute(parameter))
+                    removeTileCommand.Execute(parameter);
+            }
         }
 
         public event EventHandler CanExecuteChanged;
