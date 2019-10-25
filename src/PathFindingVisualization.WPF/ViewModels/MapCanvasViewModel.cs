@@ -35,22 +35,18 @@ namespace PathFindingVisualization.WPF.ViewModels
             }
         }
 
-        public ICommand RemoveTileCommand { get; private set; }
         public ICommand PlaceTileCommand { get; private set; }
+        public ICommand RemoveTileCommand { get; private set; }
         public ICommand ProcessMouseMovementCommand { get; private set; }
 
-        // TODO: make sure that these properties are used correctly
         public Place Place { get; set; } = Place.Wall;
         public bool MapDesignPhaseActive { get; set; } = true;
 
-        private Map _map;
-        private List<Node> _path;
+        private Map _map = new Map(2, 2);
+        private List<Node> _path = new List<Node>();
 
         public MapCanvasViewModel()
         {
-            _map = new Map(2, 2);
-            _path = new List<Node>();
-
             // TODO: inject these if necessary
             PlaceTileCommand = new PlaceTileCommand(this);
             RemoveTileCommand = new RemoveTileCommand(this);

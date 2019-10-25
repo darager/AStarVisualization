@@ -19,7 +19,7 @@ namespace PathFindingVisualization.WPF
             mapCanvas.DataContext = mapViewModel;
 
             // TODO: remove mock data
-            mapViewModel.Map = new Core.Map.Map(30, 30);
+            mapViewModel.Map = new Core.Map.Map(50, 50);
         }
     }
 }

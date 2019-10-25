@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Specialized;
 
-// TODO: has to be tested
 namespace PathFindingVisualization.Core.Map
 {
     public class Map : INotifyCollectionChanged, IEnumerable
@@ -31,6 +30,7 @@ namespace PathFindingVisualization.Core.Map
                 }
             }
         }
+
         private Node.Node[][] _map;
 
         public Map(int numRows, int numColumns)
@@ -49,7 +49,7 @@ namespace PathFindingVisualization.Core.Map
 
         public int GetLength(int dimension)
         {
-            if (dimension > 1) throw new ArgumentOutOfRangeException();
+            if (dimension > 1 || dimension < 0) throw new ArgumentOutOfRangeException();
 
             int length = 0;
             if (dimension == 0) length = _map.GetLength(0);
