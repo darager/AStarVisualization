@@ -1,18 +1,18 @@
-﻿using System;
+﻿using PathFindingVisualization.Core.Node;
+using PathFindingVisualization.WPF.Controls;
+using PathFindingVisualization.WPF.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shapes;
-using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.WPF.Controls;
-using PathFindingVisualization.WPF.ViewModels;
 
 namespace PathFindingVisualization.WPF.Commands
 {
-    public class RemoveTileCommand : ICommand
+    public class PlaceWallCommand : ICommand
     {
-        private MapViewModel _mapViewModel;
+        private readonly MapViewModel _mapViewModel;
 
-        public RemoveTileCommand(MapViewModel mapCanvasViewModel)
+        public PlaceWallCommand(MapViewModel mapCanvasViewModel)
         {
             _mapViewModel = mapCanvasViewModel;
         }
@@ -28,7 +28,7 @@ namespace PathFindingVisualization.WPF.Commands
             (int rowIdx, int colIdx) = mapCanvas.GetNodeIndices(position);
 
             Node node = mapCanvas.Map[rowIdx, colIdx];
-            node.State = NodeState.Ground;
+            node.State = NodeState.Wall;
         }
 
         public event EventHandler CanExecuteChanged;

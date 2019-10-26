@@ -7,27 +7,27 @@ namespace PathFindingVisualization.WPF.Commands
 {
     public class ProcessMouseMovementCommand : ICommand
     {
-        private MapCanvasViewModel _mapCanvasViewModel;
+        private MapViewModel _mapViewModel;
 
-        public ProcessMouseMovementCommand(MapCanvasViewModel mapCanvasViewModel)
+        public ProcessMouseMovementCommand(MapViewModel mapCanvasViewModel)
         {
-            _mapCanvasViewModel = mapCanvasViewModel;
+            _mapViewModel = mapCanvasViewModel;
         }
 
-        public bool CanExecute(object parameter) => _mapCanvasViewModel.MapDesignPhaseActive;
+        public bool CanExecute(object parameter) => _mapViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
             var args = (MouseEventArgs)parameter;
 
-            if (args.LeftButton == MouseButtonState.Pressed)
+            if (args.LeftButton == MouseButtonState.Pressed && _mapViewModel.Place == Place.Wall)
             {
-                ICommand placeTileCommand = _mapCanvasViewModel.PlaceTileCommand;
-                if (placeTileCommand.CanExecute(parameter))
-                    placeTileCommand.Execute(parameter);
+                ICommand placeWallCommand = _mapViewModel.PlaceTileCommand;
+                if (placeWallCommand.CanExecute(parameter))
+                    placeWallCommand.Execute(parameter);
             }
-            else if (args.RightButton == MouseButtonState.Pressed)
+            if (args.RightButton == MouseButtonState.Pressed)
             {
-                ICommand removeTileCommand = _mapCanvasViewModel.RemoveTileCommand;
+                ICommand removeTileCommand = _mapViewModel.RemoveTileCommand;
                 if (removeTileCommand.CanExecute(parameter))
                     removeTileCommand.Execute(parameter);
             }

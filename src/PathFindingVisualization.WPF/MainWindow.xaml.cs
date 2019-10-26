@@ -15,8 +15,8 @@ namespace PathFindingVisualization.WPF
             kernel.Load(Assembly.GetExecutingAssembly());
 
             // TODO: use xaml to inject the viewmodels instead
-            var mapViewModel = new MapCanvasViewModel();
-            mapCanvas.DataContext = mapViewModel;
+            var mapViewModel = new MapViewModel();
+            DataContext = mapViewModel;
 
             // TODO: remove mock data
             mapViewModel.Map = new Core.Map.Map(50, 50);

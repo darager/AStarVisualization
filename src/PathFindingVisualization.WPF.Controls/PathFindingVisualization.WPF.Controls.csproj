@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MapCanvas.cs" />
+    <Compile Include="MapCanvasExtension.cs" />
     <Compile Include="MapCanvasRenderers\GridLineRenderer.cs" />
     <Compile Include="MapCanvasRenderers\PathRenderer.cs" />
     <Compile Include="MapCanvasRenderers\TileRenderer.cs" />
