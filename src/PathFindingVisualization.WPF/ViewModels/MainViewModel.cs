@@ -1,6 +1,7 @@
 ﻿using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Commands;
+using PathFindingVisualization.WPF.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -36,23 +37,28 @@ namespace PathFindingVisualization.WPF.ViewModels
         }
 
         public ICommand PlaceTileCommand { get; private set; }
+        public ICommand PlaceStartCommand { get; private set; }
+        public ICommand PlaceGoalCommand { get; private set; }
         public ICommand RemoveTileCommand { get; private set; }
-        public ICommand ProcessMouseMovementCommand { get; private set; }
         public ICommand ClearMapCommand { get; private set; }
 
         public Place PlacementMode { get; set; } = Place.Wall;
         public bool MapDesignPhaseActive { get; set; } = true;
 
-        private Map _map = new Map(2, 2);
-        private List<Node> _path = new List<Node>();
+        private Map _map;
+        private List<Node> _path;
 
-        public MainViewModel()
+        public MainViewModel(MapCanvasData mapCanvasData)
         {
+            Map = mapCanvasData.Map;
+            Path = mapCanvasData.Path;
+
             // TODO: inject these if necessary
             PlaceTileCommand = new PlaceTileCommand(this);
             RemoveTileCommand = new RemoveTileCommand(this);
-            ProcessMouseMovementCommand = new ProcessMouseMovementCommand(this);
             ClearMapCommand = new ClearMapCommand(this);
+            PlaceStartCommand = new PlaceStartCommand(this);
+            PlaceGoalCommand = new PlaceGoalCommand(this);
         }
 
         private void OnPropertyChanged(string propertyName)

@@ -33,7 +33,7 @@ namespace PathFindingVisualization.Core.Map
 
         private Node.Node[][] _map;
 
-        public Map(int numRows, int numColumns)
+        public Map(int numRows = 50, int numColumns = 50)
         {
             _map = new Node.Node[numRows][];
 

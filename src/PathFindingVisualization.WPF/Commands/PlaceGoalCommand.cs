@@ -5,11 +5,11 @@ using System.Windows.Input;
 
 namespace PathFindingVisualization.WPF.Commands
 {
-    public class PlaceStartCommand : ICommand
+    public class PlaceGoalCommand : ICommand
     {
         private readonly MainViewModel _mapViewModel;
 
-        public PlaceStartCommand(MainViewModel mapViewModel)
+        public PlaceGoalCommand(MainViewModel mapViewModel)
         {
             _mapViewModel = mapViewModel;
         }
@@ -17,7 +17,7 @@ namespace PathFindingVisualization.WPF.Commands
         public bool CanExecute(object parameter) => _mapViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
-            _mapViewModel.PlacementMode = Place.Start;
+            _mapViewModel.PlacementMode = Place.Goal;
         }
 
         public event EventHandler CanExecuteChanged;

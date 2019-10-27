@@ -14,12 +14,7 @@ namespace PathFindingVisualization.WPF
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
 
-            // TODO: use xaml to inject the viewmodels instead
-            var mainViewModel = new MainViewModel();
-            DataContext = mainViewModel;
-
-            // TODO: remove mock data
-            mainViewModel.Map = new Core.Map.Map(50, 50);
+            DataContext = kernel.Get<MainViewModel>();
         }
     }
 }

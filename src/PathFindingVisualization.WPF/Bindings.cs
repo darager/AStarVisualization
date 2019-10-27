@@ -1,4 +1,6 @@
 ﻿using Ninject.Modules;
+using PathFindingVisualization.WPF.Models;
+using PathFindingVisualization.WPF.ViewModels;
 
 namespace PathFindingVisualization.WPF
 {
@@ -6,7 +8,10 @@ namespace PathFindingVisualization.WPF
     {
         public override void Load()
         {
-            // TODO: implement all the bindings
+            Bind<MapCanvasData>().To<MapCanvasData>().InSingletonScope();
+            Bind<MainWindow>().To<MainWindow>().InSingletonScope();
+            Bind<MainViewModel>().To<MainViewModel>().InSingletonScope();
+            Bind<AlgorithmControlViewModel>().To<AlgorithmControlViewModel>().InSingletonScope();
         }
     }
 }

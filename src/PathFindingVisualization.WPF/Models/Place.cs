@@ -1,8 +1,7 @@
-﻿namespace PathFindingVisualization.WPF.ViewModels
+﻿namespace PathFindingVisualization.WPF.Models
 {
     public enum Place
     {
-        None,
         Wall,
         Start,
         Goal

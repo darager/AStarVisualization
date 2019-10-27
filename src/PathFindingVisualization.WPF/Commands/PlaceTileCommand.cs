@@ -1,5 +1,6 @@
 ﻿using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Controls;
+using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 using System;
 using System.Windows;
@@ -21,7 +22,6 @@ namespace PathFindingVisualization.WPF.Commands
         public void Execute(object parameter)
         {
             Place placementMode = _mapViewModel.PlacementMode;
-            if (placementMode == Place.None) return;
 
             var args = (MouseEventArgs)parameter;
             var shape = (Shape)args.OriginalSource;
@@ -31,22 +31,24 @@ namespace PathFindingVisualization.WPF.Commands
             (int rowIdx, int colIdx) = mapCanvas.GetNodeIndices(position);
 
             Node node = mapCanvas.Map[rowIdx, colIdx];
+            NodeState state = GetState(placementMode);
 
-            node.State = GetState(placementMode);
+            node.State = state;
+
+            if (placementMode == Place.Goal || placementMode == Place.Start)
+                _mapViewModel.PlacementMode = Place.Wall;
         }
 
         private NodeState GetState(Place placementMode)
         {
             switch (placementMode)
             {
-                case Place.Wall:
-                    return NodeState.Wall;
                 case Place.Start:
                     return NodeState.Start;
                 case Place.Goal:
                     return NodeState.Goal;
                 default:
-                    return NodeState.Ground;
+                    return NodeState.Wall;
             }
         }
 
