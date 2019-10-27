@@ -76,15 +76,21 @@ namespace PathFindingVisualization.WPF.Controls
         {
             if (PlaceTile is null) return;
 
-            if (PlaceTile.CanExecute(e))
-                PlaceTile.Execute(e);
+            Point position = e.GetPosition(this);
+            (int rowIdx, int colIdx) = this.GetNodeIndices(position);
+
+            if (PlaceTile.CanExecute((rowIdx, colIdx, this)))
+                PlaceTile.Execute((rowIdx, colIdx, this));
         }
         private void HandleRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (RemoveTile is null) return;
 
-            if (RemoveTile.CanExecute(e))
-                RemoveTile.Execute(e);
+            Point position = e.GetPosition(this);
+            (int rowIdx, int colIdx) = this.GetNodeIndices(position);
+
+            if (RemoveTile.CanExecute((rowIdx, colIdx, this)))
+                RemoveTile.Execute((rowIdx, colIdx, this));
         }
         private void ProccessMouseMovement(object sender, MouseEventArgs e)
         {
@@ -96,7 +102,7 @@ namespace PathFindingVisualization.WPF.Controls
             if (e.RightButton == MouseButtonState.Pressed)
             {
                 var args = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, MouseButton.Right);
-                HandleRightButtonDown(sender, null);
+                HandleRightButtonDown(sender, args);
             }
         }
 

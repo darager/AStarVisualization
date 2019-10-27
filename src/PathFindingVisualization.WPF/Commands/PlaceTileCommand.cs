@@ -21,14 +21,7 @@ namespace PathFindingVisualization.WPF.Commands
         public bool CanExecute(object parameter) => _mapViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
-            Place placementMode = _mapViewModel.PlacementMode;
-
-            var args = (MouseEventArgs)parameter;
-            var shape = (Shape)args.OriginalSource;
-            var mapCanvas = (MapCanvas)shape.Parent;
-
-            Point position = args.GetPosition(mapCanvas);
-            (int rowIdx, int colIdx) = mapCanvas.GetNodeIndices(position);
+            (int rowidx, int colIdx, MapCanvas mapCanvas) = (int, int, MapCanvas)parameter;
 
             Node node = mapCanvas.Map[rowIdx, colIdx];
             NodeState state = GetState(placementMode);
