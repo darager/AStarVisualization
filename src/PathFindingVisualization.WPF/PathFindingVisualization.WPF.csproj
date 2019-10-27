@@ -64,11 +64,12 @@
     </ApplicationDefinition>
     <Compile Include="Bindings.cs" />
     <Compile Include="Commands\ClearMapCommand.cs" />
-    <Compile Include="Commands\PlaceWallCommand.cs" />
+    <Compile Include="Commands\PlaceStartCommand.cs" />
+    <Compile Include="Commands\PlaceTileCommand.cs" />
     <Compile Include="Commands\RemoveTileCommand.cs" />
     <Compile Include="Commands\ProcessMouseMovementCommand.cs" />
     <Compile Include="ViewModels\Place.cs" />
-    <Compile Include="ViewModels\MapCanvasViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

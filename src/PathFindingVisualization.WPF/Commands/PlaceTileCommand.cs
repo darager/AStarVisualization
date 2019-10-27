@@ -8,11 +8,11 @@ using System.Windows.Shapes;
 
 namespace PathFindingVisualization.WPF.Commands
 {
-    public class PlaceWallCommand : ICommand
+    public class PlaceTileCommand : ICommand
     {
-        private readonly MapViewModel _mapViewModel;
+        private readonly MainViewModel _mapViewModel;
 
-        public PlaceWallCommand(MapViewModel mapCanvasViewModel)
+        public PlaceTileCommand(MainViewModel mapCanvasViewModel)
         {
             _mapViewModel = mapCanvasViewModel;
         }
@@ -20,6 +20,9 @@ namespace PathFindingVisualization.WPF.Commands
         public bool CanExecute(object parameter) => _mapViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
+            Place placementMode = _mapViewModel.PlacementMode;
+            if (placementMode == Place.None) return;
+
             var args = (MouseEventArgs)parameter;
             var shape = (Shape)args.OriginalSource;
             var mapCanvas = (MapCanvas)shape.Parent;
@@ -28,7 +31,23 @@ namespace PathFindingVisualization.WPF.Commands
             (int rowIdx, int colIdx) = mapCanvas.GetNodeIndices(position);
 
             Node node = mapCanvas.Map[rowIdx, colIdx];
-            node.State = NodeState.Wall;
+
+            node.State = GetState(placementMode);
+        }
+
+        private NodeState GetState(Place placementMode)
+        {
+            switch (placementMode)
+            {
+                case Place.Wall:
+                    return NodeState.Wall;
+                case Place.Start:
+                    return NodeState.Start;
+                case Place.Goal:
+                    return NodeState.Goal;
+                default:
+                    return NodeState.Ground;
+            }
         }
 
         public event EventHandler CanExecuteChanged;

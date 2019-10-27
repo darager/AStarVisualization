@@ -10,9 +10,9 @@ namespace PathFindingVisualization.WPF.Commands
 {
     public class RemoveTileCommand : ICommand
     {
-        private MapViewModel _mapViewModel;
+        private MainViewModel _mapViewModel;
 
-        public RemoveTileCommand(MapViewModel mapCanvasViewModel)
+        public RemoveTileCommand(MainViewModel mapCanvasViewModel)
         {
             _mapViewModel = mapCanvasViewModel;
         }

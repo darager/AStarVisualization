@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace PathFindingVisualization.WPF.ViewModels
 {
-    public class MapViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged
     {
         public Map Map
         {
@@ -40,16 +40,16 @@ namespace PathFindingVisualization.WPF.ViewModels
         public ICommand ProcessMouseMovementCommand { get; private set; }
         public ICommand ClearMapCommand { get; private set; }
 
-        public Place Place { get; set; } = Place.Wall;
+        public Place PlacementMode { get; set; } = Place.Wall;
         public bool MapDesignPhaseActive { get; set; } = true;
 
         private Map _map = new Map(2, 2);
         private List<Node> _path = new List<Node>();
 
-        public MapViewModel()
+        public MainViewModel()
         {
             // TODO: inject these if necessary
-            PlaceTileCommand = new PlaceWallCommand(this);
+            PlaceTileCommand = new PlaceTileCommand(this);
             RemoveTileCommand = new RemoveTileCommand(this);
             ProcessMouseMovementCommand = new ProcessMouseMovementCommand(this);
             ClearMapCommand = new ClearMapCommand(this);

@@ -20,6 +20,8 @@
             DockPanel.Dock="Top"
             Orientation="Horizontal">
             <Button Command="{Binding ClearMapCommand}" Content="Clear" />
+            <Button Content="PlaceStart" />
+            <Button Content="PlaceGoal" />
         </StackPanel>
 
         <c:MapCanvas
