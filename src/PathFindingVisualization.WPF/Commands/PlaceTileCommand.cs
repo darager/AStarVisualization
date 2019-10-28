@@ -1,11 +1,9 @@
-﻿using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.WPF.Controls;
+﻿using PathFindingVisualization.Core.Map;
+using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 using System;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Shapes;
 
 namespace PathFindingVisualization.WPF.Commands
 {
@@ -21,9 +19,14 @@ namespace PathFindingVisualization.WPF.Commands
         public bool CanExecute(object parameter) => _mapViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
-            (int rowidx, int colIdx, MapCanvas mapCanvas) = (int, int, MapCanvas)parameter;
+            var indices = (ValueTuple<int, int>)parameter;
+            int rowIdx = indices.Item1;
+            int colIdx = indices.Item2;
 
-            Node node = mapCanvas.Map[rowIdx, colIdx];
+            Map map = _mapViewModel.Map;
+            Node node = map[rowIdx, colIdx];
+
+            Place placementMode = _mapViewModel.PlacementMode;
             NodeState state = GetState(placementMode);
 
             node.State = state;
@@ -40,6 +43,8 @@ namespace PathFindingVisualization.WPF.Commands
                     return NodeState.Start;
                 case Place.Goal:
                     return NodeState.Goal;
+                case Place.Wall:
+                    return NodeState.Wall;
                 default:
                     return NodeState.Wall;
             }

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Shapes;
+using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.WPF.Controls;
 using PathFindingVisualization.WPF.ViewModels;
 
 namespace PathFindingVisualization.WPF.Commands
@@ -20,14 +18,13 @@ namespace PathFindingVisualization.WPF.Commands
         public bool CanExecute(object parameter) => _mapViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
-            var args = (MouseEventArgs)parameter;
-            var shape = (Shape)args.OriginalSource;
-            var mapCanvas = (MapCanvas)shape.Parent;
+            var indices = (ValueTuple<int, int>)parameter;
+            int rowIdx = indices.Item1;
+            int colIdx = indices.Item2;
 
-            Point position = args.GetPosition(mapCanvas);
-            (int rowIdx, int colIdx) = mapCanvas.GetNodeIndices(position);
+            Map map = _mapViewModel.Map;
+            Node node = map[rowIdx, colIdx];
 
-            Node node = mapCanvas.Map[rowIdx, colIdx];
             node.State = NodeState.Ground;
         }
 

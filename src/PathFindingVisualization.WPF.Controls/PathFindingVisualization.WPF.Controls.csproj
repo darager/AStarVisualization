@@ -50,9 +50,9 @@
   <ItemGroup>
     <Compile Include="MapCanvas.cs" />
     <Compile Include="MapCanvasExtension.cs" />
-    <Compile Include="MapCanvasRenderers\GridLineRenderer.cs" />
-    <Compile Include="MapCanvasRenderers\PathRenderer.cs" />
-    <Compile Include="MapCanvasRenderers\TileRenderer.cs" />
+    <Compile Include="Helpers\GridLineRenderer.cs" />
+    <Compile Include="Helpers\PathRenderer.cs" />
+    <Compile Include="Helpers\TileRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -77,20 +77,20 @@ namespace PathFindingVisualization.WPF.Controls
             if (PlaceTile is null) return;
 
             Point position = e.GetPosition(this);
-            (int rowIdx, int colIdx) = this.GetNodeIndices(position);
+            (int, int) indices = this.GetNodeIndices(position);
 
-            if (PlaceTile.CanExecute((rowIdx, colIdx, this)))
-                PlaceTile.Execute((rowIdx, colIdx, this));
+            if (PlaceTile.CanExecute(indices))
+                PlaceTile.Execute(indices);
         }
         private void HandleRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (RemoveTile is null) return;
 
             Point position = e.GetPosition(this);
-            (int rowIdx, int colIdx) = this.GetNodeIndices(position);
+            (int, int) indices = this.GetNodeIndices(position);
 
-            if (RemoveTile.CanExecute((rowIdx, colIdx, this)))
-                RemoveTile.Execute((rowIdx, colIdx, this));
+            if (RemoveTile.CanExecute(indices))
+                RemoveTile.Execute(indices);
         }
         private void ProccessMouseMovement(object sender, MouseEventArgs e)
         {
