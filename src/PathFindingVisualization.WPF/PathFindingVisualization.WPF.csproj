@@ -69,6 +69,7 @@
     <Compile Include="Commands\PlaceTileCommand.cs" />
     <Compile Include="Commands\RemoveTileCommand.cs" />
     <Compile Include="Models\MapCanvasData.cs" />
+    <Compile Include="NodeStateChanger.cs" />
     <Compile Include="ViewModels\AlgorithmControlViewModel.cs" />
     <Compile Include="Models\Place.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
