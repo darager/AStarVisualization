@@ -36,17 +36,20 @@ namespace PathFindingVisualization.WPF.ViewModels
             }
         }
 
-        public ICommand PlaceTileCommand { get; private set; }
+        public ICommand PlaceTileCommand => _nodeStateChanger.HandleLeftClick;
+        public ICommand RemoveTileCommand => _nodeStateChanger.HandleRightClick;
+        public ICommand ProcessMouseMovementCommand => _nodeStateChanger.ProcessMouseMovement;
+
+        public ICommand ClearMapCommand { get; private set; }
         public ICommand PlaceStartCommand { get; private set; }
         public ICommand PlaceGoalCommand { get; private set; }
-        public ICommand RemoveTileCommand { get; private set; }
-        public ICommand ClearMapCommand { get; private set; }
 
         public Place PlacementMode { get; set; } = Place.Wall;
         public bool MapDesignPhaseActive { get; set; } = true; // TODO
 
         private Map _map;
         private List<Node> _path;
+        private NodeStateChanger _nodeStateChanger;
 
         public MainViewModel(MapCanvasData mapCanvasData)
         {
@@ -54,8 +57,7 @@ namespace PathFindingVisualization.WPF.ViewModels
             Path = mapCanvasData.Path;
 
             // TODO: inject these if necessary
-            PlaceTileCommand = new PlaceTileCommand(this);
-            RemoveTileCommand = new RemoveTileCommand(this);
+            _nodeStateChanger = new NodeStateChanger();
             ClearMapCommand = new ClearMapCommand(this);
             PlaceStartCommand = new PlaceStartCommand(this);
             PlaceGoalCommand = new PlaceGoalCommand(this);

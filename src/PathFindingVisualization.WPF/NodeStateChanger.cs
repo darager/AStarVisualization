@@ -11,8 +11,7 @@ namespace PathFindingVisualization.WPF
 
         private NodeState PlacementMode = NodeState.Ground;
 
-
-        public void ChangeNodeState()
+        public NodeStateChanger()
         {
         }
     }

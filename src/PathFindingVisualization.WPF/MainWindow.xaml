@@ -30,10 +30,8 @@
             VerticalAlignment="Stretch"
             DockPanel.Dock="Bottom"
             Map="{Binding Path=Map, Mode=TwoWay}"
-            Path="{Binding Path=Path, Mode=TwoWay}"
-            PlaceTile="{Binding Path=PlaceTileCommand}"
-            RemoveTile="{Binding Path=RemoveTileCommand}">
-            <!--<i:Interaction.Triggers>
+            Path="{Binding Path=Path, Mode=TwoWay}">
+            <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseMove">
                     <i:InvokeCommandAction Command="{Binding Path=ProcessMouseMovementCommand}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>
@@ -43,7 +41,7 @@
                 <i:EventTrigger EventName="MouseRightButtonDown">
                     <i:InvokeCommandAction Command="{Binding Path=RemoveTileCommand}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>
-            </i:Interaction.Triggers>-->
+            </i:Interaction.Triggers>
         </c:MapCanvas>
 
     </DockPanel>
