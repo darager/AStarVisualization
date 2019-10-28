@@ -43,7 +43,7 @@ namespace PathFindingVisualization.WPF.ViewModels
         public ICommand ClearMapCommand { get; private set; }
 
         public Place PlacementMode { get; set; } = Place.Wall;
-        public bool MapDesignPhaseActive { get; set; } = true;
+        public bool MapDesignPhaseActive { get; set; } = true; // TODO
 
         private Map _map;
         private List<Node> _path;
