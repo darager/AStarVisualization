@@ -12,55 +12,44 @@ namespace PathFindingVisualization.WPF.ViewModels
     {
         public Map Map
         {
-            get => _map;
+            get => _mapCanvasData.Map;
             set
             {
-                if (_map != value)
+                if (_mapCanvasData.Map != value)
                 {
-                    _map = value;
-                    _map.UpdateNodeIndices();
+                    _mapCanvasData.Map = value;
+                    _mapCanvasData.Map.UpdateNodeIndices();
                     OnPropertyChanged("Map");
                 }
             }
         }
         public List<Node> Path
         {
-            get => _path;
+            get => _mapCanvasData.Path;
             set
             {
-                if (_path != value)
+                if (_mapCanvasData.Path != value)
                 {
-                    _path = value;
+                    _mapCanvasData.Path = value;
                     OnPropertyChanged("Path");
                 }
             }
         }
 
-        public ICommand PlaceTileCommand => _nodeStateChanger.HandleLeftClick;
-        public ICommand RemoveTileCommand => _nodeStateChanger.HandleRightClick;
-        public ICommand ProcessMouseMovementCommand => _nodeStateChanger.ProcessMouseMovement;
+        public ICommand PlaceTileCommand => _mapEditor.PlaceTile;
+        public ICommand RemoveTileCommand => _mapEditor.RemoveTile;
+        public ICommand ProcessMouseMovementCommand => _mapEditor.ProcessMouseMovement;
+        public ICommand ClearMapCommand => _mapEditor.ClearMap;
+        //public ICommand PlaceStartCommand { get; private set; }
+        //public ICommand PlaceGoalCommand { get; private set; }
 
-        public ICommand ClearMapCommand { get; private set; }
-        public ICommand PlaceStartCommand { get; private set; }
-        public ICommand PlaceGoalCommand { get; private set; }
+        private MapCanvasData _mapCanvasData;
+        private readonly MapEditor _mapEditor;
 
-        public Place PlacementMode { get; set; } = Place.Wall;
-        public bool MapDesignPhaseActive { get; set; } = true; // TODO
-
-        private Map _map;
-        private List<Node> _path;
-        private NodeStateChanger _nodeStateChanger;
-
-        public MainViewModel(MapCanvasData mapCanvasData)
+        public MainViewModel(MapCanvasData mapCanvasData, MapEditor mapEditor)
         {
-            Map = mapCanvasData.Map;
-            Path = mapCanvasData.Path;
-
-            // TODO: inject these if necessary
-            _nodeStateChanger = new NodeStateChanger();
-            ClearMapCommand = new ClearMapCommand(this);
-            PlaceStartCommand = new PlaceStartCommand(this);
-            PlaceGoalCommand = new PlaceGoalCommand(this);
+            _mapCanvasData = mapCanvasData;
+            _mapEditor = mapEditor;
         }
 
         private void OnPropertyChanged(string propertyName)

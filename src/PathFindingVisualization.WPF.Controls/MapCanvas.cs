@@ -29,6 +29,9 @@ namespace PathFindingVisualization.WPF.Controls
                 "Path", typeof(List<Node>), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnPathChange)));
 
+        public int NumRows => Map.GetLength(0);
+        public int NumColumns => Map.GetLength(1);
+
         public PathRenderer PathRenderer;
         public TileRenderer TileRenderer;
         public GridLineRenderer GridLineRenderer;

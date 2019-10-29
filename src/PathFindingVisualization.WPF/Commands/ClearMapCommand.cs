@@ -1,6 +1,5 @@
 ﻿using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.WPF.ViewModels;
 using System;
 using System.Windows.Input;
 
@@ -8,19 +7,19 @@ namespace PathFindingVisualization.WPF.Commands
 {
     public class ClearMapCommand : ICommand
     {
-        private MainViewModel _mainViewModel;
+        private MapEditor _mapEditor;
 
-        public ClearMapCommand(MainViewModel mapViewModel)
+        public ClearMapCommand(MapEditor mapEditor)
         {
-            _mainViewModel = mapViewModel;
+            _mapEditor = mapEditor;
         }
 
-        public bool CanExecute(object parameter) => _mainViewModel.MapDesignPhaseActive;
+        public bool CanExecute(object parameter) => _mapEditor.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
-            _mainViewModel.Path = new System.Collections.Generic.List<Node>();
+            _mapEditor.Path = new System.Collections.Generic.List<Node>();
 
-            Map map = _mainViewModel.Map;
+            Map map = _mapEditor.Map;
             foreach (Node[] nodes in map)
                 foreach (Node node in nodes)
                     node.State = NodeState.Ground;
