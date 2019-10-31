@@ -1,8 +1,5 @@
 ﻿using Ninject;
-using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.WPF.Models;
-using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace PathFindingVisualization.WPF
@@ -10,24 +7,19 @@ namespace PathFindingVisualization.WPF
     public class MapEditor
     {
         [Inject, Named("PlaceTileCommand")]
-        public ICommand PlaceTile;
+        public ICommand PlaceTile { get; set; }
         [Inject, Named("RemoveTileCommand")]
-        public ICommand RemoveTile;
-        //[Inject, Named("ProcessMouseMovement")]
-        public ICommand ProcessMouseMovement;
+        public ICommand RemoveTile { get; set; }
+        [Inject, Named("ProcessMouseMovementCommand")]
+        public ICommand ProcessMouseMovement { get; set; }
         [Inject, Named("ClearMapCommand")]
-        public ICommand ClearMap;
+        public ICommand ClearMap { get; set; }
 
-        public List<Node> Path { get; set; }
-        public Map Map { get; private set; }
-
-        public bool MapDesignPhaseActive { get; set; }
+        public bool MapDesignPhaseActive { get; set; } = true; // TODO: handle this property differently
         public NodeState PlacementMode { get; set; } = NodeState.Wall;
 
-        public MapEditor(MapCanvasData data)
+        public MapEditor()
         {
-            Map = data.Map;
-            Path = data.Path;
         }
     }
 }

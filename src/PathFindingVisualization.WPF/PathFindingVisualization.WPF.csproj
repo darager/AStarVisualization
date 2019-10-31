@@ -67,6 +67,7 @@
     <Compile Include="Commands\PlaceGoalCommand.cs" />
     <Compile Include="Commands\PlaceStartCommand.cs" />
     <Compile Include="Commands\PlaceTileCommand.cs" />
+    <Compile Include="Commands\ProcessMouseMovement.cs" />
     <Compile Include="Commands\RemoveTileCommand.cs" />
     <Compile Include="Models\MapCanvasData.cs" />
     <Compile Include="MapEditor.cs" />

@@ -1,6 +1,6 @@
-﻿using PathFindingVisualization.Core.Map;
+﻿using Ninject;
+using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.WPF.Commands;
 using PathFindingVisualization.WPF.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,11 +40,12 @@ namespace PathFindingVisualization.WPF.ViewModels
         public ICommand RemoveTileCommand => _mapEditor.RemoveTile;
         public ICommand ProcessMouseMovementCommand => _mapEditor.ProcessMouseMovement;
         public ICommand ClearMapCommand => _mapEditor.ClearMap;
+
         //public ICommand PlaceStartCommand { get; private set; }
         //public ICommand PlaceGoalCommand { get; private set; }
 
         private MapCanvasData _mapCanvasData;
-        private readonly MapEditor _mapEditor;
+        private MapEditor _mapEditor;
 
         public MainViewModel(MapCanvasData mapCanvasData, MapEditor mapEditor)
         {
