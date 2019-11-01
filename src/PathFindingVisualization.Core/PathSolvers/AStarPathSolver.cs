@@ -1,9 +1,9 @@
-﻿using PathFindingVisualization.Core.Exceptions;
-using System.Linq;
-using PathFindingVisualization.DataStructures;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using PathFindingVisualization.Core.Exceptions;
 using PathFindingVisualization.Core.Map;
+using PathFindingVisualization.DataStructures;
 
 // TODO: clean up this class
 // TODO: measure performance, if necessary replace linq for more efficient methods

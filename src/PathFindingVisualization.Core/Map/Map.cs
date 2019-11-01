@@ -26,6 +26,7 @@ namespace PathFindingVisualization.Core.Map
                 if (_map != value)
                 {
                     _map = value;
+                    this.UpdateNodeIndices();
                     CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                 }
             }

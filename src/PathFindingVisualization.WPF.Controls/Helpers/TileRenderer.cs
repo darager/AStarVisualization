@@ -1,9 +1,9 @@
-﻿using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.Core.Map;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using PathFindingVisualization.Core.Map;
+using PathFindingVisualization.Core.Node;
 
 namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
 {

@@ -1,7 +1,6 @@
-﻿using PathFindingVisualization.Core.Map;
+﻿using System.Windows.Input;
 using PathFindingVisualization.Core.PathSolvers;
 using PathFindingVisualization.WPF.Models;
-using System.Windows.Input;
 
 namespace PathFindingVisualization.WPF.ViewModels
 {

@@ -1,9 +1,9 @@
-﻿using PathFindingVisualization.Core.Exceptions;
-using PathFindingVisualization.Core.PathSolvers;
-using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
+using PathFindingVisualization.Core.Exceptions;
+using PathFindingVisualization.Core.PathSolvers;
 
 // TODO: clean up this testFixture
 

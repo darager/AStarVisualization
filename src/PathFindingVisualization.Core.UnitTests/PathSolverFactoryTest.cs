@@ -1,5 +1,5 @@
-﻿using PathFindingVisualization.Core.PathSolvers;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using PathFindingVisualization.Core.PathSolvers;
 
 namespace PathFindingVisualization.Core.UnitTests
 {

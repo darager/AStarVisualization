@@ -6,34 +6,31 @@ using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Controls;
 using PathFindingVisualization.WPF.Models;
+using PathFindingVisualization.WPF.ViewModels;
 
 namespace PathFindingVisualization.WPF.Commands
 {
     public class RemoveTileCommand : ICommand
     {
-        private MapEditor _mapEditor;
         private MapCanvasData _data;
+        private MainViewModel _mainViewModel;
 
-        public RemoveTileCommand(MapEditor mapEditor, MapCanvasData data)
+        public RemoveTileCommand(MapCanvasData data, MainViewModel mainViewModel)
         {
-            _mapEditor = mapEditor;
             _data = data;
+            _mainViewModel = mainViewModel;
         }
 
-        public bool CanExecute(object parameter) => _mapEditor.MapDesignPhaseActive;
+        public bool CanExecute(object parameter) => _mainViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
-            var args = (MouseEventArgs)parameter;
-            var shape = (Shape)args.OriginalSource;
-            var mapCanvas = (MapCanvas)shape.Parent;
+            ICommand placeTile = _mainViewModel.PlaceTileCommand;
 
-            Point position = args.GetPosition(mapCanvas);
-            (int rowIdx, int colIdx) = mapCanvas.GetNodeIndices(position);
-
-            Map map = _data.Map;
-            Node node = map[rowIdx, colIdx];
-
-            node.State = NodeState.Ground;
+            if (placeTile.CanExecute(parameter))
+            {
+                _mainViewModel.PlacementMode = NodeState.Ground;
+                placeTile.Execute(parameter);
+            }
         }
 
         public event EventHandler CanExecuteChanged;

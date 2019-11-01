@@ -1,7 +1,7 @@
-﻿using PathFindingVisualization.WPF.ViewModels;
-using Ninject;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Windows;
+using Ninject;
+using PathFindingVisualization.WPF.ViewModels;
 
 namespace PathFindingVisualization.WPF
 {

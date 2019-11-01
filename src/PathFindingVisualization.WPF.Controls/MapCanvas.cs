@@ -1,9 +1,9 @@
-﻿using PathFindingVisualization.Core.Map;
-using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.WPF.Controls.MapCanvasRenderers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using PathFindingVisualization.Core.Map;
+using PathFindingVisualization.Core.Node;
+using PathFindingVisualization.WPF.Controls.MapCanvasRenderers;
 
 namespace PathFindingVisualization.WPF.Controls
 {
@@ -16,7 +16,7 @@ namespace PathFindingVisualization.WPF.Controls
         }
         public static readonly DependencyProperty MapProperty =
             DependencyProperty.Register(
-                "Map", typeof(Map), typeof(MapCanvas),
+                nameof(Map), typeof(Map), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnMapChange)));
 
         public List<Node> Path
@@ -26,7 +26,7 @@ namespace PathFindingVisualization.WPF.Controls
         }
         public static readonly DependencyProperty PathProperty =
             DependencyProperty.Register(
-                "Path", typeof(List<Node>), typeof(MapCanvas),
+                nameof(Path), typeof(List<Node>), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnPathChange)));
 
         public int NumRows => Map.GetLength(0);

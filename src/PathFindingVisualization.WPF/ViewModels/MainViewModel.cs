@@ -1,15 +1,28 @@
-﻿using Ninject;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Input;
+using Ninject;
 using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Models;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Input;
 
 namespace PathFindingVisualization.WPF.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        [Inject, Named("PlaceTileCommand")]
+        public ICommand PlaceTileCommand { get; set; }
+        [Inject, Named("RemoveTileCommand")]
+        public ICommand RemoveTileCommand { get; set; }
+        [Inject, Named("ProcessMouseMovementCommand")]
+        public ICommand ProcessMouseMovementCommand { get; set; }
+        [Inject, Named("ClearMapCommand")]
+        public ICommand ClearMapCommand { get; set; }
+        [Inject, Named("PlaceStartCommand")]
+        public ICommand PlaceStartCommand { get; set; }
+        [Inject, Named("PlaceGoalCommand")]
+        public ICommand PlaceGoalCommand { get; set; }
+
         public Map Map
         {
             get => _mapCanvasData.Map;
@@ -18,7 +31,6 @@ namespace PathFindingVisualization.WPF.ViewModels
                 if (_mapCanvasData.Map != value)
                 {
                     _mapCanvasData.Map = value;
-                    _mapCanvasData.Map.UpdateNodeIndices();
                     OnPropertyChanged("Map");
                 }
             }
@@ -36,21 +48,31 @@ namespace PathFindingVisualization.WPF.ViewModels
             }
         }
 
-        public ICommand PlaceTileCommand => _mapEditor.PlaceTile;
-        public ICommand RemoveTileCommand => _mapEditor.RemoveTile;
-        public ICommand ProcessMouseMovementCommand => _mapEditor.ProcessMouseMovement;
-        public ICommand ClearMapCommand => _mapEditor.ClearMap;
+        public bool StartPlacementActive => (PlacementMode == NodeState.Start);
+        public bool GoalPlacementActive => (PlacementMode == NodeState.Goal);
 
-        //public ICommand PlaceStartCommand { get; private set; }
-        //public ICommand PlaceGoalCommand { get; private set; }
+        // TODO: handle these pyoperties differently
+        public bool MapDesignPhaseActive { get; set; } = true;
+        public NodeState PlacementMode
+        {
+            get => _placementMode;
+            set
+            {
+                if (_placementMode != value)
+                {
+                    _placementMode = value;
+                    OnPropertyChanged("StartPlacementActive");
+                    OnPropertyChanged("GoalPlacementActive");
+                }
+            }
+        }
+        private NodeState _placementMode = NodeState.Wall;
 
-        private MapCanvasData _mapCanvasData;
-        private MapEditor _mapEditor;
+        private readonly MapCanvasData _mapCanvasData;
 
-        public MainViewModel(MapCanvasData mapCanvasData, MapEditor mapEditor)
+        public MainViewModel(MapCanvasData mapCanvasData)
         {
             _mapCanvasData = mapCanvasData;
-            _mapEditor = mapEditor;
         }
 
         private void OnPropertyChanged(string propertyName)

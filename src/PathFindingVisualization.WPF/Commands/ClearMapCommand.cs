@@ -1,23 +1,24 @@
-﻿using PathFindingVisualization.Core.Map;
+﻿using System;
+using System.Windows.Input;
+using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Models;
-using System;
-using System.Windows.Input;
+using PathFindingVisualization.WPF.ViewModels;
 
 namespace PathFindingVisualization.WPF.Commands
 {
     public class ClearMapCommand : ICommand
     {
-        private MapEditor _mapEditor;
         private MapCanvasData _data;
+        private MainViewModel _mainViewModel;
 
-        public ClearMapCommand(MapEditor mapEditor, MapCanvasData data)
+        public ClearMapCommand(MapCanvasData data, MainViewModel mainViewModel)
         {
-            _mapEditor = mapEditor;
             _data = data;
+            _mainViewModel = mainViewModel;
         }
 
-        public bool CanExecute(object parameter) => _mapEditor.MapDesignPhaseActive;
+        public bool CanExecute(object parameter) => _mainViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
             _data.Path = new System.Collections.Generic.List<Node>();

@@ -1,6 +1,6 @@
-﻿using PathFindingVisualization.Core.Map;
+﻿using System.Collections.Generic;
+using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
-using System.Collections.Generic;
 
 namespace PathFindingVisualization.WPF.Models
 {
@@ -8,6 +8,9 @@ namespace PathFindingVisualization.WPF.Models
     {
         public Map Map;
         public List<Node> Path;
+
+        public Node Start = null;
+        public Node Goal = null;
 
         public MapCanvasData()
         {
