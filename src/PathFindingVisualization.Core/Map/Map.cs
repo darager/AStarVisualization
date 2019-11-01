@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Specialized;
 
 namespace PathFindingVisualization.Core.Map
 {
-    public class Map : INotifyCollectionChanged, IEnumerable
+    public class Map : IEnumerable
     {
         public Node.Node this[int i, int j]
         {
@@ -14,7 +13,6 @@ namespace PathFindingVisualization.Core.Map
                 if (_map[i][j] != value)
                 {
                     _map[i][j] = value;
-                    CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, _map[i][j]));
                 }
             }
         }
@@ -26,12 +24,10 @@ namespace PathFindingVisualization.Core.Map
                 if (_map != value)
                 {
                     _map = value;
-                    this.UpdateNodeIndices();
-                    CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    UpdateNodeIndices();
                 }
             }
         }
-
         private Node.Node[][] _map;
 
         public Map(int numRows = 50, int numColumns = 50)
@@ -39,13 +35,14 @@ namespace PathFindingVisualization.Core.Map
             _map = new Node.Node[numRows][];
 
             for (int i = 0; i < numRows; i++)
+            {
                 _map[i] = new Node.Node[numColumns];
 
-            for (int i = 0; i < numRows; i++)
                 for (int j = 0; j < numColumns; j++)
                     _map[i][j] = new Node.Node(Node.NodeState.Ground);
+            }
 
-            this.UpdateNodeIndices();
+            UpdateNodeIndices();
         }
 
         public int GetLength(int dimension)
@@ -60,6 +57,11 @@ namespace PathFindingVisualization.Core.Map
         }
         public IEnumerator GetEnumerator() => _map.GetEnumerator();
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        private void UpdateNodeIndices()
+        {
+            for (int i = 0; i < GetLength(0); i++)
+                for (int j = 0; j < GetLength(1); j++)
+                    _map[i][j].SetIndices(i, j);
+        }
     }
 }

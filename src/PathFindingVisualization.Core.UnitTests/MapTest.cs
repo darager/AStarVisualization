@@ -61,17 +61,5 @@ namespace PathFindingVisualization.Core.UnitTests
 
             Assert.AreEqual(firstRow, expectedRow);
         }
-
-        [Test]
-        public void SetData_ChangesData_TriggersCollectionChangedEvent()
-        {
-            var map = new Map.Map(10, 10);
-            map.CollectionChanged += (s, e) => Assert.Pass();
-
-            map.Data = new Node.Node[][]
-            {
-                new Node.Node[] { new Node.Node(Node.NodeState.Wall), new Node.Node(Node.NodeState.Ground) }
-            };
-        }
     }
 }

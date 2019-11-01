@@ -31,12 +31,6 @@ namespace PathFindingVisualization.Core.Map
 
             return neighbors;
         }
-        public static void UpdateNodeIndices(this Map map) // TODO: write tests for this extension method
-        {
-            for (int i = 0; i < map.GetLength(0); i++)
-                for (int j = 0; j < map.GetLength(1); j++)
-                    map[i, j].SetIndices(i, j);
-        }
         public static int GetNeighborCount(this Map map, int rowIdx, int colIdx, bool diagonalsEnabled)
         {
             return map.GetNeighbors(rowIdx, colIdx, diagonalsEnabled).Count;

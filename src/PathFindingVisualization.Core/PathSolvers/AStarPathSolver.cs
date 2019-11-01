@@ -35,7 +35,6 @@ namespace PathFindingVisualization.Core.PathSolvers
         {
             EnsureMapValidity(this.map);
             InitDataStructures(this.map);
-            this.map.UpdateNodeIndices();
             ComputeHeuristicCosts(this.map);
             (this.startNode, this.goalNode) = GetStartAndGoal(map);
 
