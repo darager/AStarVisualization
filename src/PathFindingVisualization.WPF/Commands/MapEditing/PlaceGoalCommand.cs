@@ -3,7 +3,7 @@ using System.Windows.Input;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.ViewModels;
 
-namespace PathFindingVisualization.WPF.Commands
+namespace PathFindingVisualization.WPF.Commands.MapEditing
 {
     public class PlaceGoalCommand : ICommand
     {

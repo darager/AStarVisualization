@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Shapes;
 using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.WPF.Controls;
 using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 
-namespace PathFindingVisualization.WPF.Commands
+namespace PathFindingVisualization.WPF.Commands.MapEditing
 {
-    public class RemoveTileCommand : ICommand
+    public class ClearMapCommand : ICommand
     {
         private MapCanvasData _data;
         private MainViewModel _mainViewModel;
 
-        public RemoveTileCommand(MapCanvasData data, MainViewModel mainViewModel)
+        public ClearMapCommand(MapCanvasData data, MainViewModel mainViewModel)
         {
             _data = data;
             _mainViewModel = mainViewModel;
@@ -24,13 +21,12 @@ namespace PathFindingVisualization.WPF.Commands
         public bool CanExecute(object parameter) => _mainViewModel.MapDesignPhaseActive;
         public void Execute(object parameter)
         {
-            ICommand placeTile = _mainViewModel.PlaceTileCommand;
+            _data.Path = new System.Collections.Generic.List<Node>();
 
-            if (placeTile.CanExecute(parameter))
-            {
-                _mainViewModel.PlacementMode = NodeState.Ground;
-                placeTile.Execute(parameter);
-            }
+            Map map = _data.Map;
+            foreach (Node[] nodes in map)
+                foreach (Node node in nodes)
+                    node.State = NodeState.Ground;
         }
 
         public event EventHandler CanExecuteChanged;

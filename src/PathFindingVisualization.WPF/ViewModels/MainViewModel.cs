@@ -23,6 +23,8 @@ namespace PathFindingVisualization.WPF.ViewModels
         [Inject, Named("PlaceGoalCommand")]
         public ICommand PlaceGoalCommand { get; set; }
 
+        public ICommand StartAlgorigthmCommand { get; set; }
+
         public Map Map
         {
             get => _mapCanvasData.Map;

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 using Ninject.Modules;
-using PathFindingVisualization.WPF.Commands;
+using PathFindingVisualization.WPF.Commands.MapEditing;
 using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 

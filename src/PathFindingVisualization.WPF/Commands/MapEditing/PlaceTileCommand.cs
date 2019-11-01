@@ -9,7 +9,7 @@ using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 
 // TODO: clean up this class
-namespace PathFindingVisualization.WPF.Commands
+namespace PathFindingVisualization.WPF.Commands.MapEditing
 {
     public class PlaceTileCommand : ICommand
     {

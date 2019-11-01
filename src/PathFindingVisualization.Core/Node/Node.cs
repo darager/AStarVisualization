@@ -20,17 +20,17 @@ namespace PathFindingVisualization.Core.Node
                 }
             }
         }
-        public Node Parent { get; set; }
+        private NodeState _state;
+
+        public int RowIndex => _rowIndex;
+        private int _rowIndex;
+        public int ColIndex => _colIndex;
+        private int _colIndex;
+
         public bool IsWalkable => State != NodeState.Wall;
         public bool AlreadyVisited => (State != NodeState.Ground) || (State != NodeState.Goal);
         public double TotalCost => Heuristic + MovementCost; // TODO: 500 used to be here
-
-        public int RowIndex => _rowIndex;
-        public int ColIndex => _colIndex;
-
-        private NodeState _state;
-        private int _rowIndex;
-        private int _colIndex;
+        public Node Parent { get; set; }
 
         public Node(NodeState state)
         {
@@ -39,8 +39,8 @@ namespace PathFindingVisualization.Core.Node
 
         public void SetIndices(int rowIndex, int colIndex)
         {
-            this._rowIndex = rowIndex;
-            this._colIndex = colIndex;
+            _rowIndex = rowIndex;
+            _colIndex = colIndex;
         }
 
         public override bool Equals(object other)
