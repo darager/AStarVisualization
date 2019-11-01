@@ -4,7 +4,6 @@ using System.Windows.Input;
 using Ninject;
 using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.WPF.Models;
 
 namespace PathFindingVisualization.WPF.ViewModels
 {
@@ -23,37 +22,42 @@ namespace PathFindingVisualization.WPF.ViewModels
         [Inject, Named("PlaceGoalCommand")]
         public ICommand PlaceGoalCommand { get; set; }
 
-        public ICommand StartAlgorigthmCommand { get; set; }
+        // HACK: this is only or testing purposes
+        [Inject, Named("StartAlgorithmCommand")]
+        public ICommand StartAlgorithmCommand { get; set; }
 
         public Map Map
         {
-            get => _mapCanvasData.Map;
+            get => _map;
             set
             {
-                if (_mapCanvasData.Map != value)
+                if (_map != value)
                 {
-                    _mapCanvasData.Map = value;
+                    _map = value;
                     OnPropertyChanged("Map");
                 }
             }
         }
+        private Map _map = new Map();
         public List<Node> Path
         {
-            get => _mapCanvasData.Path;
+            get => _path;
             set
             {
-                if (_mapCanvasData.Path != value)
+                if (_path != value)
                 {
-                    _mapCanvasData.Path = value;
+                    _path = value;
                     OnPropertyChanged("Path");
                 }
             }
         }
-
-        public bool StartPlacementActive => (PlacementMode == NodeState.Start);
-        public bool GoalPlacementActive => (PlacementMode == NodeState.Goal);
+        private List<Node> _path = new List<Node>();
 
         // TODO: handle these pyoperties differently
+        public bool StartPlacementActive => (PlacementMode == NodeState.Start);
+        public bool GoalPlacementActive => (PlacementMode == NodeState.Goal);
+        public Node Start = null;
+        public Node Goal = null;
         public bool MapDesignPhaseActive { get; set; } = true;
         public NodeState PlacementMode
         {
@@ -69,13 +73,6 @@ namespace PathFindingVisualization.WPF.ViewModels
             }
         }
         private NodeState _placementMode = NodeState.Wall;
-
-        private readonly MapCanvasData _mapCanvasData;
-
-        public MainViewModel(MapCanvasData mapCanvasData)
-        {
-            _mapCanvasData = mapCanvasData;
-        }
 
         private void OnPropertyChanged(string propertyName)
         {

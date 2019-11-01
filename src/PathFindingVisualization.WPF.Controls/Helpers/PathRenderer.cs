@@ -18,6 +18,7 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
             Panel.SetZIndex(PathLine, 100); // ensures that the PathLine is in the foreground
         }
 
+        // TODO: render the path differently if nodes are on the same height or width one less point has to be set
         public void HandlePathChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             var canvas = (MapCanvas)source;

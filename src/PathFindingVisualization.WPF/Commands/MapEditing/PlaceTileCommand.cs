@@ -5,7 +5,6 @@ using System.Windows.Shapes;
 using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Controls;
-using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 
 // TODO: clean up this class
@@ -13,12 +12,10 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
 {
     public class PlaceTileCommand : ICommand
     {
-        private MapCanvasData _data;
         private MainViewModel _mainViewModel;
 
-        public PlaceTileCommand(MapCanvasData data, MainViewModel mainViewModel)
+        public PlaceTileCommand(MainViewModel mainViewModel)
         {
-            _data = data;
             _mainViewModel = mainViewModel;
         }
 
@@ -32,7 +29,7 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
             Point position = args.GetPosition(mapCanvas);
             (int rowIdx, int colIdx) = mapCanvas.GetNodeIndices(position);
 
-            Map map = _data.Map;
+            Map map = _mainViewModel.Map;
             Node node = map[rowIdx, colIdx];
             NodeState oldState = node.State;
             NodeState newState = _mainViewModel.PlacementMode;
@@ -45,10 +42,10 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
             switch (oldState)
             {
                 case NodeState.Start:
-                    _data.Start = null;
+                    _mainViewModel.Start = null;
                     break;
                 case NodeState.Goal:
-                    _data.Goal = null;
+                    _mainViewModel.Goal = null;
                     break;
                 default:
                     break;
@@ -57,22 +54,22 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
             switch (newState)
             {
                 case NodeState.Start:
-                    Node start = _data.Start;
+                    Node start = _mainViewModel.Start;
                     if (start != null)
                     {
                         start.State = NodeState.Ground;
                     }
-                    _data.Start = node;
+                    _mainViewModel.Start = node;
                     node.State = NodeState.Start;
                     break;
 
                 case NodeState.Goal:
-                    Node goal = _data.Goal;
+                    Node goal = _mainViewModel.Goal;
                     if (goal != null)
                     {
                         goal.State = NodeState.Ground;
                     }
-                    _data.Goal = node;
+                    _mainViewModel.Goal = node;
                     node.State = NodeState.Goal;
                     break;
 

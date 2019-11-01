@@ -33,6 +33,7 @@
                 Background="{Binding GoalPlacementActive, Converter={StaticResource boolToBackgroundConverter}}"
                 Command="{Binding PlaceGoalCommand}"
                 Content="PlaceGoal" />
+            <Button Command="{Binding StartAlgorithmCommand}" Content="Start (testing purposes only)" />
         </StackPanel>
 
         <c:MapCanvas

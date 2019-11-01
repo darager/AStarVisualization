@@ -1,7 +1,8 @@
 ﻿using System.Windows.Input;
 using Ninject.Modules;
+using PathFindingVisualization.Core.PathSolvers;
+using PathFindingVisualization.WPF.Commands;
 using PathFindingVisualization.WPF.Commands.MapEditing;
-using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 
 namespace PathFindingVisualization.WPF
@@ -17,10 +18,12 @@ namespace PathFindingVisualization.WPF
             Bind<ICommand>().To<ProcessMouseMovementCommand>().Named("ProcessMouseMovementCommand");
             Bind<ICommand>().To<RemoveTileCommand>().Named("RemoveTileCommand");
 
+            Bind<ICommand>().To<StartAlgorithmCommand>().Named("StartAlgorithmCommand"); // HACK: for testing purposes
+
             Bind<AlgorithmControlViewModel>().To<AlgorithmControlViewModel>().InSingletonScope();
             Bind<MainViewModel>().To<MainViewModel>().InSingletonScope();
             Bind<MainWindow>().To<MainWindow>().InSingletonScope();
-            Bind<MapCanvasData>().To<MapCanvasData>().InSingletonScope();
+            Bind<IPathSolverFactory>().To<PathSolverFactory>().InSingletonScope();
         }
     }
 }

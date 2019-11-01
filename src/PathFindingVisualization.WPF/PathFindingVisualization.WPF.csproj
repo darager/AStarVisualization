@@ -69,8 +69,8 @@
     <Compile Include="Commands\MapEditing\PlaceTileCommand.cs" />
     <Compile Include="Commands\MapEditing\ProcessMouseMovementCommand.cs" />
     <Compile Include="Commands\MapEditing\RemoveTileCommand.cs" />
+    <Compile Include="Commands\StartAlgorithmCommand.cs" />
     <Compile Include="Converters\BoolToBackgroundConverter.cs" />
-    <Compile Include="Models\MapCanvasData.cs" />
     <Compile Include="ViewModels\AlgorithmControlViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">

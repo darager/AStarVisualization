@@ -1,23 +1,16 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Shapes;
-using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.WPF.Controls;
-using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 
 namespace PathFindingVisualization.WPF.Commands.MapEditing
 {
     public class RemoveTileCommand : ICommand
     {
-        private MapCanvasData _data;
         private MainViewModel _mainViewModel;
 
-        public RemoveTileCommand(MapCanvasData data, MainViewModel mainViewModel)
+        public RemoveTileCommand(MainViewModel mainViewModel)
         {
-            _data = data;
             _mainViewModel = mainViewModel;
         }
 

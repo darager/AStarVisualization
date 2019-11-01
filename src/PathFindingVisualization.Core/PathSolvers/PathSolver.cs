@@ -2,7 +2,16 @@
 {
     public enum PathSolver
     {
+        // TODO: implement more pathsolvers
+        // of course
         AStar,
-        // TODO: implement more pathsolvers (djikstra, etc, ...)
+        BreadthFirstSearch,
+        BestFirstSearch,
+        Dijkstra,
+
+        // maybe
+        JumpPointSearch,
+        OrthogonalJumpPointSearch,
+        Trace,
     }
 }
