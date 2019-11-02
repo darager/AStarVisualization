@@ -3,7 +3,7 @@ using System.Windows.Input;
 using PathFindingVisualization.Core.PathSolvers;
 using PathFindingVisualization.WPF.ViewModels;
 
-namespace PathFindingVisualization.WPF.Commands
+namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
 {
     // HACK: this class is only for testing purposes for now
     public class StartAlgorithmCommand : ICommand

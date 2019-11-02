@@ -15,10 +15,10 @@
 
     <Window.Resources>
         <conv:BoolToBackgroundConverter x:Key="boolToBackgroundConverter" />
+        <conv:StringToPathSolverConverter x:Key="stringToPathsolverConverter" />
     </Window.Resources>
 
     <DockPanel>
-
         <StackPanel
             Height="50"
             Background="CornflowerBlue"
@@ -34,6 +34,10 @@
                 Command="{Binding PlaceGoalCommand}"
                 Content="PlaceGoal" />
             <Button Command="{Binding StartAlgorithmCommand}" Content="Start (testing purposes only)" />
+
+            <StackPanel x:Name="AlgorithmControls">
+                <ComboBox ItemsSource="{Binding PathSolverTypes}" SelectedItem="{Binding PathSolverType}" />
+            </StackPanel>
         </StackPanel>
 
         <c:MapCanvas

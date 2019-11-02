@@ -8,7 +8,6 @@
         BreadthFirstSearch,
         BestFirstSearch,
         Dijkstra,
-
         // maybe
         JumpPointSearch,
         OrthogonalJumpPointSearch,

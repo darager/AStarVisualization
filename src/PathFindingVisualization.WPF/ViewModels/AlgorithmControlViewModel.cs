@@ -1,15 +1,40 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Input;
 using PathFindingVisualization.Core.PathSolvers;
+using Ninject;
 
 namespace PathFindingVisualization.WPF.ViewModels
 {
-    public class AlgorithmControlViewModel
+    public class AlgorithmControlViewModel : INotifyPropertyChanged
     {
-        public ICommand StartAlgorithmCommand { get; private set; }
-        public ICommand PauseAlgorithmCommand { get; private set; }
-        public ICommand StopAlgorithmCommand { get; private set; }
-        public ICommand ChooseAlgorithmCommand { get; private set; }
+        [Inject, Named("ResetAlgorithmCommand")]
+        public ICommand ResetAlgorithmCommand { get; set; }
 
-        private IPathSolver _pathSolver;
+        public List<PathSolver> PathSolverTypes =>
+            Enum.GetValues(typeof(PathSolver))
+            .Cast<PathSolver>()
+            .ToList<PathSolver>();
+        public PathSolver PathSolverType
+        {
+            get => _pathSolverType;
+            set
+            {
+                if (_pathSolverType == value)
+                    return;
+
+                _pathSolverType = value;
+                OnPropertyChanged("PathSolver");
+            }
+        }
+        private PathSolver _pathSolverType = PathSolver.AStar;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

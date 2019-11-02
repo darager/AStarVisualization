@@ -9,7 +9,7 @@
                 case PathSolver.AStar:
                     return new AStarPathSolver(ref map, diagonalsEnabled);
                 default:
-                    return null;
+                    throw new System.Exception($"The requested Pathsolving algorithm ({pathSolverType}) is not implemented");
             }
         }
     }
