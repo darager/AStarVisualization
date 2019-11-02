@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using PathFindingVisualization.Core.Map;
@@ -41,6 +42,17 @@ namespace PathFindingVisualization.WPF.Controls
             TileRenderer = new TileRenderer();
             PathRenderer = new PathRenderer(this);
             GridLineRenderer = new GridLineRenderer(this);
+        }
+
+        public (int, int) GetNodeIndices(Point position)
+        {
+            double rowSpacing = ActualHeight / NumRows;
+            double colSpacing = ActualWidth / NumColumns;
+
+            int rowIdx = (int)Math.Truncate(position.Y / rowSpacing);
+            int colIdx = (int)Math.Truncate(position.X / colSpacing);
+
+            return (rowIdx, colIdx);
         }
 
         private static void OnMapChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
