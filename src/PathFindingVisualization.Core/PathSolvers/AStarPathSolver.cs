@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using PathFindingVisualization.Core.Exceptions;
 using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.DataStructures;
@@ -31,7 +33,7 @@ namespace PathFindingVisualization.Core.PathSolvers
         {
             throw new System.NotImplementedException();
         }
-        public List<Node.Node> FindPath()
+        public async Task<List<Node.Node>> FindPath()
         {
             EnsureMapValidity(this.map);
             InitDataStructures(this.map);
@@ -67,6 +69,9 @@ namespace PathFindingVisualization.Core.PathSolvers
                 if (currentNode.State != Node.NodeState.Goal && currentNode.State != Node.NodeState.Start)
                     currentNode.State = Node.NodeState.GroundVisited;
                 closedSet.Add(currentNode);
+
+                // TODO: move this to some sort of algorithm controller class that calls the steps of the algorithm
+                //await Task.Delay(1); // HACK: remove this!!!
             }
 
             if (currentNode.State != Node.NodeState.Goal)

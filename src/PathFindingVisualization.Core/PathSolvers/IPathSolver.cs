@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PathFindingVisualization.Core.PathSolvers
 {
     public interface IPathSolver
     {
-        List<Node.Node> FindPath();
+        Task<List<Node.Node>> FindPath();
         void Stop();
     }
 }

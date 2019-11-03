@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Ninject;
 using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
@@ -27,11 +29,10 @@ namespace PathFindingVisualization.WPF.ViewModels
             get => _map;
             set
             {
-                if (_map != value)
-                {
-                    _map = value;
-                    OnPropertyChanged("Map");
-                }
+                if (_map == value)
+                    return;
+                _map = value;
+                OnPropertyChanged("Map");
             }
         }
         private Map _map = new Map();
@@ -40,35 +41,46 @@ namespace PathFindingVisualization.WPF.ViewModels
             get => _path;
             set
             {
-                if (_path != value)
-                {
-                    _path = value;
-                    OnPropertyChanged("Path");
-                }
+                if (_path == value)
+                    return;
+                _path = value;
+                OnPropertyChanged("Path");
             }
         }
         private List<Node> _path = new List<Node>();
+        public bool MapDesignPhaseActive
+        {
+            get => _mapDesignPhaseActive;
+            set
+            {
+                if (_mapDesignPhaseActive == value)
+                    return;
+                _mapDesignPhaseActive = value;
+                OnPropertyChanged("MapDesignPhaseActive");
+
+                CommandManager.InvalidateRequerySuggested();
+            }
+        }
+        private bool _mapDesignPhaseActive = true;
+        public NodeState PlacementMode
+        {
+            get => _placementMode;
+            set
+            {
+                if (_placementMode == value)
+                    return;
+                _placementMode = value;
+                OnPropertyChanged("StartPlacementActive");
+                OnPropertyChanged("GoalPlacementActive");
+            }
+        }
+        private NodeState _placementMode = NodeState.Wall;
 
         // TODO: handle these pyoperties differently
         public bool StartPlacementActive => (PlacementMode == NodeState.Start);
         public bool GoalPlacementActive => (PlacementMode == NodeState.Goal);
         public Node Start = null;
         public Node Goal = null;
-        public bool MapDesignPhaseActive { get; set; } = false;
-        public NodeState PlacementMode
-        {
-            get => _placementMode;
-            set
-            {
-                if (_placementMode != value)
-                {
-                    _placementMode = value;
-                    OnPropertyChanged("StartPlacementActive");
-                    OnPropertyChanged("GoalPlacementActive");
-                }
-            }
-        }
-        private NodeState _placementMode = NodeState.Wall;
 
         private void OnPropertyChanged(string propertyName)
         {

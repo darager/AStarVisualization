@@ -18,14 +18,14 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
         }
 
         public bool CanExecute(object parameter) => _mainViewModel.MapDesignPhaseActive;
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
+            _mainViewModel.MapDesignPhaseActive = false;
+
             var map = _mainViewModel.Map;
             var pathSolver = _pathSolverFactory.GetPathSolver(ref map, PathSolver.AStar, true);
 
-            _mainViewModel.Path = pathSolver.FindPath();
-
-            _mainViewModel.MapDesignPhaseActive = false;
+            _mainViewModel.Path = await pathSolver.FindPath();
         }
 
         public event EventHandler CanExecuteChanged;
