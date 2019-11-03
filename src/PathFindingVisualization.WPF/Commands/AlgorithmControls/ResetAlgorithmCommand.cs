@@ -15,23 +15,25 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
             _mainViewModel = mainViewModel;
         }
 
-        public bool CanExecute(object parameter) => !_mainViewModel.MapDesignPhaseActive;
+        public bool CanExecute(object parameter) => !(_mainViewModel.MapDesignPhaseActive);
         public void Execute(object parameter)
         {
             _mainViewModel.Path = new List<Node>();
 
-            foreach (Node node in _mainViewModel.Map)
-            {
-                switch (node.State)
+            var map = _mainViewModel.Map;
+            foreach (Node[] nodes in map)
+                foreach (Node node in nodes)
                 {
-                    case NodeState.GroundVisited:
-                    case NodeState.GroundToBeVisited:
-                        node.State = NodeState.Ground;
-                        break;
-                    default:
-                        break;
+                    switch (node.State)
+                    {
+                        case NodeState.GroundVisited:
+                        case NodeState.GroundToBeVisited:
+                            node.State = NodeState.Ground;
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
 
             _mainViewModel.MapDesignPhaseActive = true;
         }

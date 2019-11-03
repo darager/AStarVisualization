@@ -10,6 +10,8 @@ namespace PathFindingVisualization.WPF.ViewModels
 {
     public class AlgorithmControlViewModel : INotifyPropertyChanged
     {
+        [Inject, Named("StartAlgorithmCommand")]
+        public ICommand StartAlgorithmCommand { get; set; } // HACK: this is only or testing purposes
         [Inject, Named("ResetAlgorithmCommand")]
         public ICommand ResetAlgorithmCommand { get; set; }
 
@@ -17,6 +19,7 @@ namespace PathFindingVisualization.WPF.ViewModels
             Enum.GetValues(typeof(PathSolver))
             .Cast<PathSolver>()
             .ToList<PathSolver>();
+
         public PathSolver PathSolverType
         {
             get => _pathSolverType;

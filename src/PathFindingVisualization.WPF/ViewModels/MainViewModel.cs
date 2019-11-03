@@ -22,10 +22,6 @@ namespace PathFindingVisualization.WPF.ViewModels
         [Inject, Named("PlaceGoalCommand")]
         public ICommand PlaceGoalCommand { get; set; }
 
-        // HACK: this is only or testing purposes
-        [Inject, Named("StartAlgorithmCommand")]
-        public ICommand StartAlgorithmCommand { get; set; }
-
         public Map Map
         {
             get => _map;
@@ -58,7 +54,7 @@ namespace PathFindingVisualization.WPF.ViewModels
         public bool GoalPlacementActive => (PlacementMode == NodeState.Goal);
         public Node Start = null;
         public Node Goal = null;
-        public bool MapDesignPhaseActive { get; set; } = true;
+        public bool MapDesignPhaseActive { get; set; } = false;
         public NodeState PlacementMode
         {
             get => _placementMode;

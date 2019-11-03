@@ -33,10 +33,11 @@
                 Background="{Binding GoalPlacementActive, Converter={StaticResource boolToBackgroundConverter}}"
                 Command="{Binding PlaceGoalCommand}"
                 Content="PlaceGoal" />
-            <Button Command="{Binding StartAlgorithmCommand}" Content="Start (testing purposes only)" />
 
-            <StackPanel x:Name="AlgorithmControls">
+            <StackPanel x:Name="AlgorithmControls" Orientation="Horizontal">
                 <ComboBox ItemsSource="{Binding PathSolverTypes}" SelectedItem="{Binding PathSolverType}" />
+                <Button Command="{Binding StartAlgorithmCommand}" Content="Start (testing purposes only)" />
+                <Button Command="{Binding ResetAlgorithmCommand}" Content="Reset Algorithm" />
             </StackPanel>
         </StackPanel>
 
