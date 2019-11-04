@@ -24,7 +24,10 @@
             Background="CornflowerBlue"
             DockPanel.Dock="Top"
             Orientation="Horizontal">
-            <Button Command="{Binding ClearMapCommand}" Content="Clear" />
+            <Button
+                Command="{Binding ClearMapCommand}"
+                Content="Clear"
+                IsEnabled="{Binding MapDesignPhaseActive}" />
             <Button
                 Background="{Binding StartPlacementActive, Converter={StaticResource boolToBackgroundConverter}}"
                 Command="{Binding PlaceStartCommand}"

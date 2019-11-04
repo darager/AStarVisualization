@@ -15,7 +15,7 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
             _mainViewModel = mainViewModel;
         }
 
-        public bool CanExecute(object parameter) => _mainViewModel.MapDesignPhaseActive;
+        public bool CanExecute(object parameter) => !(_mainViewModel.MapDesignPhaseActive);
         public void Execute(object parameter)
         {
             _mainViewModel.Path = new List<Node>();

@@ -32,7 +32,7 @@ namespace PathFindingVisualization.Core.UnitTests
                 expectedPath.Add(map[indices.Item1, indices.Item2]);
 
             IPathSolver pathfinder = new AStarPathSolver(ref map);
-            List<Node.Node> actualPath = pathfinder.FindPath();
+            List<Node.Node> actualPath = pathfinder.FindPath().Result;
 
             Assert.That(actualPath, Is.EquivalentTo(expectedPath));
         }

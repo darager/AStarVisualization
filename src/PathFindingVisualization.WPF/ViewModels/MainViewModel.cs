@@ -24,6 +24,8 @@ namespace PathFindingVisualization.WPF.ViewModels
         [Inject, Named("PlaceGoalCommand")]
         public ICommand PlaceGoalCommand { get; set; }
 
+        private IEnumerable<ICommand> _commands;
+
         public Map Map
         {
             get => _map;
@@ -48,6 +50,8 @@ namespace PathFindingVisualization.WPF.ViewModels
             }
         }
         private List<Node> _path = new List<Node>();
+
+        // the commands that are dependent on this variable do not update when it changes
         public bool MapDesignPhaseActive
         {
             get => _mapDesignPhaseActive;
@@ -59,6 +63,8 @@ namespace PathFindingVisualization.WPF.ViewModels
                 OnPropertyChanged("MapDesignPhaseActive");
 
                 CommandManager.InvalidateRequerySuggested();
+                //foreach (ICommand command in _commands)
+                //command.CanExecute(null);
             }
         }
         private bool _mapDesignPhaseActive = true;
@@ -81,6 +87,11 @@ namespace PathFindingVisualization.WPF.ViewModels
         public bool GoalPlacementActive => (PlacementMode == NodeState.Goal);
         public Node Start = null;
         public Node Goal = null;
+
+        public MainViewModel(IEnumerable<ICommand> commands)
+        {
+            _commands = commands;
+        }
 
         private void OnPropertyChanged(string propertyName)
         {
