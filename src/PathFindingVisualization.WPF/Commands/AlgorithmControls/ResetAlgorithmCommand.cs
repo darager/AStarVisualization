@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using PathFindingVisualization.Core.Node;
+using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 
 namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
@@ -9,13 +10,15 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
     public class ResetAlgorithmCommand : ICommand
     {
         private MainViewModel _mainViewModel;
+        private ApplicationState _appState;
 
-        public ResetAlgorithmCommand(MainViewModel mainViewModel)
+        public ResetAlgorithmCommand(MainViewModel mainViewModel, ApplicationState appState)
         {
             _mainViewModel = mainViewModel;
+            _appState = appState;
         }
 
-        public bool CanExecute(object parameter) => !(_mainViewModel.MapDesignPhaseActive);
+        public bool CanExecute(object parameter) => _appState.State == AppState.AlgorithmDone;
         public void Execute(object parameter)
         {
             _mainViewModel.Path = new List<Node>();
@@ -35,7 +38,7 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
                     }
                 }
 
-            _mainViewModel.MapDesignPhaseActive = true;
+            _appState.State = AppState.MapDesignPhase;
         }
 
         public event EventHandler CanExecuteChanged;

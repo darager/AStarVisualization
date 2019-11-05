@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using PathFindingVisualization.Core.Node;
+using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 
 namespace PathFindingVisualization.WPF.Commands.MapEditing
@@ -8,10 +9,12 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
     public class ProcessMouseMovementCommand : ICommand
     {
         private MainViewModel _mainViewModel;
+        private ApplicationState _appState;
 
-        public ProcessMouseMovementCommand(MainViewModel mainViewModel)
+        public ProcessMouseMovementCommand(MainViewModel mainViewModel, ApplicationState appState)
         {
             _mainViewModel = mainViewModel;
+            _appState = appState;
         }
 
         public bool CanExecute(object parameter)
@@ -19,7 +22,7 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
             NodeState placementMode = _mainViewModel.PlacementMode;
             bool objectivePlacementInactive = !(placementMode == NodeState.Start || placementMode == NodeState.Goal);
 
-            return _mainViewModel.MapDesignPhaseActive && objectivePlacementInactive;
+            return _appState.State == AppState.MapDesignPhase && objectivePlacementInactive;
         }
         public void Execute(object parameter)
         {

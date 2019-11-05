@@ -5,6 +5,7 @@ using System.Windows.Shapes;
 using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Controls;
+using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 
 // TODO: clean up this class
@@ -13,13 +14,15 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
     public class PlaceTileCommand : ICommand
     {
         private MainViewModel _mainViewModel;
+        private ApplicationState _appState;
 
-        public PlaceTileCommand(MainViewModel mainViewModel)
+        public PlaceTileCommand(MainViewModel mainViewModel, ApplicationState appState)
         {
             _mainViewModel = mainViewModel;
+            _appState = appState;
         }
 
-        public bool CanExecute(object parameter) => _mainViewModel.MapDesignPhaseActive;
+        public bool CanExecute(object parameter) => _appState.State == AppState.MapDesignPhase;
         public void Execute(object parameter)
         {
             var args = (MouseEventArgs)parameter;

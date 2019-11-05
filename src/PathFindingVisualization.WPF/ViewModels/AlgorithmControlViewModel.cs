@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using PathFindingVisualization.Core.PathSolvers;
 using Ninject;
+using PathFindingVisualization.WPF.Models;
 
 namespace PathFindingVisualization.WPF.ViewModels
 {
@@ -19,7 +20,6 @@ namespace PathFindingVisualization.WPF.ViewModels
             Enum.GetValues(typeof(PathSolver))
             .Cast<PathSolver>()
             .ToList<PathSolver>();
-
         public PathSolver PathSolverType
         {
             get => _pathSolverType;
@@ -33,6 +33,24 @@ namespace PathFindingVisualization.WPF.ViewModels
             }
         }
         private PathSolver _pathSolverType = PathSolver.AStar;
+
+        //public bool AlgorithmActive
+        //{
+        //    get { return _mapDesignPhaseInactive; }
+        //    set { _mapDesignPhaseInactive = value; }
+        //}
+        //private bool _mapDesignPhaseInactive;
+
+        //private ApplicationState _appState;
+
+        public AlgorithmControlViewModel(ApplicationState appState)
+        {
+            //_appState = appState;
+
+            // TODO: make sure the buttons are enabled /disabled when the applicationSTate changes
+            //_appState.PropertyChanged +=
+            //      (s, e) => OnPropertyChanged("AlgorithmActive");
+        }
 
         private void OnPropertyChanged(string propertyName)
         {

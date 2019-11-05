@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using PathFindingVisualization.Core.PathSolvers;
+using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 
 namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
@@ -9,23 +10,27 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
     public class StartAlgorithmCommand : ICommand
     {
         private IPathSolverFactory _pathSolverFactory;
+        private ApplicationState _appState;
         private MainViewModel _mainViewModel;
 
-        public StartAlgorithmCommand(IPathSolverFactory pathSolverFactory, MainViewModel mainViewModel)
+        public StartAlgorithmCommand(IPathSolverFactory pathSolverFactory, ApplicationState appState, MainViewModel mainViewModel)
         {
             _pathSolverFactory = pathSolverFactory;
+            _appState = appState;
             _mainViewModel = mainViewModel;
         }
 
-        public bool CanExecute(object parameter) => _mainViewModel.MapDesignPhaseActive;
+        public bool CanExecute(object parameter) => _appState.State == AppState.MapDesignPhase;
         public async void Execute(object parameter)
         {
-            _mainViewModel.MapDesignPhaseActive = false;
+            _appState.State = AppState.AlgorithmActive;
 
             var map = _mainViewModel.Map;
             var pathSolver = _pathSolverFactory.GetPathSolver(ref map, PathSolver.AStar, true);
 
             _mainViewModel.Path = await pathSolver.FindPath();
+
+            _appState.State = AppState.AlgorithmDone;
         }
 
         public event EventHandler CanExecuteChanged;

@@ -3,6 +3,7 @@ using Ninject.Modules;
 using PathFindingVisualization.Core.PathSolvers;
 using PathFindingVisualization.WPF.Commands.AlgorithmControls;
 using PathFindingVisualization.WPF.Commands.MapEditing;
+using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 
 namespace PathFindingVisualization.WPF
@@ -22,6 +23,7 @@ namespace PathFindingVisualization.WPF
             Bind<ICommand>().To<ResetAlgorithmCommand>().Named("ResetAlgorithmCommand");
 
             Bind<AlgorithmControlViewModel>().To<AlgorithmControlViewModel>().InSingletonScope();
+            Bind<ApplicationState>().To<ApplicationState>().InSingletonScope();
             Bind<IPathSolverFactory>().To<PathSolverFactory>().InSingletonScope();
             Bind<MainViewModel>().To<MainViewModel>().InSingletonScope();
             Bind<MainWindow>().To<MainWindow>().InSingletonScope();

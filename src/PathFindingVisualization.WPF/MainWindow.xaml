@@ -24,10 +24,7 @@
             Background="CornflowerBlue"
             DockPanel.Dock="Top"
             Orientation="Horizontal">
-            <Button
-                Command="{Binding ClearMapCommand}"
-                Content="Clear"
-                IsEnabled="{Binding MapDesignPhaseActive}" />
+            <Button Command="{Binding ClearMapCommand}" Content="Clear" />
             <Button
                 Background="{Binding StartPlacementActive, Converter={StaticResource boolToBackgroundConverter}}"
                 Command="{Binding PlaceStartCommand}"
@@ -49,17 +46,17 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             DockPanel.Dock="Bottom"
-            Map="{Binding Path=Map, Mode=TwoWay}"
-            Path="{Binding Path=Path, Mode=TwoWay}">
+            Map="{Binding Map}"
+            Path="{Binding Path}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseMove">
-                    <i:InvokeCommandAction Command="{Binding Path=ProcessMouseMovementCommand}" PassEventArgsToCommand="True" />
+                    <i:InvokeCommandAction Command="{Binding ProcessMouseMovementCommand}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="MouseLeftButtonDown">
-                    <i:InvokeCommandAction Command="{Binding Path=PlaceTileCommand}" PassEventArgsToCommand="True" />
+                    <i:InvokeCommandAction Command="{Binding PlaceTileCommand}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="MouseRightButtonDown">
-                    <i:InvokeCommandAction Command="{Binding Path=RemoveTileCommand}" PassEventArgsToCommand="True" />
+                    <i:InvokeCommandAction Command="{Binding RemoveTileCommand}" PassEventArgsToCommand="True" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </c:MapCanvas>
