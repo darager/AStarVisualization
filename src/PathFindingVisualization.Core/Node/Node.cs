@@ -1,5 +1,6 @@
 ﻿using System;
 
+// TODO: maybe writer wrappers if the algorithms need different values
 // TODO: write tests for this class
 namespace PathFindingVisualization.Core.Node
 {
@@ -7,6 +8,7 @@ namespace PathFindingVisualization.Core.Node
     {
         public double Heuristic { get; set; }
         public double MovementCost { get; set; }
+
         public NodeState State
         {
             get => _state;
@@ -23,13 +25,13 @@ namespace PathFindingVisualization.Core.Node
         private NodeState _state;
 
         public int RowIndex => _rowIndex;
-        private int _rowIndex;
         public int ColIndex => _colIndex;
+        private int _rowIndex;
         private int _colIndex;
 
         public bool IsWalkable => State != NodeState.Wall;
+        public double TotalCost => Heuristic + MovementCost; // TODO: adjust the values for efficient AStar
         public bool AlreadyVisited => (State != NodeState.Ground) || (State != NodeState.Goal);
-        public double TotalCost => Heuristic + MovementCost; // TODO: 500 used to be here
         public Node Parent { get; set; }
 
         public Node(NodeState state)

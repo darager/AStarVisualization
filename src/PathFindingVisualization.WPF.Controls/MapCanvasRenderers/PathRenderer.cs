@@ -19,7 +19,7 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
         }
 
         // TODO: render the path differently if nodes are on the same height or width one less point has to be set
-        public void HandlePathChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        public void RedrawPath(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             var canvas = (MapCanvas)source;
             var path = (List<Node>)e.NewValue;

@@ -11,7 +11,7 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
     {
         private Rectangle[,] Tiles;
 
-        public void HandleMapChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        public void RedrawTiles(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             var canvas = (MapCanvas)source;
             var oldMap = (Map)e.OldValue;
@@ -80,23 +80,16 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
         }
         private SolidColorBrush GetStateColor(NodeState state) // TODO: choose proper colors
         {
-            switch (state)
+            return state switch
             {
-                case NodeState.Ground:
-                    return new SolidColorBrush(Colors.Transparent);
-                case NodeState.GroundVisited:
-                    return new SolidColorBrush(Colors.LightGreen);
-                case NodeState.GroundToBeVisited:
-                    return new SolidColorBrush(Colors.LightBlue);
-                case NodeState.Start:
-                    return new SolidColorBrush(Colors.DarkGoldenrod);
-                case NodeState.Wall:
-                    return new SolidColorBrush(Colors.Black);
-                case NodeState.Goal:
-                    return new SolidColorBrush(Colors.Red);
-                default:
-                    return null;
-            }
+                NodeState.Ground => new SolidColorBrush(Colors.Transparent),
+                NodeState.GroundVisited => new SolidColorBrush(Colors.LightGreen),
+                NodeState.GroundToBeVisited => new SolidColorBrush(Colors.LightBlue),
+                NodeState.Start => new SolidColorBrush(Colors.DarkGoldenrod),
+                NodeState.Wall => new SolidColorBrush(Colors.Black),
+                NodeState.Goal => new SolidColorBrush(Colors.Red),
+                _ => null
+            };
         }
     }
 }

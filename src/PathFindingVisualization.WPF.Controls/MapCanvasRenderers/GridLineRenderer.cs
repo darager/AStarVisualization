@@ -15,7 +15,7 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
                 canvas.Children.Add(line);
         }
 
-        public void HandleMapChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        public void RedrawGridLines(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             var canvas = (MapCanvas)source;
 

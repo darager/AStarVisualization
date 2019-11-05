@@ -33,9 +33,9 @@ namespace PathFindingVisualization.WPF.Controls
         public int NumRows => Map.GetLength(0);
         public int NumColumns => Map.GetLength(1);
 
-        public PathRenderer PathRenderer;
-        public TileRenderer TileRenderer;
-        public GridLineRenderer GridLineRenderer;
+        internal PathRenderer PathRenderer;
+        internal TileRenderer TileRenderer;
+        internal GridLineRenderer GridLineRenderer;
 
         public MapCanvas()
         {
@@ -57,14 +57,14 @@ namespace PathFindingVisualization.WPF.Controls
 
         private static void OnMapChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            var canvas = source as MapCanvas;
-            canvas.TileRenderer.HandleMapChange(source, e);
-            canvas.GridLineRenderer.HandleMapChange(source, e);
+            var canvas = (MapCanvas)source;
+            canvas.TileRenderer.RedrawTiles(source, e);
+            canvas.GridLineRenderer.RedrawGridLines(source, e);
         }
         private static void OnPathChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            var canvas = source as MapCanvas;
-            canvas.PathRenderer.HandlePathChange(source, e);
+            var canvas = (MapCanvas)source;
+            canvas.PathRenderer.RedrawPath(source, e);
         }
     }
 }
