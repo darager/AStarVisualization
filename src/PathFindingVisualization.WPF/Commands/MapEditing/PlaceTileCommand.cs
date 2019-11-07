@@ -37,11 +37,24 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
             NodeState oldState = node.State;
             NodeState newState = _mainViewModel.PlacementMode;
 
-            // Do not place walls on the Start or Goal!
-            bool nodeIsObjective = (oldState == NodeState.Goal || oldState == NodeState.Start);
-            if (nodeIsObjective && newState != NodeState.Ground)
+            if (WallWillOverWriteObjective(newState, oldState))
                 return;
 
+            if (NewObjectiveWillBePlaced(newState))
+                RemoveRedundantObjective(oldState);
+
+            PlaceNode(newState, node);
+
+            _mainViewModel.PlacementMode = NodeState.Wall; // return to the default placement mode
+        }
+
+        private bool NewObjectiveWillBePlaced(NodeState newState)
+        {
+            return (newState == NodeState.Goal
+                || newState == NodeState.Start);
+        }
+        private void RemoveRedundantObjective(NodeState oldState)
+        {
             switch (oldState)
             {
                 case NodeState.Start:
@@ -50,10 +63,17 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
                 case NodeState.Goal:
                     _mainViewModel.Goal = null;
                     break;
-                default:
-                    break;
             }
+        }
+        private bool WallWillOverWriteObjective(NodeState newState, NodeState oldState)
+        {
+            bool nodeIsObjective = (oldState == NodeState.Goal || oldState == NodeState.Start);
+            bool willOverRideObjective = (nodeIsObjective && newState != NodeState.Ground);
 
+            return willOverRideObjective;
+        }
+        private void PlaceNode(NodeState newState, Node node)
+        {
             switch (newState)
             {
                 case NodeState.Start:
@@ -80,9 +100,6 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
                     node.State = newState;
                     break;
             }
-
-            // set the default placement mode
-            _mainViewModel.PlacementMode = NodeState.Wall;
         }
 
         public event EventHandler CanExecuteChanged;

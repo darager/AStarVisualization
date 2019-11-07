@@ -13,8 +13,8 @@ namespace PathFindingVisualization.WPF
         public override void Load()
         {
             Bind<ICommand>().To<ClearMapCommand>().Named("ClearMapCommand");
-            Bind<ICommand>().To<PlaceStartCommand>().Named("PlaceStartCommand");
             Bind<ICommand>().To<PlaceGoalCommand>().Named("PlaceGoalCommand");
+            Bind<ICommand>().To<PlaceStartCommand>().Named("PlaceStartCommand");
             Bind<ICommand>().To<PlaceTileCommand>().Named("PlaceTileCommand");
             Bind<ICommand>().To<ProcessMouseMovementCommand>().Named("ProcessMouseMovementCommand");
             Bind<ICommand>().To<RemoveTileCommand>().Named("RemoveTileCommand");
