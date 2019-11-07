@@ -60,18 +60,18 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
             double canvasheight = canvas.ActualHeight;
             double canvaswidth = canvas.ActualWidth;
 
-            double rowspacing = canvasheight / numrows;
-            double columnspacing = canvaswidth / numcolumns;
+            double gridHeight = canvasheight / numrows;
+            double gridWidth = canvaswidth / numcolumns;
 
             int gridLineThickness = 1;
-            rect.Height = rowspacing - 2 * gridLineThickness;
-            rect.Width = columnspacing - 2 * gridLineThickness;
+            rect.Height = gridHeight - 2 * gridLineThickness;
+            rect.Width = gridWidth - 2 * gridLineThickness;
 
             rect.SnapsToDevicePixels = true;
             rect.Fill = GetStateColor(node.State);
 
-            double x = node.ColIndex * columnspacing + gridLineThickness;
-            double y = node.RowIndex * rowspacing + gridLineThickness;
+            double x = node.ColIndex * gridWidth + gridLineThickness;
+            double y = node.RowIndex * gridHeight + gridLineThickness;
 
             Canvas.SetLeft(rect, x);
             Canvas.SetTop(rect, y);

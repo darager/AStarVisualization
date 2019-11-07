@@ -11,8 +11,8 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
 
         public GridLineRenderer(MapCanvas canvas)
         {
-            foreach (Line line in GridLines)
-                canvas.Children.Add(line);
+            GridLines.ForEach(
+                line => canvas.Children.Add(line));
         }
 
         public void RedrawGridLines(DependencyObject source, DependencyPropertyChangedEventArgs e)
@@ -21,8 +21,8 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
 
             double height = canvas.ActualHeight;
             double width = canvas.ActualWidth;
-            double rowSpacing = height / canvas.NumRows;
-            double colSpacing = width / canvas.NumColumns;
+            double gridHeight = height / canvas.NumRows;
+            double gridWidth = width / canvas.NumColumns;
 
             var stroke = new SolidColorBrush(Colors.DarkGray);
             int lineThickness = 1;
@@ -30,7 +30,7 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
             var newLines = new List<Line>();
             for (int i = 0; i < canvas.NumRows; i++)
             {
-                double y = i * rowSpacing + rowSpacing;
+                double y = i * gridHeight + gridHeight;
                 var rowLine = new Line()
                 {
                     X1 = 0,
@@ -45,7 +45,7 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
             }
             for (int i = 0; i < canvas.NumColumns; i++)
             {
-                double x = i * colSpacing + colSpacing;
+                double x = i * gridWidth + gridWidth;
                 var rowLine = new Line()
                 {
                     X1 = x,

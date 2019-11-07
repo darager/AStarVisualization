@@ -15,30 +15,31 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
         public PathRenderer(MapCanvas canvas)
         {
             canvas.Children.Add(PathLine);
-            Panel.SetZIndex(PathLine, 100); // ensures that the PathLine is in the foreground
+
+            // ensures that the PathLine is in the foreground
+            Panel.SetZIndex(PathLine, 100);
         }
 
-        // TODO: render the path differently if nodes are on the same height or width one less point has to be set
         public void RedrawPath(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             var canvas = (MapCanvas)source;
             var path = (List<Node>)e.NewValue;
 
-            double rowSpacing = canvas.ActualHeight / canvas.NumRows;
-            double colSpacing = canvas.ActualWidth / canvas.NumColumns;
+            double gridHeight = canvas.ActualHeight / canvas.NumRows;
+            double gridWidth = canvas.ActualWidth / canvas.NumColumns;
+
+            PathLine.Stroke = new SolidColorBrush(Colors.Black);
+            PathLine.StrokeThickness = Math.Min(gridHeight, gridWidth) * 0.2;
 
             var points = new PointCollection();
             foreach (Node node in path)
             {
-                double x = (node.ColIndex * colSpacing) + (colSpacing / 2);
-                double y = (node.RowIndex * rowSpacing) + (rowSpacing / 2);
+                double x = (node.ColIndex * gridWidth) + (gridWidth / 2);
+                double y = (node.RowIndex * gridHeight) + (gridHeight / 2);
 
                 points.Add(new Point(x, y));
             }
             PathLine.Points = points;
-
-            PathLine.Stroke = new SolidColorBrush(Colors.Black);
-            PathLine.StrokeThickness = Math.Min(rowSpacing, colSpacing) * 0.2;
         }
     }
 }
