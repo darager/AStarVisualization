@@ -25,11 +25,11 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
         public bool CanExecute(object parameter) => _appState.State == AppState.MapDesignPhase;
         public void Execute(object parameter)
         {
-            var args = (MouseEventArgs)parameter;
-            var shape = (Shape)args.OriginalSource;
+            var mouseArgs = (MouseEventArgs)parameter;
+            var shape = (Shape)mouseArgs.OriginalSource;
             var mapCanvas = (MapCanvas)shape.Parent;
 
-            Point position = args.GetPosition(mapCanvas);
+            Point position = mouseArgs.GetPosition(mapCanvas);
             (int rowIdx, int colIdx) = mapCanvas.GetNodeIndices(position);
 
             Map map = _mainViewModel.Map;

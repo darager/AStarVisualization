@@ -30,18 +30,18 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
 
             if (args.LeftButton == MouseButtonState.Pressed)
             {
-                if (_mainViewModel.PlaceTileCommand.CanExecute(parameter))
-                {
-                    _mainViewModel.PlaceTileCommand.Execute(parameter);
-                }
+                ICommand placeTileCommand = _mainViewModel.PlaceTileCommand;
+
+                if (placeTileCommand.CanExecute(parameter))
+                    placeTileCommand.Execute(parameter);
             }
 
             if (args.RightButton == MouseButtonState.Pressed)
             {
-                if (_mainViewModel.RemoveTileCommand.CanExecute(parameter))
-                {
-                    _mainViewModel.RemoveTileCommand.Execute(parameter);
-                }
+                ICommand removeTileCommand = _mainViewModel.RemoveTileCommand;
+
+                if (removeTileCommand.CanExecute(parameter))
+                    removeTileCommand.Execute(parameter);
             }
         }
 

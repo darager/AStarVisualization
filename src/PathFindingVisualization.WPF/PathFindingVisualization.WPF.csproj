@@ -74,7 +74,6 @@
     <Compile Include="Commands\AlgorithmControls\ResetAlgorithmCommand.cs" />
     <Compile Include="Commands\AlgorithmControls\StartAlgorithmCommand.cs" />
     <Compile Include="Converters\BoolToBackgroundConverter.cs" />
-    <Compile Include="Converters\StringToPathSolverConverter.cs" />
     <Compile Include="Models\ApplicationState.cs" />
     <Compile Include="Models\AppState.cs" />
     <Compile Include="ViewModels\AlgorithmControlViewModel.cs" />
