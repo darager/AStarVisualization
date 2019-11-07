@@ -49,19 +49,9 @@ namespace PathFindingVisualization.DataStructures
             HeapifyUp();
         }
 
-        private int GetRightChildIndex(int index)
-        {
-            return index * 2 + 2;
-        }
-        private int GetLeftChildIndex(int index)
-        {
-            return index * 2 + 1;
-        }
-        private int GetParentIndex(int index)
-        {
-            return (index - 1) / 2;
-
-        }
+        private int GetRightChildIndex(int index) => (index * 2 + 2);
+        private int GetLeftChildIndex(int index) => (index * 2 + 1);
+        private int GetParentIndex(int index) => (index - 1) / 2;
         private bool HasLeftChild(int index)
         {
             return GetLeftChildIndex(index) < _Count;
@@ -124,8 +114,8 @@ namespace PathFindingVisualization.DataStructures
 
                 if (_Items[index].CompareTo(_Items[SmallerChildIndex]) == -1)
                     break;
-                else
-                    Swap(index, SmallerChildIndex);
+
+                Swap(index, SmallerChildIndex);
 
                 index = SmallerChildIndex;
             }
