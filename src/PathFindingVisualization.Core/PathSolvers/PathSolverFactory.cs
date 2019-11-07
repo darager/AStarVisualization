@@ -1,4 +1,6 @@
-﻿namespace PathFindingVisualization.Core.PathSolvers
+﻿using PathFindingVisualization.Core.PathSolvers.AStar;
+
+namespace PathFindingVisualization.Core.PathSolvers
 {
     public class PathSolverFactory : IPathSolverFactory
     {

@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using PathFindingVisualization.Core.PathSolvers;
+using PathFindingVisualization.Core.PathSolvers.AStar;
 
 namespace PathFindingVisualization.Core.UnitTests
 {
@@ -7,7 +8,7 @@ namespace PathFindingVisualization.Core.UnitTests
     public class PathSolverFactoryTest
     {
         [Test]
-        public void GetPathSolver_RequestsAStarPathSolver_ReturnsAStarPathSolver()
+        public void GetPathSolver_RequestsAStarPathSolver_GetsAStarPathSolver()
         {
             Map.Map map = null;
             IPathSolverFactory pathSolverFactory = new PathSolverFactory();

@@ -37,7 +37,8 @@ namespace PathFindingVisualization.Core.Map
         }
         private static bool IsDiagonalNeighbor(int rowIdx, int colIdx, int nRowidx, int nColIdx)
         {
-            return ((Math.Abs(rowIdx - nRowidx)) == 1) && ((Math.Abs(colIdx - nColIdx) == 1));
+            return ((Math.Abs(rowIdx - nRowidx)) == 1)
+                && ((Math.Abs(colIdx - nColIdx) == 1));
         }
     }
 }

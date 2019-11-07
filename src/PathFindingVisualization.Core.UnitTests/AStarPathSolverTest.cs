@@ -4,6 +4,7 @@ using System.Linq;
 using NUnit.Framework;
 using PathFindingVisualization.Core.Exceptions;
 using PathFindingVisualization.Core.PathSolvers;
+using PathFindingVisualization.Core.PathSolvers.AStar;
 
 // TODO: clean up this testFixture
 

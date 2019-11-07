@@ -10,10 +10,9 @@ namespace PathFindingVisualization.Core.Map
             get => _map[i][j];
             set
             {
-                if (_map[i][j] != value)
-                {
-                    _map[i][j] = value;
-                }
+                if (_map[i][j] == value) return;
+
+                _map[i][j] = value;
             }
         }
         public Node.Node[][] Data
@@ -21,11 +20,10 @@ namespace PathFindingVisualization.Core.Map
             get => _map;
             set
             {
-                if (_map != value)
-                {
-                    _map = value;
-                    UpdateNodeIndices();
-                }
+                if (_map == value) return;
+
+                _map = value;
+                UpdateNodeIndices();
             }
         }
         private Node.Node[][] _map;

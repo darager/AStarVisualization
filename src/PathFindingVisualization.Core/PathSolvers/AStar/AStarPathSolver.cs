@@ -9,7 +9,7 @@ using PathFindingVisualization.DataStructures;
 // TODO: clean up this class
 // TODO: measure performance, if necessary replace linq for more efficient methods
 
-namespace PathFindingVisualization.Core.PathSolvers
+namespace PathFindingVisualization.Core.PathSolvers.AStar
 {
     public class AStarPathSolver : IPathSolver
     {
