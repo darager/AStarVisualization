@@ -132,6 +132,10 @@
       <Name>PathFindingVisualization.WPF.Controls</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Icons\pause.svg" />
+    <Content Include="Icons\play.svg" />
+    <Content Include="Icons\reset.svg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

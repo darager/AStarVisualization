@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 640 640" width="640" height="640">
+  <defs>
+    <path d="M450 350C450 405.19 405.19 450 350 450C294.81 450 250 405.19 250 350C250 294.81 294.81 250 350 250C405.19 250 450 294.81 450 350Z" id="e3TYC5aI8Q"></path>
+    <path d="M300 300L400 300L400 400L300 400L300 300Z" id="c228rPxQ3"></path>
+  </defs>
+  <g>
+    <g>
+      <g>
+        <g>
+          <filter id="shadow15491697" x="241" y="241" width="219" height="219" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse">
+            <feFlood></feFlood>
+            <feComposite in2="SourceAlpha" operator="in"></feComposite>
+            <feGaussianBlur stdDeviation="1"></feGaussianBlur>
+            <feOffset dx="1" dy="1" result="afterOffset"></feOffset>
+            <feFlood flood-color="#000000" flood-opacity="0.5"></feFlood>
+            <feComposite in2="afterOffset" operator="in"></feComposite>
+            <feMorphology operator="dilate" radius="1"></feMorphology>
+            <feComposite in2="SourceAlpha" operator="out"></feComposite>
+          </filter>
+          <path d="M450 350C450 405.19 405.19 450 350 450C294.81 450 250 405.19 250 350C250 294.81 294.81 250 350 250C405.19 250 450 294.81 450 350Z" id="asfBpggUD" fill="white" fill-opacity="1" filter="url(#shadow15491697)"></path>
+        </g>
+        <use xlink:href="#e3TYC5aI8Q" opacity="1" fill="#1f2325" fill-opacity="1"></use>
+        <g>
+          <use xlink:href="#e3TYC5aI8Q" opacity="1" fill-opacity="0" stroke="#79848a" stroke-width="1" stroke-opacity="1"></use>
+        </g>
+      </g>
+      <g>
+        <g>
+          <filter id="shadow9837973" x="289" y="289" width="125" height="125" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse">
+            <feFlood></feFlood>
+            <feComposite in2="SourceAlpha" operator="in"></feComposite>
+            <feGaussianBlur stdDeviation="1"></feGaussianBlur>
+            <feOffset dx="3" dy="3" result="afterOffset"></feOffset>
+            <feFlood flood-color="#000000" flood-opacity="0.5"></feFlood>
+            <feComposite in2="afterOffset" operator="in"></feComposite>
+            <feMorphology operator="dilate" radius="1"></feMorphology>
+            <feComposite in2="SourceAlpha" operator="out"></feComposite>
+          </filter>
+          <path d="M300 300L400 300L400 400L300 400L300 300Z" id="aZKyuSbAB" fill="white" fill-opacity="1" filter="url(#shadow9837973)"></path>
+        </g>
+        <use xlink:href="#c228rPxQ3" opacity="1" fill="#8f3636" fill-opacity="1"></use>
+      </g>
+    </g>
+  </g>
+</svg>
