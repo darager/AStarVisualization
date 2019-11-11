@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
@@ -16,6 +17,7 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
         {
             _mainViewModel = mainViewModel;
             _appState = appState;
+            _appState.PropertyChanged += UpdateCanExecute;
         }
 
         public bool CanExecute(object parameter) => _appState.State == AppState.MapDesignPhase;
@@ -29,6 +31,10 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
                     node.State = NodeState.Ground;
         }
 
+        private void UpdateCanExecute(object sender, PropertyChangedEventArgs e)
+        {
+            CanExecuteChanged?.Invoke(sender, e);
+        }
         public event EventHandler CanExecuteChanged;
     }
 }

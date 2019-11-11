@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Input;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Models;
@@ -16,6 +17,7 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
         {
             _mainViewModel = mainViewModel;
             _appState = appState;
+            _appState.PropertyChanged += UpdateCanExecute;
         }
 
         public bool CanExecute(object parameter) => _appState.State == AppState.AlgorithmDone;
@@ -41,6 +43,10 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
             _appState.State = AppState.MapDesignPhase;
         }
 
+        private void UpdateCanExecute(object sender, PropertyChangedEventArgs e)
+        {
+            CanExecuteChanged?.Invoke(sender, e);
+        }
         public event EventHandler CanExecuteChanged;
     }
 }
