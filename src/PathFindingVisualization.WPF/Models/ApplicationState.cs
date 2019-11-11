@@ -14,7 +14,6 @@ namespace PathFindingVisualization.WPF.Models
                     return;
                 _state = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("State"));
-                CommandManager.InvalidateRequerySuggested();
             }
         }
 

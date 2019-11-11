@@ -1,6 +1,6 @@
 ﻿using System;
 
-// TODO: maybe writer wrappers if the algorithms need different values
+// TODO: write wrappers for this class (not ever pathsolver requires the same values!!
 // TODO: write tests for this class
 namespace PathFindingVisualization.Core.Node
 {

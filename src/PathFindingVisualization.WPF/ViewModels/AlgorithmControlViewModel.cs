@@ -33,25 +33,31 @@ namespace PathFindingVisualization.WPF.ViewModels
             }
         }
         private PathSolver _pathSolverType = PathSolver.AStar;
-
-        //public bool AlgorithmActive
-        //{
-        //    get { return _mapDesignPhaseInactive; }
-        //    set { _mapDesignPhaseInactive = value; }
-        //}
-        //private bool _mapDesignPhaseInactive;
-
-        //private ApplicationState _appState;
+        public bool DiagonalPathsEnabled
+        {
+            get { return _diagonalsEnabled; }
+            set { _diagonalsEnabled = value; }
+        }
+        private bool _diagonalsEnabled = false;
+        public bool SlowDownAlgorithm
+        {
+            get { return _slowDownAlgorithm; }
+            set { _slowDownAlgorithm = value; }
+        }
+        private bool _slowDownAlgorithm;
+        public bool MapDesignPhaseActive => (_appState.State == AppState.MapDesignPhase);
+        private ApplicationState _appState;
 
         public AlgorithmControlViewModel(ApplicationState appState)
         {
-            //_appState = appState;
-
-            // TODO: make sure the buttons are enabled /disabled when the applicationSTate changes
-            //_appState.PropertyChanged +=
-            //      (s, e) => OnPropertyChanged("AlgorithmActive");
+            _appState = appState;
+            _appState.PropertyChanged += RelayAppStateChanged;
         }
 
+        private void RelayAppStateChanged(object sender, EventArgs e)
+        {
+            OnPropertyChanged("MapDesignPhaseActive");
+        }
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

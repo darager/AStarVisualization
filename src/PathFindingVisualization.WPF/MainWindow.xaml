@@ -34,9 +34,22 @@
                 Content="PlaceGoal" />
 
             <StackPanel x:Name="AlgorithmControls" Orientation="Horizontal">
-                <ComboBox ItemsSource="{Binding PathSolverTypes}" SelectedItem="{Binding PathSolverType}" />
+                <ComboBox
+                    IsEnabled="{Binding MapDesignPhaseActive}"
+                    ItemsSource="{Binding PathSolverTypes}"
+                    SelectedItem="{Binding PathSolverType}" />
                 <Button Command="{Binding StartAlgorithmCommand}" Content="Start (testing purposes only)" />
                 <Button Command="{Binding ResetAlgorithmCommand}" Content="Reset Algorithm" />
+                <StackPanel>
+                    <CheckBox
+                        Content="ShowAlgorithmInSlowMotion"
+                        IsChecked="{Binding SlowDownAlgorithm}"
+                        IsEnabled="{Binding MapDesignPhaseActive}" />
+                    <CheckBox
+                        Content="Diagonals Enabled"
+                        IsChecked="{Binding DiagonalPathsEnabled}"
+                        IsEnabled="{Binding MapDesignPhaseActive}" />
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
