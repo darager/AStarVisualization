@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections;
+using PathFindingVisualization.Core.Node;
 
 namespace PathFindingVisualization.Core.Map
 {
     public class Map : IEnumerable
     {
-        public Node.Node this[int i, int j]
+        public INode this[int i, int j]
         {
             get => _map[i][j];
             set
@@ -15,7 +16,7 @@ namespace PathFindingVisualization.Core.Map
                 _map[i][j] = value;
             }
         }
-        public Node.Node[][] Data
+        public INode[][] Data
         {
             get => _map;
             set
@@ -26,7 +27,7 @@ namespace PathFindingVisualization.Core.Map
                 UpdateNodeIndices();
             }
         }
-        private Node.Node[][] _map;
+        private INode[][] _map;
 
         public Map(int numRows = 50, int numColumns = 50)
         {
@@ -37,7 +38,7 @@ namespace PathFindingVisualization.Core.Map
                 _map[i] = new Node.Node[numColumns];
 
                 for (int j = 0; j < numColumns; j++)
-                    _map[i][j] = new Node.Node(Node.NodeState.Ground);
+                    _map[i][j] = new Node.Node(NodeState.Ground);
             }
 
             UpdateNodeIndices();

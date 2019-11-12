@@ -1,38 +1,28 @@
 ﻿using System;
 
-// TODO: write wrappers for this class (not ever pathsolver requires the same values!!
-// TODO: write tests for this class
 namespace PathFindingVisualization.Core.Node
 {
-    public class Node : IEquatable<Node>
+    public class Node : INode
     {
-        public double Heuristic { get; set; }
-        public double MovementCost { get; set; }
-
         public NodeState State
         {
             get => _state;
             set
             {
-                if (value == _state)
+                if (_state == value)
                     return;
 
-                NodeState oldState = _state;
                 _state = value;
-                StateChanged?.Invoke(this, new StateChangedEventArgs(this, _state, oldState));
+                StateChanged?.Invoke(this, (RowIndex, ColIndex));
             }
         }
         private NodeState _state;
-
+        public bool IsWalkable => (this.State != NodeState.Wall);
+        public INode Parent { get; set; }
         public int RowIndex => _rowIndex;
-        public int ColIndex => _colIndex;
         private int _rowIndex;
+        public int ColIndex => _colIndex;
         private int _colIndex;
-
-        public bool IsWalkable => State != NodeState.Wall;
-        public double TotalCost => Heuristic + MovementCost; // TODO: adjust the values for efficient pathfinding
-        public bool AlreadyVisited => (State != NodeState.Ground) || (State != NodeState.Goal);
-        public Node Parent { get; set; }
 
         public Node(NodeState state)
         {
@@ -44,31 +34,18 @@ namespace PathFindingVisualization.Core.Node
             _rowIndex = rowIndex;
             _colIndex = colIndex;
         }
-
-        public override bool Equals(object other)
-        {
-            if (other.GetType() != this.GetType()) return false;
-            var node = (Node)other;
-
-            return Equals(node);
-        }
-        public bool Equals(Node other)
+        public bool Equals(INode other)
         {
             if (other is null) return false;
-            if (ReferenceEquals(this, other)) return true;
+            if (other.GetType() != typeof(Node)) return false;
 
-            return (this.RowIndex == other.RowIndex)
-                && (this.ColIndex == other.ColIndex);
-        }
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return (RowIndex.ToString() + ColIndex.ToString()).GetHashCode();
-            }
+            var otherNode = (Node)other;
+            if (ReferenceEquals(this, otherNode)) return true;
+
+            return (this.RowIndex == otherNode.RowIndex)
+                && (this.ColIndex == otherNode.ColIndex);
         }
 
-        public delegate void StateChangedEventHandler(object sender, StateChangedEventArgs e);
-        public event StateChangedEventHandler StateChanged;
+        public event EventHandler<(int rowIndex, int colIdndex)> StateChanged;
     }
 }

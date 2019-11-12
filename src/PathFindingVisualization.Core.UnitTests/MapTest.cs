@@ -53,11 +53,11 @@ namespace PathFindingVisualization.Core.UnitTests
         public void GetEnumerator_MapIsPopulated_ReturnsEnumerator()
         {
             var map = new Map.Map(10, 10);
-            Node.Node[] expectedRow = map.Data[0];
+            INode[] expectedRow = map.Data[0];
 
             IEnumerator enumerator = map.GetEnumerator();
             enumerator.MoveNext();
-            var firstRow = (Node.Node[])enumerator.Current;
+            var firstRow = (INode[])enumerator.Current;
 
             Assert.AreEqual(firstRow, expectedRow);
         }
