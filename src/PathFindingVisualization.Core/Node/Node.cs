@@ -1,9 +1,11 @@
-﻿using System;
-
-namespace PathFindingVisualization.Core.Node
+﻿namespace PathFindingVisualization.Core.Node
 {
     public class Node : INode
     {
+        public INode Parent { get; set; }
+        public int RowIndex { get; private set; }
+        public int ColIndex { get; private set; }
+        public bool IsWalkable => (this.State != NodeState.Wall);
         public NodeState State
         {
             get => _state;
@@ -12,28 +14,21 @@ namespace PathFindingVisualization.Core.Node
                 if (_state == value)
                     return;
 
+                NodeState oldState = _state;
                 _state = value;
-                StateChanged?.Invoke(this, (RowIndex, ColIndex));
+
+                StateChanged?.Invoke(this, new StateChangedEventArgs(this, _state, oldState));
             }
         }
         private NodeState _state;
-        public bool IsWalkable => (this.State != NodeState.Wall);
-        public INode Parent { get; set; }
-        public int RowIndex => _rowIndex;
-        private int _rowIndex;
-        public int ColIndex => _colIndex;
-        private int _colIndex;
 
-        public Node(NodeState state)
+        public Node(NodeState state, int rowIndex, int colIndex)
         {
             this.State = state;
+            this.RowIndex = rowIndex;
+            this.ColIndex = colIndex;
         }
 
-        public void SetIndices(int rowIndex, int colIndex)
-        {
-            _rowIndex = rowIndex;
-            _colIndex = colIndex;
-        }
         public bool Equals(INode other)
         {
             if (other is null) return false;
@@ -46,6 +41,7 @@ namespace PathFindingVisualization.Core.Node
                 && (this.ColIndex == otherNode.ColIndex);
         }
 
-        public event EventHandler<(int rowIndex, int colIdndex)> StateChanged;
+        public delegate void StateChangedEventHandler(object sender, StateChangedEventArgs e);
+        public event StateChangedEventHandler StateChanged;
     }
 }

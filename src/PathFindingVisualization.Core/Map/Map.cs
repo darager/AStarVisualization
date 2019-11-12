@@ -1,66 +1,29 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using PathFindingVisualization.Core.Node;
 
 namespace PathFindingVisualization.Core.Map
 {
-    public class Map : IEnumerable
+    public class Map : IMap
     {
-        public INode this[int i, int j]
-        {
-            get => _map[i][j];
-            set
-            {
-                if (_map[i][j] == value) return;
+        public INode this[int i, int j] => _data[i][j];
+        public INode[][] Data { get; set; }
 
-                _map[i][j] = value;
-            }
-        }
-        public INode[][] Data
-        {
-            get => _map;
-            set
-            {
-                if (_map == value) return;
-
-                _map = value;
-                UpdateNodeIndices();
-            }
-        }
-        private INode[][] _map;
+        private INode[][] _data;
 
         public Map(int numRows = 50, int numColumns = 50)
         {
-            _map = new Node.Node[numRows][];
+            _data = new INode[numRows][];
 
             for (int i = 0; i < numRows; i++)
             {
-                _map[i] = new Node.Node[numColumns];
+                _data[i] = new INode[numColumns];
 
                 for (int j = 0; j < numColumns; j++)
-                    _map[i][j] = new Node.Node(NodeState.Ground);
+                    _data[i][j] = new Node.Node(NodeState.Ground, i, j);
             }
-
-            UpdateNodeIndices();
         }
 
-        public int GetLength(int dimension)
-        {
-            if (dimension > 1 || dimension < 0) throw new ArgumentOutOfRangeException();
-
-            int length = 0;
-            if (dimension == 0) length = _map.GetLength(0);
-            if (dimension == 1) length = _map[0].GetLength(0);
-
-            return length;
-        }
-        public IEnumerator GetEnumerator() => _map.GetEnumerator();
-
-        private void UpdateNodeIndices()
-        {
-            for (int i = 0; i < GetLength(0); i++)
-                for (int j = 0; j < GetLength(1); j++)
-                    _map[i][j].SetIndices(i, j);
-        }
+        public int GetLength(int dimension) => this.GetLength(dimension);
+        public IEnumerator GetEnumerator() => _data.GetEnumerator();
     }
 }

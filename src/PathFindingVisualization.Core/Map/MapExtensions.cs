@@ -8,8 +8,25 @@ namespace PathFindingVisualization.Core.Map
 {
     public static class MapExtensions
     {
-        public static IEnumerable<INode> GetNeighbors(this Map map, int rowIdx, int colIdx, bool diagonalsEnabled)
+        public static int GetLength(this IMap map, int dimension)
         {
+            if (dimension > 1 || dimension < 0) throw new ArgumentOutOfRangeException();
+
+            INode[][] data = map.Data;
+            int length = 0;
+            if (dimension == 0) length = data.GetLength(0);
+            if (dimension == 1) length = data[0].GetLength(0);
+
+            return length;
+        }
+        public static IEnumerable<INode> GetNeighbors(this IMap map, int rowIdx, int colIdx, bool diagonalsEnabled)
+        {
+            static bool IsDiagonalNeighbor(int rowIdx, int colIdx, int nRowidx, int nColIdx)
+            {
+                return ((Math.Abs(rowIdx - nRowidx)) == 1)
+                    && ((Math.Abs(colIdx - nColIdx) == 1));
+            }
+
             var neighbors = new List<INode>();
 
             int rowCount = map.GetLength(0);
@@ -34,43 +51,19 @@ namespace PathFindingVisualization.Core.Map
 
             return neighbors;
         }
-        private static bool IsDiagonalNeighbor(int rowIdx, int colIdx, int nRowidx, int nColIdx)
+        public static IMap GetAlgorithmSpecificMap(this IMap map, PathSolver pathsolverType)
         {
-            return ((Math.Abs(rowIdx - nRowidx)) == 1)
-                && ((Math.Abs(colIdx - nColIdx) == 1));
-        }
-
-        public static INode[][] GetAlgorithmSpecificMap(this Map map, PathSolver pathsolverType)
-        {
-            int numRows = map.GetLength(0);
-            int numColumns = map.GetLength(1);
-
-            var algorithmMap = new INode[numRows][];
-            for (int i = 0; i < numRows; i++)
-            {
-                algorithmMap[i] = new INode[numColumns];
-
-                for (int j = 0; j < numColumns; j++)
-                {
-                    var node = (Node.Node)map[i, j];
-                    algorithmMap[i][j] = GetAlgorithmSpecificNode(pathsolverType, node);
-                }
-            }
-
-            return algorithmMap;
-        }
-        private static INode GetAlgorithmSpecificNode(PathSolver pathsolverType, Node.Node node)
-        {
+            // TODO: implement more of the algorithms
             return pathsolverType switch
             {
-                PathSolver.AStar => new AStarNode(node),
-                //PathSolver.BreadthFirstSearch => typeof(BreadthFirstSearchNode),
-                //PathSolver.BestFirstSearch => typeof(BestFirstSearchNode),
-                //PathSolver.Dijkstra => typeof(DijkstraNode),
-                //PathSolver.JumpPointSearch => typeof(JumpPointSearchNode),
-                //PathSolver.OrthogonalJumpPointSearch => typeof(OrthogonalJumpPointSearchNode),
-                //PathSolver.Trace => typeof(TraceNode),
-                _ => throw new Exception("The Node for the algorithm of type '{pathsolverType}' does not exist!")
+                PathSolver.AStar => new AStarMap(map),
+                //PathSolver.BreadthFirstSearch => new BreadthFirstSearchMap(map),
+                //PathSolver.BestFirstSearch => new BestFirstSearchMap(map),
+                //PathSolver.Dijkstra => new DijkstraMap(map),
+                //PathSolver.JumpPointSearch => new JumpPointSearchMap(map),
+                //PathSolver.OrthogonalJumpPointSearch => new OrthogonalJumpPointSearchMap(map),
+                //PathSolver.Trace => new TraceMap(map),
+                _ => throw new Exception($"The Map for the {pathsolverType} algorithm has not yet been implemented!")
             };
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using PathFindingVisualization.Core.Exceptions;
+using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.Core.PathSolvers;
 using PathFindingVisualization.Core.PathSolvers.AStar;
 
@@ -16,7 +17,7 @@ namespace PathFindingVisualization.Core.UnitTests
         private static readonly Map.Map Map = new Map.Map(4, 4) { Data = map };
         private static readonly INode[][] map = new Node.Node[][]
         {
-            new Node.Node[]{ new Node.Node(NodeState.Ground), new Node.Node(NodeState.Wall), new Node.Node(NodeState.Wall), new Node.Node(NodeState.Ground) },
+            new Node.Node[]{ new Node.Node(NodeState.Ground, 0, 0), new Node.Node(NodeState.Wall), new Node.Node(NodeState.Wall), new Node.Node(NodeState.Ground) },
             new Node.Node[]{ new Node.Node(NodeState.Ground), new Node.Node(NodeState.Ground), new Node.Node(NodeState.Ground), new Node.Node(NodeState.Ground) },
             new Node.Node[]{ new Node.Node(NodeState.Ground), new Node.Node(NodeState.Wall), new Node.Node(NodeState.Wall), new Node.Node(NodeState.Ground) },
             new Node.Node[]{ new Node.Node(NodeState.Ground), new Node.Node(NodeState.Ground), new Node.Node(NodeState.Wall), new Node.Node(NodeState.Ground) },

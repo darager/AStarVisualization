@@ -9,9 +9,5 @@ namespace PathFindingVisualization.Core.Node
         bool IsWalkable { get; }
         int RowIndex { get; }
         int ColIndex { get; }
-
-        void SetIndices(int rowIndex, int colIndex);
-
-        event EventHandler<(int rowIndex, int colIdndex)> StateChanged;
     }
 }

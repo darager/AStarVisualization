@@ -1,10 +1,11 @@
-﻿using PathFindingVisualization.Core.PathSolvers.AStar;
+﻿using PathFindingVisualization.Core.Map;
+using PathFindingVisualization.Core.PathSolvers.AStar;
 
 namespace PathFindingVisualization.Core.PathSolvers
 {
     public class PathSolverFactory : IPathSolverFactory
     {
-        public IPathSolver GetPathSolver(ref Map.Map map, PathSolver pathSolverType, bool diagonalsEnabled)
+        public IPathSolver GetPathSolver(ref IMap map, PathSolver pathSolverType, bool diagonalsEnabled)
         {
             return pathSolverType switch
             {
@@ -14,7 +15,6 @@ namespace PathFindingVisualization.Core.PathSolvers
                 PathSolver.BreadthFirstSearch => throw new System.NotImplementedException(),
                 PathSolver.JumpPointSearch => throw new System.NotImplementedException(),
                 PathSolver.OrthogonalJumpPointSearch => throw new System.NotImplementedException(),
-
                 _ => throw new System.Exception($"The requested Pathsolving algorithm ({pathSolverType}) is not implemented")
             };
         }
