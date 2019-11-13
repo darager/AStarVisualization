@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using PathFindingVisualization.Core.Map;
@@ -23,7 +24,7 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
         public bool CanExecute(object parameter) => _appState.State == AppState.MapDesignPhase;
         public void Execute(object parameter)
         {
-            _mainViewModel.Path = new System.Collections.Generic.List<Node>();
+            _mainViewModel.Path = new List<INode>();
 
             Map map = _mainViewModel.Map;
             foreach (Node[] nodes in map)

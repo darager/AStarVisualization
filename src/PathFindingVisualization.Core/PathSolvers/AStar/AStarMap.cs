@@ -30,7 +30,7 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             }
         }
 
-        public int GetLength(int dimension) => this.GetLength(dimension);
+        public int GetLength(int dimension) => MapExtensions.GetLength(this, dimension);
         public IEnumerator GetEnumerator() => _data.GetEnumerator();
     }
 }

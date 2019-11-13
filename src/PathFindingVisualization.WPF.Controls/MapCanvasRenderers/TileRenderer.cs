@@ -23,7 +23,7 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
             // create the new tiles
             for (int i = 0; i < canvas.NumRows; i++)
                 for (int j = 0; j < canvas.NumColumns; j++)
-                    Tiles[i, j] = GetRectangle(canvas, newMap[i, j]);
+                    Tiles[i, j] = GetRectangle(canvas, (Node)newMap[i, j]);
 
             foreach (Node[] nodes in newMap)
                 foreach (Node node in nodes)

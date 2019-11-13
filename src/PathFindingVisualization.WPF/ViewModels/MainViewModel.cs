@@ -4,7 +4,6 @@ using System.Windows.Input;
 using Ninject;
 using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.WPF.Models;
 
 namespace PathFindingVisualization.WPF.ViewModels
 {
@@ -35,7 +34,7 @@ namespace PathFindingVisualization.WPF.ViewModels
             }
         }
         private Map _map = new Map();
-        public List<Node> Path
+        public List<INode> Path
         {
             get => _path;
             set
@@ -46,7 +45,7 @@ namespace PathFindingVisualization.WPF.ViewModels
                 OnPropertyChanged("Path");
             }
         }
-        private List<Node> _path = new List<Node>();
+        private List<INode> _path = new List<INode>();
         public NodeState PlacementMode
         {
             get => _placementMode;

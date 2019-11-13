@@ -6,9 +6,17 @@ namespace PathFindingVisualization.Core.Map
     public class Map : IMap
     {
         public INode this[int i, int j] => _data[i][j];
-        public INode[][] Data { get; set; }
+        public INode[][] Data
+        {
+            get => (INode[][])_data;
+            set
+            {
+                if (_data == value)
+                    return;
+            }
+        }
 
-        private INode[][] _data;
+        private Node[][] _data;
 
         public Map(int numRows = 50, int numColumns = 50)
         {
@@ -23,7 +31,7 @@ namespace PathFindingVisualization.Core.Map
             }
         }
 
-        public int GetLength(int dimension) => this.GetLength(dimension);
+        public int GetLength(int dimension) => MapExtensions.GetLength(this, dimension);
         public IEnumerator GetEnumerator() => _data.GetEnumerator();
     }
 }

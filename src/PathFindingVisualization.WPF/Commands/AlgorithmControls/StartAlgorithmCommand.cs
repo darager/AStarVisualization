@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.ComponentModel;
 using System.Windows.Input;
 using PathFindingVisualization.Core.Map;
+using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.Core.PathSolvers;
 using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
@@ -31,7 +33,7 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
         {
             _appState.State = AppState.AlgorithmActive;
 
-            Map map = _mainViewModel.Map;
+            IMap map = _mainViewModel.Map;
             bool diagonalsEnabled = _algorithmControlViewModel.DiagonalPathsEnabled;
             PathSolver pathsolverType = _algorithmControlViewModel.PathSolverType;
 

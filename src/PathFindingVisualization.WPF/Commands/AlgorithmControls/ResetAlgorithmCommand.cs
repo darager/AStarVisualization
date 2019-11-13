@@ -23,7 +23,7 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
         public bool CanExecute(object parameter) => _appState.State == AppState.AlgorithmDone;
         public void Execute(object parameter)
         {
-            _mainViewModel.Path = new List<Node>();
+            _mainViewModel.Path = new List<INode>();
 
             var map = _mainViewModel.Map;
             foreach (Node[] nodes in map)

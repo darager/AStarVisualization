@@ -35,7 +35,7 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
             (int rowIdx, int colIdx) = mapCanvas.GetNodeIndices(position);
 
             Map map = _mainViewModel.Map;
-            Node node = map[rowIdx, colIdx];
+            Node node = (Node)map[rowIdx, colIdx];
             NodeState oldState = node.State;
             NodeState newState = _mainViewModel.PlacementMode;
 
