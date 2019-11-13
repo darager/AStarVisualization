@@ -21,11 +21,11 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             int cols = map.GetLength(1);
 
             _data = new AStarNode[rows][];
-            for (int i = 0; i <= rows; i++)
+            for (int i = 0; i < rows; i++)
             {
                 _data[i] = new AStarNode[cols];
 
-                for (int j = 0; j <= cols; j++)
+                for (int j = 0; j < cols; j++)
                     _data[i][j] = new AStarNode(map[i, j]);
             }
         }

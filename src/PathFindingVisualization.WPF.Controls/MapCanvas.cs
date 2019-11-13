@@ -20,14 +20,14 @@ namespace PathFindingVisualization.WPF.Controls
                 nameof(Map), typeof(Map), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnMapChange)));
 
-        public List<Node> Path
+        public List<INode> Path
         {
-            get => (List<Node>)GetValue(PathProperty);
+            get => (List<INode>)GetValue(PathProperty);
             set => SetValue(PathProperty, value);
         }
         public static readonly DependencyProperty PathProperty =
             DependencyProperty.Register(
-                nameof(Path), typeof(List<Node>), typeof(MapCanvas),
+                nameof(Path), typeof(List<INode>), typeof(MapCanvas),
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnPathChange)));
 
         public int NumRows => Map.GetLength(0);

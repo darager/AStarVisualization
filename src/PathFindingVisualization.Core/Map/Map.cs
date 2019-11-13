@@ -16,15 +16,15 @@ namespace PathFindingVisualization.Core.Map
             }
         }
 
-        private Node[][] _data;
+        private INode[][] _data;
 
         public Map(int numRows = 50, int numColumns = 50)
         {
-            _data = new INode[numRows][];
+            _data = new Node.Node[numRows][];
 
             for (int i = 0; i < numRows; i++)
             {
-                _data[i] = new INode[numColumns];
+                _data[i] = new Node.Node[numColumns];
 
                 for (int j = 0; j < numColumns; j++)
                     _data[i][j] = new Node.Node(NodeState.Ground, i, j);

@@ -23,7 +23,7 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
         public void RedrawPath(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             var canvas = (MapCanvas)source;
-            var path = (List<Node>)e.NewValue;
+            var path = (List<INode>)e.NewValue;
 
             double gridHeight = canvas.ActualHeight / canvas.NumRows;
             double gridWidth = canvas.ActualWidth / canvas.NumColumns;
@@ -32,7 +32,7 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
             PathLine.StrokeThickness = Math.Min(gridHeight, gridWidth) * 0.2;
 
             var points = new PointCollection();
-            foreach (Node node in path)
+            foreach (INode node in path)
             {
                 double x = (node.ColIndex * gridWidth) + (gridWidth / 2);
                 double y = (node.RowIndex * gridHeight) + (gridHeight / 2);
