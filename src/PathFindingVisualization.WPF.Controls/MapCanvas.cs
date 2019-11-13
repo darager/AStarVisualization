@@ -52,6 +52,9 @@ namespace PathFindingVisualization.WPF.Controls
             int rowIdx = (int)Math.Truncate(position.Y / rowSpacing);
             int colIdx = (int)Math.Truncate(position.X / colSpacing);
 
+            if (rowIdx >= NumRows) rowIdx = NumRows - 1;
+            if (colIdx >= NumColumns) colIdx = NumColumns - 1;
+
             return (rowIdx, colIdx);
         }
 
