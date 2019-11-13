@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using NUnit.Framework;
+using PathFindingVisualization.Core.Node;
 
 namespace PathFindingVisualization.Core.UnitTests
 {
