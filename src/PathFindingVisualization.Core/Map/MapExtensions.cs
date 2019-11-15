@@ -8,6 +8,42 @@ namespace PathFindingVisualization.Core.Map
 {
     public static class MapExtensions
     {
+        public static bool IsValid(this IMap map)
+        {
+            if (map is null)
+                return false;
+
+            if (map.GetLength(0) == 1 || map.GetLength(1) == 1)
+                return false;
+
+            if (!map.HasStartAndGoal())
+                return false;
+
+            return true;
+        }
+        private static bool HasStartAndGoal(this IMap map)
+        {
+            (INode start, INode goal) = GetStartAndGoal(map);
+
+            return ((start != null)
+                && (goal != null));
+        }
+        public static (INode, INode) GetStartAndGoal(this IMap map)
+        {
+            INode goal = null;
+            INode start = null;
+
+            foreach (INode[] nodes in map)
+                foreach (INode node in nodes)
+                {
+                    if (node.State == NodeState.Start)
+                        start = node;
+                    else if (node.State == NodeState.Goal)
+                        goal = node;
+                }
+
+            return (start, goal);
+        }
         public static int GetLength(this IMap map, int dimension)
         {
             if (dimension > 1 || dimension < 0) throw new ArgumentOutOfRangeException();

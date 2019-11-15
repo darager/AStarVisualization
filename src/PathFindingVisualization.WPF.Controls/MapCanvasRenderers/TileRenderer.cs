@@ -45,10 +45,13 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
 
         private void UpdateColor(object sender, StateChangedEventArgs e)
         {
-            var node = (Node)sender;
-            Rectangle rectangle = Tiles[node.RowIndex, node.ColIndex];
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var node = (Node)sender;
+                Rectangle rectangle = Tiles[node.RowIndex, node.ColIndex];
 
-            rectangle.Fill = GetStateColor(e.NewState);
+                rectangle.Fill = GetStateColor(e.NewState);
+            });
         }
         private Rectangle GetRectangle(MapCanvas canvas, Node node)
         {

@@ -14,7 +14,7 @@ namespace PathFindingVisualization.WPF
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
 
-            DataContext = kernel.Get<MainViewModel>();
+            this.DataContext = kernel.Get<MainViewModel>();
             AlgorithmControls.DataContext = kernel.Get<AlgorithmControlViewModel>();
         }
     }

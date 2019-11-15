@@ -21,11 +21,14 @@ namespace PathFindingVisualization.WPF
             Bind<ICommand>().To<ResetAlgorithmCommand>().Named("ResetAlgorithmCommand");
             Bind<ICommand>().To<StartAlgorithmCommand>().Named("StartAlgorithmCommand"); // HACK: for testing purposes
 
-            Bind<AlgorithmControlViewModel>().To<AlgorithmControlViewModel>().InSingletonScope();
-            Bind<MainViewModel>().To<MainViewModel>().InSingletonScope();
-            Bind<MainWindow>().To<MainWindow>().InSingletonScope();
             Bind<ApplicationState>().To<ApplicationState>().InSingletonScope();
-            Bind<IPathSolverFactory>().To<PathSolverFactory>().InSingletonScope();
+            Bind<PathSolverController>().To<PathSolverController>().InSingletonScope();
+            Bind<PathSolverFactory>().To<PathSolverFactory>().InSingletonScope();
+
+            //Bind<MainWindow>().To<MainWindow>().InSingletonScope();
+
+            Bind<MainViewModel>().To<MainViewModel>().InSingletonScope();
+            Bind<AlgorithmControlViewModel>().To<AlgorithmControlViewModel>().InSingletonScope();
         }
     }
 }

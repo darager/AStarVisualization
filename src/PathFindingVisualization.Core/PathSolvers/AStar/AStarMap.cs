@@ -2,14 +2,15 @@
 using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
 
+// TODO: make sure that this class works correctly
 namespace PathFindingVisualization.Core.PathSolvers.AStar
 {
     public class AStarMap : IMap
     {
-        public INode this[int i, int j] => _data[i][j];
+        public INode this[int i, int j] => (AStarNode)_data[i][j];
         public INode[][] Data
         {
-            get => _data;
+            get => (AStarNode[][])_data;
             set => _data = (AStarNode[][])value;
         }
 

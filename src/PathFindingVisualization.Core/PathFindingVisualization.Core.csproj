@@ -9,4 +9,8 @@
         <ProjectReference Include="..\PathFindingVisualization.DataStructures\PathFindingVisualization.DataStructures.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="PathSolvers\Dijkstra\" />
+    </ItemGroup>
+
 </Project>

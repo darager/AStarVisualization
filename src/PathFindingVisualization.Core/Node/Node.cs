@@ -29,16 +29,10 @@
             this.ColIndex = colIndex;
         }
 
-        public bool Equals(INode other)
+        public bool Equals(INode other) => INodeExtensions.Equals(this, typeof(Node), other);
+        public Node GetStandardNodeImplementationEquivalent()
         {
-            if (other is null) return false;
-            if (other.GetType() != typeof(Node)) return false;
-
-            var otherNode = (Node)other;
-            if (ReferenceEquals(this, otherNode)) return true;
-
-            return (this.RowIndex == otherNode.RowIndex)
-                && (this.ColIndex == otherNode.ColIndex);
+            return this;
         }
 
         public delegate void StateChangedEventHandler(object sender, StateChangedEventArgs e);

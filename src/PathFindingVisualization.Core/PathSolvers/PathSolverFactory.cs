@@ -3,7 +3,7 @@ using PathFindingVisualization.Core.PathSolvers.AStar;
 
 namespace PathFindingVisualization.Core.PathSolvers
 {
-    public class PathSolverFactory : IPathSolverFactory
+    public class PathSolverFactory
     {
         public IPathSolver GetPathSolver(ref IMap map, PathSolver pathSolverType, bool diagonalsEnabled)
         {

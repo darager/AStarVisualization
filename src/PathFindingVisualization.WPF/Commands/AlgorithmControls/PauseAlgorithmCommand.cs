@@ -1,27 +1,20 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
-using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.PathSolvers;
 using PathFindingVisualization.WPF.Models;
-using PathFindingVisualization.WPF.ViewModels;
 
-// TODO: clean up this command
 namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
 {
-    public class StartAlgorithmCommand : ICommand
+    public class PauseAlgorithmCommand : ICommand
     {
         private ApplicationState _appState;
         private PathSolverController _pathSolverController;
-        private MainViewModel _mainViewModel;
-        private AlgorithmControlViewModel _algorithmControlViewModel;
 
-        public StartAlgorithmCommand(ApplicationState appState, PathSolverController pathSolverController, MainViewModel mainViewModel, AlgorithmControlViewModel algorithmControlViewModel)
+        public PauseAlgorithmCommand(ApplicationState appState, PathSolverController pathSolverController)
         {
             _appState = appState;
             _pathSolverController = pathSolverController;
-            _mainViewModel = mainViewModel;
-            _algorithmControlViewModel = algorithmControlViewModel;
             _appState.PropertyChanged += UpdateCanExecute;
         }
 
@@ -30,11 +23,7 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
         {
             _appState.State = AppState.AlgorithmActive;
 
-            Map map = _mainViewModel.Map;
-            bool diagonalsEnabled = _algorithmControlViewModel.DiagonalPathsEnabled;
-            PathSolver pathsolverType = _algorithmControlViewModel.PathSolverType;
-
-            _pathSolverController.StartPathSolver(map, pathsolverType, diagonalsEnabled);
+            _pathSolverController.PausePathSolver();
         }
 
         private void UpdateCanExecute(object sender, PropertyChangedEventArgs e)

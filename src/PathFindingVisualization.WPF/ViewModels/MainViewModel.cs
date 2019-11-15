@@ -34,7 +34,7 @@ namespace PathFindingVisualization.WPF.ViewModels
             }
         }
         private Map _map = new Map();
-        public List<INode> Path
+        public List<Node> Path
         {
             get => _path;
             set
@@ -45,7 +45,7 @@ namespace PathFindingVisualization.WPF.ViewModels
                 OnPropertyChanged("Path");
             }
         }
-        private List<INode> _path = new List<INode>();
+        private List<Node> _path = new List<Node>();
         public NodeState PlacementMode
         {
             get => _placementMode;

@@ -9,7 +9,7 @@ namespace PathFindingVisualization.Core.PathSolvers
         //Task<List<INode>> FindPath();
         //void Stop();
 
-        bool PathFound { get; }
+        bool AlgorithmDone { get; }
         List<INode> Path { get; }
 
         Task PerformAlgorithmStep();

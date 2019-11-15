@@ -4,10 +4,12 @@ namespace PathFindingVisualization.Core.Node
 {
     public interface INode : IEquatable<INode>
     {
-        NodeState State { get; set; }
         INode Parent { get; set; }
+        NodeState State { get; set; }
         bool IsWalkable { get; }
-        int RowIndex { get; }
         int ColIndex { get; }
+        int RowIndex { get; }
+
+        Node GetStandardNodeImplementationEquivalent();
     }
 }

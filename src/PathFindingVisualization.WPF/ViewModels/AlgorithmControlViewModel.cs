@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
-using PathFindingVisualization.Core.PathSolvers;
 using Ninject;
+using PathFindingVisualization.Core.Node;
+using PathFindingVisualization.Core.PathSolvers;
 using PathFindingVisualization.WPF.Models;
 
 namespace PathFindingVisualization.WPF.ViewModels
@@ -12,7 +13,7 @@ namespace PathFindingVisualization.WPF.ViewModels
     public class AlgorithmControlViewModel : INotifyPropertyChanged
     {
         [Inject, Named("StartAlgorithmCommand")]
-        public ICommand StartAlgorithmCommand { get; set; } // HACK: this is only or testing purposes
+        public ICommand StartAlgorithmCommand { get; set; }
         [Inject, Named("ResetAlgorithmCommand")]
         public ICommand ResetAlgorithmCommand { get; set; }
 
@@ -33,31 +34,34 @@ namespace PathFindingVisualization.WPF.ViewModels
             }
         }
         private PathSolver _pathSolverType = PathSolver.AStar;
-        public bool DiagonalPathsEnabled
-        {
-            get { return _diagonalsEnabled; }
-            set { _diagonalsEnabled = value; }
-        }
-        private bool _diagonalsEnabled = false;
-        public bool SlowDownAlgorithm
-        {
-            get { return _slowDownAlgorithm; }
-            set { _slowDownAlgorithm = value; }
-        }
-        private bool _slowDownAlgorithm;
-        public bool MapDesignPhaseActive => (_appState.State == AppState.MapDesignPhase);
-        private ApplicationState _appState;
 
-        public AlgorithmControlViewModel(ApplicationState appState)
+        public bool DiagonalPathsEnabled { get; set; } = false;
+        public bool MapDesignPhaseActive => (_appState.State == AppState.MapDesignPhase);
+
+        private ApplicationState _appState;
+        private PathSolverController _pathSolverController;
+        private MainViewModel _mainViewModel;
+
+        public AlgorithmControlViewModel(ApplicationState appState, PathSolverController pathSolverController, MainViewModel mainViewModel)
         {
             _appState = appState;
             _appState.PropertyChanged += RelayAppStateChanged;
+
+            _pathSolverController = pathSolverController;
+            _pathSolverController.PathChanged += RelayPathChanged;
+
+            _mainViewModel = mainViewModel;
         }
 
+        private void RelayPathChanged(object sender, List<Node> newPath)
+        {
+            _mainViewModel.Path = newPath;
+        }
         private void RelayAppStateChanged(object sender, EventArgs e)
         {
             OnPropertyChanged("MapDesignPhaseActive");
         }
+
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

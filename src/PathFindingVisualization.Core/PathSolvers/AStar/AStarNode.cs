@@ -30,16 +30,10 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             _node = node;
         }
 
-        public bool Equals(INode other)
+        public bool Equals(INode other) => INodeExtensions.Equals(this, typeof(AStarNode), other);
+        public Node.Node GetStandardNodeImplementationEquivalent()
         {
-            if (other is null) return false;
-            if (other.GetType() != typeof(AStarNode)) return false;
-
-            var otherNode = (AStarNode)other;
-            if (ReferenceEquals(this, otherNode)) return true;
-
-            return (this.RowIndex == otherNode.RowIndex)
-                && (this.ColIndex == otherNode.ColIndex);
+            return new Node.Node(this.State, this.RowIndex, this.ColIndex);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
         public bool CanExecute(object parameter) => _appState.State == AppState.MapDesignPhase;
         public void Execute(object parameter)
         {
-            _mainViewModel.Path = new List<INode>();
+            _mainViewModel.Path = new List<Node>();
 
             Map map = _mainViewModel.Map;
             foreach (Node[] nodes in map)

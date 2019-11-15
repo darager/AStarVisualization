@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using PathFindingVisualization.Core.Node;
+using PathFindingVisualization.Core.PathSolvers;
 using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
 
@@ -10,20 +12,28 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
 {
     public class ResetAlgorithmCommand : ICommand
     {
-        private MainViewModel _mainViewModel;
         private ApplicationState _appState;
+        private PathSolverController _pathSolverController;
+        private AlgorithmControlViewModel _algorithmControlViewModel;
+        private MainViewModel _mainViewModel;
 
-        public ResetAlgorithmCommand(MainViewModel mainViewModel, ApplicationState appState)
+        public ResetAlgorithmCommand(ApplicationState appState, PathSolverController pathSolverController, AlgorithmControlViewModel algorithmControlViewModel, MainViewModel mainViewModel)
         {
-            _mainViewModel = mainViewModel;
             _appState = appState;
+            _mainViewModel = mainViewModel;
+            _pathSolverController = pathSolverController;
+            _algorithmControlViewModel = algorithmControlViewModel;
             _appState.PropertyChanged += UpdateCanExecute;
         }
 
-        public bool CanExecute(object parameter) => _appState.State == AppState.AlgorithmDone;
+        public bool CanExecute(object parameter) => _appState.State == AppState.AlgorithmActive || _appState.State == AppState.AlgorithmDone;
         public void Execute(object parameter)
         {
-            _mainViewModel.Path = new List<INode>();
+            _pathSolverController.ResetPathSolver();
+
+            Task.Delay(300);
+
+            _mainViewModel.Path = new List<Node>();
 
             var map = _mainViewModel.Map;
             foreach (Node[] nodes in map)

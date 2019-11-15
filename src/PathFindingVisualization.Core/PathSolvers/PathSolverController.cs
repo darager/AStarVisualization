@@ -1,46 +1,94 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using PathFindingVisualization.Core.Map;
+using PathFindingVisualization.Core.Node;
 
 namespace PathFindingVisualization.Core.PathSolvers
 {
     public class PathSolverController
     {
-        private IPathSolverFactory _pathSolverFactory;
-        private IPathSolver _pathSolver;
-        private bool _algorithmActive;
+        public List<Node.Node> Path { get; private set; }
 
-        public PathSolverController(IPathSolverFactory pathSolverFactory)
+        private bool _pauseAlgorithm = true;
+
+        private IPathSolver _pathSolver;
+        private PathSolverFactory _pathSolverFactory;
+
+        public PathSolverController(PathSolverFactory pathSolverFactory)
         {
             _pathSolverFactory = pathSolverFactory;
         }
 
-        public async Task Start(Map.Map map, PathSolver pathSolverType, bool diagonalsEnabled)
+        public async void StartPathSolver(Map.Map map, PathSolver pathsolverType, bool diagonalsEnabled)
         {
-            IMap algorithmSpecificMap = map.GetAlgorithmSpecificMap(pathSolverType);
-            _pathSolver = _pathSolverFactory.GetPathSolver(ref algorithmSpecificMap, pathSolverType, diagonalsEnabled);
-            await _pathSolver.PerformAlgorithmStep();
+            if (!map.IsValid())
+                return;
+
+            IMap algorithmSpecificMap = map.GetAlgorithmSpecificMap(pathsolverType);
+            _pathSolver = _pathSolverFactory.GetPathSolver(ref algorithmSpecificMap, pathsolverType, diagonalsEnabled);
+
+            _pauseAlgorithm = false;
+            await PerformPathfindingAlgorithm();
         }
-        public async Task Pause()
+        public void PausePathSolver()
         {
+            if (_pathSolver is null)
+                return;
+            if (_pauseAlgorithm == false)
+                return;
+
+            _pauseAlgorithm = true;
         }
-        public async Task Continue()
+        public async void ContinuePathSolver()
         {
+            if (_pathSolver is null)
+                return;
+            if (_pauseAlgorithm == true)
+                return;
+
+            _pauseAlgorithm = false;
+            await PerformPathfindingAlgorithm();
         }
-        public async Task Reset(Map.Map map, PathSolver pathSolverType, bool diagonalsEnabled)
+        public void ResetPathSolver()
         {
-            await Pause();
-            await Start(map, pathSolverType, diagonalsEnabled);
+            // TODO: make sure that no tiles are changed when then algorithm is already paused
+            _pauseAlgorithm = true;
+            //_pathSolver = null;
         }
 
-        private async Task PerformAlgorithm()
+        private async Task PerformPathfindingAlgorithm()
         {
-            while (_algorithmActive && !_pathSolver.PathFound)
+            while (!_pathSolver.AlgorithmDone)
             {
+                if (_pauseAlgorithm)
+                    return;
+
                 await _pathSolver.PerformAlgorithmStep();
+
+                if (_pauseAlgorithm)
+                    return;
             }
+
+            List<INode> algorithmSpecificPath = _pathSolver.Path;
+            if (algorithmSpecificPath != null)
+                SetPath(algorithmSpecificPath);
         }
+        private void SetPath(List<INode> algorithmSpecificPath)
+        {
+            if (algorithmSpecificPath is null)
+                return;
+
+            Path = new List<Node.Node>();
+            foreach (INode specificNode in algorithmSpecificPath)
+            {
+                Node.Node node = specificNode.GetStandardNodeImplementationEquivalent();
+                Path.Add(node);
+            }
+
+            PathChanged?.Invoke(this, Path);
+        }
+
+        public event EventHandler<List<Node.Node>> PathChanged;
     }
 }

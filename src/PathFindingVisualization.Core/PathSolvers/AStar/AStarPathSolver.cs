@@ -2,104 +2,104 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PathFindingVisualization.Core.Exceptions;
 using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.DataStructures;
 
-// TODO: clean up this class
+// TODO: do you actually need ref for passing the map
 // TODO: measure performance, if necessary replace linq for more efficient methods
 
 namespace PathFindingVisualization.Core.PathSolvers.AStar
 {
     public class AStarPathSolver : IPathSolver
     {
-        private AStarMap _algorithmSpecificMap;
-        private readonly bool _diagonalsAllowed;
+        public bool AlgorithmDone { get; private set; }
+        public List<INode> Path { get; private set; }
+
+        private bool _diagonalsEnabled;
+        private AStarMap _map;
+
+        private int _step = 0;
+        private MinPriorityQueue<double, AStarNode> _openSet;
+        private HashSet<AStarNode> _closedSet;
         private AStarNode _startNode;
         private AStarNode _goalNode;
         private AStarNode _currentNode;
 
-        private MinPriorityQueue<double, AStarNode> openSet;
-        private HashSet<AStarNode> closedSet;
-
-        public AStarPathSolver(ref IMap map, bool diagonalsAllowed = false)
+        public AStarPathSolver(ref IMap map, bool diagonalsEnabled)
         {
-            _algorithmSpecificMap = (AStarMap)map.GetAlgorithmSpecificMap(PathSolver.AStar);
-            _diagonalsAllowed = diagonalsAllowed;
+            _map = (AStarMap)map;
+            _diagonalsEnabled = diagonalsEnabled;
         }
 
-        public void Stop()
+        public async Task PerformAlgorithmStep()
         {
-            throw new System.NotImplementedException();
-        }
-        public async Task<List<INode>> FindPath()
-        {
-            EnsureMapValidity(_algorithmSpecificMap);
-            InitDataStructures(_algorithmSpecificMap);
-            ComputeHeuristicCosts(_algorithmSpecificMap);
-            (INode start, INode goal) = GetStartAndGoal(_algorithmSpecificMap);
-            _startNode = (AStarNode)start;
-            _goalNode = (AStarNode)goal;
+            switch (_step)
+            {
+                case 0:
+                    await Task.Run(PerformFirstStep);
+                    break;
+                default:
+                    await Task.Run(PerformStep);
+                    break;
+            }
 
-            // 1.st step
+            _step++;
+        }
+
+        private void PerformFirstStep()
+        {
+            SetUpDataStructures(_map);
+            ComputeHeuristicCosts(_map);
+
+            (INode startNode, INode goalNode) = _map.GetStartAndGoal();
+            _startNode = new AStarNode(startNode);
+            _goalNode = new AStarNode(goalNode);
+
             _currentNode = _startNode;
             _currentNode.MovementCost = 0;
-            openSet.Add(_currentNode.TotalCost, _currentNode);
-
-            while (openSet.Count > 0 && _currentNode != _goalNode)
+            _openSet.Add(_currentNode.TotalCost, _currentNode);
+        }
+        private void PerformStep()
+        {
+            if (_openSet.Count == 0 || _currentNode == _goalNode)
             {
-                _currentNode = openSet.Pop().Value;
-
-                // get the neighbors
-                IEnumerable<INode> neighbors = _algorithmSpecificMap.GetNeighbors(_currentNode.RowIndex, _currentNode.ColIndex, _diagonalsAllowed);
-                // get the successors out of the neighbors (already visited, wall, similar,...)
-                List<AStarNode> successors = neighbors
-                    .Select(n => (AStarNode)n)
-                    .Where(n => (n.State == NodeState.Ground) || (n.State == NodeState.Goal))
-                    .ToList<AStarNode>();
-                // set the movementcost of all the successors
-                successors.ForEach(n => SetSuccessorMovementCost(_currentNode, n));
-                // add all of the successors to the openSet
-                foreach (var successor in successors)
-                {
-                    successor.Parent = _currentNode;
-                    if (successor.State != NodeState.Goal)
-                        successor.State = NodeState.GroundToBeVisited;
-
-                    openSet.Add(successor.TotalCost, successor);
-                }
-
-                // add the currentnode to the closedSet
-                if (_currentNode.State != NodeState.Goal && _currentNode.State != NodeState.Start)
-                    _currentNode.State = NodeState.GroundVisited;
-                closedSet.Add(_currentNode);
-
-                // TODO: move this to some sort of algorithm controller class that calls the steps of the algorithm
-                //await Task.Delay(1); // HACK: remove this!!!
+                StopAlgorithm();
+                return;
             }
 
-            if (_currentNode.State != NodeState.Goal)
-                throw new NoPathFoundException();
+            _currentNode = _openSet.Pop().Value;
 
-            List<INode> path = ReconstructPath(_currentNode);
+            // get the neighbors
+            IEnumerable<INode> neighbors = _map.GetNeighbors(_currentNode.RowIndex, _currentNode.ColIndex, _diagonalsEnabled);
+            // get the successors out of the neighbors (already visited, wall, similar,...)
+            List<AStarNode> successors = neighbors
+                .Select(n => (AStarNode)n)
+                .Where(n => (n.State == NodeState.Ground) || (n.State == NodeState.Goal))
+                .ToList<AStarNode>();
+            // set the movementcost of all the successors
+            successors.ForEach(n => SetSuccessorMovementCost(_currentNode, n));
+            // add all of the successors to the _openSet
+            foreach (var successor in successors)
+            {
+                successor.Parent = _currentNode;
+                if (successor.State != NodeState.Goal)
+                    successor.State = NodeState.GroundToBeVisited;
 
-            return path;
+                _openSet.Add(successor.TotalCost, successor);
+            }
+
+            // add the currentnode to the closedSet
+            if (_currentNode.State != NodeState.Goal && _currentNode.State != NodeState.Start)
+                _currentNode.State = NodeState.GroundVisited;
+            _closedSet.Add(_currentNode);
         }
 
-        private List<INode> ReconstructPath(INode node)
+        private void SetUpDataStructures(AStarMap map)
         {
-            var path = new List<INode>();
-
-            while (node.Parent != null)
-            {
-                path.Add(node);
-                node = node.Parent;
-            }
-            path.Add(node);
-            path.Reverse();
-
-            return path;
+            int numNodes = map.GetLength(0) * map.GetLength(1);
+            _openSet = new MinPriorityQueue<double, AStarNode>(numNodes);
+            _closedSet = new HashSet<AStarNode>();
         }
         private void ComputeHeuristicCosts(AStarMap map, double D = 1000.0) // TODO: do something with D
         {
@@ -133,12 +133,6 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
                 return (rowIdx, colIdx);
             }
         }
-        private void InitDataStructures(IMap map)
-        {
-            int numNodes = map.GetLength(0) * map.GetLength(1);
-            this.openSet = new MinPriorityQueue<double, AStarNode>(numNodes);
-            this.closedSet = new HashSet<AStarNode>();
-        }
         private void SetSuccessorMovementCost(AStarNode current, AStarNode successor)
         {
             int dx = _currentNode.ColIndex - successor.ColIndex;
@@ -146,48 +140,9 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
 
             successor.MovementCost = Math.Sqrt(dx * dx + dy * dy);
         }
-        private void EnsureMapValidity(IMap map)
+        private void StopAlgorithm()
         {
-            if (map is null)
-                throw new ArgumentNullException();
-
-            if (map.GetLength(0) == 1 || map.GetLength(1) == 1)
-                throw new MapTooSmallException();
-
-            if (!MapHasGoalAndPath(map))
-                throw new NoWayPointsException();
-        }
-        private bool MapHasGoalAndPath(IMap map)
-        {
-            bool hasStart = false;
-            bool hasGoal = false;
-
-            foreach (INode[] nodes in map)
-                foreach (INode node in nodes)
-                {
-                    if (node.State == NodeState.Start)
-                        hasStart = true;
-                    else if (node.State == NodeState.Goal)
-                        hasGoal = true;
-                }
-
-            return (hasStart && hasGoal);
-        }
-        private (INode, INode) GetStartAndGoal(IMap map)
-        {
-            INode goal = null;
-            INode start = null;
-
-            foreach (INode[] nodes in map)
-                foreach (INode node in nodes)
-                {
-                    if (node.State == NodeState.Start)
-                        start = node;
-                    else if (node.State == NodeState.Goal)
-                        goal = node;
-                }
-
-            return (start, goal);
+            AlgorithmDone = true;
         }
     }
 }

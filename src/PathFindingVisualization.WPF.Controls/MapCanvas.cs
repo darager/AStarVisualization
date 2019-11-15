@@ -60,14 +60,20 @@ namespace PathFindingVisualization.WPF.Controls
 
         private static void OnMapChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            var canvas = (MapCanvas)source;
-            canvas.TileRenderer.RedrawTiles(source, e);
-            canvas.GridLineRenderer.RedrawGridLines(source, e);
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var canvas = (MapCanvas)source;
+                canvas.TileRenderer.RedrawTiles(source, e);
+                canvas.GridLineRenderer.RedrawGridLines(source, e);
+            });
         }
         private static void OnPathChange(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            var canvas = (MapCanvas)source;
-            canvas.PathRenderer.RedrawPath(source, e);
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var canvas = (MapCanvas)source;
+                canvas.PathRenderer.RedrawPath(source, e);
+            });
         }
     }
 }
