@@ -1,21 +1,16 @@
-﻿using System.Reflection;
-using System.Windows;
-using Ninject;
+﻿using System.Windows;
 using PathFindingVisualization.WPF.ViewModels;
 
 namespace PathFindingVisualization.WPF
 {
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainViewModel mainViewModel, AlgorithmControlViewModel algorithmControlViewModel)
         {
             InitializeComponent();
 
-            var kernel = new StandardKernel();
-            kernel.Load(Assembly.GetExecutingAssembly());
-
-            this.DataContext = kernel.Get<MainViewModel>();
-            AlgorithmControls.DataContext = kernel.Get<AlgorithmControlViewModel>();
+            this.DataContext = mainViewModel;
+            AlgorithmControls.DataContext = algorithmControlViewModel;
         }
     }
 }

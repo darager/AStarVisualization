@@ -25,7 +25,7 @@ namespace PathFindingVisualization.WPF
             Bind<PathSolverController>().To<PathSolverController>().InSingletonScope();
             Bind<PathSolverFactory>().To<PathSolverFactory>().InSingletonScope();
 
-            //Bind<MainWindow>().To<MainWindow>().InSingletonScope();
+            Bind<MainWindow>().To<MainWindow>().InSingletonScope();
 
             Bind<MainViewModel>().To<MainViewModel>().InSingletonScope();
             Bind<AlgorithmControlViewModel>().To<AlgorithmControlViewModel>().InSingletonScope();
