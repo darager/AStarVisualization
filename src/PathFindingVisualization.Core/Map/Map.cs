@@ -8,7 +8,7 @@ namespace PathFindingVisualization.Core.Map
         public INode this[int i, int j] => _data[i][j];
         public INode[][] Data
         {
-            get => (INode[][])_data;
+            get => _data;
             set
             {
                 if (_data == value)
