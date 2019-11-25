@@ -5,11 +5,11 @@ namespace PathFindingVisualization.Core.PathSolvers
 {
     public class PathSolverFactory
     {
-        public IPathSolver GetPathSolver(ref IMap map, PathSolver pathSolverType, bool diagonalsEnabled)
+        public IPathSolver GetPathSolver(IMap map, PathSolver pathSolverType, bool diagonalsEnabled)
         {
             return pathSolverType switch
             {
-                PathSolver.AStar => new AStarPathSolver(ref map, diagonalsEnabled),
+                PathSolver.AStar => new AStarPathSolver(map, diagonalsEnabled),
                 PathSolver.Dijkstra => throw new System.NotImplementedException(),
                 PathSolver.BestFirstSearch => throw new System.NotImplementedException(),
                 PathSolver.BreadthFirstSearch => throw new System.NotImplementedException(),

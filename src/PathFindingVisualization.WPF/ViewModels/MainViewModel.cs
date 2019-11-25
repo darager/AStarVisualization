@@ -41,7 +41,7 @@ namespace PathFindingVisualization.WPF.ViewModels
             {
                 if (_path == value)
                     return;
-                _path = value;
+                _path = (List<Node>)value;
                 OnPropertyChanged("Path");
             }
         }

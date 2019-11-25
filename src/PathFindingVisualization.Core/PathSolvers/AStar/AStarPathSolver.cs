@@ -6,8 +6,8 @@ using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.DataStructures;
 
-// TODO: do you actually need ref for passing the map
-// TODO: measure performance, if necessary replace linq for more efficient methods
+// TODO: make sure that the algorithm is properly stopped and continued
+// TODO: make sure that the path is drawn
 
 namespace PathFindingVisualization.Core.PathSolvers.AStar
 {
@@ -22,11 +22,11 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
         private int _step = 0;
         private MinPriorityQueue<double, AStarNode> _openSet;
         private HashSet<AStarNode> _closedSet;
-        private AStarNode _startNode;
-        private AStarNode _goalNode;
+        private INode _startNode;
+        private INode _goalNode;
         private AStarNode _currentNode;
 
-        public AStarPathSolver(ref IMap map, bool diagonalsEnabled)
+        public AStarPathSolver(IMap map, bool diagonalsEnabled)
         {
             _map = (AStarMap)map;
             _diagonalsEnabled = diagonalsEnabled;
@@ -52,11 +52,9 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             SetUpDataStructures(_map);
             ComputeHeuristicCosts(_map);
 
-            (INode startNode, INode goalNode) = _map.GetStartAndGoal();
-            _startNode = new AStarNode(startNode);
-            _goalNode = new AStarNode(goalNode);
+            (_startNode, _goalNode) = _map.GetStartAndGoal();
 
-            _currentNode = _startNode;
+            _currentNode = (AStarNode)_startNode;
             _currentNode.MovementCost = 0;
             _openSet.Add(_currentNode.TotalCost, _currentNode);
         }
@@ -142,6 +140,7 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
         }
         private void StopAlgorithm()
         {
+            Path = INodeExtensions.ReconstructPath(_startNode, _currentNode);
             AlgorithmDone = true;
         }
     }

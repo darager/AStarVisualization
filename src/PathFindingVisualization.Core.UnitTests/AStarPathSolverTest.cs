@@ -34,7 +34,7 @@ namespace PathFindingVisualization.Core.UnitTests
         //    foreach ((int, int) indices in expectedPathIndices)
         //        expectedPath.Add(map[indices.Item1, indices.Item2]);
 
-        //    IPathSolver pathfinder = new AStarPathSolver(ref map);
+        //    IPathSolver pathfinder = new AStarPathSolver(map);
         //    List<INode> actualPath = pathfinder.FindPath().Result;
 
         //    Assert.That(actualPath, Is.EquivalentTo(expectedPath));
@@ -71,7 +71,7 @@ namespace PathFindingVisualization.Core.UnitTests
         //        }
         //    };
         //    IMap astarMap = new AStarMap(map);
-        //    IPathSolver pathfinder = new AStarPathSolver(ref astarMap);
+        //    IPathSolver pathfinder = new AStarPathSolver(astarMap);
 
         //    Assert.That(() => pathfinder.FindPath(),
         //        Throws.Exception
@@ -81,7 +81,7 @@ namespace PathFindingVisualization.Core.UnitTests
         //public void FindPath_MapIsNull_ThrowsError()
         //{
         //    AStarMap map = null;
-        //    IPathSolver pathfinder = new AStarPathSolver(ref map);
+        //    IPathSolver pathfinder = new AStarPathSolver(map);
 
         //    Assert.That(() => pathfinder.FindPath(),
         //        Throws.Exception
@@ -98,7 +98,7 @@ namespace PathFindingVisualization.Core.UnitTests
         //        }
         //    };
 
-        //    IPathSolver pathfinder = new AStarPathSolver(ref map);
+        //    IPathSolver pathfinder = new AStarPathSolver(map);
 
         //    Assert.That(() => pathfinder.FindPath(),
         //        Throws.Exception
@@ -116,7 +116,7 @@ namespace PathFindingVisualization.Core.UnitTests
         //        }
         //    };
 
-        //    IPathSolver pathfinder = new AStarPathSolver(ref map);
+        //    IPathSolver pathfinder = new AStarPathSolver(map);
 
         //    Assert.That(() => pathfinder.FindPath(),
         //        Throws.Exception

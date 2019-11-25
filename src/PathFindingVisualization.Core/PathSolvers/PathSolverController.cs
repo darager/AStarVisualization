@@ -26,7 +26,7 @@ namespace PathFindingVisualization.Core.PathSolvers
                 return;
 
             IMap algorithmSpecificMap = map.GetAlgorithmSpecificMap(pathsolverType);
-            _pathSolver = _pathSolverFactory.GetPathSolver(ref algorithmSpecificMap, pathsolverType, diagonalsEnabled);
+            _pathSolver = _pathSolverFactory.GetPathSolver(algorithmSpecificMap, pathsolverType, diagonalsEnabled);
 
             _pauseAlgorithm = false;
             await PerformPathfindingAlgorithm();

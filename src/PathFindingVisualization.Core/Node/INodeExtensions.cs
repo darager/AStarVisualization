@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PathFindingVisualization.Core.Node
 {
@@ -15,6 +16,20 @@ namespace PathFindingVisualization.Core.Node
 
             return (node.RowIndex == otherNode.RowIndex)
                 && (node.ColIndex == otherNode.ColIndex);
+        }
+        public static List<INode> ReconstructPath(INode startNode, INode currentNode)
+        {
+            var path = new List<INode>();
+            INode node = currentNode;
+
+            while (node.Parent != null)
+            {
+                path.Add(node);
+                node = node.Parent;
+            }
+            path.Add(startNode);
+
+            return path;
         }
     }
 }

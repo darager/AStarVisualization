@@ -23,7 +23,7 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
         public void RedrawPath(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             var canvas = (MapCanvas)source;
-            var path = (List<INode>)e.NewValue;
+            var path = (List<Node>)e.NewValue;
 
             double gridHeight = canvas.ActualHeight / canvas.NumRows;
             double gridWidth = canvas.ActualWidth / canvas.NumColumns;

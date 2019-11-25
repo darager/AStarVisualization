@@ -14,7 +14,7 @@ namespace PathFindingVisualization.Core.UnitTests
             IMap map = new Map.Map();
             PathSolverFactory pathSolverFactory = new PathSolverFactory();
 
-            IPathSolver pathsolver = pathSolverFactory.GetPathSolver(ref map, PathSolver.AStar, false);
+            IPathSolver pathsolver = pathSolverFactory.GetPathSolver(map, PathSolver.AStar, false);
 
             Assert.That(pathsolver.GetType() == typeof(AStarPathSolver));
         }
