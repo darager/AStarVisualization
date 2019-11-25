@@ -35,7 +35,8 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
             (int rowIdx, int colIdx) = mapCanvas.GetNodeIndices(position);
 
             Map map = _mainViewModel.Map;
-            Node node = (Node)map[rowIdx, colIdx];
+            var node = (Node)map[rowIdx, colIdx];
+
             NodeState oldState = node.State;
             NodeState newState = _mainViewModel.PlacementMode;
 
@@ -43,7 +44,7 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
                 return;
 
             if (NewObjectiveWillBePlaced(newState))
-                RemoveRedundantObjective(oldState);
+                RemoveExistingObjective(oldState);
 
             PlaceNode(newState, node);
 
@@ -55,7 +56,7 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
             return (newState == NodeState.Goal
                 || newState == NodeState.Start);
         }
-        private void RemoveRedundantObjective(NodeState oldState)
+        private void RemoveExistingObjective(NodeState oldState)
         {
             switch (oldState)
             {
@@ -70,9 +71,9 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
         private bool WallWillOverWriteObjective(NodeState newState, NodeState oldState)
         {
             bool nodeIsObjective = (oldState == NodeState.Goal || oldState == NodeState.Start);
-            bool willOverRideObjective = (nodeIsObjective && newState != NodeState.Ground);
+            bool wallWillOverrideObjective = (nodeIsObjective && newState != NodeState.Ground);
 
-            return willOverRideObjective;
+            return wallWillOverrideObjective;
         }
         private void PlaceNode(NodeState newState, Node node)
         {
