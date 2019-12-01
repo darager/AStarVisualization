@@ -65,8 +65,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bindings.cs" />
-    <Compile Include="Commands\AlgorithmControls\ContinueAlgorithmCommand.cs" />
-    <Compile Include="Commands\AlgorithmControls\PauseAlgorithmCommand.cs" />
     <Compile Include="Commands\MapEditing\ClearMapCommand.cs" />
     <Compile Include="Commands\MapEditing\PlaceGoalCommand.cs" />
     <Compile Include="Commands\MapEditing\PlaceStartCommand.cs" />

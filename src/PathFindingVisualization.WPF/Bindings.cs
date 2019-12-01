@@ -18,6 +18,7 @@ namespace PathFindingVisualization.WPF
             Bind<ICommand>().To<RemoveTileCommand>().Named("RemoveTileCommand");
             Bind<ICommand>().To<ClearMapCommand>().Named("ClearMapCommand");
             Bind<ICommand>().To<ProcessMouseMovementCommand>().Named("ProcessMouseMovementCommand");
+
             Bind<ICommand>().To<ResetAlgorithmCommand>().Named("ResetAlgorithmCommand");
             Bind<ICommand>().To<StartAlgorithmCommand>().Named("StartAlgorithmCommand"); // HACK: for testing purposes
 
