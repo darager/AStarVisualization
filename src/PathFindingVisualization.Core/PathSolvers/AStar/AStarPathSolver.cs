@@ -13,38 +13,23 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
 {
     public class AStarPathSolver : IPathSolver
     {
-        public bool AlgorithmDone { get; private set; }
-        public List<INode> Path { get; private set; }
+        public bool AlgorithmDone => throw new NotImplementedException();
+        public List<INode> Path => throw new NotImplementedException();
+        public IAlgorithmData AlgorithmData { get; private set; }
 
-        private bool _diagonalsEnabled;
-        private AStarMap _map;
-
-        private int _step = 0;
-        private MinPriorityQueue<double, AStarNode> _openSet;
-        private HashSet<AStarNode> _closedSet;
-        private INode _startNode;
-        private INode _goalNode;
-        private AStarNode _currentNode;
-
-        public AStarPathSolver(IMap map, bool diagonalsEnabled)
+        public AStarPathSolver(Map.Map map, bool diagonalsEnabled)
         {
-            _map = (AStarMap)map;
-            _diagonalsEnabled = diagonalsEnabled;
+            AlgorithmData = new AStarData(map, diagonalsEnabled);
         }
 
         public async Task PerformAlgorithmStep()
         {
-            switch (_step)
-            {
-                case 0:
-                    await Task.Run(PerformFirstStep);
-                    break;
-                default:
-                    await Task.Run(PerformStep);
-                    break;
-            }
+            if (AlgorithmData.AlgorithmStep == 0)
+                await Task.Run(PerformFirstStep);
+            else
+                await Task.Run(PerformStep);
 
-            _step++;
+            AlgorithmData.AlgorithmStep++;
         }
 
         private void PerformFirstStep()

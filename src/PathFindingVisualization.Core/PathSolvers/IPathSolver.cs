@@ -6,11 +6,9 @@ namespace PathFindingVisualization.Core.PathSolvers
 {
     public interface IPathSolver
     {
-        //Task<List<INode>> FindPath();
-        //void Stop();
-
         bool AlgorithmDone { get; }
         List<INode> Path { get; }
+        IAlgorithmData AlgorithmData { get; }
 
         Task PerformAlgorithmStep();
     }
