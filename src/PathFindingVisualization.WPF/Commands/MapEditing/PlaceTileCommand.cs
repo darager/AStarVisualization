@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -70,8 +71,8 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
         }
         private bool WallWillOverWriteObjective(NodeState newState, NodeState oldState)
         {
-            bool nodeIsObjective = (oldState == NodeState.Goal || oldState == NodeState.Start);
-            bool wallWillOverrideObjective = (nodeIsObjective && newState != NodeState.Ground);
+            bool nodeIsObjective = oldState.Equals(NodeState.Goal) || oldState.Equals(NodeState.Start);
+            bool wallWillOverrideObjective = nodeIsObjective && !newState.Equals(NodeState.Ground);
 
             return wallWillOverrideObjective;
         }

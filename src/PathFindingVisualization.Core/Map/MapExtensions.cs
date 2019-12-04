@@ -1,14 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.Core.PathSolvers;
-using PathFindingVisualization.Core.PathSolvers.AStar;
 
 namespace PathFindingVisualization.Core.Map
 {
     public static class MapExtensions
     {
-        public static bool IsValid(this IMap map)
+        public static bool IsValid(this Map map)
         {
             if (map is null)
                 return false;
@@ -21,14 +21,14 @@ namespace PathFindingVisualization.Core.Map
 
             return true;
         }
-        private static bool HasStartAndGoal(this IMap map)
+        private static bool HasStartAndGoal(this Map map)
         {
             (INode start, INode goal) = GetStartAndGoal(map);
 
             return ((start != null)
                 && (goal != null));
         }
-        public static (INode, INode) GetStartAndGoal(this IMap map)
+        public static (INode, INode) GetStartAndGoal(this Map map)
         {
             INode goal = null;
             INode start = null;
@@ -44,18 +44,20 @@ namespace PathFindingVisualization.Core.Map
 
             return (start, goal);
         }
-        public static int GetLength(this IMap map, int dimension)
+        public static int GetLength(this Map map, int dimension)
         {
-            if (dimension > 1 || dimension < 0) throw new ArgumentOutOfRangeException();
+            if (dimension > 1 || dimension < 0)
+                throw new ArgumentOutOfRangeException();
 
             INode[][] data = map.Data;
             int length = 0;
+
             if (dimension == 0) length = data.GetLength(0);
             if (dimension == 1) length = data[0].GetLength(0);
 
             return length;
         }
-        public static IEnumerable<INode> GetNeighbors(this IMap map, int rowIdx, int colIdx, bool diagonalsEnabled)
+        public static List<INode> GetNeighbors(this Map map, int rowIdx, int colIdx, bool diagonalsEnabled)
         {
             static bool IsDiagonalNeighbor(int rowIdx, int colIdx, int nRowidx, int nColIdx)
             {
@@ -67,8 +69,8 @@ namespace PathFindingVisualization.Core.Map
 
             int rowCount = map.GetLength(0);
             int colCount = map.GetLength(1);
-            var rowIndices = new int[] { rowIdx - 1, rowIdx, rowIdx + 1 };
-            var colIndices = new int[] { colIdx - 1, colIdx, colIdx + 1 };
+            int[] rowIndices = { rowIdx - 1, rowIdx, rowIdx + 1 };
+            int[] colIndices = { colIdx - 1, colIdx, colIdx + 1 };
 
             foreach (int i in rowIndices)
                 foreach (int j in colIndices)
@@ -87,7 +89,7 @@ namespace PathFindingVisualization.Core.Map
 
             return neighbors;
         }
-        public static IMap GetAlgorithmSpecificMap(this IMap map, PathSolver pathsolverType)
+        public static Map GetAlgorithmSpecificMap(this Map map, PathSolver pathsolverType)
         {
             // TODO: implement more of the algorithms
             return pathsolverType switch

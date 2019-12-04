@@ -3,7 +3,7 @@ using PathFindingVisualization.Core.Node;
 
 namespace PathFindingVisualization.Core.Map
 {
-    public class Map : IMap
+    public class Map
     {
         public INode this[int i, int j] => _data[i][j];
         public INode[][] Data

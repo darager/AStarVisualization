@@ -31,7 +31,7 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
         {
             _pathSolverController.ResetPathSolver();
 
-            Task.Delay(300);
+            Task.Delay(300); // HACK: no idea why this line exists
 
             _mainViewModel.Path = new List<Node>();
 

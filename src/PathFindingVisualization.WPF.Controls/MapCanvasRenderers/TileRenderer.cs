@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -9,6 +10,15 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
 {
     public class TileRenderer
     {
+        private Dictionary<NodeState, Color> TileColors = new Dictionary<NodeState, Color>
+        {
+            [NodeState.Wall] = Colors.Black,
+            [NodeState.Goal] = Colors.Red,
+            [NodeState.Start] = Colors.DarkGoldenrod,
+            [NodeState.Ground] = Colors.Transparent,
+            [NodeState.GroundVisited] = Colors.LightGreen,
+            [NodeState.GroundToBeVisited] = Colors.LightBlue,
+        };
         private Rectangle[,] Tiles;
 
         public void RedrawTiles(DependencyObject source, DependencyPropertyChangedEventArgs e)
@@ -50,7 +60,7 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
                 var node = (Node)sender;
                 Rectangle rectangle = Tiles[node.RowIndex, node.ColIndex];
 
-                rectangle.Fill = GetStateColor(e.NewState);
+                rectangle.Fill = GetColor(e.NewState);
             });
         }
         private Rectangle GetRectangle(MapCanvas canvas, Node node)
@@ -71,7 +81,7 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
             rect.Width = gridWidth - 2 * gridLineThickness;
 
             rect.SnapsToDevicePixels = true;
-            rect.Fill = GetStateColor(node.State);
+            rect.Fill = GetColor(node.State);
 
             double x = node.ColIndex * gridWidth + gridLineThickness;
             double y = node.RowIndex * gridHeight + gridLineThickness;
@@ -81,18 +91,8 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
 
             return rect;
         }
-        private SolidColorBrush GetStateColor(NodeState state) // TODO: choose proper colors
-        {
-            return state switch
-            {
-                NodeState.Ground => new SolidColorBrush(Colors.Transparent),
-                NodeState.GroundVisited => new SolidColorBrush(Colors.LightGreen),
-                NodeState.GroundToBeVisited => new SolidColorBrush(Colors.LightBlue),
-                NodeState.Start => new SolidColorBrush(Colors.DarkGoldenrod),
-                NodeState.Wall => new SolidColorBrush(Colors.Black),
-                NodeState.Goal => new SolidColorBrush(Colors.Red),
-                _ => null
-            };
-        }
+
+        // TODO: choose proper colors
+        private SolidColorBrush GetColor(NodeState state) => new SolidColorBrush(TileColors[state]);
     }
 }
