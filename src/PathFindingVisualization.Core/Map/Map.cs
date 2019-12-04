@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using PathFindingVisualization.Core.Node;
 
+// TODO: use a normal 2 dimensional array for the internal data
 namespace PathFindingVisualization.Core.Map
 {
     public class Map
