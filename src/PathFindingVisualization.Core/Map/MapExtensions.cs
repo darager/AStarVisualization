@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.Core.PathSolvers;
@@ -23,18 +22,18 @@ namespace PathFindingVisualization.Core.Map
         }
         private static bool HasStartAndGoal(this Map map)
         {
-            (INode start, INode goal) = GetStartAndGoal(map);
+            (Node.Node start, Node.Node goal) = GetStartAndGoal(map);
 
             return ((start != null)
                 && (goal != null));
         }
-        public static (INode, INode) GetStartAndGoal(this Map map)
+        public static (Node.Node, Node.Node) GetStartAndGoal(this Map map)
         {
-            INode goal = null;
-            INode start = null;
+            Node.Node goal = null;
+            Node.Node start = null;
 
-            foreach (INode[] nodes in map)
-                foreach (INode node in nodes)
+            foreach (Node.Node[] nodes in map)
+                foreach (Node.Node node in nodes)
                 {
                     if (node.State == NodeState.Start)
                         start = node;
@@ -49,7 +48,7 @@ namespace PathFindingVisualization.Core.Map
             if (dimension > 1 || dimension < 0)
                 throw new ArgumentOutOfRangeException();
 
-            INode[][] data = map.Data;
+            Node.Node[][] data = map.Data;
             int length = 0;
 
             if (dimension == 0) length = data.GetLength(0);
@@ -57,7 +56,7 @@ namespace PathFindingVisualization.Core.Map
 
             return length;
         }
-        public static List<INode> GetNeighbors(this Map map, int rowIdx, int colIdx, bool diagonalsEnabled)
+        public static List<T> GetNeighbors<T>(T[,] map, int rowIdx, int colIdx, bool diagonalsEnabled)
         {
             static bool IsDiagonalNeighbor(int rowIdx, int colIdx, int nRowidx, int nColIdx)
             {
@@ -65,7 +64,7 @@ namespace PathFindingVisualization.Core.Map
                     && ((Math.Abs(colIdx - nColIdx) == 1));
             }
 
-            var neighbors = new List<INode>();
+            var neighbors = new List<T>();
 
             int rowCount = map.GetLength(0);
             int colCount = map.GetLength(1);
@@ -88,21 +87,6 @@ namespace PathFindingVisualization.Core.Map
                 }
 
             return neighbors;
-        }
-        public static Map GetAlgorithmSpecificMap(this Map map, PathSolver pathsolverType)
-        {
-            // TODO: implement more of the algorithms
-            return pathsolverType switch
-            {
-                PathSolver.AStar => new AStarMap(map),
-                //PathSolver.BreadthFirstSearch => new BreadthFirstSearchMap(map),
-                //PathSolver.BestFirstSearch => new BestFirstSearchMap(map),
-                //PathSolver.Dijkstra => new DijkstraMap(map),
-                //PathSolver.JumpPointSearch => new JumpPointSearchMap(map),
-                //PathSolver.OrthogonalJumpPointSearch => new OrthogonalJumpPointSearchMap(map),
-                //PathSolver.Trace => new TraceMap(map),
-                _ => throw new Exception($"The Map for the {pathsolverType} algorithm has not yet been implemented!")
-            };
         }
     }
 }

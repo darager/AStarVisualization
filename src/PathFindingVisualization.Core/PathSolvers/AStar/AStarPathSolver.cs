@@ -13,80 +13,67 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
 {
     public class AStarPathSolver : IPathSolver
     {
-        public bool AlgorithmDone => throw new NotImplementedException();
-        public List<INode> Path => throw new NotImplementedException();
-        public IAlgorithmData AlgorithmData { get; private set; }
+        public bool AlgorithmDone { get; private set; } = false;
+        public List<Node.Node> Path => _data.CurrentNode.ReconstructPath(_data.StartNode);
+
+        private AStarData _data;
 
         public AStarPathSolver(Map.Map map, bool diagonalsEnabled)
         {
-            AlgorithmData = new AStarData(map, diagonalsEnabled);
-        }
-
-        public async Task PerformAlgorithmStep()
-        {
-            if (AlgorithmData.AlgorithmStep == 0)
-                await Task.Run(PerformFirstStep);
-            else
-                await Task.Run(PerformStep);
-
-            AlgorithmData.AlgorithmStep++;
+            _data = new AStarData(map, diagonalsEnabled);
+            ComputeHeuristicCosts(_data.Map, _data.GoalNode, 1000); //TODO: adjust the D value
+            PerformFirstStep();
         }
 
         private void PerformFirstStep()
         {
-            SetUpDataStructures(_map);
-            ComputeHeuristicCosts(_map);
-
-            (_startNode, _goalNode) = _map.GetStartAndGoal();
-
-            _currentNode = (AStarNode)_startNode;
-            _currentNode.MovementCost = 0;
-            _openSet.Add(_currentNode.TotalCost, _currentNode);
+            _data.CurrentNode = _data.StartNode;
+            _data.CurrentNode.MovementCost = 0;
+            _data.OpenSet.Add(_data.CurrentNode.TotalCost, _data.CurrentNode);
         }
-        private void PerformStep()
+        public Task PerformAlgorithmStep() => Task.Run(PerformStep);
+        public void PerformStep()
         {
-            if (_openSet.Count == 0 || _currentNode == _goalNode)
-            {
-                StopAlgorithm();
+            if (AlgorithmDone)
                 return;
-            }
 
-            _currentNode = _openSet.Pop().Value;
+            if (_data.OpenSet.Count == 0 || _data.CurrentNode == _data.GoalNode)
+                return;
 
-            // get the neighbors
-            IEnumerable<INode> neighbors = _map.GetNeighbors(_currentNode.RowIndex, _currentNode.ColIndex, _diagonalsEnabled);
-            // get the successors out of the neighbors (already visited, wall, similar,...)
-            List<AStarNode> successors = neighbors
-                .Select(n => (AStarNode)n)
+            _data.CurrentNode = _data.OpenSet.Pop().Value;
+
+            // get the successors (already visited, wall, similar,...)
+            int rowIndex = _data.CurrentNode.RowIndex;
+            int colIndex = _data.CurrentNode.ColIndex;
+            List<AStarNode> successors =
+                 MapExtensions.GetNeighbors<AStarNode>(_data.Map.Data, rowIndex, colIndex, _data.DiagonalsEnabled)
+                .AsEnumerable<AStarNode>()
                 .Where(n => (n.State == NodeState.Ground) || (n.State == NodeState.Goal))
                 .ToList<AStarNode>();
+
             // set the movementcost of all the successors
-            successors.ForEach(n => SetSuccessorMovementCost(_currentNode, n));
-            // add all of the successors to the _openSet
+            successors.ForEach(n => SetSuccessorMovementCost(_data.CurrentNode, n));
+
+            // add all of the successors to the _data.openSet
             foreach (var successor in successors)
             {
-                successor.Parent = _currentNode;
+                successor.Parent = _data.CurrentNode.GetUnderlyingNode();
                 if (successor.State != NodeState.Goal)
                     successor.State = NodeState.GroundToBeVisited;
 
-                _openSet.Add(successor.TotalCost, successor);
+                _data.OpenSet.Add(successor.TotalCost, successor);
             }
 
             // add the currentnode to the closedSet
-            if (_currentNode.State != NodeState.Goal && _currentNode.State != NodeState.Start)
-                _currentNode.State = NodeState.GroundVisited;
-            _closedSet.Add(_currentNode);
+            if (_data.CurrentNode.State != NodeState.Goal && _data.CurrentNode.State != NodeState.Start)
+                _data.CurrentNode.State = NodeState.GroundVisited;
+            _data.ClosedSet.Add(_data.CurrentNode);
         }
 
-        private void SetUpDataStructures(Map.Map map)
+        private void ComputeHeuristicCosts(AStarMap map, AStarNode goal, float D = 1000)
         {
-            int numNodes = map.GetLength(0) * map.GetLength(1);
-            _openSet = new MinPriorityQueue<double, AStarNode>(numNodes);
-            _closedSet = new HashSet<AStarNode>();
-        }
-        private void ComputeHeuristicCosts(AStarMap map, double D = 1000.0) // TODO: do something with D
-        {
-            (int goalRowIdx, int goalColIdx) = GetGoalIndices();
+            int goalRowIdx = goal.RowIndex;
+            int goalColIdx = goal.ColIndex;
 
             foreach (AStarNode[] nodes in map)
                 foreach (AStarNode node in nodes)
@@ -96,37 +83,13 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
                     // this particular heuristic is the Manhattan distance which is used for grid layouts
                     node.Heuristic = D * (Math.Abs(rowIdx - goalRowIdx) + Math.Abs(colIdx - goalColIdx));
                 }
-
-            (int, int) GetGoalIndices()
-            {
-                int rowIdx = -1;
-                int colIdx = -1;
-
-                for (int i = 0; i < map.GetLength(0); i++)
-                    for (int j = 0; j < map.GetLength(1); j++)
-                    {
-                        var node = (AStarNode)map[i, j];
-                        if (node.State == NodeState.Goal)
-                        {
-                            rowIdx = i;
-                            colIdx = j;
-                        }
-                    }
-
-                return (rowIdx, colIdx);
-            }
         }
         private void SetSuccessorMovementCost(AStarNode current, AStarNode successor)
         {
-            int dx = _currentNode.ColIndex - successor.ColIndex;
-            int dy = _currentNode.RowIndex - successor.RowIndex;
+            int dx = _data.CurrentNode.Parent.ColIndex - successor.ColIndex;
+            int dy = _data.CurrentNode.Parent.RowIndex - successor.RowIndex;
 
             successor.MovementCost = Math.Sqrt(dx * dx + dy * dy);
-        }
-        private void StopAlgorithm()
-        {
-            Path = INodeExtensions.ReconstructPath(_startNode, _currentNode);
-            AlgorithmDone = true;
         }
     }
 }

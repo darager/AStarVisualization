@@ -9,9 +9,9 @@ namespace PathFindingVisualization.WPF.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var objectivePlacementActive = (bool)value;
-            var backgroundColor = objectivePlacementActive ? new SolidColorBrush(Colors.DarkBlue) : new SolidColorBrush(Colors.Transparent);
-            return backgroundColor;
+            return (bool)value
+              ? new SolidColorBrush(Colors.DarkBlue)
+              : new SolidColorBrush(Colors.Transparent);
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

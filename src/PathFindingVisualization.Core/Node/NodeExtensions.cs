@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace PathFindingVisualization.Core.Node
 {
-    public static class INodeExtensions
+    public static class NodeExtensions
     {
-        public static bool Equals(INode node, Type nodeType, INode otherNode)
+        public static bool Equals(Node node, Type nodeType, Node otherNode)
         {
             if (otherNode is null)
                 return false;
@@ -17,10 +17,10 @@ namespace PathFindingVisualization.Core.Node
             return (node.RowIndex == otherNode.RowIndex)
                 && (node.ColIndex == otherNode.ColIndex);
         }
-        public static List<INode> ReconstructPath(INode startNode, INode currentNode)
+        public static List<Node> ReconstructPath(Node startNode, Node currentNode)
         {
-            var path = new List<INode>();
-            INode node = currentNode;
+            var path = new List<Node>();
+            Node node = currentNode;
 
             while (node.Parent != null)
             {

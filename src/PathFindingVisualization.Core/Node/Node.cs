@@ -1,8 +1,8 @@
 ﻿namespace PathFindingVisualization.Core.Node
 {
-    public class Node : INode
+    public class Node
     {
-        public INode Parent { get; set; }
+        public Node Parent { get; set; }
         public int RowIndex { get; private set; }
         public int ColIndex { get; private set; }
         public bool IsWalkable => (this.State != NodeState.Wall);
@@ -29,8 +29,7 @@
             this.ColIndex = colIndex;
         }
 
-        public bool Equals(INode other) => INodeExtensions.Equals(this, typeof(Node), other);
-        public Node GetStandardNodeImplementationEquivalent() => this;
+        public bool Equals(Node other) => NodeExtensions.Equals(this, typeof(Node), other);
 
         public delegate void StateChangedEventHandler(object sender, StateChangedEventArgs e);
         public event StateChangedEventHandler StateChanged;

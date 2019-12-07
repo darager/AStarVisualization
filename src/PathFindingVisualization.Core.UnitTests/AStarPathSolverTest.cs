@@ -16,7 +16,7 @@ namespace PathFindingVisualization.Core.UnitTests
     public class AStarPathSolverTest
     {
         //private static readonly Map.Map Map = new Map.Map(4, 4) { Data = map };
-        //private static readonly INode[][] map = new Node.Node[][]
+        //private static readonly Node.Node[][] map = new Node.Node[][]
         //{
         //    new Node.Node[]{ new Node.Node(NodeState.Ground, 0, 0), new Node.Node(NodeState.Wall, 0, 1), new Node.Node(NodeState.Wall, 0, 2), new Node.Node(NodeState.Ground, 0, 3) },
         //    new Node.Node[]{ new Node.Node(NodeState.Ground, 1, 0), new Node.Node(NodeState.Ground, 1, 1), new Node.Node(NodeState.Ground, 1, 2), new Node.Node(NodeState.Ground, 1, 3) },
@@ -30,12 +30,12 @@ namespace PathFindingVisualization.Core.UnitTests
         //    // TODO: clean up this test, the problem with the test is the way that the paths are compared
         //    (int startRowIdx, int startColIdx, int goalRowIdx, int goalColIdx, var expectedPathIndices) = GetTestParameters(parameters);
         //    Map.Map map = GetMapWithWaypoints(startRowIdx, startColIdx, goalRowIdx, goalColIdx, Map);
-        //    var expectedPath = new List<INode>();
+        //    var expectedPath = new List<Node.Node>();
         //    foreach ((int, int) indices in expectedPathIndices)
         //        expectedPath.Add(map[indices.Item1, indices.Item2]);
 
         //    IPathSolver pathfinder = new AStarPathSolver(map);
-        //    List<INode> actualPath = pathfinder.FindPath().Result;
+        //    List<Node.Node> actualPath = pathfinder.FindPath().Result;
 
         //    Assert.That(actualPath, Is.EquivalentTo(expectedPath));
         //}
@@ -64,7 +64,7 @@ namespace PathFindingVisualization.Core.UnitTests
         //{
         //    Map map = new Map.Map(2, 3)
         //    {
-        //        Data = new INode[][]
+        //        Data = new Node.Node[][]
         //        {
         //            new Node.Node[]{ new Node.Node(NodeState.Start, 0, 0), new Node.Node(NodeState.Wall, 0, 1), new Node.Node(NodeState.Goal, 0, 2) },
         //            new Node.Node[]{ new Node.Node(NodeState.Ground, 1, 0), new Node.Node(NodeState.Wall, 1, 1), new Node.Node(NodeState.Ground, 1, 2) }

@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using PathFindingVisualization.Core.Map;
-using PathFindingVisualization.Core.Node;
 
 namespace PathFindingVisualization.Core.PathSolvers
 {
     public class PathSolverController
     {
-        public List<Node.Node> Path { get; private set; }
-
-        private bool _pauseAlgorithm = true;
-
-        private IPathSolver _pathSolver;
         private PathSolverFactory _pathSolverFactory;
+        private CancellationTokenSource _tokenSource = new CancellationTokenSource();
 
         public PathSolverController(PathSolverFactory pathSolverFactory)
         {
@@ -25,68 +21,24 @@ namespace PathFindingVisualization.Core.PathSolvers
             if (!map.IsValid())
                 return;
 
-            Map.Map algorithmSpecificMap = map.GetAlgorithmSpecificMap(pathsolverType);
-            _pathSolver = _pathSolverFactory.GetPathSolver(algorithmSpecificMap, pathsolverType, diagonalsEnabled);
+            await Task.Factory.StartNew(() =>
+            {
+                IPathSolver pathSolver = _pathSolverFactory.GetPathSolver(map, pathsolverType, diagonalsEnabled);
 
-            _pauseAlgorithm = false;
-            await PerformPathfindingAlgorithm();
-        }
-        public void PausePathSolver()
-        {
-            if (_pathSolver is null)
-                return;
-            if (_pauseAlgorithm == false)
-                return;
-
-            _pauseAlgorithm = true;
-        }
-        public async void ContinuePathSolver()
-        {
-            if (_pathSolver is null)
-                return;
-            if (_pauseAlgorithm == true)
-                return;
-
-            _pauseAlgorithm = false;
-            await PerformPathfindingAlgorithm();
+                PerformPathsolvingAlgorithm(pathSolver);
+            }, _tokenSource.Token);
         }
         public void ResetPathSolver()
         {
-            // TODO: make sure that no tiles are changed when then algorithm is already paused
-            _pauseAlgorithm = true;
-            //_pathSolver = null;
+            _tokenSource.Cancel();
         }
 
-        private async Task PerformPathfindingAlgorithm()
+        private async Task PerformPathsolvingAlgorithm(IPathSolver pathSolver)
         {
-            while (!_pathSolver.AlgorithmDone)
-            {
-                if (_pauseAlgorithm)
-                    return;
+            while (!pathSolver.AlgorithmDone)
+                await pathSolver.PerformAlgorithmStep();
 
-                await _pathSolver.PerformAlgorithmStep();
-
-                if (_pauseAlgorithm)
-                    return;
-            }
-
-            List<INode> algorithmSpecificPath = _pathSolver.Path;
-            if (algorithmSpecificPath != null)
-                SetPath(algorithmSpecificPath);
-        }
-        private void SetPath(List<INode> algorithmSpecificPath)
-        {
-            if (algorithmSpecificPath is null)
-                return;
-
-            Path = new List<Node.Node>();
-            foreach (INode specificNode in algorithmSpecificPath)
-            {
-                Node.Node node = specificNode.GetStandardNodeImplementationEquivalent();
-                Path.Add(node);
-            }
-
-            PathChanged?.Invoke(this, Path);
+            PathChanged?.Invoke(this, pathSolver.Path);
         }
 
         public event EventHandler<List<Node.Node>> PathChanged;

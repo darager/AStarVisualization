@@ -6,8 +6,8 @@ namespace PathFindingVisualization.Core.Map
 {
     public class Map
     {
-        public INode this[int i, int j] => _data[i][j];
-        public INode[][] Data
+        public Node.Node this[int i, int j] => _data[i][j];
+        public Node.Node[][] Data
         {
             get => _data;
             set
@@ -17,7 +17,7 @@ namespace PathFindingVisualization.Core.Map
             }
         }
 
-        private INode[][] _data;
+        private Node.Node[][] _data;
 
         public Map(int numRows = 50, int numColumns = 50)
         {

@@ -32,7 +32,7 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
             PathLine.StrokeThickness = Math.Min(gridHeight, gridWidth) * 0.2;
 
             var points = new PointCollection();
-            foreach (INode node in path)
+            foreach (Node node in path)
             {
                 double x = (node.ColIndex * gridWidth) + (gridWidth / 2);
                 double y = (node.RowIndex * gridHeight) + (gridHeight / 2);

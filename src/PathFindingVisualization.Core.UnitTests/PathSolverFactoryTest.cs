@@ -11,7 +11,7 @@ namespace PathFindingVisualization.Core.UnitTests
         [Test]
         public void GetPathSolver_RequestsAStarPathSolver_GetsAStarPathSolver()
         {
-            Map map = new Map.Map();
+            var map = new Map.Map();
             PathSolverFactory pathSolverFactory = new PathSolverFactory();
 
             IPathSolver pathsolver = pathSolverFactory.GetPathSolver(map, PathSolver.AStar, false);
