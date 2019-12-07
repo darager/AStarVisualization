@@ -62,7 +62,7 @@ namespace PathFindingVisualization.Core.UnitTests
         //[Test]
         //public void FindPath_NoPathExists_ThrowsError()
         //{
-        //    IMap map = new Map.Map(2, 3)
+        //    Map map = new Map.Map(2, 3)
         //    {
         //        Data = new INode[][]
         //        {
@@ -70,7 +70,7 @@ namespace PathFindingVisualization.Core.UnitTests
         //            new Node.Node[]{ new Node.Node(NodeState.Ground, 1, 0), new Node.Node(NodeState.Wall, 1, 1), new Node.Node(NodeState.Ground, 1, 2) }
         //        }
         //    };
-        //    IMap astarMap = new AStarMap(map);
+        //    Map astarMap = new AStarMap(map);
         //    IPathSolver pathfinder = new AStarPathSolver(astarMap);
 
         //    Assert.That(() => pathfinder.FindPath(),

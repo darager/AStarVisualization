@@ -25,7 +25,7 @@ namespace PathFindingVisualization.Core.PathSolvers
             if (!map.IsValid())
                 return;
 
-            IMap algorithmSpecificMap = map.GetAlgorithmSpecificMap(pathsolverType);
+            Map.Map algorithmSpecificMap = map.GetAlgorithmSpecificMap(pathsolverType);
             _pathSolver = _pathSolverFactory.GetPathSolver(algorithmSpecificMap, pathsolverType, diagonalsEnabled);
 
             _pauseAlgorithm = false;

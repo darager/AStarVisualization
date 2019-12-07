@@ -38,17 +38,8 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
             var map = _mainViewModel.Map;
             foreach (Node[] nodes in map)
                 foreach (Node node in nodes)
-                {
-                    switch (node.State)
-                    {
-                        case NodeState.GroundVisited:
-                        case NodeState.GroundToBeVisited:
-                            node.State = NodeState.Ground;
-                            break;
-                        default:
-                            break;
-                    }
-                }
+                    if (node.State == NodeState.GroundToBeVisited || node.State == NodeState.GroundToBeVisited)
+                        node.State = NodeState.Ground;
 
             _appState.State = AppState.MapDesignPhase;
         }

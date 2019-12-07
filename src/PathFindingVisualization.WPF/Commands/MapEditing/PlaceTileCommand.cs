@@ -71,38 +71,30 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
         }
         private bool WallWillOverWriteObjective(NodeState newState, NodeState oldState)
         {
-            bool nodeIsObjective = oldState.Equals(NodeState.Goal) || oldState.Equals(NodeState.Start);
-            bool wallWillOverrideObjective = nodeIsObjective && !newState.Equals(NodeState.Ground);
+            bool isObjective = oldState.Equals(NodeState.Goal) || oldState.Equals(NodeState.Start);
+            bool wallWillOverrideObjective = isObjective && !newState.Equals(NodeState.Ground);
 
             return wallWillOverrideObjective;
         }
         private void PlaceNode(NodeState newState, Node node)
         {
-            switch (newState)
+            node.State = newState;
+
+            if (newState == NodeState.Start)
             {
-                case NodeState.Start:
-                    Node start = _mainViewModel.Start;
-                    if (start != null)
-                    {
-                        start.State = NodeState.Ground;
-                    }
-                    _mainViewModel.Start = node;
-                    node.State = NodeState.Start;
-                    break;
+                Node previousStart = _mainViewModel.Start;
+                if (previousStart != null)
+                    previousStart.State = NodeState.Ground;
 
-                case NodeState.Goal:
-                    Node goal = _mainViewModel.Goal;
-                    if (goal != null)
-                    {
-                        goal.State = NodeState.Ground;
-                    }
-                    _mainViewModel.Goal = node;
-                    node.State = NodeState.Goal;
-                    break;
+                _mainViewModel.Start = node;
+            }
+            else if (newState == NodeState.Start)
+            {
+                Node previousGoal = _mainViewModel.Goal;
+                if (previousGoal != null)
+                    previousGoal.State = NodeState.Ground;
 
-                default:
-                    node.State = newState;
-                    break;
+                _mainViewModel.Goal = node;
             }
         }
 

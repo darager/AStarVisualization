@@ -30,10 +30,7 @@
         }
 
         public bool Equals(INode other) => INodeExtensions.Equals(this, typeof(Node), other);
-        public Node GetStandardNodeImplementationEquivalent()
-        {
-            return this;
-        }
+        public Node GetStandardNodeImplementationEquivalent() => this;
 
         public delegate void StateChangedEventHandler(object sender, StateChangedEventArgs e);
         public event StateChangedEventHandler StateChanged;

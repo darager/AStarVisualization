@@ -78,7 +78,7 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             _closedSet.Add(_currentNode);
         }
 
-        private void SetUpDataStructures(AStarMap map)
+        private void SetUpDataStructures(Map.Map map)
         {
             int numNodes = map.GetLength(0) * map.GetLength(1);
             _openSet = new MinPriorityQueue<double, AStarNode>(numNodes);
