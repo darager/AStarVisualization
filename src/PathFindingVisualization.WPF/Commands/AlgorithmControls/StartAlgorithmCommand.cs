@@ -26,7 +26,7 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
         }
 
         public bool CanExecute(object parameter) => _appState.State == AppState.MapDesignPhase;
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
             _appState.State = AppState.AlgorithmActive;
 
@@ -34,7 +34,7 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
             bool diagonalsEnabled = _algorithmControlViewModel.DiagonalPathsEnabled;
             PathSolver pathsolverType = _algorithmControlViewModel.PathSolverType;
 
-            _pathSolverController.StartPathSolver(map, pathsolverType, diagonalsEnabled);
+            await _pathSolverController.StartPathSolver(map, pathsolverType, diagonalsEnabled);
         }
 
         private void UpdateCanExecute(object sender, PropertyChangedEventArgs e)

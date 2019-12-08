@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.Core.PathSolvers;
 using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
+using PathFindingVisualization.Core.Map;
 
 namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
 {
@@ -27,19 +29,13 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
         }
 
         public bool CanExecute(object parameter) => _appState.State == AppState.AlgorithmActive || _appState.State == AppState.AlgorithmDone;
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
-            _pathSolverController.ResetPathSolver();
-
-            Task.Delay(300); // HACK: no idea why this line exists
-
+            Map map = _mainViewModel.Map;
             _mainViewModel.Path = new List<Node>();
 
-            var map = _mainViewModel.Map;
-            foreach (Node[] nodes in map)
-                foreach (Node node in nodes)
-                    if (node.State == NodeState.GroundToBeVisited || node.State == NodeState.GroundToBeVisited)
-                        node.State = NodeState.Ground;
+            await _pathSolverController.ResetPathSolver(map);
+
 
             _appState.State = AppState.MapDesignPhase;
         }

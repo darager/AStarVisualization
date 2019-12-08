@@ -8,6 +8,7 @@ namespace PathFindingVisualization.Core.PathSolvers
 {
     public class PathSolverController
     {
+        private Map.Map _map;
         private PathSolverFactory _pathSolverFactory;
         private CancellationTokenSource _tokenSource = new CancellationTokenSource();
 
@@ -16,21 +17,24 @@ namespace PathFindingVisualization.Core.PathSolvers
             _pathSolverFactory = pathSolverFactory;
         }
 
-        public async void StartPathSolver(Map.Map map, PathSolver pathsolverType, bool diagonalsEnabled)
+        public async Task StartPathSolver(Map.Map map, PathSolver pathsolverType, bool diagonalsEnabled)
         {
             if (!map.IsValid())
                 return;
 
-            await Task.Factory.StartNew(() =>
-            {
-                IPathSolver pathSolver = _pathSolverFactory.GetPathSolver(map, pathsolverType, diagonalsEnabled);
+            _map = map;
 
-                PerformPathsolvingAlgorithm(pathSolver);
-            }, _tokenSource.Token);
+            IPathSolver pathSolver = _pathSolverFactory.GetPathSolver(map, pathsolverType, diagonalsEnabled);
+
+            await PerformPathsolvingAlgorithm(pathSolver);
         }
-        public void ResetPathSolver()
+        public async Task ResetPathSolver(Map.Map map)
         {
-            _tokenSource.Cancel();
+            foreach (Node.Node[] nodes in map)
+                foreach (Node.Node node in nodes)
+                    if (node.State == Node.NodeState.GroundVisited || node.State == Node.NodeState.GroundToBeVisited)
+                        node.State = Node.NodeState.Ground;
+
         }
 
         private async Task PerformPathsolvingAlgorithm(IPathSolver pathSolver)

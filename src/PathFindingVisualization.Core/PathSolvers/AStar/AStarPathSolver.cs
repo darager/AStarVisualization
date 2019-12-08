@@ -75,19 +75,18 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             int goalRowIdx = goal.RowIndex;
             int goalColIdx = goal.ColIndex;
 
-            foreach (AStarNode[] nodes in map)
-                foreach (AStarNode node in nodes)
-                {
-                    int rowIdx = node.RowIndex;
-                    int colIdx = node.ColIndex;
-                    // this particular heuristic is the Manhattan distance which is used for grid layouts
-                    node.Heuristic = D * (Math.Abs(rowIdx - goalRowIdx) + Math.Abs(colIdx - goalColIdx));
-                }
+            foreach (AStarNode node in map)
+            {
+                int rowIdx = node.RowIndex;
+                int colIdx = node.ColIndex;
+                // this particular heuristic is the Manhattan distance which is used for grid layouts
+                node.Heuristic = D * (Math.Abs(rowIdx - goalRowIdx) + Math.Abs(colIdx - goalColIdx));
+            }
         }
         private void SetSuccessorMovementCost(AStarNode current, AStarNode successor)
         {
-            int dx = _data.CurrentNode.Parent.ColIndex - successor.ColIndex;
-            int dy = _data.CurrentNode.Parent.RowIndex - successor.RowIndex;
+            int dx = _data.CurrentNode.ColIndex - successor.ColIndex;
+            int dy = _data.CurrentNode.RowIndex - successor.RowIndex;
 
             successor.MovementCost = Math.Sqrt(dx * dx + dy * dy);
         }
