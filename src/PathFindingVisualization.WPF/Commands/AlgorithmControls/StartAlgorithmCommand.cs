@@ -26,11 +26,15 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
         }
 
         public bool CanExecute(object parameter) => _appState.State == AppState.MapDesignPhase;
+
         public async void Execute(object parameter)
         {
-            _appState.State = AppState.AlgorithmActive;
+            if (!_mainViewModel.Map.IsValid())
+                return;
 
             Map map = _mainViewModel.Map;
+            _appState.State = AppState.AlgorithmActive;
+
             bool diagonalsEnabled = _algorithmControlViewModel.DiagonalPathsEnabled;
             PathSolver pathsolverType = _algorithmControlViewModel.PathSolverType;
 

@@ -36,7 +36,6 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
 
             await _pathSolverController.ResetPathSolver(map);
 
-
             _appState.State = AppState.MapDesignPhase;
         }
 

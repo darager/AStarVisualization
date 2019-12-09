@@ -5,15 +5,24 @@ using System.Threading.Tasks;
 using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
 
-// TODO: make sure that the algorithm is properly stopped and continued
-// TODO: make sure that the path is drawn
-
 namespace PathFindingVisualization.Core.PathSolvers.AStar
 {
     public class AStarPathSolver : IPathSolver
     {
-        public bool AlgorithmDone { get; private set; } = false;
-        public List<Node.Node> Path => _data.CurrentNode.ReconstructPath(_data.StartNode);
+        public bool StopAlgorithm { get; private set; } = false;
+        public List<Node.Node> Path
+        {
+            get
+            {
+                var path = new List<Node.Node>();
+                AStarNode node = _data.CurrentNode;
+
+                if (node.State == NodeState.Goal)
+                    path = node.ReconstructPath(_data.StartNode);
+
+                return path;
+            }
+        }
 
         private AStarData _data;
 
@@ -24,6 +33,9 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
 
         public async Task PerformAlgorithmStep()
         {
+            if (StopAlgorithm)
+                return;
+
             if (_data.Step == 0)
                 await Task.Run(PerformFirstStep);
             else
@@ -39,11 +51,11 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
         }
         public void PerformStep()
         {
-            if (AlgorithmDone)
-                return;
-
             if (_data.OpenSet.Count == 0 || _data.CurrentNode == _data.GoalNode)
+            {
+                StopAlgorithm = true;
                 return;
+            }
 
             _data.CurrentNode = _data.OpenSet.Pop().Value;
 
@@ -80,6 +92,17 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             int dy = _data.CurrentNode.RowIndex - successor.RowIndex;
 
             successor.MovementCost = Math.Sqrt(dx * dx + dy * dy);
+        }
+
+        public async Task Reset()
+        {
+            StopAlgorithm = true;
+            await Task.Run(() =>
+            {
+                foreach (AStarNode node in _data.Map)
+                    if (node.State == Node.NodeState.GroundVisited || node.State == Node.NodeState.GroundToBeVisited)
+                        node.State = Node.NodeState.Ground;
+            });
         }
     }
 }

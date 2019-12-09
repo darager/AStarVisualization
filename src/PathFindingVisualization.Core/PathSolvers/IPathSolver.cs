@@ -5,9 +5,10 @@ namespace PathFindingVisualization.Core.PathSolvers
 {
     public interface IPathSolver
     {
-        bool AlgorithmDone { get; }
+        bool StopAlgorithm { get; }
         List<Node.Node> Path { get; }
 
         Task PerformAlgorithmStep();
+        Task Reset();
     }
 }

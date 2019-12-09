@@ -45,7 +45,7 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
                 return;
 
             if (NewObjectiveWillBePlaced(newState))
-                RemoveExistingObjective(oldState);
+                RemoveExistingObjective(newState);
 
             PlaceNode(newState, node);
 
@@ -57,14 +57,21 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
             return (newState == NodeState.Goal
                 || newState == NodeState.Start);
         }
-        private void RemoveExistingObjective(NodeState oldState)
+        private void RemoveExistingObjective(NodeState newState)
         {
-            switch (oldState)
+            switch (newState)
             {
                 case NodeState.Start:
+                    Node previousStart = _mainViewModel.Start;
+                    if (previousStart != null)
+                        previousStart.State = NodeState.Ground;
                     _mainViewModel.Start = null;
                     break;
+
                 case NodeState.Goal:
+                    Node previousGoal = _mainViewModel.Goal;
+                    if (previousGoal != null)
+                        previousGoal.State = NodeState.Ground;
                     _mainViewModel.Goal = null;
                     break;
             }
@@ -78,24 +85,12 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
         }
         private void PlaceNode(NodeState newState, Node node)
         {
-            node.State = newState;
-
             if (newState == NodeState.Start)
-            {
-                Node previousStart = _mainViewModel.Start;
-                if (previousStart != null)
-                    previousStart.State = NodeState.Ground;
-
                 _mainViewModel.Start = node;
-            }
-            else if (newState == NodeState.Start)
-            {
-                Node previousGoal = _mainViewModel.Goal;
-                if (previousGoal != null)
-                    previousGoal.State = NodeState.Ground;
-
+            else if (newState == NodeState.Goal)
                 _mainViewModel.Goal = node;
-            }
+
+            node.State = newState;
         }
 
         private void UpdateCanExecute(object sender, PropertyChangedEventArgs e)
