@@ -1,5 +1,6 @@
 ﻿using System;
 using PathFindingVisualization.Core.PathSolvers.AStar;
+using PathFindingVisualization.Core.PathSolvers.Dijkstra;
 
 namespace PathFindingVisualization.Core.PathSolvers
 {
@@ -10,7 +11,7 @@ namespace PathFindingVisualization.Core.PathSolvers
             return pathSolverType switch
             {
                 PathSolver.AStar => new AStarPathSolver(map, diagonalsEnabled),
-                PathSolver.Dijkstra => throw new NotImplementedException(),
+                PathSolver.Dijkstra => new DijkstraPathSolver(map, diagonalsEnabled),
                 PathSolver.BestFirstSearch => throw new NotImplementedException(),
                 PathSolver.BreadthFirstSearch => throw new NotImplementedException(),
                 PathSolver.JumpPointSearch => throw new NotImplementedException(),
