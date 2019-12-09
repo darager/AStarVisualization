@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.DataStructures;
 
 // TODO: make sure that the algorithm is properly stopped and continued
 // TODO: make sure that the path is drawn
@@ -21,17 +20,23 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
         public AStarPathSolver(Map.Map map, bool diagonalsEnabled)
         {
             _data = new AStarData(map, diagonalsEnabled);
-            ComputeHeuristicCosts(_data.Map, _data.GoalNode, 1000); //TODO: adjust the D value
-            PerformFirstStep();
         }
 
+        public async Task PerformAlgorithmStep()
+        {
+            if (_data.Step == 0)
+                await Task.Run(PerformFirstStep);
+            else
+                await Task.Run(PerformStep);
+
+            _data.Step++;
+        }
         private void PerformFirstStep()
         {
             _data.CurrentNode = _data.StartNode;
             _data.CurrentNode.MovementCost = 0;
             _data.OpenSet.Add(_data.CurrentNode.TotalCost, _data.CurrentNode);
         }
-        public Task PerformAlgorithmStep() => Task.Run(PerformStep);
         public void PerformStep()
         {
             if (AlgorithmDone)
@@ -47,7 +52,6 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             int colIndex = _data.CurrentNode.ColIndex;
             List<AStarNode> successors =
                  MapExtensions.GetNeighbors<AStarNode>(_data.Map.Data, rowIndex, colIndex, _data.DiagonalsEnabled)
-                .AsEnumerable<AStarNode>()
                 .Where(n => (n.State == NodeState.Ground) || (n.State == NodeState.Goal))
                 .ToList<AStarNode>();
 
@@ -70,19 +74,6 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             _data.ClosedSet.Add(_data.CurrentNode);
         }
 
-        private void ComputeHeuristicCosts(AStarMap map, AStarNode goal, float D = 1000)
-        {
-            int goalRowIdx = goal.RowIndex;
-            int goalColIdx = goal.ColIndex;
-
-            foreach (AStarNode node in map)
-            {
-                int rowIdx = node.RowIndex;
-                int colIdx = node.ColIndex;
-                // this particular heuristic is the Manhattan distance which is used for grid layouts
-                node.Heuristic = D * (Math.Abs(rowIdx - goalRowIdx) + Math.Abs(colIdx - goalColIdx));
-            }
-        }
         private void SetSuccessorMovementCost(AStarNode current, AStarNode successor)
         {
             int dx = _data.CurrentNode.ColIndex - successor.ColIndex;

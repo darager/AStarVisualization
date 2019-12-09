@@ -34,7 +34,6 @@ namespace PathFindingVisualization.Core.PathSolvers
                 foreach (Node.Node node in nodes)
                     if (node.State == Node.NodeState.GroundVisited || node.State == Node.NodeState.GroundToBeVisited)
                         node.State = Node.NodeState.Ground;
-
         }
 
         private async Task PerformPathsolvingAlgorithm(IPathSolver pathSolver)

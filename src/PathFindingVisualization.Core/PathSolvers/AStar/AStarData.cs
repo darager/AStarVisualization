@@ -7,6 +7,7 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
 {
     public class AStarData
     {
+        public int Step { get; set; } = 0;
         public bool DiagonalsEnabled { get; private set; }
 
         public AStarMap Map { get; }
@@ -27,7 +28,7 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             this.OpenSet = new MinPriorityQueue<double, AStarNode>(capacity);
             this.ClosedSet = new HashSet<AStarNode>();
 
-            ComputeHeuristicCosts();
+            ComputeHeuristicCosts(1000); // TODO: adjust this value
         }
 
         private (AStarNode StartNode, AStarNode GoalNode) GetStartAndGoal(Map.Map map)
@@ -40,7 +41,7 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             return (start, goal);
         }
 
-        private void ComputeHeuristicCosts(double D = 1000.0) // TODO: do something with D
+        private void ComputeHeuristicCosts(double D = 1000.0)
         {
             int goalRowIdx = GoalNode.RowIndex;
             int goalColIdx = GoalNode.ColIndex;
