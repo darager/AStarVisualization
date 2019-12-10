@@ -6,7 +6,6 @@ namespace PathFindingVisualization.Core.Node
     {
         public int RowIndex { get; }
         public int ColIndex { get; }
-        public bool IsWalkable { get; }
         public NodeState State { get; set; }
 
         public Node GetUnderlyingNode();

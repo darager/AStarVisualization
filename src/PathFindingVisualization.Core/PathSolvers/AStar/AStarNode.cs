@@ -7,7 +7,6 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
     {
         public int RowIndex => _node.RowIndex;
         public int ColIndex => _node.ColIndex;
-        public bool IsWalkable => (this.State != NodeState.Wall);
         public NodeState State
         {
             get => _node.State;

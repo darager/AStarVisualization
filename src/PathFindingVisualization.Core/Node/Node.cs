@@ -5,7 +5,6 @@
         public Node Parent { get; set; }
         public int RowIndex { get; private set; }
         public int ColIndex { get; private set; }
-        public bool IsWalkable => (this.State != NodeState.Wall);
         public NodeState State
         {
             get => _state;

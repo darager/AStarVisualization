@@ -8,6 +8,5 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
 {
     public class DijkstraMap
     {
-
     }
 }
