@@ -32,7 +32,7 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
             Map map = _mainViewModel.Map;
             _mainViewModel.Path = new List<Node>();
 
-            await _pathSolverController.ResetPathSolver(map);
+            await _pathSolverController.ResetPathSolver();
 
             foreach (Node[] nodes in map)
                 foreach (Node node in nodes)
