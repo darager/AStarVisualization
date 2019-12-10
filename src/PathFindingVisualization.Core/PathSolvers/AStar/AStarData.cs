@@ -28,7 +28,7 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             this.OpenSet = new MinPriorityQueue<double, AStarNode>(capacity);
             this.ClosedSet = new HashSet<AStarNode>();
 
-            ComputeHeuristicCosts(1000); // TODO: adjust this value
+            ComputeHeuristicCosts(80000); // TODO: adjust this value
         }
 
         private (AStarNode StartNode, AStarNode GoalNode) GetStartAndGoal(Map.Map map)

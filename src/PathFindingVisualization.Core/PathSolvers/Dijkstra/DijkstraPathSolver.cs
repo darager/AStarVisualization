@@ -39,7 +39,7 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
         {
         }
 
-        public Task Reset()
+        public Task Stop()
         {
             throw new NotImplementedException();
         }

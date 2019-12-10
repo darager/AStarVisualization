@@ -26,7 +26,7 @@ namespace PathFindingVisualization.Core.PathSolvers
         }
         public async Task ResetPathSolver(Map.Map map)
         {
-            await _pathSolver.Reset();
+            await _pathSolver.Stop();
         }
 
         private async Task PerformPathsolvingAlgorithm(IPathSolver pathSolver)

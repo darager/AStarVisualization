@@ -94,15 +94,15 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             successor.MovementCost = Math.Sqrt(dx * dx + dy * dy);
         }
 
-        public async Task Reset()
+        public async Task Stop()
         {
             StopAlgorithm = true;
-            await Task.Run(() =>
-            {
-                foreach (AStarNode node in _data.Map)
-                    if (node.State == Node.NodeState.GroundVisited || node.State == Node.NodeState.GroundToBeVisited)
-                        node.State = Node.NodeState.Ground;
-            });
+            //await Task.Run(() =>
+            //{
+            //    foreach (AStarNode node in _data.Map)
+            //        if (node.State == Node.NodeState.GroundVisited || node.State == Node.NodeState.GroundToBeVisited)
+            //            node.State = Node.NodeState.Ground;
+            //});
         }
     }
 }

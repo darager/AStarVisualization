@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.Core.PathSolvers;
@@ -35,6 +33,11 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
             _mainViewModel.Path = new List<Node>();
 
             await _pathSolverController.ResetPathSolver(map);
+
+            foreach (Node[] nodes in map)
+                foreach (Node node in nodes)
+                    if (node.State == NodeState.GroundToBeVisited || node.State == NodeState.GroundVisited)
+                        node.State = NodeState.Ground;
 
             _appState.State = AppState.MapDesignPhase;
         }

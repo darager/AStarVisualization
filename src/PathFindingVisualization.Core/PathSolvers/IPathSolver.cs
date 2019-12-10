@@ -9,6 +9,6 @@ namespace PathFindingVisualization.Core.PathSolvers
         List<Node.Node> Path { get; }
 
         Task PerformAlgorithmStep();
-        Task Reset();
+        Task Stop();
     }
 }
