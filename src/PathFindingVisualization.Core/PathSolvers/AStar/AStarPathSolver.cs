@@ -48,6 +48,8 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             _data.CurrentNode = _data.StartNode;
             _data.CurrentNode.MovementCost = 0;
             _data.OpenSet.Add(_data.CurrentNode.TotalCost, _data.CurrentNode);
+
+            ComputeHeuristicCosts(_data, 80000); // TODO: adjust this value
         }
         public void PerformStep()
         {
@@ -103,6 +105,20 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             //        if (node.State == Node.NodeState.GroundVisited || node.State == Node.NodeState.GroundToBeVisited)
             //            node.State = Node.NodeState.Ground;
             //});
+        }
+
+        private void ComputeHeuristicCosts(AStarData data, double D = 1000.0)
+        {
+            int goalRowIdx = data.GoalNode.RowIndex;
+            int goalColIdx = data.GoalNode.ColIndex;
+
+            foreach (AStarNode astarNode in data.Map)
+            {
+                int rowIdx = astarNode.RowIndex;
+                int colIdx = astarNode.ColIndex;
+                // this particular heuristic is the Manhattan distance which is used for grid layouts
+                astarNode.Heuristic = D * (Math.Abs(rowIdx - goalRowIdx) + Math.Abs(colIdx - goalColIdx));
+            }
         }
     }
 }

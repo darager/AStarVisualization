@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using PathFindingVisualization.Core.Map;
 
 namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
 {
@@ -15,27 +16,21 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
 
         public DijkstraNode CurrentNode { get; set; }
 
-        public DijkstraNode(Map.Map map, bool diagonalsEnabled)
+        public DijkstraData(Map.Map map, bool diagonalsEnabled)
         {
             this.DiagonalsEnabled = diagonalsEnabled;
             this.Map = new DijkstraMap(map);
             (StartNode, GoalNode) = GetStartAndGoal(map);
-
-            SetTentativeScore();
         }
 
-        private (AStarNode StartNode, AStarNode GoalNode) GetStartAndGoal(Map.Map map)
+        private (DijkstraNode StartNode, DijkstraNode GoalNode) GetStartAndGoal(Map.Map map)
         {
             (var originalStart, var originalGoal) = MapExtensions.GetStartAndGoal(map);
 
-            AStarNode start = Map[originalStart.RowIndex, originalStart.ColIndex];
-            AStarNode goal = Map[originalGoal.RowIndex, originalGoal.ColIndex];
+            DijkstraNode start = Map[originalStart.RowIndex, originalStart.ColIndex];
+            DijkstraNode goal = Map[originalGoal.RowIndex, originalGoal.ColIndex];
 
             return (start, goal);
-        }
-
-        private void SetTentativeScore()
-        {
         }
     }
 }
