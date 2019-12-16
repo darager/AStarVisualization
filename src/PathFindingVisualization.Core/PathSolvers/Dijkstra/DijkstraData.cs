@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using PathFindingVisualization.Core.Map;
 
 namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
@@ -15,11 +13,14 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
         public DijkstraNode GoalNode { get; set; }
 
         public DijkstraNode CurrentNode { get; set; }
+        public List<DijkstraNode> NextToBeVisited;
 
         public DijkstraData(Map.Map map, bool diagonalsEnabled)
         {
             this.DiagonalsEnabled = diagonalsEnabled;
+            this.NextToBeVisited = new List<DijkstraNode>();
             this.Map = new DijkstraMap(map);
+
             (StartNode, GoalNode) = GetStartAndGoal(map);
         }
 

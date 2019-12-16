@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using PathFindingVisualization.Core.Map;
 
 namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
 {
@@ -10,8 +11,6 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
         public List<Node.Node> Path => throw new NotImplementedException();
         public bool StopAlgorithm { get; private set; } = false;
 
-        private Node.Node _currentNode;
-        private int _step = 0;
         private DijkstraData _data;
 
         public DijkstraPathSolver(Map.Map map, bool diagonalsEnabled)
@@ -24,12 +23,12 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
             if (StopAlgorithm)
                 return;
 
-            if (_step == 0)
+            if (_data.Step == 0)
                 await Task.Run(PerformFirstStep);
             else
                 await Task.Run(PerformStep);
 
-            _step++;
+            _data.Step++;
         }
 
         //  1. mark all the nodes as unvisited
@@ -49,20 +48,39 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
         public void PerformFirstStep()
         {
             SetTentativeScore(_data.Map);
-        }
 
-        private void SetTentativeScore(DijkstraMap map)
-        {
-            throw new NotImplementedException();
+            DijkstraNode start = _data.StartNode;
+            start.MovementCost = 0;
+
+            _data.NextToBeVisited.Add(start);
         }
 
         public void PerformStep()
         {
+            var nextNodes = _data.NextToBeVisited;
+
+
+            nextNodes.ForEach(node => MapExtensions
+                    .GetNeighbors<DijkstraNode>(_data.Map.Data, node.RowIndex, node.ColIndex, _data.DiagonalsEnabled)
+                    .Where(n => n.State == Node.NodeState.Ground)
+                    .ToList<DijkstraNode>()
+                    .ForEach(n =>
+                    {
+                        n.State = Node.NodeState.GroundToBeVisited;
+                    }));
         }
 
         public Task Stop()
         {
             throw new NotImplementedException();
+        }
+
+        private void SetTentativeScore(DijkstraMap map)
+        {
+            foreach (DijkstraNode node in map)
+            {
+                node.MovementCost = double.PositiveInfinity;
+            }
         }
     }
 }
