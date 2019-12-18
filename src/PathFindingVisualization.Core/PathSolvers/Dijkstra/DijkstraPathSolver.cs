@@ -1,24 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-
-/*
- * 1. mark all the nodes as unvisited
- *      create set of unvisited nodes (unvisited)
- * 2. calculate tentative distance for every node
- *      (0 start node and infinity for all others)
- *      set start as current
- * 3. get neighbors of current
- *      set their parents to current
- *      calc tentative score for each of them and add
- *      tentative score of current and current to neighbor
- * 4. mark the current node as visited
- *      remove it from unvisited set (will never be checked again)
- * 5. if the smallest tentative score is infinite or goal has been marked visited => stop
- *     otherwise select node with smallest tentative score => set it as current, continue at 3
- */
+using PathFindingVisualization.Core.Map;
 
 namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
 {
@@ -27,12 +11,11 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
         public List<Node.Node> Path => throw new NotImplementedException();
         public bool StopAlgorithm { get; private set; } = false;
 
-        private Node.Node _currentNode;
-        private int _step = 0;
+        private DijkstraData _data;
 
         public DijkstraPathSolver(Map.Map map, bool diagonalsEnabled)
         {
-
+            _data = new DijkstraData(map, diagonalsEnabled);
         }
 
         public async Task PerformAlgorithmStep()
@@ -40,24 +23,90 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
             if (StopAlgorithm)
                 return;
 
-            if (_step == 0)
+            if (_data.Step == 0)
                 await Task.Run(PerformFirstStep);
             else
                 await Task.Run(PerformStep);
 
-            _step++;
+            _data.Step++;
         }
+
+        //  1. mark all the nodes as unvisited
+        //       create set of unvisited nodes (unvisited)
+        //  2. calculate tentative distance for every node
+        //       (0 start node and infinity for all others)
+        //       set start as current
+        //  3. get neighbors of current
+        //       set their parents to current
+        //       calc tentative score for each of them and add
+        //       tentative score of current and current to neighbor
+        //  4. mark the current node as visited
+        //       remove it from unvisited set (will never be checked again)
+        //  5. if the smallest tentative score is infinite or goal has been marked visited => stop
+        //      otherwise select node with smallest tentative score => set it as current, continue at 3
 
         public void PerformFirstStep()
         {
+            SetTentativeScore(_data.Map);
+
+            DijkstraNode start = _data.StartNode;
+            start.MovementCost = 0;
+
+            _data.NextToBeVisited.Add(start);
         }
+
         public void PerformStep()
         {
+            var nextNodes = new List<DijkstraNode>();
+
+            _data.NextToBeVisited.ForEach(currentNode => MapExtensions
+                    .GetNeighbors<DijkstraNode>(_data.Map.Data, currentNode.RowIndex, currentNode.ColIndex, _data.DiagonalsEnabled)
+                    .Where(n => IsValidSuccessor(n.State))
+                    .ToList()
+                    .ForEach(n =>
+                    {
+                        n.MovementCost = currentNode.MovementCost + ComputeDistance(n, currentNode);
+                        n.Parent = currentNode.GetUnderlyingNode();
+
+                        if (n.State != Node.NodeState.Goal)
+                        {
+                            n.State = Node.NodeState.GroundToBeVisited;
+                            currentNode.State = Node.NodeState.GroundVisited;
+                        }
+
+                        nextNodes.Add(n);
+                    }));
+
+
+            if (nextNodes.Contains(_data.GoalNode))
+            {
+
+            }
         }
 
         public Task Stop()
         {
             throw new NotImplementedException();
+        }
+
+        private void SetTentativeScore(DijkstraMap map)
+        {
+            foreach (DijkstraNode node in map)
+            {
+                node.MovementCost = double.PositiveInfinity;
+            }
+        }
+        private bool IsValidSuccessor(Node.NodeState state)
+        {
+            return state == Node.NodeState.Ground
+                || state == Node.NodeState.Goal;
+        }
+        private double ComputeDistance(DijkstraNode node1, DijkstraNode node2)
+        {
+            int dx = Math.Abs(node1.ColIndex - node2.ColIndex);
+            int dy = Math.Abs(node1.RowIndex - node2.RowIndex);
+
+            return Math.Sqrt(dx * dx + dy * dy);
         }
     }
 }

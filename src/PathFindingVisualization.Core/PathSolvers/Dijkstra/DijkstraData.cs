@@ -1,4 +1,5 @@
-﻿using PathFindingVisualization.Core.Map;
+﻿using System.Collections.Generic;
+using PathFindingVisualization.Core.Map;
 
 namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
 {
@@ -12,14 +13,15 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
         public DijkstraNode GoalNode { get; set; }
 
         public DijkstraNode CurrentNode { get; set; }
+        public List<DijkstraNode> NextToBeVisited;
 
         public DijkstraData(Map.Map map, bool diagonalsEnabled)
         {
             this.DiagonalsEnabled = diagonalsEnabled;
+            this.NextToBeVisited = new List<DijkstraNode>();
             this.Map = new DijkstraMap(map);
-            (StartNode, GoalNode) = GetStartAndGoal(map);
 
-            SetTentativeScore();
+            (StartNode, GoalNode) = GetStartAndGoal(map);
         }
 
         private (DijkstraNode StartNode, DijkstraNode GoalNode) GetStartAndGoal(Map.Map map)
@@ -30,10 +32,6 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
             DijkstraNode goal = Map[originalGoal.RowIndex, originalGoal.ColIndex];
 
             return (start, goal);
-        }
-
-        private void SetTentativeScore()
-        {
         }
     }
 }

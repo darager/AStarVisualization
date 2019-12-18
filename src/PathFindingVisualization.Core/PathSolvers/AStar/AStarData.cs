@@ -27,8 +27,6 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             int capacity = Map.GetLength(0) * Map.GetLength(1);
             this.OpenSet = new MinPriorityQueue<double, AStarNode>(capacity);
             this.ClosedSet = new HashSet<AStarNode>();
-
-            ComputeHeuristicCosts(80000); // TODO: adjust this value
         }
 
         private (AStarNode StartNode, AStarNode GoalNode) GetStartAndGoal(Map.Map map)
@@ -39,20 +37,6 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             AStarNode goal = Map[originalGoal.RowIndex, originalGoal.ColIndex];
 
             return (start, goal);
-        }
-
-        private void ComputeHeuristicCosts(double D = 1000.0)
-        {
-            int goalRowIdx = GoalNode.RowIndex;
-            int goalColIdx = GoalNode.ColIndex;
-
-            foreach (AStarNode astarNode in Map)
-            {
-                int rowIdx = astarNode.RowIndex;
-                int colIdx = astarNode.ColIndex;
-                // this particular heuristic is the Manhattan distance which is used for grid layouts
-                astarNode.Heuristic = D * (Math.Abs(rowIdx - goalRowIdx) + Math.Abs(colIdx - goalColIdx));
-            }
         }
     }
 }
