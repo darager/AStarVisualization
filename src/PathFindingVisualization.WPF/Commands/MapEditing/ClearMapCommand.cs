@@ -27,9 +27,8 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
             _mainViewModel.Path = new List<Node>();
 
             Map map = _mainViewModel.Map;
-            foreach (Node[] nodes in map)
-                foreach (Node node in nodes)
-                    node.State = NodeState.Ground;
+            foreach (Node node in map)
+                node.State = NodeState.Ground;
         }
 
         private void UpdateCanExecute(object sender, PropertyChangedEventArgs e)

@@ -34,10 +34,9 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
 
             await _pathSolverController.ResetPathSolver();
 
-            foreach (Node[] nodes in map)
-                foreach (Node node in nodes)
-                    if (node.State == NodeState.GroundToBeVisited || node.State == NodeState.GroundVisited)
-                        node.State = NodeState.Ground;
+            foreach (Node node in map)
+                if (node.State == NodeState.GroundToBeVisited || node.State == NodeState.GroundVisited)
+                    node.State = NodeState.Ground;
 
             _appState.State = AppState.MapDesignPhase;
         }

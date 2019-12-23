@@ -4,7 +4,7 @@ using PathFindingVisualization.Core.Node;
 // TODO: use a normal 2 dimensional array for the internal data
 namespace PathFindingVisualization.Core.Map
 {
-    public class Map
+    public class Map : IEnumerable
     {
         public Node.Node this[int i, int j] => _data[i][j];
         public Node.Node[][] Data
@@ -33,6 +33,11 @@ namespace PathFindingVisualization.Core.Map
         }
 
         public int GetLength(int dimension) => MapExtensions.GetLength(this, dimension);
-        public IEnumerator GetEnumerator() => _data.GetEnumerator();
+        public IEnumerator GetEnumerator()
+        {
+            foreach (Node.Node[] row in _data)
+                foreach (Node.Node node in row)
+                    yield return node;
+        }
     }
 }

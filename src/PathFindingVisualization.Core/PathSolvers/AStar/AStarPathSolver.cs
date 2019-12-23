@@ -73,7 +73,7 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             successors.ForEach(n => SetSuccessorMovementCost(_data.CurrentNode, n));
 
             // add all of the successors to the _data.openSet
-            foreach (var successor in successors)
+            foreach (AStarNode successor in successors)
             {
                 successor.Parent = _data.CurrentNode.GetUnderlyingNode();
                 if (successor.State != NodeState.Goal)

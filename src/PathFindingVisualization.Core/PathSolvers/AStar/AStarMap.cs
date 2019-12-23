@@ -9,7 +9,6 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
         public AStarNode[,] Data => _data;
 
         public int GetLength(int dimension) => _map.GetLength(dimension);
-        public IEnumerator GetEnumerator() => _data.GetEnumerator();
 
         private Map.Map _map;
         private AStarNode[,] _data;
@@ -22,6 +21,13 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             foreach (Node.Node[] nodes in _map)
                 foreach (Node.Node node in nodes)
                     _data[node.RowIndex, node.ColIndex] = new AStarNode(node);
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            foreach (Node.Node[] nodes in _map)
+                foreach (Node.Node node in nodes)
+                    yield return node;
         }
     }
 }

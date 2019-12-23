@@ -35,18 +35,16 @@ namespace PathFindingVisualization.WPF.Controls.MapCanvasRenderers
                 for (int j = 0; j < canvas.NumColumns; j++)
                     Tiles[i, j] = GetRectangle(canvas, (Node)newMap[i, j]);
 
-            foreach (Node[] nodes in newMap)
-                foreach (Node node in nodes)
-                    node.StateChanged += UpdateColor;
+            foreach (Node node in newMap)
+                node.StateChanged += UpdateColor;
 
             foreach (Rectangle tile in Tiles)
                 canvas.Children.Add(tile);
 
             if (oldMap != null)
             {
-                foreach (Node[] nodes in oldMap)
-                    foreach (Node node in nodes)
-                        node.StateChanged -= UpdateColor;
+                foreach (Node node in oldMap)
+                    node.StateChanged -= UpdateColor;
 
                 foreach (Rectangle tile in oldTiles)
                     canvas.Children.Remove(tile);
