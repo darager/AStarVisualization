@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using PathFindingVisualization.DataStructures;
 using PathFindingVisualization.Core.Map;
 

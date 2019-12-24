@@ -14,6 +14,7 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
 
         public DijkstraNode CurrentNode { get; set; }
         public List<DijkstraNode> NextToBeVisited;
+        public List<DijkstraNode> Visited;
 
         public DijkstraData(Map.Map map, bool diagonalsEnabled)
         {

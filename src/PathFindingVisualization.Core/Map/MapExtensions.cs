@@ -32,14 +32,13 @@ namespace PathFindingVisualization.Core.Map
             Node.Node goal = null;
             Node.Node start = null;
 
-            foreach (Node.Node[] nodes in map)
-                foreach (Node.Node node in nodes)
-                {
-                    if (node.State == NodeState.Start)
-                        start = node;
-                    else if (node.State == NodeState.Goal)
-                        goal = node;
-                }
+            foreach (Node.Node node in map)
+            {
+                if (node.State == NodeState.Start)
+                    start = node;
+                else if (node.State == NodeState.Goal)
+                    goal = node;
+            }
 
             return (start, goal);
         }

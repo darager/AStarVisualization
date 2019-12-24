@@ -18,16 +18,14 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             _map = map;
 
             _data = new AStarNode[GetLength(0), GetLength(1)];
-            foreach (Node.Node[] nodes in _map)
-                foreach (Node.Node node in nodes)
-                    _data[node.RowIndex, node.ColIndex] = new AStarNode(node);
+            foreach (Node.Node node in _map)
+                _data[node.RowIndex, node.ColIndex] = new AStarNode(node);
         }
 
         public IEnumerator GetEnumerator()
         {
-            foreach (Node.Node[] nodes in _map)
-                foreach (Node.Node node in nodes)
-                    yield return node;
+            foreach (Node.Node node in _map)
+                yield return node;
         }
     }
 }

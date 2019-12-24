@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
-using PathFindingVisualization.Core.Map;
 using PathFindingVisualization.Core.Node;
 using PathFindingVisualization.WPF.Models;
 using PathFindingVisualization.WPF.ViewModels;
@@ -26,8 +25,7 @@ namespace PathFindingVisualization.WPF.Commands.MapEditing
         {
             _mainViewModel.Path = new List<Node>();
 
-            Map map = _mainViewModel.Map;
-            foreach (Node node in map)
+            foreach (Node node in _mainViewModel.Map)
                 node.State = NodeState.Ground;
         }
 

@@ -57,36 +57,36 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
 
         public void PerformStep()
         {
-            var nextNodes = new List<DijkstraNode>();
-
-            _data.NextToBeVisited.ForEach(currentNode => MapExtensions
-                    .GetNeighbors<DijkstraNode>(_data.Map.Data, currentNode.RowIndex, currentNode.ColIndex, _data.DiagonalsEnabled)
-                    .Where(n => IsValidSuccessor(n.State))
-                    .ToList()
-                    .ForEach(n =>
-                    {
-                        n.MovementCost = currentNode.MovementCost + ComputeDistance(n, currentNode);
-                        n.Parent = currentNode.GetUnderlyingNode();
-
-                        if (n.State != Node.NodeState.Goal)
-                        {
-                            n.State = Node.NodeState.GroundToBeVisited;
-                            currentNode.State = Node.NodeState.GroundVisited;
-                        }
-
-                        nextNodes.Add(n);
-                    }));
-
-
-            if (nextNodes.Contains(_data.GoalNode))
+            var nextToBeVisited = _data.NextToBeVisited;
+            foreach (DijkstraNode node in nextToBeVisited)
             {
+                _data.CurrentNode = node;
 
+                if (nextToBeVisited.Count == 0 || node == _data.GoalNode)
+                {
+                    StopAlgorithm = true;
+                    return;
+                }
+
+                var successors = MapExtensions
+                    .GetNeighbors<DijkstraNode>(_data.Map.Data, node.RowIndex, node.ColIndex, _data.DiagonalsEnabled)
+                    .Where(n => IsValidSuccessor(n.State));
+
+                foreach (DijkstraNode successor in successors)
+                {
+                    successor.MovementCost = ComputeDistance(successor, node);
+                    successor.State = Node.NodeState.GroundToBeVisited;
+                    _data.NextToBeVisited.Add(successor);
+                }
+
+                node.State = Node.NodeState.GroundVisited;
+                _data.NextToBeVisited.Remove(node);
             }
         }
 
-        public Task Stop()
+        public async Task Stop()
         {
-            throw new NotImplementedException();
+            StopAlgorithm = true;
         }
 
         private void SetTentativeScore(DijkstraMap map)

@@ -113,12 +113,12 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             int goalRowIdx = data.GoalNode.RowIndex;
             int goalColIdx = data.GoalNode.ColIndex;
 
-            foreach (AStarNode astarNode in data.Map)
+            foreach (AStarNode aStarNode in data.Map.Data)
             {
-                int rowIdx = astarNode.RowIndex;
-                int colIdx = astarNode.ColIndex;
+                int rowIdx = aStarNode.RowIndex;
+                int colIdx = aStarNode.ColIndex;
                 // this particular heuristic is the Manhattan distance which is used for grid layouts
-                astarNode.Heuristic = D * (Math.Abs(rowIdx - goalRowIdx) + Math.Abs(colIdx - goalColIdx));
+                aStarNode.Heuristic = D * (Math.Abs(rowIdx - goalRowIdx) + Math.Abs(colIdx - goalColIdx));
             }
         }
     }
