@@ -3,13 +3,17 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PathFindingVisualization.Core.Map;
+using PathFindingVisualization.Core.Node;
 
 namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
 {
     public class DijkstraPathSolver : IPathSolver
     {
-        public List<Node.Node> Path => throw new NotImplementedException();
         public bool StopAlgorithm { get; private set; } = false;
+        public List<Node.Node> Path
+        {
+            get => NodeExtensions.ReconstructPath(_data.StartNode, _data.CurrentNode);
+        }
 
         private DijkstraData _data;
 
@@ -31,20 +35,6 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
             _data.Step++;
         }
 
-        //  1. mark all the nodes as unvisited
-        //       create set of unvisited nodes (unvisited)
-        //  2. calculate tentative distance for every node
-        //       (0 start node and infinity for all others)
-        //       set start as current
-        //  3. get neighbors of current
-        //       set their parents to current
-        //       calc tentative score for each of them and add
-        //       tentative score of current and current to neighbor
-        //  4. mark the current node as visited
-        //       remove it from unvisited set (will never be checked again)
-        //  5. if the smallest tentative score is infinite or goal has been marked visited => stop
-        //      otherwise select node with smallest tentative score => set it as current, continue at 3
-
         public void PerformFirstStep()
         {
             SetTentativeScore(_data.Map);
@@ -54,33 +44,43 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
 
             _data.NextToBeVisited.Add(start);
         }
-
         public void PerformStep()
         {
-            var nextToBeVisited = _data.NextToBeVisited;
-            foreach (DijkstraNode node in nextToBeVisited)
+            int count = _data.NextToBeVisited.Count;
+            if (count == 0)
             {
-                _data.CurrentNode = node;
+                StopAlgorithm = true;
+                return;
+            }
 
-                if (nextToBeVisited.Count == 0 || node == _data.GoalNode)
+            var currentlyVisited = new DijkstraNode[count];
+            _data.NextToBeVisited.CopyTo(currentlyVisited);
+
+            foreach (DijkstraNode currentNode in currentlyVisited)
+            {
+                _data.CurrentNode = currentNode;
+                if (currentNode == _data.GoalNode)
                 {
                     StopAlgorithm = true;
                     return;
                 }
 
                 var successors = MapExtensions
-                    .GetNeighbors<DijkstraNode>(_data.Map.Data, node.RowIndex, node.ColIndex, _data.DiagonalsEnabled)
+                    .GetNeighbors<DijkstraNode>(_data.Map.Data, currentNode.RowIndex, currentNode.ColIndex, _data.DiagonalsEnabled)
                     .Where(n => IsValidSuccessor(n.State));
 
                 foreach (DijkstraNode successor in successors)
                 {
-                    successor.MovementCost = ComputeDistance(successor, node);
-                    successor.State = Node.NodeState.GroundToBeVisited;
+                    successor.Parent = currentNode.GetUnderlyingNode();
+                    successor.MovementCost = ComputeDistance(successor, currentNode);
+                    if (successor.State != NodeState.Goal)
+                        successor.State = Node.NodeState.GroundToBeVisited;
                     _data.NextToBeVisited.Add(successor);
                 }
 
-                node.State = Node.NodeState.GroundVisited;
-                _data.NextToBeVisited.Remove(node);
+                if (currentNode.State != NodeState.Goal && currentNode.State != NodeState.Start)
+                    currentNode.State = Node.NodeState.GroundVisited;
+                _data.NextToBeVisited.Remove(currentNode);
             }
         }
 

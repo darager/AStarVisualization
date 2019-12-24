@@ -9,6 +9,5 @@ namespace PathFindingVisualization.Core.Node
         public NodeState State { get; set; }
 
         public Node GetUnderlyingNode();
-        public List<Node> ReconstructPath(IAlgorithmNode startNode);
     }
 }

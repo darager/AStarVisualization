@@ -17,16 +17,14 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
             _map = map;
 
             _data = new DijkstraNode[GetLength(0), GetLength(1)];
-            foreach (Node.Node[] nodes in _map)
-                foreach (Node.Node node in nodes)
-                    _data[node.RowIndex, node.ColIndex] = new DijkstraNode(node);
+            foreach (Node.Node node in _map)
+                _data[node.RowIndex, node.ColIndex] = new DijkstraNode(node);
         }
 
         public IEnumerator GetEnumerator()
         {
-            foreach (Node.Node[] nodes in _map)
-                foreach (Node.Node node in nodes)
-                    yield return node;
+            foreach (DijkstraNode node in _data)
+                yield return node;
         }
     }
 }

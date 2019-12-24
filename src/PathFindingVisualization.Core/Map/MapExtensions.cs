@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using PathFindingVisualization.Core.Node;
-using PathFindingVisualization.Core.PathSolvers;
 
 namespace PathFindingVisualization.Core.Map
 {
@@ -86,6 +85,12 @@ namespace PathFindingVisualization.Core.Map
                 }
 
             return neighbors;
+        }
+        public static void Reset(this Map map)
+        {
+            foreach (Node.Node node in map)
+                if (node.State == Node.NodeState.GroundVisited || node.State == Node.NodeState.GroundToBeVisited)
+                    node.State = Node.NodeState.Ground;
         }
     }
 }

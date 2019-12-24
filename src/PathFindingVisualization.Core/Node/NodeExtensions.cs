@@ -20,6 +20,10 @@ namespace PathFindingVisualization.Core.Node
         public static List<Node> ReconstructPath(Node startNode, Node currentNode)
         {
             var path = new List<Node>();
+
+            if (currentNode.State != NodeState.Goal)
+                return path;
+
             Node node = currentNode;
 
             while (node.Parent != null)
@@ -30,6 +34,10 @@ namespace PathFindingVisualization.Core.Node
             path.Add(startNode);
 
             return path;
+        }
+        public static List<Node> ReconstructPath(IAlgorithmNode startNode, IAlgorithmNode currentNode)
+        {
+            return ReconstructPath(startNode.GetUnderlyingNode(), currentNode.GetUnderlyingNode());
         }
     }
 }

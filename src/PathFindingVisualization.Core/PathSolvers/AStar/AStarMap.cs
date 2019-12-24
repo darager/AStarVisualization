@@ -3,7 +3,7 @@
 // TODO: clean up this class
 namespace PathFindingVisualization.Core.PathSolvers.AStar
 {
-    public class AStarMap
+    public class AStarMap : IEnumerable
     {
         public AStarNode this[int i, int j] => _data[i, j];
         public AStarNode[,] Data => _data;
@@ -24,7 +24,7 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
 
         public IEnumerator GetEnumerator()
         {
-            foreach (Node.Node node in _map)
+            foreach (AStarNode node in _data)
                 yield return node;
         }
     }

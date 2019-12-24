@@ -12,16 +12,7 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
         public bool StopAlgorithm { get; private set; } = false;
         public List<Node.Node> Path
         {
-            get
-            {
-                var path = new List<Node.Node>();
-                AStarNode node = _data.CurrentNode;
-
-                if (node.State == NodeState.Goal)
-                    path = node.ReconstructPath(_data.StartNode);
-
-                return path;
-            }
+            get => NodeExtensions.ReconstructPath(_data.StartNode, _data.CurrentNode);
         }
 
         private AStarData _data;
@@ -99,13 +90,6 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
         public async Task Stop()
         {
             StopAlgorithm = true;
-            // TODO: refactor
-            //await Task.Run(() =>
-            //{
-            //    foreach (AStarNode node in _data.Map)
-            //        if (node.State == Node.NodeState.GroundVisited || node.State == Node.NodeState.GroundToBeVisited)
-            //            node.State = Node.NodeState.Ground;
-            //});
         }
 
         private void ComputeHeuristicCosts(AStarData data, double D = 1000.0)
@@ -113,7 +97,7 @@ namespace PathFindingVisualization.Core.PathSolvers.AStar
             int goalRowIdx = data.GoalNode.RowIndex;
             int goalColIdx = data.GoalNode.ColIndex;
 
-            foreach (AStarNode aStarNode in data.Map.Data)
+            foreach (AStarNode aStarNode in data.Map)
             {
                 int rowIdx = aStarNode.RowIndex;
                 int colIdx = aStarNode.ColIndex;

@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using PathFindingVisualization.Core.Node;
+﻿using PathFindingVisualization.Core.Node;
 
 namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
 {
-    public class DijkstraNode
+    public class DijkstraNode : IAlgorithmNode
     {
         public int RowIndex => _node.RowIndex;
         public int ColIndex => _node.ColIndex;
@@ -28,19 +27,5 @@ namespace PathFindingVisualization.Core.PathSolvers.Dijkstra
         }
 
         public Node.Node GetUnderlyingNode() => _node;
-        public List<Node.Node> ReconstructPath(IAlgorithmNode startNode)
-        {
-            var path = new List<Node.Node>();
-            Node.Node node = this.GetUnderlyingNode();
-
-            while (node.Parent != null)
-            {
-                path.Add(node);
-                node = node.Parent;
-            }
-            path.Add(startNode.GetUnderlyingNode());
-
-            return path;
-        }
     }
 }

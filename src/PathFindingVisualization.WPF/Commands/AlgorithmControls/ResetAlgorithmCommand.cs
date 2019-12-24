@@ -32,7 +32,7 @@ namespace PathFindingVisualization.WPF.Commands.AlgorithmControls
             Map map = _mainViewModel.Map;
             _mainViewModel.Path = new List<Node>();
 
-            await _pathSolverController.ResetPathSolver();
+            await _pathSolverController.ResetPathSolver(map);
 
             foreach (Node node in map)
                 if (node.State == NodeState.GroundToBeVisited || node.State == NodeState.GroundVisited)
