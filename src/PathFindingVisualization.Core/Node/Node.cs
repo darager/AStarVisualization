@@ -23,9 +23,7 @@
 
         public Node(NodeState state, int rowIndex, int colIndex)
         {
-            this.State = state;
-            this.RowIndex = rowIndex;
-            this.ColIndex = colIndex;
+            (State, RowIndex, ColIndex) = (state, rowIndex, colIndex);
         }
 
         public bool Equals(Node other) => NodeExtensions.Equals(this, typeof(Node), other);

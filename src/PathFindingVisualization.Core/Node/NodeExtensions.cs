@@ -5,17 +5,17 @@ namespace PathFindingVisualization.Core.Node
 {
     public static class NodeExtensions
     {
-        public static bool Equals(Node node, Type nodeType, Node otherNode)
+        public static bool Equals(Node node, Type nodeType, Node other)
         {
-            if (otherNode is null)
+            if (other is null)
                 return false;
-            if (otherNode.GetType() != nodeType)
+            if (other.GetType() != nodeType)
                 return false;
-            if (ReferenceEquals(node, otherNode))
+            if (ReferenceEquals(node, other))
                 return true;
 
-            return (node.RowIndex == otherNode.RowIndex)
-                && (node.ColIndex == otherNode.ColIndex);
+            return (node.RowIndex, node.ColIndex)
+                == (other.RowIndex, other.ColIndex);
         }
         public static List<Node> ReconstructPath(Node startNode, Node currentNode)
         {

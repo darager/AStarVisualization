@@ -10,9 +10,7 @@ namespace PathFindingVisualization.Core.Node
 
         public StateChangedEventArgs(Node node, NodeState newState, NodeState oldState)
         {
-            Node = node;
-            NewState = newState;
-            OldState = oldState;
+            (Node, NewState, OldState) = (node, newState, oldState);
         }
     }
 }
