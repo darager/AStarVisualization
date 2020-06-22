@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace PathFindingVisualization.DataStructures
-{
-    public class MinPriorityQueue<T, K> where T : IComparable
-    {
-        public int Capacity => _minHeap.Capacity;
+{   public class MinPriorityQueue<T, K> where T : IComparable
+    {   public int Capacity => _minHeap.Capacity;
         public int Count => _count;
 
         private int _count;
@@ -14,18 +12,15 @@ namespace PathFindingVisualization.DataStructures
         private Dictionary<T, List<K>> _dictionary;
 
         public MinPriorityQueue(int Capacity)
-        {
-            _minHeap = new MinHeap<T>(Capacity);
+        {   _minHeap = new MinHeap<T>(Capacity);
             _dictionary = new Dictionary<T, List<K>>();
         }
 
         public bool Contains(T key)
-        {
-            return _dictionary.ContainsKey(key);
+        {   return _dictionary.ContainsKey(key);
         }
         public void Add(T key, K value)
-        {
-            _minHeap.Add(key);
+        {    _minHeap.Add(key);
 
             if (_dictionary.ContainsKey(key))
                 _dictionary[key].Add(value);
@@ -35,8 +30,7 @@ namespace PathFindingVisualization.DataStructures
             _count++;
         }
         public KeyValuePair<T, K> Peek()
-        {
-            if (_count == 0)
+        {   if (_count == 0)
                 throw new Exception("The Priority Queue is Empty");
 
             T key = _minHeap.Peek();
@@ -45,8 +39,7 @@ namespace PathFindingVisualization.DataStructures
             return new KeyValuePair<T, K>(key, list.First());
         }
         public KeyValuePair<T, K> Pop()
-        {
-            if (_count == 0)
+        {   if (_count == 0)
                 throw new Exception("The Priority Queue is empty");
 
             T key = _minHeap.Pop();
