@@ -18,5 +18,10 @@ namespace AStarVisualization.WPF
             var uiElements = new UIElements.UIControl(AStarcontrols, DrawingCanvas);
             var AStarVisualizer = new AStarVisualizer.AStarVisualizer(uiElements);
         }
+        /*
+                    _
+                .__(.)<  (MEOW)
+                 \___)
+        */
     }
 }
